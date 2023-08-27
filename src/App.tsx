@@ -1,5 +1,5 @@
 export const App = () => (
-  <header>
+  <div>
     <h2>Nice Gadgets store!</h2>
-  </header>
+  </div>
 );
