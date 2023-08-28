@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import React from 'react';
 import {
   CardImage,
@@ -16,7 +17,7 @@ import {
   ButtonLikeBackground,
 } from './PhoneCard.styled';
 
-import phnoneImg from '../../../assets/phone_img.png';
+import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
 
 export const PhoneCard: React.FC = () => {
   const [isClicked, setIsClicked] = React.useState(false);

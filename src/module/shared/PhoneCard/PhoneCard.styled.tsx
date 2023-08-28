@@ -21,12 +21,14 @@ export const CardWrapper = styled.div`
 
   border-radius: 8px;
   border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
-  background: #fff;
+  background: ${({ theme }) => theme.colors.white};
 `;
 
 export const CardImage = styled.img`
   width: 208px;
   height: 196px;
+
+  object-fit: contain;
 
   margin: 0 auto;
 
@@ -36,10 +38,10 @@ export const CardImage = styled.img`
 export const CardTitle = styled.h2`
   color: ${({ theme }) => theme.colors.grayPrimary};
 
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-style: normal;
-  font-weight: 600;
-  line-height: ${({ theme }) => theme.fonts.lineHeightM};
+  font-weight: ${({ theme }) => theme.fonts.sizeXs};
+  line-height: ${({ theme }) => theme.fonts.weightSemiBold};
 
   margin-bottom: 8px;
 `;
@@ -49,18 +51,18 @@ export const PriceWrapper = styled.div`
   gap: 8px;
 
   margin-bottom: 8px;
-  border-bottom: 1px solid #e2e6e9;
+  border-bottom: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
 
   padding-bottom: 8px;
 `;
 
 export const CurrentPrice = styled.h3`
-  font-size: 22px;
+  font-size: ${({ theme }) => theme.fonts.lineHeightM};
   font-style: normal;
-  font-weight: 800;
-  line-height: 140%;
+  font-weight: ${({ theme }) => theme.fonts.weightBold};
+  line-height: ${({ theme }) => theme.fonts.lineHeightXl};
 
-  color: #0f0f11;
+  color: ${({ theme }) => theme.colors.grayPrimary};
 `;
 
 export const OldPrice = styled(CurrentPrice)`
@@ -84,7 +86,7 @@ export const DescrTitle = styled.h3`
   color: ${({ theme: { colors } }) => colors.graySecondary};
 
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
-  font-weight: 600;
+  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
   line-height: normal;
 `;
 
@@ -94,7 +96,7 @@ export const DescrValue = styled.p`
   font-family: Mont;
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-style: normal;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: normal;
 `;
 
@@ -108,9 +110,13 @@ export const ButtonAdd = styled.button<ButtonProps>`
   width: 100%;
   height: 40px;
 
-  color: ${(props) => (props.isClicked ? '#216cff' : '#fff')};
+  color: ${(props) =>
+    props.isClicked
+      ? props.theme.colors.accentPrimary
+      : props.theme.colors.white};
 
-  border: ${(props) => (props.isClicked ? '1px solid #e2e6e9' : 'none')};
+  border: ${(props) =>
+    props.isClicked ? `1px solid ${props.theme.colors.grayElements}` : 'none'};
 
   text-align: center;
   cursor: pointer;
@@ -122,15 +128,14 @@ export const ButtonAdd = styled.button<ButtonProps>`
       : props.theme.colors.accentPrimary};
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
-  font-style: normal;
-  font-weight: 700;
+  font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
 `;
 
 export const ButtonLike = styled.button`
   cursor: pointer;
   border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.white};
   width: 40px;
 
   border-radius: 48px;
