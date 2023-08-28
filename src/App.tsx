@@ -1,7 +1,7 @@
-import { PhoneCard } from './module/shared';
+import { Outlet } from 'react-router-dom';
 
 export const App = () => (
   <div>
-    <PhoneCard />
+    <Outlet />
   </div>
 );
