@@ -19,8 +19,7 @@ import {
 } from './PhoneCard.styled';
 
 import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
-import IconSprite from '../Sprites/IconsSprite';
-import Icon from '../Sprites/Icon';
+import { Icon, IconSprite } from '../Sprites';
 
 export const PhoneCard: React.FC = () => {
   const theme = useTheme();
