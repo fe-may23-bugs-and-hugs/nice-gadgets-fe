@@ -1,92 +1,10 @@
 /* eslint-disable max-len */
-import styled from 'styled-components';
+import * as FooterStyles from './Footer.styled';
 
 export const Footer = () => {
-  const StyledFooter = styled.div`
-    display: flex;
-    flex-direction: column;
-    padding: 32px 16px;
-    box-shadow: 0px -1px 0px 0px #e2e6e9;
-
-    font-family: 'Montserrat', sans-serif;
-    font-size: 12px;
-    font-style: normal;
-    font-weight: 700;
-    line-height: normal;
-
-    @media (min-width: 640px) {
-      flex-direction: row;
-      justify-content: space-between;
-      align-items: center;
-      padding: 32px 24px;
-    }
-
-    @media (min-width: 1200px) {
-      padding: 32px 32px;
-    }
-  `;
-
-  const LogoContainer = styled.div`
-    display: flex;
-    position: relative;
-    margin-bottom: 32px;
-
-    @media (min-width: 640px) {
-      margin: 0;
-    }
-  `;
-
-  const LogoOk = styled.svg`
-    position: absolute;
-    top: 0;
-    left: 45px;
-  `;
-
-  const ListContainer = styled.ul`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    width: 197px;
-    margin: 0 0 32px 0;
-    padding: 0;
-
-    font-weight: 800;
-    line-height: 11px;
-    letter-spacing: 0.48px;
-    text-transform: uppercase;
-    list-style: none;
-
-    @media (min-width: 640px) {
-      flex-direction: row;
-      width: 197px;
-      margin: 0;
-    }
-
-    @media (min-width: 1200px) {
-      width: 378px;
-    }
-  `;
-
-  const ListItem = styled.li`
-    margin-bottom: 16px;
-    color: #89939a;
-  `;
-
-  const ButtonLink = styled.a`
-    display: flex;
-    align-self: center;
-    text-decoration: none;
-  `;
-
-  const ButtonText = styled.p`
-    align-self: center;
-    margin: 0 16px 0 0;
-    color: #89939a;
-  `;
-
   return (
-    <StyledFooter>
-      <LogoContainer>
+    <FooterStyles.StyledFooter>
+      <FooterStyles.LogoContainer>
         <svg
           xmlns="http://www.w3.org/2000/svg"
           width="89"
@@ -140,7 +58,7 @@ export const Footer = () => {
           />
         </svg>
 
-        <LogoOk
+        <FooterStyles.LogoOk
           xmlns="http://www.w3.org/2000/svg"
           width="13"
           height="17"
@@ -187,17 +105,27 @@ export const Footer = () => {
               />
             </defs>
           </defs>
-        </LogoOk>
-      </LogoContainer>
+        </FooterStyles.LogoOk>
+      </FooterStyles.LogoContainer>
 
-      <ListContainer>
-        <ListItem>Github</ListItem>
-        <ListItem>Contacts</ListItem>
-        <ListItem>rights</ListItem>
-      </ListContainer>
+      <FooterStyles.ListContainer>
+        <FooterStyles.ListItem>
+          Github
+        </FooterStyles.ListItem>
 
-      <ButtonLink>
-        <ButtonText className="footer__button-text">Back to top</ButtonText>
+        <FooterStyles.ListItem>
+          Contacts
+        </FooterStyles.ListItem>
+
+        <FooterStyles.ListItem>
+          rights
+        </FooterStyles.ListItem>
+      </FooterStyles.ListContainer>
+
+      <FooterStyles.ButtonLink>
+        <FooterStyles.ButtonText>
+          Back to top
+        </FooterStyles.ButtonText>
 
         <svg
           className="footer__button-content"
@@ -223,7 +151,7 @@ export const Footer = () => {
             fill="#0F0F11"
           />
         </svg>
-      </ButtonLink>
-    </StyledFooter>
+      </FooterStyles.ButtonLink>
+    </FooterStyles.StyledFooter>
   );
 };
