@@ -1,5 +1,7 @@
-/* eslint-disable */
+/* eslint-disable max-len */
 import React from 'react';
+import { useTheme } from 'styled-components';
+
 import {
   CardImage,
   CardTitle,
@@ -21,6 +23,8 @@ import IconSprite from '../Sprites/IconsSprite';
 import Icon from '../Sprites/Icon';
 
 export const PhoneCard: React.FC = () => {
+  const theme = useTheme();
+
   const [isClicked, setIsClicked] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
 
@@ -63,7 +67,10 @@ export const PhoneCard: React.FC = () => {
         <ButtonLike type="button" onClick={toggleFavorite}>
           <IconSprite />
           {isFavorite ? (
-            <Icon spriteName="heart-field" fill="#F447AF" />
+            <Icon
+              spriteName="heart-field"
+              fill={theme.colors.accentSecondary}
+            />
           ) : (
             <Icon spriteName="heart" />
           )}
