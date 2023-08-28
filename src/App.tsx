@@ -1,5 +1,7 @@
+import { PhoneCard } from './module/shared';
+
 export const App = () => (
   <div>
-    <h2>Nice Gadgets store!</h2>
+    <PhoneCard />
   </div>
 );
