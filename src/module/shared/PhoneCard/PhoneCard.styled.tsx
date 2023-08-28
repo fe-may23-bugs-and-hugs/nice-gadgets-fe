@@ -1,7 +1,14 @@
 import styled from 'styled-components';
 
+import heart from '../../../assets/icons/hearts.svg';
+import fullHeart from '../../../assets/icons/Heart_filled.svg';
+
 interface ButtonProps {
   isClicked: boolean;
+}
+
+interface IButtonLike {
+  isFavoriteElement: boolean;
 }
 
 export const CardWrapper = styled.div`
@@ -32,7 +39,7 @@ export const CardTitle = styled.h2`
   font-size: 14px;
   font-style: normal;
   font-weight: 600;
-  line-height: 21px;
+  line-height: ${({ theme }) => theme.fonts.lineHeightM};
 
   margin-bottom: 8px;
 `;
@@ -57,7 +64,7 @@ export const CurrentPrice = styled.h3`
 `;
 
 export const OldPrice = styled(CurrentPrice)`
-  color: #89939a;
+  color: ${({ theme }) => theme.colors.graySecondary};
   text-decoration: line-through;
 `;
 
@@ -76,8 +83,7 @@ export const DescrBox = styled.div`
 export const DescrTitle = styled.h3`
   color: ${({ theme: { colors } }) => colors.graySecondary};
 
-  font-size: 12px;
-  font-style: normal;
+  font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-weight: 600;
   line-height: normal;
 `;
@@ -86,7 +92,7 @@ export const DescrValue = styled.p`
   color: ${({ theme }) => theme.colors.grayPrimary};
   text-align: right;
   font-family: Mont;
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-style: normal;
   font-weight: 700;
   line-height: normal;
@@ -115,10 +121,10 @@ export const ButtonAdd = styled.button<ButtonProps>`
       ? props.theme.colors.white
       : props.theme.colors.accentPrimary};
 
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-style: normal;
   font-weight: 700;
-  line-height: 21px;
+  line-height: ${({ theme }) => theme.fonts.lineHeightM};
 `;
 
 export const ButtonLike = styled.button`
@@ -126,12 +132,14 @@ export const ButtonLike = styled.button`
   border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
   background-color: #fff;
   width: 40px;
+
+  border-radius: 48px;
 `;
 
-export const ButtonLikeBackground = styled.div`
+export const ButtonLikeBackground = styled.div<IButtonLike>`
   display: block;
-
-  background-image: url('../../../assets/icons/heart.svg');
+  background-image: ${(props) =>
+    props.isFavoriteElement ? `url(${fullHeart})` : `url(${heart})`};
   background-position: center;
   background-repeat: no-repeat;
   height: 100%;

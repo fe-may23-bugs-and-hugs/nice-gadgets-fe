@@ -20,9 +20,14 @@ import phnoneImg from '../../../assets/phone_img.png';
 
 export const PhoneCard: React.FC = () => {
   const [isClicked, setIsClicked] = React.useState(false);
+  const [isFavorite, setIsFavorite] = React.useState(false);
 
   const toggleClick = () => {
     setIsClicked((prev) => !prev);
+  };
+
+  const toggleFavorite = () => {
+    setIsFavorite((prev) => !prev);
   };
 
   return (
@@ -53,12 +58,10 @@ export const PhoneCard: React.FC = () => {
         <ButtonAdd onClick={toggleClick} type="button" isClicked={isClicked}>
           {isClicked ? 'Added' : 'Add to cart'}
         </ButtonAdd>
-        <ButtonLike>
-          <ButtonLikeBackground />
+        <ButtonLike type="button" onClick={toggleFavorite}>
+          <ButtonLikeBackground isFavoriteElement={isFavorite} />
         </ButtonLike>
       </ButtonsWrapper>
-
-      <img src="../../../assets/icons/heart.svg" />
     </CardWrapper>
   );
 };
