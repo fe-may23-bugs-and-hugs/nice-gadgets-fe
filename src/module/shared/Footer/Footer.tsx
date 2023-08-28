@@ -109,23 +109,15 @@ export const Footer = () => {
       </FooterStyles.LogoContainer>
 
       <FooterStyles.ListContainer>
-        <FooterStyles.ListItem>
-          Github
-        </FooterStyles.ListItem>
+        <FooterStyles.ListItem>Github</FooterStyles.ListItem>
 
-        <FooterStyles.ListItem>
-          Contacts
-        </FooterStyles.ListItem>
+        <FooterStyles.ListItem>Contacts</FooterStyles.ListItem>
 
-        <FooterStyles.ListItem>
-          rights
-        </FooterStyles.ListItem>
+        <FooterStyles.ListItem>rights</FooterStyles.ListItem>
       </FooterStyles.ListContainer>
 
       <FooterStyles.ButtonLink>
-        <FooterStyles.ButtonText>
-          Back to top
-        </FooterStyles.ButtonText>
+        <FooterStyles.ButtonText>Back to top</FooterStyles.ButtonText>
 
         <svg
           className="footer__button-content"
