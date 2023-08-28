@@ -1,7 +1,7 @@
 /* eslint-disable max-len */
 /* jshint ignore:start */
 
-const IconSprite = () => {
+export const IconSprite = () => {
   const styles = `
     .icon { display: none; }
     .icon:target { display: inline; }
@@ -122,5 +122,4 @@ const IconSprite = () => {
   );
 };
 
-export default IconSprite;
 /* jshint ignore:end */
