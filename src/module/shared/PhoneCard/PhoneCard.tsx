@@ -1,4 +1,4 @@
-/* eslint-disable max-len */
+/* eslint-disable */
 import React from 'react';
 import {
   CardImage,
@@ -14,10 +14,11 @@ import {
   ButtonsWrapper,
   ButtonAdd,
   ButtonLike,
-  ButtonLikeBackground,
 } from './PhoneCard.styled';
 
 import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
+import IconSprite from '../Sprites/IconsSprite';
+import Icon from '../Sprites/Icon';
 
 export const PhoneCard: React.FC = () => {
   const [isClicked, setIsClicked] = React.useState(false);
@@ -60,7 +61,12 @@ export const PhoneCard: React.FC = () => {
           {isClicked ? 'Added' : 'Add to cart'}
         </ButtonAdd>
         <ButtonLike type="button" onClick={toggleFavorite}>
-          <ButtonLikeBackground isFavoriteElement={isFavorite} />
+          <IconSprite />
+          {isFavorite ? (
+            <Icon spriteName="heart-field" fill="#F447AF" />
+          ) : (
+            <Icon spriteName="heart" />
+          )}
         </ButtonLike>
       </ButtonsWrapper>
     </CardWrapper>

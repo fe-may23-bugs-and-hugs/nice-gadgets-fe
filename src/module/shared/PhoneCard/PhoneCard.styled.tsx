@@ -1,14 +1,7 @@
 import styled from 'styled-components';
 
-import heart from '../../../assets/icons/hearts.svg';
-import fullHeart from '../../../assets/icons/Heart_filled.svg';
-
 interface ButtonProps {
   isClicked: boolean;
-}
-
-interface IButtonLike {
-  isFavoriteElement: boolean;
 }
 
 export const CardWrapper = styled.div`
@@ -139,14 +132,4 @@ export const ButtonLike = styled.button`
   width: 40px;
 
   border-radius: 48px;
-`;
-
-export const ButtonLikeBackground = styled.div<IButtonLike>`
-  display: block;
-  background-image: ${(props) =>
-    props.isFavoriteElement ? `url(${fullHeart})` : `url(${heart})`};
-  background-position: center;
-  background-repeat: no-repeat;
-  height: 100%;
-  width: 100%;
 `;
