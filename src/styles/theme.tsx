@@ -14,7 +14,7 @@ export const theme = {
     grayBackground: '#FAFBFC',
   },
   fonts: {
-    name: 'Montserrat, sans-serif',
+    name: 'Mont, sans-serif',
     sizeXxs: '12px',
     sizeXs: '14px',
     sizeS: '16px',
