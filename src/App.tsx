@@ -1,10 +1,10 @@
-import { Header } from './module/shared/Header';
+import React from 'react';
+import { Outlet } from 'react-router-dom';
+import { Header } from './module/shared';
 
-export const App = () => {
-  return (
-    <div>
-      <Header />
-      <h2>Nice Gadgets store!</h2>
-    </div>
-  );
-};
+export const App = () => (
+  <div>
+    <Header />
+    <Outlet />
+  </div>
+);
