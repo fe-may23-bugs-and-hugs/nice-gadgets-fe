@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import { Footer } from './module/shared/Footer/Footer';
+import { Footer } from './module/shared';
 
 export const App = () => (
   <div>

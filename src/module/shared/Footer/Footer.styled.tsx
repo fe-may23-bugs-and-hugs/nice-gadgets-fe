@@ -64,10 +64,29 @@ export const ListItem = styled.li`
   }
 `;
 
-export const ButtonLink = styled.a`
+export const ButtonWrapper = styled.div`
   display: flex;
-  align-self: center;
-  text-decoration: none;
+`;
+
+export const IconElement = styled.a`
+  position: relative;
+  cursor: pointer;
+  border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
+  width: 32px;
+  height: 32px;
+  border-radius: 50px;
+  transition: border ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;
 
 export const ButtonText = styled.p`
