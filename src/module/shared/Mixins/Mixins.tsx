@@ -1,12 +1,12 @@
 type StylesFunction = (styles: string) => string;
 
-export const onTablet: StylesFunction = styles => `
+export const onTablet: StylesFunction = (styles) => `
   @media (min-width: 640px) {
     ${styles}
   }
 `;
 
-export const onDesktop: StylesFunction = styles => `
+export const onDesktop: StylesFunction = (styles) => `
   @media (min-width: 1200px) {
     ${styles}
   }
