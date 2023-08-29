@@ -1,10 +1,9 @@
 import React from 'react';
 import { Outlet } from 'react-router-dom';
-import { Header } from './module/shared';
+import { AppLayout } from './module/shared/AppLayout/AppLayout';
 
 export const App = () => (
-  <div>
-    <Header />
+  <AppLayout>
     <Outlet />
-  </div>
+  </AppLayout>
 );
