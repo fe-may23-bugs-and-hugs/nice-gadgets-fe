@@ -6,7 +6,6 @@ import { Header } from './module/shared';
 export const App = () => (
   <>
     <Header />
-
     <AppLayout>
       <Outlet />
     </AppLayout>
