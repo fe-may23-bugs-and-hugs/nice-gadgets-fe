@@ -1,7 +1,8 @@
 import { Outlet } from 'react-router-dom';
+import { AppLayout } from './module/shared/AppLayout/AppLayout';
 
 export const App = () => (
-  <div>
+  <AppLayout>
     <Outlet />
-  </div>
+  </AppLayout>
 );
