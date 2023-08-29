@@ -19,7 +19,7 @@ jobs:
           git config --global user.name "maxyma-sanx"
 
       - name: Install dependencies
-        run: npm ci
+        run: npm install
 
       - name: Run linting
         run: npm run lint
