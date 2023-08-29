@@ -1,9 +1,12 @@
 import { Outlet } from 'react-router-dom';
+import { AppLayout } from './module/shared/AppLayout/AppLayout';
 import { Footer } from './module/shared';
 
 export const App = () => (
-  <div>
-    <Outlet />
+  <>
+    <AppLayout>
+      <Outlet />
+    </AppLayout>
     <Footer />
-  </div>
+  </>
 );

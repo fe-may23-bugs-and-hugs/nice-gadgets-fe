@@ -1,4 +1,9 @@
-/* eslint-disable space-before-function-paren */
-import axios from 'axios';
+import { client } from '../helpers/fetchClient';
 
-axios.defaults.baseURL = 'http://localhost:3000/';
+export const getPhones = () => {
+  return client.get('../assets/data/phones.json'); // mock url
+};
+
+export const getOnePhone = (phoneId: string) => {
+  return client.get(`../assets/data/phones/${phoneId}.json`); // mock url
+};

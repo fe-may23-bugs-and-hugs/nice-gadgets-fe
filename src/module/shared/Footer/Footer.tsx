@@ -29,7 +29,7 @@ export const Footer = () => {
 
         <IconElement>
           <IconSprite />
-          <Icon spriteName='arrow-up' />
+          <Icon spriteName="arrow-up" />
         </IconElement>
       </ButtonWrapper>
     </StyledFooter>
