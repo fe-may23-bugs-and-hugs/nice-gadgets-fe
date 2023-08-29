@@ -1,6 +1,7 @@
 /* eslint-disable max-len */
 import {
   StyledFooter,
+  FooterWrapper,
   LogoFooter,
   ListContainer,
   ListItem,
@@ -14,24 +15,26 @@ import { Icon, IconSprite } from '../Sprites';
 export const Footer = () => {
   return (
     <StyledFooter>
-      <LogoFooter src={logoFooter} />
+      <FooterWrapper>
+        <LogoFooter src={logoFooter} />
 
-      <ListContainer>
-        <ListItem>Github</ListItem>
+        <ListContainer>
+          <ListItem>Github</ListItem>
 
-        <ListItem>Contacts</ListItem>
+          <ListItem>Contacts</ListItem>
 
-        <ListItem>rights</ListItem>
-      </ListContainer>
+          <ListItem>rights</ListItem>
+        </ListContainer>
 
-      <ButtonWrapper>
-        <ButtonText>Back to top</ButtonText>
+        <ButtonWrapper>
+          <ButtonText>Back to top</ButtonText>
 
-        <IconElement>
-          <IconSprite />
-          <Icon spriteName="arrow-up" />
-        </IconElement>
-      </ButtonWrapper>
+          <IconElement>
+            <IconSprite />
+            <Icon spriteName="arrow-up" />
+          </IconElement>
+        </ButtonWrapper>
+      </FooterWrapper>
     </StyledFooter>
   );
 };

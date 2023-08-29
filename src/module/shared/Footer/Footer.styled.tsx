@@ -1,34 +1,47 @@
 import styled from 'styled-components';
+import { onDesktop, onTablet } from '../Mixins';
 
 export const StyledFooter = styled.div`
-  display: flex;
-  flex-direction: column;
+  width: 100%;
   padding: 32px 16px;
+  display: flex;
+  justify-content: center;
+
   box-shadow: 0px -1px 0px 0px ${({ theme }) => theme.colors.grayElements};
   font-family: ${({ theme }) => theme.fonts.name};
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: normal;
 
-  @media (min-width: 640px) {
+  ${onTablet(`
+    padding: 32px 24px;
+  `)}
+
+  ${onDesktop(`
+    padding: 32px 32px;
+  `)}
+`;
+
+export const FooterWrapper = styled.div`
+  width: 100%;
+  max-width: 1200px;
+  display: flex;
+  flex-direction: column;
+
+  ${onTablet(`
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 32px 24px;
-  }
-
-  @media (min-width: 1200px) {
-    padding: 32px 32px;
-  }
+  `)};
 `;
 
 export const LogoFooter = styled.img`
   width: 89px;
   margin-bottom: 32px;
 
-  @media (min-width: 640px) {
+  ${onTablet(`
     margin: 0;
-  }
+  `)}
 `;
 
 export const ListContainer = styled.ul`
@@ -44,24 +57,24 @@ export const ListContainer = styled.ul`
   text-transform: uppercase;
   list-style: none;
 
-  @media (min-width: 640px) {
+  ${onTablet(`
     flex-direction: row;
     width: 197px;
     margin: 0;
-  }
+  `)}
 
-  @media (min-width: 1200px) {
-    width: 378px;
-  }
+  ${onDesktop(`
+      width: 378px;
+    `)}
 `;
 
 export const ListItem = styled.li`
   margin-bottom: 16px;
   color: ${({ theme }) => theme.colors.graySecondary};
 
-  @media (min-width: 640px) {
+  ${onTablet(`
     margin: 0;
-  }
+  `)}
 `;
 
 export const ButtonWrapper = styled.div`
