@@ -1,5 +1,1 @@
-export const Header = () => (
-  <header>
-    123
-  </header>
-);
+export const Header = () => <header>123</header>;

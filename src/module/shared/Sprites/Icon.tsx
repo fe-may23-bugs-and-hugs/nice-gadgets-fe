@@ -6,7 +6,7 @@ interface IconProps {
   fill?: string; // Додайте атрибут fill до IconProps
 }
 
-const Icon: React.FC<IconProps> = ({
+export const Icon: React.FC<IconProps> = ({
   spriteName,
   size = '16px',
   fill = '#0F0F11',
@@ -17,5 +17,3 @@ const Icon: React.FC<IconProps> = ({
     </svg>
   );
 };
-
-export default Icon;
