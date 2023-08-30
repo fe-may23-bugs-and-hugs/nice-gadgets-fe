@@ -1,10 +1,3 @@
-import { ContentLayout } from '../shared/ContentLayout';
-import { Categories } from './components/Categories';
-
 export const HomePage = () => {
-  return (
-    <ContentLayout>
-      <Categories />
-    </ContentLayout>
-  );
+  return <h2>HomePage</h2>;
 };

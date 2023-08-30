@@ -1,4 +1,5 @@
 import { styled } from 'styled-components';
+import { onTablet } from '../../../shared/Mixins';
 
 export const CategoryWrapper = styled.article`
   display: flex;
@@ -15,14 +16,22 @@ export const CategoryImage = styled.img`
   object-fit: cover;
 `;
 
-export const CategoryContent = styled.div``;
+export const CategoryContent = styled.div`
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+`;
 
-export const CategoryTitle = styled.h3`
+export const CategoryTitle = styled.h4`
   color: ${({ theme }) => theme.colors.grayPrimary};
+  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
   font-size: ${({ theme }) => theme.fonts.sizeM};
-  font-weight: ${({ theme }) => theme.fonts.weightBold};
-  font-style: normal;
   line-height: normal;
+
+  ${onTablet(`
+    font-size: 20px;
+    line-height: 26px;
+  `)};
 
   &:hover {
     color: ${({ theme }) => theme.colors.graySecondary};
@@ -32,7 +41,7 @@ export const CategoryTitle = styled.h3`
 export const CategoryModels = styled.p`
   color: ${({ theme }) => theme.colors.graySecondary};
   font-size: ${({ theme }) => theme.fonts.sizeXs};
-  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
+  font-weight: ${({ theme }) => theme.fonts.weightRegular};
   font-style: normal;
-  line-height: 150%;
+  line-height: ${({ theme }) => theme.fonts.lineHeightM};
 `;

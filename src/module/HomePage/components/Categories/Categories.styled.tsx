@@ -19,9 +19,14 @@ export const CategoriesWrapper = styled.section`
 `;
 
 export const CategoriesTitle = styled.h2`
+  font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-size: ${({ theme }) => theme.fonts.sizeL};
+  line-height: ${({ theme }) => theme.fonts.lineHeightL};
+  font-style: normal;
 
   ${onTablet(`
-      font-size: ${({ theme }) => theme.fonts.sizeXxl};
+      font-size: 32px;
+      line-height: 41px;
+      letter-spacing: -0.01em;
   `)};
 `;

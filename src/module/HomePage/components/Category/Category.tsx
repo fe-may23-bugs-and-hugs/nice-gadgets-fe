@@ -17,19 +17,15 @@ interface Props {
 export const Category: React.FC<Props> = ({ image, title, numberOfModels }) => {
   return (
     <CategoryWrapper>
-      <Link to={`/phones`} >
+      <Link to={`/phones`}>
         <CategoryImage src={image} alt="Phone Image" />
       </Link>
       <CategoryContent>
         <Link to={`/phones`}>
-          <CategoryTitle>
-            {title}
-          </CategoryTitle>
+          <CategoryTitle>{title}</CategoryTitle>
         </Link>
 
-        <CategoryModels>
-          {numberOfModels} models
-        </CategoryModels>
+        <CategoryModels>{numberOfModels} models</CategoryModels>
       </CategoryContent>
     </CategoryWrapper>
   );
