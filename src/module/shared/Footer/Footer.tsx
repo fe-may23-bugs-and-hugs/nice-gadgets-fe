@@ -17,21 +17,21 @@ export const Footer = () => {
   return (
     <StyledFooter>
       <FooterWrapper>
-        <Link href='#'>
+        <Link href="#">
           <LogoFooter src={logoFooter} />
         </Link>
 
         <ListContainer>
           <ListItem>
-            <Link href='https://github.com/fe-may23-bugs-and-hugs'>Github</Link>
+            <Link href="https://github.com/fe-may23-bugs-and-hugs">Github</Link>
           </ListItem>
 
           <ListItem>
-            <Link href='#'>Contacts</Link>
+            <Link href="#">Contacts</Link>
           </ListItem>
 
           <ListItem>
-            <Link href='#'>rights</Link>
+            <Link href="#">rights</Link>
           </ListItem>
         </ListContainer>
 
