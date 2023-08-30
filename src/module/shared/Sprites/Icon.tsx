@@ -1,15 +1,16 @@
 import React from 'react';
+import { theme } from '../../../styles';
 
 interface IconProps {
   spriteName: string;
   size?: string;
-  fill?: string; // Додайте атрибут fill до IconProps
+  fill?: string;
 }
 
 export const Icon: React.FC<IconProps> = ({
   spriteName,
-  size = '16px',
-  fill = '#0F0F11',
+  size = theme.fonts.sizeS,
+  fill = theme.colors.grayPrimary,
 }) => {
   return (
     <svg width={size} height={size}>
