@@ -4,7 +4,7 @@ import { App } from '../App';
 import { Catalog, HomePage, PageNotFound, ProductCard } from '../module';
 
 export const Root = () => (
-  <BrowserRouter basename="nice-gadgets-fe">
+  <BrowserRouter basename="/">
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
