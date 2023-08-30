@@ -22,6 +22,5 @@ export const PageNotFound = () => {
         <ButtonGoHome href="/">Go home</ButtonGoHome>
       </NotFoundWrapper>
     </ContentLayout>
-
   );
 };

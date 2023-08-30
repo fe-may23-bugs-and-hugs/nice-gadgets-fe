@@ -9,7 +9,13 @@ export const NotFoundWrapper = styled.div`
   padding: 20px 0;
 
   @media (min-width: 640px) {
-    height: calc(100vh - (${({ theme }) => theme.sizes.headerHeigth} + ${({ theme }) => theme.sizes.footerHeigth}));
+    height: calc(
+      100vh -
+        (
+          ${({ theme }) => theme.sizes.headerHeigth} +
+            ${({ theme }) => theme.sizes.footerHeigth}
+        )
+    );
   }
 `;
 
