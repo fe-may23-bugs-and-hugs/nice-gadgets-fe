@@ -1,8 +1,7 @@
 import React from 'react';
 import { Icon, IconSprite } from '../Sprites';
-import logoDesktop from './../../../assets/images/logo-desktop.png';
-import logoTablet from './../../../assets/images/logo-tablet.png';
-import logoMobile from './../../../assets/images/logo-mobile.png';
+import logo from './../../../assets/images/logo.png';
+import { NavLink } from 'react-router-dom';
 import {
   HeaderElement,
   BarElement,
@@ -16,15 +15,17 @@ import {
 } from './Header.styled';
 
 export const Header = () => {
+  const showCircleFavorites = true;
+  const showCircleBag = true;
+  const counterFavorites = 4;
+  const counterBag = 3;
+
   return (
     <HeaderElement>
-      <BarElement to="/">
-        <ImgElement
-          srcSet={`${logoMobile} 319w, ${logoTablet} 1199w, ${logoDesktop} 1400w`}
-          sizes="(max-width: 319px) 319px, (max-width: 1199px) 1200px, 1400px"
-          src={logoMobile}
-          alt="Nice gadgets logo"
-        />
+      <BarElement>
+        <NavLink to="/">
+          <ImgElement src={logo}/>
+        </NavLink>
         <NavElement>
           <UlElement>
             <LiElement>
@@ -43,11 +44,17 @@ export const Header = () => {
         </NavElement>
       </BarElement>
       <IconsSection>
-        <IconElement>
-          <IconSprite />
+        <IconElement
+          hasPinkCircle={showCircleFavorites}
+          circleText={counterFavorites}
+        >
+          <IconSprite/>
           <Icon spriteName="heart" size="18px" />
         </IconElement>
-        <IconElement>
+        <IconElement
+          hasPinkCircle={showCircleBag}
+          circleText={counterBag}
+        >
           <IconSprite />
           <Icon spriteName="shopping-bag" size="18px" />
         </IconElement>

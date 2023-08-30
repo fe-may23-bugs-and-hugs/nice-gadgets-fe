@@ -9,7 +9,7 @@ import {
   ButtonText,
   IconElement,
 } from './Footer.styled';
-import logoFooter from '../../../assets/images/logo_footer.png';
+import logoFooter from '../../../assets/images/logo.png';
 import { Icon, IconSprite } from '../Sprites';
 
 export const Footer = () => {

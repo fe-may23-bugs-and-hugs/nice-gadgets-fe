@@ -1,5 +1,10 @@
-import styled from 'styled-components';
-import { Link } from 'react-router-dom';
+import styled, { css } from 'styled-components';
+import { NavLink } from 'react-router-dom';
+
+interface IconElementProps {
+  hasPinkCircle?: boolean;
+  circleText?: number;
+}
 
 export const HeaderElement = styled.header`
   display: flex;
@@ -24,8 +29,9 @@ export const NavElement = styled.nav`
   }
 `;
 
-export const BarElement = styled(Link)`
+export const BarElement = styled.div`
   display: flex;
+  align-items: center;
   margin: 0 24px;
   gap: 32px;
 
@@ -35,9 +41,13 @@ export const BarElement = styled(Link)`
 `;
 
 export const ImgElement = styled.img`
-  height: 100%;
-  line-height: 100%;
+  height: auto;
+  max-width: 64px;
   align-self: center;
+
+  @media (min-width: 1200px) {
+    max-width: 80px;
+  }
 `;
 
 export const UlElement = styled.ul`
@@ -60,7 +70,12 @@ export const LiElement = styled.li`
   }
 `;
 
-export const LinkElement = styled(Link)``;
+export const LinkElement = styled(NavLink)`
+  &.active {
+    color: ${({ theme }) => theme.colors.grayPrimary};
+    font-weight: ${({ theme }) => theme.fonts.weightBold};
+  }
+`;
 
 export const IconsSection = styled.div`
   display: flex;
@@ -68,10 +83,39 @@ export const IconsSection = styled.div`
   align-items: center;
 `;
 
-export const IconElement = styled.div`
+export const IconElement = styled.div<IconElementProps>`
+  position: relative;
   padding: 0 12px;
   cursor: pointer;
   transition: background-color ${({ theme }) => theme.transition.slower};
+
+  ${({ hasPinkCircle, circleText }) =>
+    hasPinkCircle
+    && css`
+      &:before {
+        content: '${circleText}';
+        font-size: 10px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: ${({ theme }) => theme.colors.white};
+
+        position: absolute;
+        top: 20%;
+        left: 70%;
+        transform: translateX(-50%);
+        width: 14px;
+        height: 14px;
+        background-color: ${({ theme }) => theme.colors.accentSecondary};
+        border: 1px solid ${({ theme }) => theme.colors.white};
+        border-radius: 50%;
+
+        @media (min-width: 1200px) {
+          top: 25%;
+          left: 62%;
+        }
+      }
+    `};
 
   @media (min-width: 1200px) {
     padding: 0 24px;
