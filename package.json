@@ -12,6 +12,7 @@
     "@types/react": "^18.2.21",
     "@types/react-dom": "^18.2.7",
     "axios": "^1.5.0",
+    "gh-pages": "^6.0.0",
     "modern-normalize": "^2.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
@@ -23,6 +24,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "format": "prettier --write . --ignore-path .gitignore",
     "lint": "eslint **/*.{ts,tsx} --ignore-path .gitignore",
     "fix": "npm run format && npm run lint -- --fix",
@@ -59,8 +62,5 @@
   },
   "lint-staged": {
     "*.{ts, tsx}": "npm run lint"
-  },
-  "engines": {
-    "node": "16.x"
   }
 }
