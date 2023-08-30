@@ -97,6 +97,8 @@ export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 8px;
+
+  margin-top: auto;
 `;
 
 export const ButtonAdd = styled.button<ButtonProps>`

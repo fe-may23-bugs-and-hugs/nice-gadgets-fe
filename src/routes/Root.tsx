@@ -1,7 +1,8 @@
 import { HashRouter, Route, Routes } from 'react-router-dom';
 
 import { App } from '../App';
-import { Catalog, HomePage, PageNotFound, ProductCard } from '../module';
+import { HomePage, PageNotFound, ProductCard } from '../module';
+import { CatalogPage } from '../module/CatalogPage';
 
 export const Root = () => (
   <HashRouter>
@@ -10,7 +11,7 @@ export const Root = () => (
         <Route index element={<HomePage />} />
 
         <Route path="phones">
-          <Route index element={<Catalog />} />
+          <Route index element={<CatalogPage />} />
           <Route path=":productId" element={<ProductCard />} />
         </Route>
 
