@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { onTablet } from '../shared/Mixins';
 
 export const NotFoundWrapper = styled.div`
   display: flex;
@@ -7,15 +6,16 @@ export const NotFoundWrapper = styled.div`
   justify-content: center;
   align-items: center;
   height: 100vh;
+  padding: 20px 0;
 
-  ${onTablet(`
-    height: calc(100vh - 124px);
-  `)}
+  @media (min-width: 640px) {
+    height: calc(100vh - (${({ theme }) => theme.sizes.headerHeigth} + ${({ theme }) => theme.sizes.footerHeigth}));
+  }
 `;
 
 export const NotFoundTitle = styled.h2`
   font-weight: ${({ theme }) => theme.fonts.weightBold};
-  font-size: ${({ theme }) => theme.fonts.sizeXxl};
+  font-size: ${({ theme }) => theme.fonts.sizeL};
 
   margin-bottom: 10px;
 
@@ -25,10 +25,11 @@ export const NotFoundTitle = styled.h2`
 export const NotFoundText = styled.p`
   margin-bottom: 20px;
   color: ${({ theme }) => theme.colors.grayPrimary};
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
 `;
 
 export const NotFoundGif = styled.img`
-  width: 200px;
+  width: 160px;
 `;
 
 export const ButtonGoHome = styled.a`
