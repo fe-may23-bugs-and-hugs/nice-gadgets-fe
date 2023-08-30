@@ -41,6 +41,8 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     setCurrentLimit(numLimit);
   };
 
+  console.log(currentLimit);
+
   const loadPhones = () => {
     setPhonesLoading(true);
 

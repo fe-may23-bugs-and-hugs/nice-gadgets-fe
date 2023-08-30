@@ -1,7 +1,7 @@
 /* eslint-disable*/
 import React, { useState, useContext } from 'react';
-import ReactPaginate from 'react-paginate';
 import { PhonesContext } from '../../context/phonesContext';
+import { ReactPaginateStyled } from './Pagination.styled';
 
 type Props = {
   products: any[];
@@ -9,20 +9,26 @@ type Props = {
 };
 
 export const Pagination: React.FC<Props> = ({ products, itemsPerPage }) => {
-  const { updatePage, currentLimit } = useContext(PhonesContext);
+  const { updatePage, currentLimit, currentPage } = useContext(PhonesContext);
+
+  const [currentPaginatePage, setCurrentPaginatePage] = useState(1);
+
+  const isActiveButton = currentPaginatePage === currentPage;
 
   const handlePageClick = (event: any) => {
     console.log(event);
+    setCurrentPaginatePage(event.selected + 1);
     updatePage(event.selected + 1);
   };
   return (
-    <ReactPaginate
+    <ReactPaginateStyled
+      isActive={isActiveButton}
       breakLabel="..."
-      nextLabel="next >"
+      nextLabel=">"
       onPageChange={handlePageClick}
       pageRangeDisplayed={currentLimit}
-      pageCount={10}
-      previousLabel="< previous"
+      pageCount={5}
+      previousLabel="<"
       renderOnZeroPageCount={null}
     />
   );

@@ -17,6 +17,7 @@ import { PhonesContext } from '../../context/phonesContext';
 import { Spinner } from '../Spinner';
 import { SortLink } from '../SortLink';
 import { Pagination } from '../Pagination/Pagination';
+import { LimitLink } from '../LimitLink';
 
 export const CatalogPage: React.FC = () => {
   const { loadPhones, phones, phonesLoading, currentPage, currentLimit } =
@@ -26,6 +27,7 @@ export const CatalogPage: React.FC = () => {
   }, [currentPage, currentLimit]);
 
   const [openSort, setOpenSort] = useState(false);
+  const [openLimit, setOpenLimit] = useState(false);
 
   return (
     <ContentLayout>
@@ -68,13 +70,20 @@ export const CatalogPage: React.FC = () => {
               )}
             </div>
 
-            <div>
+            <div onClick={() => setOpenLimit((prev) => !prev)}>
               <SortTitle>Items on page</SortTitle>
               <SortDropDown>
-                16
+                {currentLimit}
                 <IconSprite />
                 <Icon spriteName="arrow-down" />
               </SortDropDown>
+              {openLimit && (
+                <SortDropdownContent>
+                  {['4', '10', '16', '32'].map((num) => (
+                    <LimitLink key={num} num={num} />
+                  ))}
+                </SortDropdownContent>
+              )}
             </div>
           </SortWrapper>
 
