@@ -48,13 +48,10 @@ export const Header = () => {
           hasPinkCircle={showCircleFavorites}
           circleText={counterFavorites}
         >
-          <IconSprite/>
+          <IconSprite />
           <Icon spriteName="heart" size="18px" />
         </IconElement>
-        <IconElement
-          hasPinkCircle={showCircleBag}
-          circleText={counterBag}
-        >
+        <IconElement hasPinkCircle={showCircleBag} circleText={counterBag}>
           <IconSprite />
           <Icon spriteName="shopping-bag" size="18px" />
         </IconElement>
