@@ -5,6 +5,7 @@ import {
   LogoFooter,
   ListContainer,
   ListItem,
+  Link,
   ButtonWrapper,
   ButtonText,
   IconElement,
@@ -16,14 +17,22 @@ export const Footer = () => {
   return (
     <StyledFooter>
       <FooterWrapper>
-        <LogoFooter src={logoFooter} />
+        <Link href='#'>
+          <LogoFooter src={logoFooter} />
+        </Link>
 
         <ListContainer>
-          <ListItem>Github</ListItem>
+          <ListItem>
+            <Link href='https://github.com/fe-may23-bugs-and-hugs'>Github</Link>
+          </ListItem>
 
-          <ListItem>Contacts</ListItem>
+          <ListItem>
+            <Link href='#'>Contacts</Link>
+          </ListItem>
 
-          <ListItem>rights</ListItem>
+          <ListItem>
+            <Link href='#'>rights</Link>
+          </ListItem>
         </ListContainer>
 
         <ButtonWrapper>
