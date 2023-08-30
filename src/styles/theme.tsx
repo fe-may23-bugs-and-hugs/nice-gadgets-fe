@@ -41,4 +41,8 @@ export const theme = {
     slower: '0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     faster: '0.5s cubic-bezier(0.4, 0, 0.2, 1)',
   },
+  sizes: {
+    headerHeigth: '64px',
+    footerHeigth: '96px',
+  },
 };
