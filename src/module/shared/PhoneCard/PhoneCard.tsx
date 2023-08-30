@@ -16,6 +16,7 @@ import {
   ButtonsWrapper,
   ButtonAdd,
   ButtonLike,
+  ImageBox,
 } from './PhoneCard.styled';
 
 import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
@@ -42,7 +43,9 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
 
   return (
     <CardWrapper>
-      <CardImage src={phnoneImg} alt="Phone Image" />
+      <ImageBox>
+        <CardImage src={phnoneImg} alt="Phone Image" />
+      </ImageBox>
       <CardTitle>{phone.name}</CardTitle>
 
       <PriceWrapper>

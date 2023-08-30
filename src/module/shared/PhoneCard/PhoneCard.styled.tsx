@@ -17,15 +17,18 @@ export const CardWrapper = styled.div`
   background: ${({ theme }) => theme.colors.white};
 `;
 
-export const CardImage = styled.img`
+export const ImageBox = styled.div`
   width: 208px;
-  height: 196px;
+  height: 208px;
+  margin-bottom: 24px;
+`;
 
-  object-fit: contain;
+export const CardImage = styled.img`
+  height: 100%;
+  display: block;
+  object-fit: cover;
 
   margin: 0 auto;
-
-  margin-bottom: 24px;
 `;
 
 export const CardTitle = styled.h2`
@@ -35,6 +38,8 @@ export const CardTitle = styled.h2`
   font-style: normal;
   font-weight: ${({ theme }) => theme.fonts.sizeXs};
   line-height: ${({ theme }) => theme.fonts.weightSemiBold};
+
+  height: 42px;
 
   margin-bottom: 8px;
 `;
@@ -102,7 +107,7 @@ export const ButtonsWrapper = styled.div`
 `;
 
 export const ButtonAdd = styled.button<ButtonProps>`
-  width: 100%;
+  width: 160px;
   height: 40px;
 
   color: ${(props) =>

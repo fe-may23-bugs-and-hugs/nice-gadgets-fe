@@ -59,6 +59,8 @@ export const SortTitle = styled.h2`
 `;
 
 export const SortDropDown = styled.button`
+  position: relative;
+
   padding: 0 15px;
   background-color: #fff;
   cursor: pointer;
@@ -80,4 +82,19 @@ export const SortDropDown = styled.button`
   font-style: normal;
   font-weight: 700;
   line-height: 21px;
+
+  svg {
+    position: absolute;
+    top: 48%;
+    right: 4px;
+    transform: translate(-50%, -50%);
+  }
+`;
+
+export const SortDropdownContent = styled.ul`
+  position: absolute;
+  margin-top: 4px;
+  background-color: #fff;
+  border: 1px solid #e2e6e9;
+  width: inherit;
 `;
