@@ -71,9 +71,22 @@ export const LiElement = styled.li`
 `;
 
 export const LinkElement = styled(NavLink)`
+  display: block;
+  position: relative;
+
   &.active {
     color: ${({ theme }) => theme.colors.grayPrimary};
     font-weight: ${({ theme }) => theme.fonts.weightBold};
+
+    &:after {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background-color: ${({ theme }) => theme.colors.grayPrimary};
+    }
   }
 `;
 
