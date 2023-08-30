@@ -34,7 +34,7 @@ export const Categories: React.FC = () => {
     (category: string) => {
       const categoryCounts: { [key: string]: number } = {};
 
-      data.forEach(product => {
+      data.forEach((product) => {
         if (product.category === category) {
           categoryCounts[category] = (categoryCounts[category] || 0) + 1;
         }
@@ -50,7 +50,7 @@ export const Categories: React.FC = () => {
       <CategoriesTitle>Shop by category</CategoriesTitle>
 
       <CategoriesWrapper>
-        {categoriesData.map(categoryData => (
+        {categoriesData.map((categoryData) => (
           <Category
             key={categoryData.category}
             image={categoryData.image}

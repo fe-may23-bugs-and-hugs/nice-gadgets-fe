@@ -20,4 +20,8 @@ export const CategoriesWrapper = styled.section`
 
 export const CategoriesTitle = styled.h2`
   font-size: ${({ theme }) => theme.fonts.sizeL};
+
+  ${onTablet(`
+      font-size: ${({ theme }) => theme.fonts.sizeXxl};
+  `)};
 `;

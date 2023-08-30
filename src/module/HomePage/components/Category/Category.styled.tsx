@@ -15,8 +15,7 @@ export const CategoryImage = styled.img`
   object-fit: cover;
 `;
 
-export const CategoryContent = styled.div`
-`;
+export const CategoryContent = styled.div``;
 
 export const CategoryTitle = styled.h3`
   color: ${({ theme }) => theme.colors.grayPrimary};
@@ -24,6 +23,10 @@ export const CategoryTitle = styled.h3`
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-style: normal;
   line-height: normal;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.graySecondary};
+  }
 `;
 
 export const CategoryModels = styled.p`

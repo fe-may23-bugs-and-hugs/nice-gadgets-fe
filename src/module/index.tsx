@@ -4,4 +4,3 @@ export * from './Favorites';
 export * from './HomePage';
 export * from './ProductCard';
 export * from './PageNotFound';
-export * from './shared';
