@@ -69,9 +69,13 @@ export const IconsSection = styled.div`
 `;
 
 export const IconElement = styled.div`
-  padding: 0 24px;
+  padding: 0 12px;
   cursor: pointer;
   transition: background-color ${({ theme }) => theme.transition.slower};
+
+  @media (min-width: 1200px) {
+    padding: 0 24px;
+  }
 
   &:not(:last-child) {
     display: none;
