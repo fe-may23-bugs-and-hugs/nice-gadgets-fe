@@ -1,10 +1,10 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { App } from '../App';
 import { Catalog, HomePage, PageNotFound, ProductCard } from '../module';
 
 export const Root = () => (
-  <HashRouter>
+  <BrowserRouter basename="nice-gadgets-fe">
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
@@ -17,5 +17,5 @@ export const Root = () => (
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
-  </HashRouter>
+  </BrowserRouter>
 );
