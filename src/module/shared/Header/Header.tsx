@@ -6,8 +6,8 @@ import logoMobile from './../../../assets/images/logo-mobile.png';
 import {
   HeaderElement,
   BarElement,
-  ImgElement,
   NavElement,
+  ImgElement,
   UlElement,
   LiElement,
   LinkElement,
