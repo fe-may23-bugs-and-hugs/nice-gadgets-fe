@@ -1,20 +1,32 @@
 @font-face {
   font-family: 'Mont';
-  src:
-    local('Mont-Regular'),
-    url(../assets/fonts/Mont-Regular.otf) format('otf');
+  src: url('../assets/fonts/Mont-Regular.woff2') format('woff2'),
+      url('../assets/fonts/Mont-Regular.woff') format('woff'),
+      url('../assets/fonts/Mont-Regular.otf') format('opentype'),
+      url('../assets/fonts/Mont-Regular.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Mont';
-  src:
-    local('Mont-SemiBold'),
-    url(../assets/fonts/Mont-SemiBold.otf) format('otf');
+  src: url('../assets/fonts/Mont-SemiBold.woff2') format('woff2'),
+      url('../assets/fonts/Mont-SemiBold.woff') format('woff'),
+      url('../assets/fonts/Mont-SemiBold.otf') format('opentype'),
+      url('../assets/fonts/Mont-SemiBold.ttf') format('truetype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
 }
 
 @font-face {
   font-family: 'Mont';
-  src:
-    local('Mont-Bold'),
-    url(../assets/fonts/Mont-Bold.otf) format('otf');
+  src: url('../assets/fonts/Mont-Bold.woff2') format('woff2'),
+      url('../assets/fonts/Mont-Bold.woff') format('woff'),
+      url('../assets/fonts/Mont-Bold.otf') format('opentype'),
+      url('../assets/fonts/Mont-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
 }

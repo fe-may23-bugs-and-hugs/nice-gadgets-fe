@@ -1,6 +1,5 @@
 {
   "name": "nice-gadgets-fe",
-  "homepage": "https://fe-may23-bugs-and-hugs.github.io/nice-gadgets-fe",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

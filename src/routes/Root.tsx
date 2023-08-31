@@ -1,10 +1,17 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { App } from '../App';
-import { Catalog, HomePage, PageNotFound, ProductCard } from '../module';
+import {
+  CartPage,
+  Catalog,
+  Favorites,
+  HomePage,
+  PageNotFound,
+  ProductCard,
+} from '../module';
 
 export const Root = () => (
-  <HashRouter>
+  <BrowserRouter>
     <Routes>
       <Route path="/" element={<App />}>
         <Route index element={<HomePage />} />
@@ -14,8 +21,25 @@ export const Root = () => (
           <Route path=":productId" element={<ProductCard />} />
         </Route>
 
+        <Route path="tablets">
+          <Route index element={<Catalog />} />
+          <Route path=":productId" element={<ProductCard />} />
+        </Route>
+
+        <Route path="accessories">
+          <Route index element={<Catalog />} />
+          <Route path=":productId" element={<ProductCard />} />
+        </Route>
+
+        <Route path="favorites">
+          <Route index element={<Favorites/>} />
+          <Route path=":productId" element={<ProductCard />} />
+        </Route>
+
+        <Route path="cart" element={<CartPage/>} />
+
         <Route path="*" element={<PageNotFound />} />
       </Route>
     </Routes>
-  </HashRouter>
+  </BrowserRouter>
 );
