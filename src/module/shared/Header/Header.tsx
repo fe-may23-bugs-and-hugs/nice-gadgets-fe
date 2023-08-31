@@ -1,154 +1,111 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useState, useEffect } from 'react';
 import { Icon, IconSprite } from '../Sprites';
-import logoDesktop from './../../../assets/images/logo-desktop.png';
-import logoTablet from './../../../assets/images/logo-tablet.png';
-import logoMobile from './../../../assets/images/logo-mobile.png';
-import { Link } from 'react-router-dom';
-
-const HeaderElement = styled.header`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin: auto;
-  border-bottom: 1px solid ${({ theme }) => theme.colors.grayElements};
-  line-height: ${({ theme }) => theme.fonts.lineHeightXxl};
-  @media (min-width: 1200px) {
-    line-height: ${({ theme }) => theme.fonts.lineHeightXxxl};
-  }
-`;
-
-const NavElement = styled.nav`
-  font-family: ${({ theme }) => theme.fonts.name};
-  font-size: ${({ theme }) => theme.fonts.sizeS};
-  font-weight: ${({ theme }) => theme.fonts.weightBold};
-  color: ${({ theme }) => theme.colors.graySecondary};
-
-  @media (max-width: 639px) {
-    display: none;
-  }
-`;
-
-const BarElement = styled(Link)`
-  display: flex;
-  margin: 0 24px;
-  gap: 32px;
-
-  @media (min-width: 1200px) {
-    gap: 64px;
-  }
-`;
-
-const ImgElement = styled.img`
-  height: 100%;
-  line-height: 100%;
-  align-self: center;
-`;
-
-const UlElement = styled.ul`
-  display: flex;
-  gap: 32px;
-
-  @media (min-width: 1200px) {
-    gap: 64px;
-  }
-`;
-
-const LiElement = styled.li`
-  list-style-type: none;
-  cursor: pointer;
-  transition: color ${({ theme }) => theme.transition.slower};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.grayPrimary};
-    transition: color ${({ theme }) => theme.transition.slower};
-  }
-`;
-
-const LinkElement = styled(Link)``;
-
-const IconsSection = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-`;
-
-const IconElement = styled.div`
-  padding: 0 24px;
-  cursor: pointer;
-  transition: background-color ${({ theme }) => theme.transition.slower};
-
-  &:not(:last-child) {
-    display: none;
-  }
-
-  &:hover {
-    background-color: ${({ theme }) => theme.colors.grayBackground};
-    transition: background-color ${({ theme }) => theme.transition.slower};
-  }
-
-  svg {
-    display: block;
-    line-height: ${({ theme }) => theme.fonts.lineHeightXxl};
-    height: ${({ theme }) => theme.fonts.lineHeightXxl};
-
-    @media (min-width: 1200px) {
-      line-height: ${({ theme }) => theme.fonts.lineHeightXxxl};
-      height: ${({ theme }) => theme.fonts.lineHeightXxxl};
-    }
-  }
-  border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
-
-  @media (min-width: 640px) {
-    &:not(:last-child) {
-      display: block;
-    }
-    &:last-child {
-      display: none;
-    }
-  }
-`;
+import logo from './../../../assets/images/logo.png';
+import {
+  HeaderElement,
+  BarElement,
+  NavElement,
+  ImgArea,
+  ImgElement,
+  UlElement,
+  LiElement,
+  LinkElement,
+  IconsSection,
+  IconElement,
+  BuregerWrapper,
+} from './Header.styled';
 
 export const Header = () => {
+  const showCircleFavorites = true;
+  const showCircleBag = true;
+  const counterFavorites = 4;
+  const counterBag = 3;
+
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   return (
-    <HeaderElement>
-      <BarElement to="/">
-        <ImgElement
-          srcSet={`${logoMobile} 319w, ${logoTablet} 1199w, ${logoDesktop} 1400w`}
-          sizes="(max-width: 319px) 319px, (max-width: 1199px) 1200px, 1400px"
-          src={logoMobile}
-          alt="Nice gadgets logo"
-        />
-        <NavElement>
-          <UlElement>
+    <HeaderElement isMenuOpen={isMenuOpen}>
+      <BarElement isMenuOpen={isMenuOpen}>
+        <ImgArea to="/" isMenuOpen={isMenuOpen}>
+          <ImgElement src={logo} />
+        </ImgArea>
+        <NavElement isMenuOpen={isMenuOpen}>
+          <UlElement isMenuOpen={isMenuOpen}>
             <LiElement>
-              <LinkElement to="/">Home</LinkElement>
+              <LinkElement to="/" onClick={isMenuOpen ? closeMenu : undefined}>
+                Home
+              </LinkElement>
             </LiElement>
             <LiElement>
-              <LinkElement to="/phones">Phones</LinkElement>
+              <LinkElement
+                to="/phones"
+                onClick={isMenuOpen ? closeMenu : undefined}
+              >
+                Phones
+              </LinkElement>
             </LiElement>
             <LiElement>
-              <LinkElement to="/tablets">Tablets</LinkElement>
+              <LinkElement
+                to="/tablets"
+                onClick={isMenuOpen ? closeMenu : undefined}
+              >
+                Tablets
+              </LinkElement>
             </LiElement>
             <LiElement>
-              <LinkElement to="/accessories">Accessories</LinkElement>
+              <LinkElement
+                to="/accessories"
+                onClick={isMenuOpen ? closeMenu : undefined}
+              >
+                Accessories
+              </LinkElement>
             </LiElement>
           </UlElement>
         </NavElement>
       </BarElement>
-      <IconsSection>
-        <IconElement>
+      <IconsSection isMenuOpen={isMenuOpen}>
+        <IconElement
+          hasPinkCircle={showCircleFavorites}
+          circleText={counterFavorites}
+          isMenuOpen={isMenuOpen}
+        >
           <IconSprite />
           <Icon spriteName="heart" size="18px" />
         </IconElement>
-        <IconElement>
+        <IconElement
+          hasPinkCircle={showCircleBag}
+          circleText={counterBag}
+          isMenuOpen={isMenuOpen}
+        >
           <IconSprite />
           <Icon spriteName="shopping-bag" size="18px" />
         </IconElement>
-        <IconElement>
-          <IconSprite />
-          <Icon spriteName="burger" size="18px" />
-        </IconElement>
+        <BuregerWrapper onClick={toggleMenu} isMenuOpen={isMenuOpen}>
+          <IconElement>
+            <IconSprite />
+            <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
+          </IconElement>
+        </BuregerWrapper>
       </IconsSection>
     </HeaderElement>
   );

@@ -5,25 +5,34 @@ import {
   LogoFooter,
   ListContainer,
   ListItem,
+  Link,
   ButtonWrapper,
   ButtonText,
   IconElement,
 } from './Footer.styled';
-import logoFooter from '../../../assets/images/logo_footer.png';
+import logoFooter from '../../../assets/images/logo.png';
 import { Icon, IconSprite } from '../Sprites';
 
 export const Footer = () => {
   return (
     <StyledFooter>
       <FooterWrapper>
-        <LogoFooter src={logoFooter} />
+        <Link href="#">
+          <LogoFooter src={logoFooter} />
+        </Link>
 
         <ListContainer>
-          <ListItem>Github</ListItem>
+          <ListItem>
+            <Link href="https://github.com/fe-may23-bugs-and-hugs">Github</Link>
+          </ListItem>
 
-          <ListItem>Contacts</ListItem>
+          <ListItem>
+            <Link href="#">Contacts</Link>
+          </ListItem>
 
-          <ListItem>rights</ListItem>
+          <ListItem>
+            <Link href="#">rights</Link>
+          </ListItem>
         </ListContainer>
 
         <ButtonWrapper>

@@ -1,25 +1,45 @@
-import { HashRouter, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { App } from '../App';
-import { HomePage, PageNotFound, ProductCard } from '../module';
-import { CatalogPage } from '../module/CatalogPage';
-import { PhonesProvider } from '../context/phonesContext';
+import {
+  CartPage,
+  CatalogPage,
+  Favorites,
+  HomePage,
+  PageNotFound,
+  ProductCard,
+} from '../module';
 
 export const Root = () => (
-  <HashRouter>
-    <PhonesProvider>
-      <Routes>
-        <Route path="/" element={<App />}>
-          <Route index element={<HomePage />} />
+  <BrowserRouter>
+    <Routes>
+      <Route path="/" element={<App />}>
+        <Route index element={<HomePage />} />
 
-          <Route path="phones">
-            <Route index element={<CatalogPage />} />
-            <Route path=":productId" element={<ProductCard />} />
-          </Route>
-
-          <Route path="*" element={<PageNotFound />} />
+        <Route path="phones">
+          <Route index element={<CatalogPage />} />
+          <Route path=":productId" element={<ProductCard />} />
         </Route>
-      </Routes>
-    </PhonesProvider>
-  </HashRouter>
+
+        <Route path="tablets">
+          <Route index element={<CatalogPage />} />
+          <Route path=":productId" element={<ProductCard />} />
+        </Route>
+
+        <Route path="accessories">
+          <Route index element={<CatalogPage />} />
+          <Route path=":productId" element={<ProductCard />} />
+        </Route>
+
+        <Route path="favorites">
+          <Route index element={<Favorites/>} />
+          <Route path=":productId" element={<ProductCard />} />
+        </Route>
+
+        <Route path="cart" element={<CartPage/>} />
+
+        <Route path="*" element={<PageNotFound />} />
+      </Route>
+    </Routes>
+  </BrowserRouter>
 );

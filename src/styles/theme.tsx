@@ -33,6 +33,8 @@ export const theme = {
     lineHeightXl: '31px',
     lineHeightXxl: '41px',
     lineHeightXxxl: '56px',
+    lineHeightTablet: '48px',
+    lineHeightDesktop: '64px',
     spacingS: '-0.01em',
     spacingDefault: '0',
     spacingM: '0.04em',
@@ -40,5 +42,9 @@ export const theme = {
   transition: {
     slower: '0.2s cubic-bezier(0.4, 0, 0.2, 1)',
     faster: '0.5s cubic-bezier(0.4, 0, 0.2, 1)',
+  },
+  sizes: {
+    headerHeigth: '64px',
+    footerHeigth: '96px',
   },
 };

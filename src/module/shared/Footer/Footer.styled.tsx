@@ -40,6 +40,7 @@ export const FooterWrapper = styled.div`
 export const LogoFooter = styled.img`
   width: 89px;
   margin-bottom: 32px;
+  cursor: pointer;
 
   ${onTablet(`
     margin: 0;
@@ -49,10 +50,9 @@ export const LogoFooter = styled.img`
 export const ListContainer = styled.ul`
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  width: 197px;
   margin: 0 0 32px 0;
   padding: 0;
+  gap: 16px;
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightXxs};
   letter-spacing: ${({ theme }) => theme.fonts.spacingM};
@@ -61,26 +61,31 @@ export const ListContainer = styled.ul`
 
   ${onTablet(`
     flex-direction: row;
-    width: 197px;
     margin: 0;
   `)}
 
   ${onDesktop(`
-      width: 378px;
+    gap: 106px;
     `)}
 `;
 
 export const ListItem = styled.li`
-  margin-bottom: 16px;
   color: ${({ theme }) => theme.colors.graySecondary};
+`;
 
-  ${onTablet(`
-    margin: 0;
-  `)}
+export const Link = styled.a`
+  cursor: pointer;
+  transition: color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.grayPrimary};
+  }
 `;
 
 export const ButtonWrapper = styled.div`
   display: flex;
+  align-items: center;
+  align-self: center;
 `;
 
 export const IconElement = styled.a`
@@ -105,7 +110,6 @@ export const IconElement = styled.a`
 `;
 
 export const ButtonText = styled.p`
-  align-self: center;
   margin: 0 16px 0 0;
   color: ${({ theme }) => theme.colors.graySecondary};
 `;
