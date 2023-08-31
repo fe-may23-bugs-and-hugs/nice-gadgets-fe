@@ -81,6 +81,14 @@ export const SortDropDown = styled.button`
   font-weight: 700;
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
 
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.graySecondary};
+  }
+
+  &:focus {
+    border-color: ${({ theme }) => theme.colors.grayPrimary};
+  }
+
   svg {
     position: absolute;
     top: 50%;

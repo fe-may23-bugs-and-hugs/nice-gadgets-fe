@@ -136,6 +136,10 @@ export const ButtonAdd = styled.button<ButtonProps>`
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
+
+  &:hover {
+    box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+  }
 `;
 
 export const ButtonLike = styled.button`
@@ -146,6 +150,10 @@ export const ButtonLike = styled.button`
   width: 40px;
 
   border-radius: 48px;
+
+  &:hover {
+    border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
+  }
 
   svg {
     position: absolute;

@@ -1,4 +1,4 @@
-/* eslint-disable */
+/* eslint-disable*/
 import React, { useContext, useEffect, useState } from 'react';
 import { IconSprite, Icon } from '../shared';
 import { ContentLayout } from '../shared/ContentLayout';
@@ -35,6 +35,26 @@ export const CatalogPage: React.FC = () => {
   const [openSort, setOpenSort] = useState(false);
   const [openLimit, setOpenLimit] = useState(false);
 
+  useEffect(() => {
+    const handleDocumentClick = (event: MouseEvent) => {
+      if (
+        !event.target ||
+        !(event.target instanceof Element) ||
+        (!event.target.closest('#sort-dropdown') &&
+          !event.target.closest('#limit-dropdown'))
+      ) {
+        setOpenSort(false);
+        setOpenLimit(false);
+      }
+    };
+
+    document.addEventListener('click', handleDocumentClick);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+    };
+  }, []);
+
   return (
     <>
       <ContentLayout>
@@ -53,7 +73,10 @@ export const CatalogPage: React.FC = () => {
             <CatalogModelsLeft>{totalModels} models</CatalogModelsLeft>
 
             <SortWrapper>
-              <div onClick={() => setOpenSort((prev) => !prev)}>
+              <div
+                id="sort-dropdown"
+                onClick={() => setOpenSort((prev) => !prev)}
+              >
                 <SortTitle>Sort by</SortTitle>
                 <SortDropDown>
                   Newest
@@ -81,7 +104,10 @@ export const CatalogPage: React.FC = () => {
                 )}
               </div>
 
-              <div onClick={() => setOpenLimit((prev) => !prev)}>
+              <div
+                id="limit-dropdown"
+                onClick={() => setOpenLimit((prev) => !prev)}
+              >
                 <SortTitle>Items on page</SortTitle>
                 <SortDropDown>
                   {currentLimit}
