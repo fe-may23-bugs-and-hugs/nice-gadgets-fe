@@ -33,6 +33,8 @@ export const theme = {
     lineHeightXl: '31px',
     lineHeightXxl: '41px',
     lineHeightXxxl: '56px',
+    lineHeightTablet: '48px',
+    lineHeightDesktop: '64px',
     spacingS: '-0.01em',
     spacingDefault: '0',
     spacingM: '0.04em',

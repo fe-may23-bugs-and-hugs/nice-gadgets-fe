@@ -1,17 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Icon, IconSprite } from '../Sprites';
 import logo from './../../../assets/images/logo.png';
-import { NavLink } from 'react-router-dom';
 import {
   HeaderElement,
   BarElement,
   NavElement,
+  ImgArea,
   ImgElement,
   UlElement,
   LiElement,
   LinkElement,
   IconsSection,
   IconElement,
+  BuregerWrapper,
 } from './Header.styled';
 
 export const Header = () => {
@@ -20,45 +21,91 @@ export const Header = () => {
   const counterFavorites = 4;
   const counterBag = 3;
 
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
+
+  const closeMenu = () => {
+    setIsMenuOpen(false);
+  };
+
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [isMenuOpen]);
+
   return (
-    <HeaderElement>
-      <BarElement>
-        <NavLink to="/">
-          <ImgElement src={logo}/>
-        </NavLink>
-        <NavElement>
-          <UlElement>
+    <HeaderElement isMenuOpen={isMenuOpen}>
+      <BarElement isMenuOpen={isMenuOpen}>
+        <ImgArea to="/" isMenuOpen={isMenuOpen}>
+          <ImgElement src={logo} />
+        </ImgArea>
+        <NavElement isMenuOpen={isMenuOpen}>
+          <UlElement isMenuOpen={isMenuOpen}>
             <LiElement>
-              <LinkElement to="/">Home</LinkElement>
+              <LinkElement
+                to="/"
+                onClick={isMenuOpen ? closeMenu : undefined}
+                >
+                  Home
+                </LinkElement>
             </LiElement>
             <LiElement>
-              <LinkElement to="/phones">Phones</LinkElement>
+              <LinkElement
+                to="/phones"
+                onClick={isMenuOpen ? closeMenu : undefined}
+                >
+                  Phones</LinkElement>
             </LiElement>
             <LiElement>
-              <LinkElement to="/tablets">Tablets</LinkElement>
+              <LinkElement
+                to="/tablets"
+                onClick={isMenuOpen ? closeMenu : undefined}
+                >
+                  Tablets</LinkElement>
             </LiElement>
             <LiElement>
-              <LinkElement to="/accessories">Accessories</LinkElement>
+              <LinkElement
+                to="/accessories"
+                onClick={isMenuOpen ? closeMenu : undefined}
+                >
+                  Accessories</LinkElement>
             </LiElement>
           </UlElement>
         </NavElement>
       </BarElement>
-      <IconsSection>
+      <IconsSection isMenuOpen={isMenuOpen}>
         <IconElement
           hasPinkCircle={showCircleFavorites}
           circleText={counterFavorites}
+          isMenuOpen={isMenuOpen}
         >
           <IconSprite />
           <Icon spriteName="heart" size="18px" />
         </IconElement>
-        <IconElement hasPinkCircle={showCircleBag} circleText={counterBag}>
+        <IconElement
+          hasPinkCircle={showCircleBag}
+          circleText={counterBag}
+          isMenuOpen={isMenuOpen}
+        >
           <IconSprite />
           <Icon spriteName="shopping-bag" size="18px" />
         </IconElement>
-        <IconElement>
-          <IconSprite />
-          <Icon spriteName="burger" size="18px" />
-        </IconElement>
+        <BuregerWrapper onClick={toggleMenu} isMenuOpen={isMenuOpen}>
+          <IconElement>
+            <IconSprite />
+              <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
+          </IconElement>
+        </BuregerWrapper>
       </IconsSection>
     </HeaderElement>
   );
