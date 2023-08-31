@@ -11,7 +11,7 @@ import {
   SortTitle,
   SortDropDown,
   SortDropdownContent,
-} from './CatalogPage.styles';
+} from './CatalogPage.styled';
 import { Catalog } from '../Catalog/Catalog';
 import { PhonesContext } from '../../context/phonesContext';
 import { Spinner } from '../Spinner';
@@ -58,7 +58,11 @@ export const CatalogPage: React.FC = () => {
                 <SortDropDown>
                   Newest
                   <IconSprite />
-                  <Icon spriteName="arrow-down" />
+                  {openSort ? (
+                    <Icon spriteName="arrow-up" />
+                  ) : (
+                    <Icon spriteName="arrow-down" />
+                  )}
                 </SortDropDown>
                 {openSort && (
                   <SortDropdownContent>
@@ -82,11 +86,15 @@ export const CatalogPage: React.FC = () => {
                 <SortDropDown>
                   {currentLimit}
                   <IconSprite />
-                  <Icon spriteName="arrow-down" />
+                  {openLimit ? (
+                    <Icon spriteName="arrow-up" />
+                  ) : (
+                    <Icon spriteName="arrow-down" />
+                  )}
                 </SortDropDown>
                 {openLimit && (
                   <SortDropdownContent>
-                    {['4', '10', '16', '32'].map((num) => (
+                    {['4', '8', '16', 'All'].map((num) => (
                       <LimitLink key={num} num={num} />
                     ))}
                   </SortDropdownContent>

@@ -8,10 +8,22 @@ type Props = {
 
 export const LimitLink: React.FC<Props> = ({ num }) => {
   // eslint-disable-next-line no-unused-vars
-  const { updateLimit } = useContext(PhonesContext);
+  const { updateLimit, updatePage, totalModels } = useContext(PhonesContext);
+
+  const handleChangeLimit = () => {
+    if (num === 'All') {
+      updateLimit(totalModels);
+      updatePage(1);
+
+      return;
+    }
+
+    updateLimit(+num);
+    updatePage(1);
+  };
 
   return (
-    <LimitWrapper onClick={() => updateLimit(+num)}>
+    <LimitWrapper onClick={handleChangeLimit}>
       <span>{num}</span>
     </LimitWrapper>
   );

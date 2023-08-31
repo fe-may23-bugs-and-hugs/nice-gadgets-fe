@@ -1,11 +1,7 @@
 import styled from 'styled-components';
 import ReactPaginate from 'react-paginate';
 
-type Props = {
-  isActive: boolean;
-};
-
-export const ReactPaginateStyled = styled(ReactPaginate)<Props>`
+export const ReactPaginateStyled = styled(ReactPaginate)`
   display: flex;
   align-items: center;
   justify-content: center;
@@ -15,26 +11,40 @@ export const ReactPaginateStyled = styled(ReactPaginate)<Props>`
 
   margin-top: 40px;
 
-  li {
-    color: #0f0f11;
+  a {
+    position: relative;
+  }
 
-    background-color: #fff;
+  li {
+    color: ${({ theme }) => theme.colors.grayPrimary};
+
+    background-color: ${({ theme }) => theme.colors.white};
     cursor: pointer;
-    border: 1px solid #e2e6e9;
+    border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
     border-radius: 48px;
     width: 32px;
     height: 32px;
     display: flex;
     justify-content: center;
     align-items: center;
-    &:hover {
-      color: #fff;
-      background-color: #0f0f11;
+
+    position: relative;
+
+    &:not(:first-child):not(:last-child):hover {
+      color: ${({ theme }) => theme.colors.white};
+      background-color: ${({ theme }) => theme.colors.grayPrimary};
+    }
+
+    svg {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
     }
   }
 
   li.selected {
-    color: #fff;
-    background-color: #0f0f11;
+    color: ${({ theme }) => theme.colors.white};
+    background-color: ${({ theme }) => theme.colors.grayPrimary};
   }
 `;

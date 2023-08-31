@@ -7,9 +7,9 @@ export const LimitWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
   color: $color-primary;
-  transition: all 0.1s linear;
+  transition: all ${({ theme }) => theme.transition.slower};
 
   cursor: pointer;
   &:hover {

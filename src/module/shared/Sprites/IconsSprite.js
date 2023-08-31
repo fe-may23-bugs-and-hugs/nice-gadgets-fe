@@ -13,21 +13,21 @@ export const IconSprite = () => {
         <style>{styles}</style>
       </defs>
       <svg xmlns="http://www.w3.org/2000/svg">
-        <symbol viewBox="0 0 12.666665 10.667" id="arrow-down">
+        <symbol id="arrow-down">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
             d="M12.4712 5.52864C12.7316 5.78899 12.7316 6.2111 12.4712 6.47145L8.47124 10.4714C8.21089 10.7318 7.78878 10.7318 7.52843 10.4714L3.52843 6.47144C3.26808 6.2111 3.26808 5.78899 3.52843 5.52864C3.78878 5.26829 4.21089 5.26829 4.47124 5.52864L7.99984 9.05723L11.5284 5.52864C11.7888 5.26829 12.2109 5.26829 12.4712 5.52864Z"
           />
         </symbol>
-        <symbol viewBox="0 0 10.666666 12.667" id="arrow-left">
+        <symbol id="arrow-left">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
             d="M10.4712 3.52861C10.2109 3.26826 9.78878 3.26826 9.52843 3.52861L5.52843 7.52861C5.26808 7.78896 5.26808 8.21107 5.52843 8.47141L9.52843 12.4714C9.78878 12.7318 10.2109 12.7318 10.4712 12.4714C10.7316 12.2111 10.7316 11.789 10.4712 11.5286L6.94265 8.00001L10.4712 4.47141C10.7316 4.21107 10.7316 3.78896 10.4712 3.52861Z"
           />
         </symbol>
-        <symbol viewBox="0 0 10.667 12.667" id="arrow-right">
+        <symbol id="arrow-right">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"

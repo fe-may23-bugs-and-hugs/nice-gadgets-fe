@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { onTablet } from '../Mixins';
 
 interface ButtonProps {
   isClicked: boolean;
@@ -11,6 +12,10 @@ export const CardWrapper = styled.div`
   box-sizing: border-box;
   padding: 32px;
   width: 272px;
+
+  /* ${onTablet(`
+    width: 229px;
+  `)} */
 
   border-radius: 8px;
   border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
@@ -133,10 +138,18 @@ export const ButtonAdd = styled.button<ButtonProps>`
 `;
 
 export const ButtonLike = styled.button`
+  position: relative;
   cursor: pointer;
   border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
   background-color: ${({ theme }) => theme.colors.white};
   width: 40px;
 
   border-radius: 48px;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;

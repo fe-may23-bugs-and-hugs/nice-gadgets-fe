@@ -10,33 +10,32 @@ export const IconsWrapper = styled.div`
 `;
 
 export const IconsTitle = styled.h2`
-  color: #89939a;
+  color: ${({ theme }) => theme.colors.graySecondary};
   font-family: Mont;
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-style: normal;
-  font-weight: 600;
+  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
   line-height: normal;
 `;
 
 export const CatalogTitle = styled.h1`
-  color: #0f0f11;
+  color: ${({ theme }) => theme.colors.grayPrimary};
   /* Mobile/H1 */
-  font-size: 32px;
+  font-size: ${({ theme }) => theme.fonts.sizeXxl};
   font-style: normal;
   font-weight: 800;
-  line-height: 41px; /* 128.125% */
+  line-height: ${({ theme }) => theme.fonts.sizeXxl};
   letter-spacing: -0.32px;
 
   margin-bottom: 8px;
 `;
 
 export const CatalogModelsLeft = styled.p`
-  color: #89939a;
+  color: ${({ theme }) => theme.colors.graySecondary};
 
-  font-size: 14px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 21px; /* 150% */
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
+  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
+  line-height: ${({ theme }) => theme.fonts.lineHeightM};
 
   margin-bottom: 32px;
 `;
@@ -48,11 +47,10 @@ export const SortWrapper = styled.div`
 `;
 
 export const SortTitle = styled.h2`
-  color: #89939a;
+  color: ${({ theme }) => theme.colors.graySecondary};
 
-  font-size: 12px;
-  font-style: normal;
-  font-weight: 700;
+  font-size: ${({ theme }) => theme.fonts.sizeXxs};
+  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
   line-height: normal;
 
   margin-bottom: 4px;
@@ -66,26 +64,26 @@ export const SortDropDown = styled.button`
   cursor: pointer;
   width: 160px;
   height: 40px;
-  border: 1px solid #b4bdc4;
+  border: 1px solid ${({ theme }) => theme.colors.grayIcons};
   text-align: left;
   display: flex;
   justify-content: space-between;
   align-items: center;
 
-  border: 1px solid #b4bdc3;
+  border: 1px solid ${({ theme }) => theme.colors.grayIcons};
   border-radius: 8px;
 
-  color: #0f0f11;
+  color: ${({ theme }) => theme.colors.grayPrimary};
   /* Buttons */
   font-family: Mont;
-  font-size: 14px;
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-style: normal;
   font-weight: 700;
-  line-height: 21px;
+  line-height: ${({ theme }) => theme.fonts.lineHeightM};
 
   svg {
     position: absolute;
-    top: 48%;
+    top: 50%;
     right: 4px;
     transform: translate(-50%, -50%);
   }
@@ -94,7 +92,7 @@ export const SortDropDown = styled.button`
 export const SortDropdownContent = styled.ul`
   position: absolute;
   margin-top: 4px;
-  background-color: #fff;
-  border: 1px solid #e2e6e9;
+  background-color: ${({ theme }) => theme.colors.white};
+  border: 1px solid ${({ theme }) => theme.colors.grayElements};
   width: inherit;
 `;

@@ -1,30 +1,50 @@
 /* eslint-disable*/
-import React, { useState, useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { PhonesContext } from '../../context/phonesContext';
 import { ReactPaginateStyled } from './Pagination.styled';
+import { Icon, IconSprite } from '../shared';
 
 export const Pagination: React.FC = () => {
-  const { updatePage, currentLimit, currentPage, totalPages } =
-    useContext(PhonesContext);
-
-  const [currentPaginatePage, setCurrentPaginatePage] = useState(1);
-
-  const isActiveButton = currentPaginatePage === currentPage;
+  const { updatePage, totalPages } = useContext(PhonesContext);
 
   const handlePageClick = (event: any) => {
     console.log(event);
-    setCurrentPaginatePage(event.selected + 1);
-    updatePage(event.selected);
+    updatePage(event.selected + 1);
   };
+
+  const quantityOfButtons = () => {
+    const width = window.innerWidth;
+
+    if (width <= 400) {
+      return 3;
+    }
+
+    return 6;
+  };
+
+  const nextArrow = (
+    <>
+      <IconSprite />
+      <Icon spriteName="arrow-right" />
+    </>
+  );
+
+  const prevArrow = (
+    <>
+      <IconSprite />
+      <Icon spriteName="arrow-left" />
+    </>
+  );
+
   return (
     <ReactPaginateStyled
-      isActive={isActiveButton}
       breakLabel="..."
-      nextLabel=">"
+      nextLabel={nextArrow}
       onPageChange={handlePageClick}
-      pageRangeDisplayed={currentLimit}
+      pageRangeDisplayed={quantityOfButtons()}
+      marginPagesDisplayed={1}
       pageCount={totalPages}
-      previousLabel="<"
+      previousLabel={prevArrow}
       renderOnZeroPageCount={null}
     />
   );
