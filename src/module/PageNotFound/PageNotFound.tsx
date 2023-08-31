@@ -5,7 +5,7 @@ import {
   ButtonGoHome,
   NotFoundGif,
 } from './PageNotFound.styled';
-import notFoundGif from '../../assets/images/not_found_img.gif';
+import notFoundGif from '../../assets/images/404.gif';
 import { ContentLayout } from '../shared/ContentLayout';
 
 export const PageNotFound = () => {
