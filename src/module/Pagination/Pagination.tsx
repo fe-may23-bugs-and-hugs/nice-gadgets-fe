@@ -1,14 +1,22 @@
-/* eslint-disable*/
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { PhonesContext } from '../../context/phonesContext';
 import { ReactPaginateStyled } from './Pagination.styled';
 import { Icon, IconSprite } from '../shared';
 
 export const Pagination: React.FC = () => {
-  const { updatePage, totalPages } = useContext(PhonesContext);
+  const { updatePage, totalPages, currentPage } = useContext(PhonesContext);
+  const [selectedPage, setSelectedPage] = useState(currentPage);
 
+  useEffect(() => {
+    setSelectedPage(currentPage);
+  }, [currentPage]);
+
+  useEffect(() => {
+    setSelectedPage(1);
+  }, []);
+
+  // eslint-disable-next-line no-shadow
   const handlePageClick = (event: any) => {
-    console.log(event);
     updatePage(event.selected + 1);
   };
 
@@ -22,17 +30,29 @@ export const Pagination: React.FC = () => {
     return 6;
   };
 
+  const prevDisabled = currentPage === 1;
+  const lastDisabled = currentPage === totalPages;
+
   const nextArrow = (
     <>
       <IconSprite />
-      <Icon spriteName="arrow-right" />
+      {lastDisabled ? (
+        <Icon spriteName="arrow-right" fill="#E2E6E9" />
+      ) : (
+        <Icon spriteName="arrow-right" />
+      )}
     </>
   );
 
   const prevArrow = (
     <>
       <IconSprite />
-      <Icon spriteName="arrow-left" />
+
+      {prevDisabled ? (
+        <Icon fill="#E2E6E9" spriteName="arrow-left" />
+      ) : (
+        <Icon spriteName="arrow-left" />
+      )}
     </>
   );
 
@@ -46,6 +66,7 @@ export const Pagination: React.FC = () => {
       pageCount={totalPages}
       previousLabel={prevArrow}
       renderOnZeroPageCount={null}
+      forcePage={selectedPage - 1}
     />
   );
 };
