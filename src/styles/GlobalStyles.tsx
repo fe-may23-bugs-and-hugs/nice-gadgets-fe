@@ -30,6 +30,11 @@ export const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
+li{
+  padding: 0;
+    margin: 0;
+  list-style: none;
+}
   a {
     color: inherit;
     text-decoration: none;

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { onTablet } from '../Mixins';
 
 interface ButtonProps {
   isClicked: boolean;
@@ -12,20 +13,27 @@ export const CardWrapper = styled.div`
   padding: 32px;
   width: 272px;
 
+  /* ${onTablet(`
+    width: 229px;
+  `)} */
+
   border-radius: 8px;
   border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
   background: ${({ theme }) => theme.colors.white};
 `;
 
-export const CardImage = styled.img`
+export const ImageBox = styled.div`
   width: 208px;
-  height: 196px;
+  height: 208px;
+  margin-bottom: 24px;
+`;
 
-  object-fit: contain;
+export const CardImage = styled.img`
+  height: 100%;
+  display: block;
+  object-fit: cover;
 
   margin: 0 auto;
-
-  margin-bottom: 24px;
 `;
 
 export const CardTitle = styled.h2`
@@ -35,6 +43,8 @@ export const CardTitle = styled.h2`
   font-style: normal;
   font-weight: ${({ theme }) => theme.fonts.sizeXs};
   line-height: ${({ theme }) => theme.fonts.weightSemiBold};
+
+  height: 42px;
 
   margin-bottom: 8px;
 `;
@@ -97,10 +107,12 @@ export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 8px;
+
+  margin-top: auto;
 `;
 
 export const ButtonAdd = styled.button<ButtonProps>`
-  width: 100%;
+  width: 160px;
   height: 40px;
 
   color: ${(props) =>
@@ -126,10 +138,18 @@ export const ButtonAdd = styled.button<ButtonProps>`
 `;
 
 export const ButtonLike = styled.button`
+  position: relative;
   cursor: pointer;
   border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
   background-color: ${({ theme }) => theme.colors.white};
   width: 40px;
 
   border-radius: 48px;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;

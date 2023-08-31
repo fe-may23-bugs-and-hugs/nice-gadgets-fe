@@ -8,6 +8,12 @@ export const onTablet: StylesFunction = (styles) => `
   }
 `;
 
+export const onSmallDesktop: StylesFunction = (styles) => `
+  @media (min-width: 768px) {
+    ${styles}
+  }
+`;
+
 export const onDesktop: StylesFunction = (styles) => `
   @media (min-width: 1200px) {
     ${styles}
