@@ -12,16 +12,22 @@ interface Props {
   image: string;
   title: string;
   numberOfModels: number;
+  category: string;
 }
 
-export const Category: React.FC<Props> = ({ image, title, numberOfModels }) => {
+export const Category: React.FC<Props> = ({
+  image,
+  title,
+  numberOfModels,
+  category,
+}) => {
   return (
     <CategoryWrapper>
-      <Link to={`/phones`}>
+      <Link to={`/${category}`}>
         <CategoryImage src={image} alt="Phone Image" />
       </Link>
       <CategoryContent>
-        <Link to={`/phones`}>
+        <Link to={`/${category}`}>
           <CategoryTitle>{title}</CategoryTitle>
         </Link>
 

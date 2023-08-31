@@ -56,6 +56,7 @@ export const Categories: React.FC = () => {
             image={categoryData.image}
             title={categoryData.title}
             numberOfModels={calculateNumberOfModels(categoryData.category)}
+            category={categoryData.category}
           />
         ))}
       </CategoriesWrapper>
