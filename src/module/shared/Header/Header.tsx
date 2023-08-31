@@ -13,6 +13,7 @@ import {
   IconsSection,
   IconElement,
   BuregerWrapper,
+  LinkWrapper,
 } from './Header.styled';
 
 export const Header = () => {
@@ -43,6 +44,20 @@ export const Header = () => {
     };
   }, [isMenuOpen]);
 
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth > 640 && isMenuOpen) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [isMenuOpen]);
+
   return (
     <HeaderElement isMenuOpen={isMenuOpen}>
       <BarElement isMenuOpen={isMenuOpen}>
@@ -52,7 +67,10 @@ export const Header = () => {
         <NavElement isMenuOpen={isMenuOpen}>
           <UlElement isMenuOpen={isMenuOpen}>
             <LiElement>
-              <LinkElement to="/" onClick={isMenuOpen ? closeMenu : undefined}>
+              <LinkElement
+                to="/"
+                onClick={isMenuOpen ? closeMenu : undefined}
+              >
                 Home
               </LinkElement>
             </LiElement>
@@ -89,19 +107,29 @@ export const Header = () => {
           circleText={counterFavorites}
           isMenuOpen={isMenuOpen}
         >
-          <IconSprite />
-          <Icon spriteName="heart" size="18px" />
+          <LinkWrapper
+            to="/favorites"
+            onClick={isMenuOpen ? closeMenu : undefined}
+          >
+            <IconSprite />
+            <Icon spriteName="heart" size="18px" />
+          </LinkWrapper>
         </IconElement>
         <IconElement
           hasPinkCircle={showCircleBag}
           circleText={counterBag}
           isMenuOpen={isMenuOpen}
         >
-          <IconSprite />
-          <Icon spriteName="shopping-bag" size="18px" />
+          <LinkWrapper
+            to="/cart"
+            onClick={isMenuOpen ? closeMenu : undefined}
+          >
+            <IconSprite />
+            <Icon spriteName="shopping-bag" size="18px" />
+          </LinkWrapper>
         </IconElement>
         <BuregerWrapper onClick={toggleMenu} isMenuOpen={isMenuOpen}>
-          <IconElement>
+          <IconElement className={isMenuOpen ? 'close' : 'burger'}>
             <IconSprite />
             <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
           </IconElement>
