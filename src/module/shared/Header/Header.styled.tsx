@@ -49,7 +49,6 @@ export const NavElement = styled.nav<mobileProps>`
     display: ${({ isMenuOpen }) => (isMenuOpen ? 'flex' : 'none')};
   }
 
-
   @media (min-width: 1200px) {
     line-height: ${({ theme }) => theme.fonts.lineHeightDesktop};
   }
@@ -58,8 +57,8 @@ export const NavElement = styled.nav<mobileProps>`
 export const ImgArea = styled(NavLink)<mobileProps>`
   width: 100%;
 
-  border-bottom: ${({ isMenuOpen, theme }) => (
-    isMenuOpen ? `1px solid ${theme.colors.grayElements}` : 'none')};
+  border-bottom: ${({ isMenuOpen, theme }) =>
+    isMenuOpen ? `1px solid ${theme.colors.grayElements}` : 'none'};
 `;
 
 export const ImgElement = styled.img`
@@ -123,8 +122,8 @@ export const IconsSection = styled.div<mobileProps>`
   align-items: center;
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
   height: ${({ isMenuOpen }) => (isMenuOpen ? '48px' : 'auto')};
-  border-top: ${({ isMenuOpen, theme }) => (
-    isMenuOpen ? `1px solid ${theme.colors.grayElements}` : 'none')};
+  border-top: ${({ isMenuOpen, theme }) =>
+    isMenuOpen ? `1px solid ${theme.colors.grayElements}` : 'none'};
 `;
 
 export const IconElement = styled.div<IconElementProps>`
@@ -166,7 +165,7 @@ export const IconElement = styled.div<IconElementProps>`
     `};
 
   @media (min-width: 1200px) {
-    width: 64px
+    width: 64px;
   }
 
   &:not(:last-child) {
@@ -179,28 +178,28 @@ export const IconElement = styled.div<IconElementProps>`
 
     return isMenuOpen
       ? css`
-          &:first-child {
-            display: block;
-            width: 100%;
-            position: relative;
+            &:first-child {
+              display: block;
+              width: 100%;
+              position: relative;
 
-            svg {
-              margin-left: auto;
-              margin-right: auto;
+              svg {
+                margin-left: auto;
+                margin-right: auto;
+              }
             }
-          }
-          &:nth-child(2) {
-            display: block;
-            width: 100%;
-            position: relative;
-            border-left: 1px solid ${theme.colors.grayElements};
+            &:nth-child(2) {
+              display: block;
+              width: 100%;
+              position: relative;
+              border-left: 1px solid ${theme.colors.grayElements};
 
-            svg {
-              margin-left: auto;
-              margin-right: auto;
+              svg {
+                margin-left: auto;
+                margin-right: auto;
+              }
             }
-          }
-        `
+          `
       : 'display: none';
   }};
   }
