@@ -32,11 +32,11 @@ export const Root = () => (
         </Route>
 
         <Route path="favorites">
-          <Route index element={<Favorites/>} />
+          <Route index element={<Favorites />} />
           <Route path=":productId" element={<ProductCard />} />
         </Route>
 
-        <Route path="cart" element={<CartPage/>} />
+        <Route path="cart" element={<CartPage />} />
 
         <Route path="*" element={<PageNotFound />} />
       </Route>
