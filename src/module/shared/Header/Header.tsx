@@ -52,33 +52,33 @@ export const Header = () => {
         <NavElement isMenuOpen={isMenuOpen}>
           <UlElement isMenuOpen={isMenuOpen}>
             <LiElement>
-              <LinkElement
-                to="/"
-                onClick={isMenuOpen ? closeMenu : undefined}
-                >
-                  Home
-                </LinkElement>
+              <LinkElement to="/" onClick={isMenuOpen ? closeMenu : undefined}>
+                Home
+              </LinkElement>
             </LiElement>
             <LiElement>
               <LinkElement
                 to="/phones"
                 onClick={isMenuOpen ? closeMenu : undefined}
-                >
-                  Phones</LinkElement>
+              >
+                Phones
+              </LinkElement>
             </LiElement>
             <LiElement>
               <LinkElement
                 to="/tablets"
                 onClick={isMenuOpen ? closeMenu : undefined}
-                >
-                  Tablets</LinkElement>
+              >
+                Tablets
+              </LinkElement>
             </LiElement>
             <LiElement>
               <LinkElement
                 to="/accessories"
                 onClick={isMenuOpen ? closeMenu : undefined}
-                >
-                  Accessories</LinkElement>
+              >
+                Accessories
+              </LinkElement>
             </LiElement>
           </UlElement>
         </NavElement>
@@ -103,7 +103,7 @@ export const Header = () => {
         <BuregerWrapper onClick={toggleMenu} isMenuOpen={isMenuOpen}>
           <IconElement>
             <IconSprite />
-              <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
+            <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
           </IconElement>
         </BuregerWrapper>
       </IconsSection>
