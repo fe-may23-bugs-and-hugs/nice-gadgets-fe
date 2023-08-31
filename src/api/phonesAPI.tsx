@@ -7,8 +7,15 @@ type fetchParams = {
   page: number;
 };
 
+type ServerAnsw = {
+  data: Phone[];
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+};
+
 export const getPhones = ({ limit, page }: fetchParams) => {
-  return client.get<Phone[]>(
+  return client.get<ServerAnsw>(
     `/phones?${limit ? `limit=${limit}` : ''}${page ? `&page=${page}` : ''}`,
   ); // mock url
 };

@@ -32,4 +32,9 @@ export const ReactPaginateStyled = styled(ReactPaginate)<Props>`
       background-color: #0f0f11;
     }
   }
+
+  li.selected {
+    color: #fff;
+    background-color: #0f0f11;
+  }
 `;

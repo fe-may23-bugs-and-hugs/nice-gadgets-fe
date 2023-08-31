@@ -3,13 +3,9 @@ import React, { useState, useContext } from 'react';
 import { PhonesContext } from '../../context/phonesContext';
 import { ReactPaginateStyled } from './Pagination.styled';
 
-type Props = {
-  products: any[];
-  itemsPerPage: number;
-};
-
-export const Pagination: React.FC<Props> = ({ products, itemsPerPage }) => {
-  const { updatePage, currentLimit, currentPage } = useContext(PhonesContext);
+export const Pagination: React.FC = () => {
+  const { updatePage, currentLimit, currentPage, totalPages } =
+    useContext(PhonesContext);
 
   const [currentPaginatePage, setCurrentPaginatePage] = useState(1);
 
@@ -18,7 +14,7 @@ export const Pagination: React.FC<Props> = ({ products, itemsPerPage }) => {
   const handlePageClick = (event: any) => {
     console.log(event);
     setCurrentPaginatePage(event.selected + 1);
-    updatePage(event.selected + 1);
+    updatePage(event.selected);
   };
   return (
     <ReactPaginateStyled
@@ -27,7 +23,7 @@ export const Pagination: React.FC<Props> = ({ products, itemsPerPage }) => {
       nextLabel=">"
       onPageChange={handlePageClick}
       pageRangeDisplayed={currentLimit}
-      pageCount={5}
+      pageCount={totalPages}
       previousLabel="<"
       renderOnZeroPageCount={null}
     />
