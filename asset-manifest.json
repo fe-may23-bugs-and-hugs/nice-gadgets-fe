@@ -1,16 +1,29 @@
 {
   "files": {
-    "main.css": "/nice-gadgets-fe/static/css/main.a1ce35f5.css",
-    "main.js": "/nice-gadgets-fe/static/js/main.c86b55e4.js",
-    "static/media/Mont-Regular.otf": "/nice-gadgets-fe/static/media/Mont-Regular.1d26d89f7339866d3133.otf",
-    "static/media/Mont-SemiBold.otf": "/nice-gadgets-fe/static/media/Mont-SemiBold.8979d71a3146ca1d761f.otf",
-    "static/media/Mont-Bold.otf": "/nice-gadgets-fe/static/media/Mont-Bold.03c8c2f6127c1da0fc39.otf",
-    "index.html": "/nice-gadgets-fe/index.html",
-    "main.a1ce35f5.css.map": "/nice-gadgets-fe/static/css/main.a1ce35f5.css.map",
-    "main.c86b55e4.js.map": "/nice-gadgets-fe/static/js/main.c86b55e4.js.map"
+    "main.css": "/static/css/main.487fe4e6.css",
+    "main.js": "/static/js/main.6b1ac942.js",
+    "static/media/404.gif": "/static/media/404.ae886cb719254596cdf9.gif",
+    "static/media/Mont-Regular.otf": "/static/media/Mont-Regular.1d26d89f7339866d3133.otf",
+    "static/media/Mont-SemiBold.otf": "/static/media/Mont-SemiBold.8979d71a3146ca1d761f.otf",
+    "static/media/Mont-Bold.otf": "/static/media/Mont-Bold.03c8c2f6127c1da0fc39.otf",
+    "static/media/Mont-Bold.ttf": "/static/media/Mont-Bold.6aaaf286b39b5bcf4585.ttf",
+    "static/media/Mont-Regular.ttf": "/static/media/Mont-Regular.1422bacdafbfe922dfea.ttf",
+    "static/media/Mont-SemiBold.ttf": "/static/media/Mont-SemiBold.44140c8c0b35eba71fac.ttf",
+    "static/media/03.jpg": "/static/media/03.a57d70f55c46436d7014.jpg",
+    "static/media/02.jpg": "/static/media/02.9f67a6622e152411c044.jpg",
+    "static/media/Mont-SemiBold.woff": "/static/media/Mont-SemiBold.2b6fb07183d9a0adf2c7.woff",
+    "static/media/Mont-Regular.woff": "/static/media/Mont-Regular.3d7ab568f82a76ca2e3b.woff",
+    "static/media/Mont-Bold.woff": "/static/media/Mont-Bold.de7f092e85f39b7ddbd9.woff",
+    "static/media/Mont-SemiBold.woff2": "/static/media/Mont-SemiBold.1272a29cf626e9e05598.woff2",
+    "static/media/Mont-Regular.woff2": "/static/media/Mont-Regular.ae4c1a6e9b8d8761f802.woff2",
+    "static/media/Mont-Bold.woff2": "/static/media/Mont-Bold.89b428957ca98e12ce78.woff2",
+    "static/media/04.jpg": "/static/media/04.cf76cad5834823a18f6b.jpg",
+    "index.html": "/index.html",
+    "main.487fe4e6.css.map": "/static/css/main.487fe4e6.css.map",
+    "main.6b1ac942.js.map": "/static/js/main.6b1ac942.js.map"
   },
   "entrypoints": [
-    "static/css/main.a1ce35f5.css",
-    "static/js/main.c86b55e4.js"
+    "static/css/main.487fe4e6.css",
+    "static/js/main.6b1ac942.js"
   ]
 }
