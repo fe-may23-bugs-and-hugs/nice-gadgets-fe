@@ -9,6 +9,8 @@ export const ReactPaginateStyled = styled(ReactPaginate)`
   margin-bottom: 80px;
   flex-wrap: wrap;
 
+  padding: 10px;
+
   margin-top: 40px;
 
   a {
