@@ -1,3 +1,7 @@
+import { PhoneCard } from '../shared/PhoneCard';
+
 export const HomePage = () => {
-  return <h2>HomePage</h2>;
+  return <>
+  <PhoneCard/>
+  </>;
 };

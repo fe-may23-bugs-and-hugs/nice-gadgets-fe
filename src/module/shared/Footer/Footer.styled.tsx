@@ -3,6 +3,7 @@ import { onDesktop, onTablet } from '../Mixins';
 
 export const StyledFooter = styled.div`
   width: 100%;
+  margin-top: auto;
   padding: 32px 16px;
   display: flex;
   justify-content: center;

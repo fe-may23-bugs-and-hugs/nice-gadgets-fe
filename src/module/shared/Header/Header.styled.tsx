@@ -16,7 +16,6 @@ export const HeaderElement = styled.header<mobileProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: auto;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grayElements};
 
   height: ${({ isMenuOpen }) => (isMenuOpen ? '100vh' : 'auto')};
