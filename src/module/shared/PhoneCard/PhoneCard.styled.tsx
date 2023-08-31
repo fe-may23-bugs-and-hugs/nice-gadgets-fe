@@ -8,6 +8,7 @@ interface ButtonProps {
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
 
   box-sizing: border-box;
   padding: 32px;
