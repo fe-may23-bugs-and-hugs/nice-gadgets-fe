@@ -14,6 +14,12 @@ export const CategoryWrapper = styled.article`
 export const CategoryImage = styled.img`
   width: 100%;
   object-fit: cover;
+
+  transition: transform 0.5s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `;
 
 export const CategoryContent = styled.div`
