@@ -19,7 +19,6 @@ import {
   ImageBox,
 } from './PhoneCard.styled';
 
-import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
 import { Icon, IconSprite } from '../Sprites';
 import { Phone } from '../../../types/Phone';
 
@@ -44,7 +43,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   return (
     <CardWrapper>
       <ImageBox>
-        <CardImage src={phnoneImg} alt="Phone Image" />
+        <CardImage src={phone.image} alt="Phone Image" />
       </ImageBox>
       <CardTitle>{phone.name}</CardTitle>
 
