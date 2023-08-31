@@ -18,6 +18,7 @@ import {
   MobileContainer,
   IconContainer,
   IconPriceContainer,
+  IconClose,
   IconElement,
   ItemQuantity,
   ItemPrice,
@@ -34,7 +35,7 @@ export const CartPage = () => {
         <CartBar>
           <IconArrow>
             <IconSprite />
-            <Icon spriteName="arrow-left" size="12px" fill="#B4BDC3" />
+            <Icon spriteName="arrow-left" size="10px" fill="#B4BDC3" />
           </IconArrow>
           <p>Back</p>
         </CartBar>
@@ -46,10 +47,10 @@ export const CartPage = () => {
         <CartList>
           <CartItem>
             <MobileContainer>
-              <IconElement>
+              <IconClose>
                 <IconSprite />
                 <Icon spriteName="close" size="16px" fill="#B4BDC3" />
-              </IconElement>
+              </IconClose>
               <ImgContainer>
                 <ImgElement src={phoneImg1} />
               </ImgContainer>
@@ -78,10 +79,10 @@ export const CartPage = () => {
           </CartItem>
           <CartItem>
             <MobileContainer>
-              <IconElement>
+              <IconClose>
                 <IconSprite />
                 <Icon spriteName="close" size="16px" fill="#B4BDC3" />
-              </IconElement>
+              </IconClose>
               <ImgContainer>
                 <ImgElement src={phoneImg2} />
               </ImgContainer>
@@ -110,10 +111,10 @@ export const CartPage = () => {
           </CartItem>
           <CartItem>
             <MobileContainer>
-              <IconElement>
+              <IconClose>
                 <IconSprite />
                 <Icon spriteName="close" size="16px" fill="#B4BDC3" />
-              </IconElement>
+              </IconClose>
               <ImgContainer>
                 <ImgElement src={phoneImg3} />
               </ImgContainer>
