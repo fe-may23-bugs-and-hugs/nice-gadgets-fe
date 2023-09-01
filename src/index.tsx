@@ -5,6 +5,7 @@ import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './styles';
 import { Root } from './routes';
 import { PhonesProvider } from './context/phonesContext';
+import { CartProvider } from './context/cartContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -13,10 +14,12 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <PhonesProvider>
-        <GlobalStyle />
-        <Root />
-      </PhonesProvider>
+      <CartProvider>
+        <PhonesProvider>
+          <GlobalStyle />
+          <Root />
+        </PhonesProvider>
+      </CartProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );

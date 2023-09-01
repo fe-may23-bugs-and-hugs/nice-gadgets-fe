@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTheme } from 'styled-components';
 
 import {
@@ -21,6 +22,7 @@ import {
 
 import { Icon, IconSprite } from '../Sprites';
 import { Phone } from '../../../types/Phone';
+import { CartContext } from '../../../context/cartContext';
 
 type Props = {
   phone: Phone;
@@ -29,11 +31,16 @@ type Props = {
 export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
 
-  const [isClicked, setIsClicked] = React.useState(false);
+  const { addItem, cartProducts } = useContext(CartContext);
+
+  console.log(cartProducts);
+
   const [isFavorite, setIsFavorite] = React.useState(false);
 
-  const toggleClick = () => {
-    setIsClicked((prev) => !prev);
+  const isSelected = cartProducts.find((product) => product.id === phone.id);
+
+  const toggleClick = (phoneData: Phone) => {
+    addItem(phoneData);
   };
 
   const toggleFavorite = () => {
@@ -67,8 +74,12 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
       </DescrWrapper>
 
       <ButtonsWrapper>
-        <ButtonAdd onClick={toggleClick} type="button" isClicked={isClicked}>
-          {isClicked ? 'Added' : 'Add to cart'}
+        <ButtonAdd
+          onClick={() => toggleClick(phone)}
+          type="button"
+          isClicked={isSelected}
+        >
+          {isSelected ? 'Added' : 'Add to cart'}
         </ButtonAdd>
         <ButtonLike type="button" onClick={toggleFavorite}>
           <IconSprite />
