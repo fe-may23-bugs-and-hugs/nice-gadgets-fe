@@ -66,6 +66,10 @@ export const ImgElement = styled.img`
   align-self: center;
   margin: 13px 16px;
 
+  @media (min-width: 640px) {
+    margin: 13px 24px;
+  }
+
   @media (min-width: 1200px) {
     max-width: 80px;
   }

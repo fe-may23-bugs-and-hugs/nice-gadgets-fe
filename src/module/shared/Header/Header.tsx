@@ -61,16 +61,16 @@ export const Header = () => {
   return (
     <HeaderElement isMenuOpen={isMenuOpen}>
       <BarElement isMenuOpen={isMenuOpen}>
-        <ImgArea to="/" isMenuOpen={isMenuOpen}>
+        <ImgArea to="/"
+          isMenuOpen={isMenuOpen}
+          onClick={isMenuOpen ? closeMenu : undefined}
+        >
           <ImgElement src={logo} />
         </ImgArea>
         <NavElement isMenuOpen={isMenuOpen}>
           <UlElement isMenuOpen={isMenuOpen}>
             <LiElement>
-              <LinkElement
-                to="/"
-                onClick={isMenuOpen ? closeMenu : undefined}
-              >
+              <LinkElement to="/" onClick={isMenuOpen ? closeMenu : undefined}>
                 Home
               </LinkElement>
             </LiElement>
@@ -120,10 +120,7 @@ export const Header = () => {
           circleText={counterBag}
           isMenuOpen={isMenuOpen}
         >
-          <LinkWrapper
-            to="/cart"
-            onClick={isMenuOpen ? closeMenu : undefined}
-          >
+          <LinkWrapper to="/cart" onClick={isMenuOpen ? closeMenu : undefined}>
             <IconSprite />
             <Icon spriteName="shopping-bag" size="18px" />
           </LinkWrapper>
