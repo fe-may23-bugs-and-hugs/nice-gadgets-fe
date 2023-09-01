@@ -107,6 +107,7 @@ export const MobileContainer = styled.div`
   @media (max-width: 640px) {
     display: flex;
     gap: 16px;
+    padding: 24px;
   }
 `;
 
@@ -127,9 +128,19 @@ export const IconPriceContainer = styled.div`
 
   @media (max-width: 640px) {
     display: flex;
-    gap: 80px;
+    gap: 50px;
     justify-content: space-between;
   }
+`;
+
+export const IconClose = styled.div`
+  display: flex;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.grayElements};
+  align-items: center;
+  justify-content: center;
 `;
 
 export const IconElement = styled.div`
