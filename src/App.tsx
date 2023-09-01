@@ -2,6 +2,7 @@
 import { Outlet } from 'react-router-dom';
 import { AppLayout } from './module/shared/AppLayout/AppLayout';
 import { Header, Footer } from './module/shared';
+import { styled } from 'styled-components';
 
 const MainWrapper = styled.div`
   display: flex;
