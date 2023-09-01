@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react';
+/*eslint-disable*/
+import { useState, useEffect, useContext } from 'react';
 import { Icon, IconSprite } from '../Sprites';
 import logo from './../../../assets/images/logo.png';
 import {
@@ -14,12 +15,11 @@ import {
   IconElement,
   BuregerWrapper,
 } from './Header.styled';
+import { FavoriteContext, CartContext } from '../../../context';
 
 export const Header = () => {
-  const showCircleFavorites = true;
-  const showCircleBag = true;
-  const counterFavorites = 4;
-  const counterBag = 3;
+  const { totalItems } = useContext(CartContext);
+  const { totalFavorite } = useContext(FavoriteContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -85,16 +85,16 @@ export const Header = () => {
       </BarElement>
       <IconsSection isMenuOpen={isMenuOpen}>
         <IconElement
-          hasPinkCircle={showCircleFavorites}
-          circleText={counterFavorites}
+          hasPinkCircle={!!totalItems}
+          circleText={totalItems}
           isMenuOpen={isMenuOpen}
         >
           <IconSprite />
           <Icon spriteName="heart" size="18px" />
         </IconElement>
         <IconElement
-          hasPinkCircle={showCircleBag}
-          circleText={counterBag}
+          hasPinkCircle={!!totalFavorite}
+          circleText={totalFavorite}
           isMenuOpen={isMenuOpen}
         >
           <IconSprite />

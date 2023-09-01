@@ -4,8 +4,7 @@ import ReactDOM from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 import { GlobalStyle, theme } from './styles';
 import { Root } from './routes';
-import { PhonesProvider } from './context/phonesContext';
-import { CartProvider } from './context/cartContext';
+import { PhonesProvider, FavoriteProvider, CartProvider } from './context';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -14,12 +13,14 @@ const root = ReactDOM.createRoot(
 root.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <CartProvider>
-        <PhonesProvider>
-          <GlobalStyle />
-          <Root />
-        </PhonesProvider>
-      </CartProvider>
+      <FavoriteProvider>
+        <CartProvider>
+          <PhonesProvider>
+            <GlobalStyle />
+            <Root />
+          </PhonesProvider>
+        </CartProvider>
+      </FavoriteProvider>
     </ThemeProvider>
   </React.StrictMode>,
 );

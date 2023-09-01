@@ -1,21 +1,8 @@
 import styled from 'styled-components';
 
-export const IconsWrapper = styled.div`
-  display: flex;
-  gap: 8px;
-
-  align-items: center;
-
-  margin-bottom: 24px;
-`;
-
-export const IconsTitle = styled.h2`
-  color: ${({ theme }) => theme.colors.graySecondary};
-  font-family: Mont;
-  font-size: ${({ theme }) => theme.fonts.sizeXxs};
-  font-style: normal;
-  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
-  line-height: normal;
+export const BreadcrumbsWrapper = styled.div`
+  margin-top: 24px;
+  margin-bottom: 40px;
 `;
 
 export const CatalogTitle = styled.h1`

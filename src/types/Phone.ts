@@ -1,5 +1,5 @@
 export type Phone = {
-  id: string;
+  _id: string;
   category: string;
   phoneId: string;
   itemId: string;

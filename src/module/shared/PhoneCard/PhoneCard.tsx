@@ -22,7 +22,7 @@ import {
 
 import { Icon, IconSprite } from '../Sprites';
 import { Phone } from '../../../types/Phone';
-import { CartContext } from '../../../context/cartContext';
+import { FavoriteContext, CartContext } from '../../../context';
 
 type Props = {
   phone: Phone;
@@ -33,18 +33,21 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
 
   const { addItem, cartProducts } = useContext(CartContext);
 
+  const { addFavoriteProduct, favoriteProducts } = useContext(FavoriteContext);
+
   console.log(cartProducts);
 
-  const [isFavorite, setIsFavorite] = React.useState(false);
-
-  const isSelected = cartProducts.find((product) => product.id === phone.id);
+  const isSelected = cartProducts.find((product) => product._id === phone._id);
+  const isFavorite = favoriteProducts.find(
+    (product) => product._id === phone._id,
+  );
 
   const toggleClick = (phoneData: Phone) => {
     addItem(phoneData);
   };
 
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
+  const toggleFavorite = (phoneData: Phone) => {
+    addFavoriteProduct(phoneData);
   };
 
   return (
@@ -81,7 +84,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
         >
           {isSelected ? 'Added' : 'Add to cart'}
         </ButtonAdd>
-        <ButtonLike type="button" onClick={toggleFavorite}>
+        <ButtonLike type="button" onClick={() => toggleFavorite(phone)}>
           <IconSprite />
           {isFavorite ? (
             <Icon
