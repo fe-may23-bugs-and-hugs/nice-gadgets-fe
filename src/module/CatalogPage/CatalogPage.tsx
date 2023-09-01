@@ -3,14 +3,13 @@ import React, { useContext, useEffect, useState } from 'react';
 import { IconSprite, Icon } from '../shared';
 import { ContentLayout } from '../shared/ContentLayout';
 import {
-  IconsWrapper,
-  IconsTitle,
   CatalogTitle,
   CatalogModelsLeft,
   SortWrapper,
   SortTitle,
   SortDropDown,
   SortDropdownContent,
+  BreadcrumbsWrapper,
 } from './CatalogPage.styled';
 import { Catalog } from '../Catalog/Catalog';
 import { PhonesContext } from '../../context/phonesContext';
@@ -18,6 +17,7 @@ import { Spinner } from '../Spinner';
 import { SortLink } from '../SortLink';
 import { Pagination } from '../Pagination/Pagination';
 import { LimitLink } from '../LimitLink';
+import { Breadcrumbs } from '../shared/Breadcrumps';
 
 export const CatalogPage: React.FC = () => {
   const {
@@ -62,12 +62,9 @@ export const CatalogPage: React.FC = () => {
           <Spinner />
         ) : (
           <>
-            <IconsWrapper>
-              <IconSprite />
-              <Icon size="24" spriteName="home" />
-              <Icon size="12" spriteName="arrow-right" />
-              <IconsTitle>Phones</IconsTitle>
-            </IconsWrapper>
+            <BreadcrumbsWrapper>
+              <Breadcrumbs />
+            </BreadcrumbsWrapper>
 
             <CatalogTitle>Mobile Phones</CatalogTitle>
             <CatalogModelsLeft>{totalModels} models</CatalogModelsLeft>
