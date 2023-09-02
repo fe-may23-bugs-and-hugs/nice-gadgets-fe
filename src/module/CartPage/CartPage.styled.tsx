@@ -137,13 +137,13 @@ export const IconClose = styled.div`
   display: flex;
   width: 32px;
   height: 32px;
-  border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.grayElements};
+  /* border-radius: 50%; */
+  /* border: 1px solid ${({ theme }) => theme.colors.grayElements}; */
   align-items: center;
   justify-content: center;
 `;
 
-export const IconElement = styled.div`
+export const IconElement = styled.button`
   display: flex;
   width: 32px;
   height: 32px;
@@ -173,6 +173,11 @@ export const ItemPrice = styled.div`
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-size: ${({ theme }) => theme.fonts.sizeL};
   font-family: ${({ theme }) => theme.fonts.name};
+
+  @media (max-width: 1200px) {
+    display: flex;
+    justify-content: end;
+  }
 `;
 
 export const CartSummary = styled.div`
@@ -234,5 +239,25 @@ export const CartCheckout = styled.button`
     height: 1px;
     width: 100%;
     background-color: ${({ theme }) => theme.colors.grayElements};
+  }
+`;
+
+export const CartEmpty = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+
+  font-size: ${({ theme }) => theme.fonts.sizeXxxl};
+  font-family: ${({ theme }) => theme.fonts.name};
+  color: black;
+  font-weight: bold;
+
+  @media (max-width: 1200px) {
+    font-size: ${({ theme }) => theme.fonts.sizeXxl};
+  }
+
+  @media (max-width: 640px) {
+    font-size: ${({ theme }) => theme.fonts.sizeL};
   }
 `;
