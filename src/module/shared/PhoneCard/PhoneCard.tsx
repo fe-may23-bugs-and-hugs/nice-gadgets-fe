@@ -53,13 +53,13 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   return (
     <CardWrapper>
       <ImageBox>
-        <CardImage src={phone.image} alt="Phone Image" />
+        <CardImage src={phone.images[0]} alt="Phone Image" />
       </ImageBox>
       <CardTitle>{phone.name}</CardTitle>
 
       <PriceWrapper>
-        <CurrentPrice>{`$${phone.price}`}</CurrentPrice>
-        <OldPrice>{`$${phone.fullPrice}`}</OldPrice>
+        <CurrentPrice>{`$${phone.priceDiscount}`}</CurrentPrice>
+        <OldPrice>{`$${phone.priceRegular}`}</OldPrice>
       </PriceWrapper>
 
       <DescrWrapper>
