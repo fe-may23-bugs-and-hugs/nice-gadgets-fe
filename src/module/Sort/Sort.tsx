@@ -10,12 +10,39 @@ import {
   SortDropdownContent,
 } from './Sort.styled';
 import { PhonesContext } from '../../context';
+import { SORTING } from '../../types/sortEnum';
+import { ORDER } from '../../types/OrderEnum';
+import { useSearchParams } from 'react-router-dom';
+import { SearchLink } from '../shared/SearchLink';
+
+const sortOptions = [
+  { sort: SORTING.NEWEST, order: ORDER.DESC, title: 'Newer' },
+  { sort: SORTING.CHEAPEST, order: ORDER.ASC, title: 'Oldest' },
+  {
+    sort: SORTING.ALPH,
+    order: ORDER.ASC,
+    title: 'Alphabetically [A-Z]',
+  },
+  {
+    sort: SORTING.CHEAPEST,
+    order: ORDER.DESC,
+    title: 'Alphabetically [Z-A]',
+  },
+  { sort: SORTING.CHEAPEST, order: ORDER.ASC, title: 'Cheapest' },
+  { sort: SORTING.CHEAPEST, order: ORDER.DESC, title: 'Expensive' },
+];
 
 export const Sort: React.FC = () => {
-  const { currentLimit } = useContext(PhonesContext);
+  const { currentLimit, totalModels } = useContext(PhonesContext);
+  const [searchParams] = useSearchParams();
 
   const [openSort, setOpenSort] = useState(false);
   const [openLimit, setOpenLimit] = useState(false);
+
+  const sort = (searchParams.get('sort') || SORTING.NEWEST) as SORTING;
+
+  const currentTitle = sortOptions.find((sortValue) => sortValue.sort === sort)
+    ?.title;
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
@@ -42,7 +69,7 @@ export const Sort: React.FC = () => {
       <div id="sort-dropdown" onClick={() => setOpenSort((prev) => !prev)}>
         <SortTitle>Sort by</SortTitle>
         <SortDropDown>
-          Newest
+          {currentTitle}
           <IconSprite />
           {openSort ? (
             <Icon spriteName="arrow-up" />
@@ -52,17 +79,14 @@ export const Sort: React.FC = () => {
         </SortDropDown>
         {openSort && (
           <SortDropdownContent>
-            <li>
-              <SortLink title="Newer" />
-            </li>
-
-            <li>
-              <SortLink title="Newer" />
-            </li>
-
-            <li>
-              <SortLink title="Newer" />
-            </li>
+            {sortOptions.map((option, index) => (
+              <SearchLink
+                key={index}
+                params={{ sort: option.sort, order: option.order, page: null }}
+              >
+                <SortLink sortField={option} />
+              </SearchLink>
+            ))}
           </SortDropdownContent>
         )}
       </div>
@@ -81,7 +105,12 @@ export const Sort: React.FC = () => {
         {openLimit && (
           <SortDropdownContent>
             {['4', '8', '16', 'All'].map((num) => (
-              <LimitLink key={num} num={num} />
+              <SearchLink
+                key={num}
+                params={{ limit: num === 'All' ? totalModels.toString() : num }}
+              >
+                <LimitLink num={num} />
+              </SearchLink>
             ))}
           </SortDropdownContent>
         )}

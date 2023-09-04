@@ -2,22 +2,30 @@ import React, { useContext, useEffect, useState } from 'react';
 import { PhonesContext } from '../../context/phonesContext';
 import { ReactPaginateStyled } from './Pagination.styled';
 import { Icon, IconSprite } from '../shared';
+import { useSearchParams } from 'react-router-dom';
+import { getSearchWith } from '../../helpers/searchHelper';
 
 export const Pagination: React.FC = () => {
-  const { updatePage, totalPages, currentPage } = useContext(PhonesContext);
+  const { totalPages, currentPage } = useContext(PhonesContext);
   const [selectedPage, setSelectedPage] = useState(currentPage);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const setSearchWith = (params: any) => {
+    const search = getSearchWith(searchParams, params);
+
+    setSearchParams(search);
+  };
 
   useEffect(() => {
     setSelectedPage(currentPage);
   }, [currentPage]);
 
-  useEffect(() => {
-    setSelectedPage(1);
-  }, []);
-
   // eslint-disable-next-line no-shadow
   const handlePageClick = (event: any) => {
-    updatePage(event.selected + 1);
+    setSearchWith({ page: event.selected + 1 });
+
+    setSelectedPage(event.selected + 1);
   };
 
   const quantityOfButtons = () => {

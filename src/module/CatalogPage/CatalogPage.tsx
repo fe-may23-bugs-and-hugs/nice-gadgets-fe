@@ -11,6 +11,7 @@ import { PhonesContext } from '../../context/phonesContext';
 import { Spinner } from '../Spinner';
 import { Pagination } from '../Pagination/Pagination';
 import { Breadcrumbs } from '../shared/Breadcrumps';
+import { Sort } from '../Sort';
 
 export const CatalogPage: React.FC = () => {
   const {
@@ -20,10 +21,13 @@ export const CatalogPage: React.FC = () => {
     currentPage,
     currentLimit,
     totalModels,
+    sortField,
+    order,
   } = useContext(PhonesContext);
+
   useEffect(() => {
     loadPhones();
-  }, [currentPage, currentLimit]);
+  }, [currentPage, currentLimit, sortField, order]);
 
   return (
     <>
@@ -38,6 +42,8 @@ export const CatalogPage: React.FC = () => {
 
             <CatalogTitle>Mobile Phones</CatalogTitle>
             <CatalogModelsLeft>{totalModels} models</CatalogModelsLeft>
+
+            <Sort />
 
             <Catalog phonesData={phones} />
           </>

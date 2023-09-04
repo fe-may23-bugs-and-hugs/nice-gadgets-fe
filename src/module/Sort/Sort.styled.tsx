@@ -62,5 +62,5 @@ export const SortDropdownContent = styled.ul`
   margin-top: 4px;
   background-color: ${({ theme }) => theme.colors.white};
   border: 1px solid ${({ theme }) => theme.colors.grayElements};
-  width: inherit;
+  min-width: inherit;
 `;
