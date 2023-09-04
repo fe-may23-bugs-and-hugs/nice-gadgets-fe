@@ -7,6 +7,7 @@ import {
   BlockWrapper,
   CurrentPath,
   HomeIconWrapper,
+  IconWrapper,
   PathItem,
   PathLink,
   PathWrapper,
@@ -35,53 +36,39 @@ const BreadcrumbSegment: React.FC<BreadcrumbSegmentProps> = ({
   children,
 }) => (
   <PathItem>
-      <span>
-        <Icon spriteName='arrow-right' fill='#B4BDC3' />
-      </span>
-    {
-      isCurrent
-        ? (
-          <CurrentPath>
-            {children}
-          </CurrentPath>
-        )
-        : (
-          <Link to={path}>
-            <PathLink>
-              {children}
-            </PathLink>
-          </Link>
-        )
-    }
+    <IconWrapper>
+      <Icon spriteName="arrow-right" size="12px" fill="#B4BDC3" />
+    </IconWrapper>
+    {isCurrent ? (
+      <CurrentPath>{children}</CurrentPath>
+    ) : (
+      <Link to={path}>
+        <PathLink>{children}</PathLink>
+      </Link>
+    )}
   </PathItem>
 );
 
 export const Breadcrumbs: React.FC = () => {
   const { pathname } = useLocation();
-  const pathSegments = pathname.split('/').filter(segment => segment !== '');
+  const pathSegments = pathname.split('/').filter((segment) => segment !== '');
 
   return (
     <BlockWrapper>
       <IconSprite />
-      <HomeIconWrapper
-        to="/"
-      >
+      <HomeIconWrapper to="/">
         <Icon spriteName="home" />
       </HomeIconWrapper>
       <PathWrapper>
         {pathSegments.map((segment, index) => {
           const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
-          const displayName = segment.replace(/^\w/, c => c.toUpperCase());
+          const displayName = segment.replace(/^\w/, (c) => c.toUpperCase());
           const isCurrent = index === pathSegments.length - 1;
           const phoneId = pathSegments[1];
 
           return (
-            <BreadcrumbSegment
-              key={path}
-              isCurrent={isCurrent}
-              path={path}
-            >
-            {index === 1 ? getPhoneName(phoneId) : displayName}
+            <BreadcrumbSegment key={path} isCurrent={isCurrent} path={path}>
+              {index === 1 ? getPhoneName(phoneId) : displayName}
             </BreadcrumbSegment>
           );
         })}
