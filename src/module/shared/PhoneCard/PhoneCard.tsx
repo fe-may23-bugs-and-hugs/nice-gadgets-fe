@@ -16,12 +16,17 @@ import {
   ButtonsWrapper,
   ButtonAdd,
   ButtonLike,
+  ImageBox,
 } from './PhoneCard.styled';
 
-import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
 import { Icon, IconSprite } from '../Sprites';
+import { Phone } from '../../../types/Phone';
 
-export const PhoneCard: React.FC = () => {
+type Props = {
+  phone: Phone;
+};
+
+export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
 
   const [isClicked, setIsClicked] = React.useState(false);
@@ -37,12 +42,14 @@ export const PhoneCard: React.FC = () => {
 
   return (
     <CardWrapper>
-      <CardImage src={phnoneImg} alt="Phone Image" />
-      <CardTitle>Apple iPhone Xs 64GB Silver (iMT9G2FS/A)</CardTitle>
+      <ImageBox>
+        <CardImage src={phone.image} alt="Phone Image" />
+      </ImageBox>
+      <CardTitle>{phone.name}</CardTitle>
 
       <PriceWrapper>
-        <CurrentPrice>$799</CurrentPrice>
-        <OldPrice>$899</OldPrice>
+        <CurrentPrice>{`$${phone.price}`}</CurrentPrice>
+        <OldPrice>{`$${phone.fullPrice}`}</OldPrice>
       </PriceWrapper>
 
       <DescrWrapper>
@@ -53,9 +60,9 @@ export const PhoneCard: React.FC = () => {
         </DescrBox>
 
         <DescrBox>
-          <DescrValue>5.8” OLED</DescrValue>
-          <DescrValue>64 GB</DescrValue>
-          <DescrValue>4 GB</DescrValue>
+          <DescrValue>{phone.screen}</DescrValue>
+          <DescrValue>{phone.capacity}</DescrValue>
+          <DescrValue>{phone.ram}</DescrValue>
         </DescrBox>
       </DescrWrapper>
 

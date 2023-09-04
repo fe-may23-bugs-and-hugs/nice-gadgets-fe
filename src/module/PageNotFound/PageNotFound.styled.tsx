@@ -5,18 +5,7 @@ export const NotFoundWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   padding: 20px 0;
-
-  @media (min-width: 640px) {
-    height: calc(
-      100vh -
-        (
-          ${({ theme }) => theme.sizes.headerHeigth} +
-            ${({ theme }) => theme.sizes.footerHeigth}
-        )
-    );
-  }
 `;
 
 export const NotFoundTitle = styled.h2`

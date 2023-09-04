@@ -3,7 +3,13 @@ import 'modern-normalize';
 import './index.css';
 
 export const GlobalStyle = createGlobalStyle`
+  html,
+  #root {
+    height: 100%;
+  }
+
   body {
+    height: 100%;
     margin: 0;
     font-family: "Mont", -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
       'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -24,6 +30,11 @@ export const GlobalStyle = createGlobalStyle`
     height: auto;
   }
 
+li{
+  padding: 0;
+    margin: 0;
+  list-style: none;
+}
   a {
     color: inherit;
     text-decoration: none;

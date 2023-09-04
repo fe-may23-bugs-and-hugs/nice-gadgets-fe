@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { onDesktop, onTablet } from '../Mixins';
 
 interface ButtonProps {
   isClicked: boolean;
@@ -7,25 +8,33 @@ interface ButtonProps {
 export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
+  align-self: flex-start;
 
   box-sizing: border-box;
   padding: 32px;
   width: 272px;
+
+  /* ${onTablet(`
+    width: 229px;
+  `)} */
 
   border-radius: 8px;
   border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
   background: ${({ theme }) => theme.colors.white};
 `;
 
-export const CardImage = styled.img`
+export const ImageBox = styled.div`
   width: 208px;
-  height: 196px;
+  height: 208px;
+  margin-bottom: 24px;
+`;
 
-  object-fit: contain;
+export const CardImage = styled.img`
+  height: 100%;
+  display: block;
+  object-fit: cover;
 
   margin: 0 auto;
-
-  margin-bottom: 24px;
 `;
 
 export const CardTitle = styled.h2`
@@ -35,6 +44,8 @@ export const CardTitle = styled.h2`
   font-style: normal;
   font-weight: ${({ theme }) => theme.fonts.sizeXs};
   line-height: ${({ theme }) => theme.fonts.weightSemiBold};
+
+  height: 42px;
 
   margin-bottom: 8px;
 `;
@@ -47,6 +58,10 @@ export const PriceWrapper = styled.div`
   border-bottom: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
 
   padding-bottom: 8px;
+
+  &.card-price {
+    border-bottom: none;
+  }
 `;
 
 export const CurrentPrice = styled.h3`
@@ -56,11 +71,22 @@ export const CurrentPrice = styled.h3`
   line-height: ${({ theme }) => theme.fonts.lineHeightXl};
 
   color: ${({ theme }) => theme.colors.grayPrimary};
+
+  &.card-current-price {
+    font-size: ${({ theme }) => theme.fonts.sizeXxl};
+    height: ${({ theme }) => theme.fonts.lineHeightXxl};
+  }
 `;
 
 export const OldPrice = styled(CurrentPrice)`
   color: ${({ theme }) => theme.colors.graySecondary};
   text-decoration: line-through;
+
+  &.card-old-price {
+    font-size: ${({ theme }) => theme.fonts.sizeL};
+    height: ${({ theme }) => theme.fonts.lineHeightL};
+    font-weight: ${({ theme }) => theme.fonts.weightRegular};
+  }
 `;
 
 export const DescrWrapper = styled.div`
@@ -97,10 +123,16 @@ export const ButtonsWrapper = styled.div`
   display: flex;
   justify-content: space-between;
   gap: 8px;
+
+  margin-top: auto;
+
+  &.card-button {
+    margin-bottom: 32px;
+  }
 `;
 
 export const ButtonAdd = styled.button<ButtonProps>`
-  width: 100%;
+  width: 160px;
   height: 40px;
 
   color: ${(props) =>
@@ -123,13 +155,43 @@ export const ButtonAdd = styled.button<ButtonProps>`
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
+
+  &:hover {
+    box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+  }
+
+  &.card-button-add {
+    width: 231px;
+    height: 48px;
+
+    ${onDesktop(`
+      width: 263px;
+  `)}
+  }
 `;
 
 export const ButtonLike = styled.button`
+  position: relative;
   cursor: pointer;
   border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
   background-color: ${({ theme }) => theme.colors.white};
   width: 40px;
 
   border-radius: 48px;
+
+  &:hover {
+    border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
+  }
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  &.card-button-like {
+    width: 48px;
+    height: 48px;
+  }
 `;
