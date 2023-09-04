@@ -7,6 +7,7 @@ import {
   BlockWrapper,
   CurrentPath,
   HomeIconWrapper,
+  IconWrapper,
   PathItem,
   PathLink,
   PathWrapper,
@@ -35,9 +36,10 @@ const BreadcrumbSegment: React.FC<BreadcrumbSegmentProps> = ({
   children,
 }) => (
   <PathItem>
-    <span>
-      <Icon spriteName="arrow-right" fill="#B4BDC3" />
-    </span>
+
+    <IconWrapper>
+      <Icon spriteName="arrow-right" size="12px" fill="#B4BDC3" />
+    </IconWrapper>
     {isCurrent ? (
       <CurrentPath>{children}</CurrentPath>
     ) : (
