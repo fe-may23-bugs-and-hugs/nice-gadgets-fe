@@ -1,11 +1,12 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   isClicked: boolean;
 }
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   align-self: flex-start;
@@ -42,8 +43,8 @@ export const CardTitle = styled.h2`
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fonts.sizeXs};
-  line-height: ${({ theme }) => theme.fonts.weightSemiBold};
+  font-weight: ${({ theme }) => theme.fonts.weightRegular};
+  line-height: ${({ theme }) => theme.fonts.lineHeightS};
 
   height: 42px;
 
@@ -161,7 +162,8 @@ export const ButtonAdd = styled.button<ButtonProps>`
   }
 
   &.card-button-add {
-    width: 231px;
+    min-width: 231px;
+    width: 80%;
     height: 48px;
 
     ${onDesktop(`

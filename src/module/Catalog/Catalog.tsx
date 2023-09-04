@@ -15,7 +15,7 @@ export const Catalog: React.FC<Props> = ({ phonesData }) => {
     <CatalogContainer>
       <CatalogContentWrapper>
         {phonesData.map((phone) => (
-          <PhoneCard key={phone.id} phone={phone} />
+          <PhoneCard key={phone._id} phone={phone} />
         ))}
       </CatalogContentWrapper>
     </CatalogContainer>

@@ -2,9 +2,10 @@
 import React from 'react';
 import styled from 'styled-components';
 import { MainElement } from './ProductCard.styled';
-import { onTablet } from '../shared/Mixins';
+import { onDesktop, onTablet } from '../shared/Mixins';
 import { theme } from '../../styles';
 import { ContentLayout } from '../shared/ContentLayout';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import {
   CurrentPrice,
@@ -20,54 +21,8 @@ import {
 } from './../shared/PhoneCard/PhoneCard.styled';
 import { Icon, IconSprite } from '../shared';
 import { colorMappings } from './colorMappings';
-
-const device = {
-  id: 'apple-iphone-7-32gb-black',
-  namespaceId: 'apple-iphone-7',
-  name: 'Apple iPhone 7 32GB Black',
-  capacityAvailable: ['32GB', '64GB', '128GB'],
-  capacity: '32GB',
-  priceRegular: 400,
-  priceDiscount: 375,
-  colorsAvailable: ['black', 'rosegold', 'gold', 'silver'],
-  color: 'black',
-  images: [
-    'img/phones/apple-iphone-7/black/00.jpg',
-    'img/phones/apple-iphone-7/black/01.jpg',
-    'img/phones/apple-iphone-7/black/02.jpg',
-    'img/phones/apple-iphone-7/black/03.jpg',
-    'img/phones/apple-iphone-7/black/04.jpg',
-  ],
-  description: [
-    {
-      title: 'And then there was Pro',
-      text: [
-        'A transformative triple-camera system that adds tons of capability without complexity.',
-        'An unprecedented leap in battery life. And a mind-blowing chip that doubles down on machine learning and pushes the boundaries of what a smartphone can do. Welcome to the first iPhone powerful enough to be called Pro.',
-      ],
-    },
-    {
-      title: 'Camera',
-      text: [
-        'Meet the first triple-camera system to combine cutting-edge technology with the legendary simplicity of iPhone. Capture up to four times more scene. Get beautiful images in drastically lower light. Shoot the highest-quality video in a smartphone — then edit with the same tools you love for photos. You’ve never shot with anything like it.',
-      ],
-    },
-    {
-      title:
-        'Shoot it. Flip it. Zoom it. Crop it. Cut it. Light it. Tweak it. Love it.',
-      text: [
-        'iPhone 11 Pro lets you capture videos that are beautifully true to life, with greater detail and smoother motion. Epic processing power means it can shoot 4K video with extended dynamic range and cinematic video stabilization — all at 60 fps. You get more creative control, too, with four times more scene and powerful new editing tools to play with.',
-      ],
-    },
-  ],
-  screen: "4.7' IPS",
-  resolution: '1334x750',
-  processor: 'Apple A10',
-  ram: '2GB',
-  camera: '12 Mp + 7 Mp',
-  zoom: 'Digital, 5x',
-  cell: ['GPRS', 'EDGE', 'WCDMA', 'UMTS', 'HSPA', 'LTE'],
-};
+import { getOnePhone } from '../../api/phonesAPI';
+import { Phone } from '../../types/Phone';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};
@@ -86,8 +41,6 @@ function extractData(obj: Record<string, any>) {
   return result;
 }
 
-const deviceData = extractData(device);
-
 const PathAndBack = styled.div`
   display: flex;
   flex-direction: column;
@@ -103,10 +56,12 @@ const Title = styled.h1`
   font-size: ${theme.fonts.sizeM};
   line-height: ${theme.fonts.lineHeightXl};
   color: ${theme.colors.grayPrimary};
+  margin-bottom: 32px;
 
   ${onTablet(`
     font-size: ${theme.fonts.sizeXxl};
     line-height: ${theme.fonts.lineHeightXxl};
+    margin-bottom: 40px;
   `)}
 `;
 
@@ -123,6 +78,29 @@ const H2 = styled.h2`
     font-size: ${theme.fonts.sizeL};
     line-height: ${theme.fonts.lineHeightXl};
   `)}
+`;
+
+const Theader = styled.th`
+  display: block;
+  color: ${theme.colors.grayPrimary};
+  font-size: ${theme.fonts.sizeM};
+  line-height: ${theme.fonts.lineHeightL};
+  font-weight: ${theme.fonts.weightBold};
+  border-bottom: 1px solid ${theme.colors.grayElements};
+  height: 42px;
+  width: 100%;
+  text-align: left;
+
+  ${onTablet(`
+    font-size: ${theme.fonts.sizeL};
+    line-height: ${theme.fonts.lineHeightXl};
+  `)}
+`;
+
+const TRow = styled.tr`
+  display: block;
+  width: 100%;
+  margin-bottom: 32px;
 `;
 
 const DescriptionWrapper = styled.div`
@@ -166,10 +144,30 @@ const ItemCard = styled.div`
   `)}
 `;
 
-const Div1 = styled.div``;
-const CardInfo = styled.div``;
+const ImagesBox = styled.div`
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+
+  ${onTablet(`
+    flex-direction: row-reverse;
+    gap: 16px;
+  `)}
+`;
+
+const CardInfo = styled.div`
+  position: relative;
+`;
 const AboutBlock = styled.div``;
-const SpecsBlock = styled.div``;
+const SpecsBlock = styled.table``;
+
+const CardWrapper = styled.div`
+  width: 100%;
+
+  ${onDesktop(`
+    max-width: 320px;
+  `)}
+`;
 
 const TechScecsInfo = styled.tbody`
   display: flex;
@@ -239,8 +237,8 @@ const ColorButton = styled.button`
 
   margin-right: 8px;
 
-  &::before,
-  &::after {
+  &:before,
+  &:after {
     content: '';
     position: absolute;
     top: 0;
@@ -262,21 +260,149 @@ const ColorButton = styled.button`
   }
 `;
 
+const DeviceId = styled.span`
+  font-size: ${theme.fonts.sizeXxs};
+  line-height: ${theme.fonts.lineHeightS};
+  font-weight: ${theme.fonts.weightSemiBold};
+  color: ${theme.colors.grayIcons};
+
+  position: absolute;
+  top: 0;
+  right: 0;
+`;
+
+const ImageSizeBox = styled.div`
+  width: 100%;
+`;
+
+const ImagesSizeBox = styled.div`
+  cursor: pointer;
+  width: 50px;
+  height: 50px;
+
+  border: 1px solid #C4C4C4;
+  border-radius: 4px;
+
+  &:hover {
+    border-color: ${theme.colors.grayPrimary};
+  }
+
+  &.active {
+    border-color: ${theme.colors.grayPrimary};
+  }
+
+  ${onDesktop(`
+    width: 80px;
+    height: 80px;
+  `)}
+`;
+
 export const CardImage = styled.img`
-  height: 100%;
+  width: auto;
+  height: 288px;
   display: block;
-  object-fit: cover;
 
   margin: 0 auto;
+
+  ${onTablet(`
+    width: auto;
+    height: auto;
+    max-height: 288px;
+  `)}
+
+  ${onDesktop(`
+    width: auto;
+    height: auto;
+    max-height: 464px;
+  `)}
+`;
+
+const ImagesWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  margin-top: 20px;
+  gap: 8px;
+
+  width: 100%;
+  height: 50px;
+
+  ${onTablet(`
+    flex-direction: column;
+    width: 49px;
+    height: 288px;
+    margin-top: 0;
+  `)}
+
+  ${onDesktop(`
+    justify-content: space-between;
+    width: 80px;
+    height: 464px;
+  `)}
+`;
+
+export const SmallCardImage = styled.img`
+  height: 41px;
+  display: block;
+  object-fit: cover;
+  margin: auto;
+  margin-top: 2px;
+
+  ${onDesktop(`
+    margin: auto;
+    margin-top: 4px;
+    height: 70px;
+  `)}
 `;
 
 export const ProductCard = () => {
+  const { productId } = useParams();
+  const navigate = useNavigate();
+  const [device, setDevice] = React.useState<Phone | null>(null);
   const [isClicked, setIsClicked] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
-  const [selectedCapacity, setSelectedCapacity] = React.useState(
-    device.capacity,
-  );
-  const [selectedColor, setSelectedColor] = React.useState(device.color);
+  const [selectedCapacity, setSelectedCapacity] = React.useState<string | null>(productId ? productId.split('-')[3] : null);
+  const [selectedColor, setSelectedColor] = React.useState<string | null>(productId ? productId.split('-')[4] : null);
+  const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
+  const [selectedImage, setSelectedImage] = React.useState<string>('');
+  const [currentPoductId, setCurrentProductId] = React.useState(productId);
+
+  // eslint-disable-next-line no-console
+  console.log(currentPoductId);
+
+  React.useEffect(() => {
+    const fetchData = async() => {
+      try {
+        if (currentPoductId) {
+          const response = await getOnePhone(currentPoductId);
+          const responseData = response as Phone;
+
+          setDevice(responseData);
+          setSelectedCapacity(responseData.capacity);
+          setSelectedColor(responseData.color);
+          setCurrentImage(responseData.images[0]);
+          setSelectedImage(responseData.images[0]);
+        }
+      } catch (error) {
+      }
+    };
+
+    fetchData();
+  }, [productId]);
+
+  React.useEffect(() => {
+    const newProductId = `apple-iphone-11-${selectedCapacity?.toLowerCase()}-${selectedColor}`;
+
+    setCurrentProductId(newProductId);
+
+    navigate(`/phones/${newProductId}`);
+  }, [selectedCapacity, selectedColor]);
+
+  if (!device) {
+    return null;
+  }
+
+  const deviceData = extractData(device);
 
   const toggleClick = () => {
     setIsClicked((prev) => !prev);
@@ -290,8 +416,8 @@ export const ProductCard = () => {
     setSelectedCapacity(capacity);
   };
 
-  const handleColorClick = (capacity: string) => {
-    setSelectedColor(capacity);
+  const handleColorClick = (color: string) => {
+    setSelectedColor(color);
   };
 
   return (
@@ -301,103 +427,129 @@ export const ProductCard = () => {
           <Span1Element>шлях додому</Span1Element>
           <Span2Element>повернутись на попередню сторінку</Span2Element>
         </PathAndBack>
-        <Title>Apple iPhone 11 Pro Max 64GB Gold (iMT9G2FS/A)</Title>
+        <Title>{device.name}</Title>
         <ItemCard>
-          <Div1>
-            <CardImage src={device.images[0]} alt="phone"></CardImage>
-          </Div1>
-          <CardInfo>
-            <ChoiseWrapper>
-              <TitleChoise>Available colors</TitleChoise>
-              <ChoiseButtons>
-                {device.colorsAvailable.map((color) => (
-                  <ColorButton
-                    className={selectedColor === color ? 'active' : ''}
-                    onClick={() => handleColorClick(color)}
-                    style={{ backgroundColor: colorMappings[color] }}
-                  ></ColorButton>
-                ))}
-              </ChoiseButtons>
-            </ChoiseWrapper>
-
-            <ChoiseWrapper>
-              <TitleChoise>Select capacity</TitleChoise>
-              <ChoiseButtons>
-                {device.capacityAvailable.map((capacity) => (
-                  <MemoryButton
-                    className={selectedCapacity === capacity ? 'active' : ''}
-                    onClick={() => handleButtonClick(capacity)}
-                  >
-                    {capacity}
-                  </MemoryButton>
-                ))}
-              </ChoiseButtons>
-            </ChoiseWrapper>
-
-            <PriceWrapper className="card-price">
-              <CurrentPrice className="card-current-price">
-                {`$${device.priceDiscount}`}
-              </CurrentPrice>
-              <OldPrice className="card-old-price">
-                {`$${device.priceRegular}`}
-              </OldPrice>
-            </PriceWrapper>
-
-            <ButtonsWrapper className="card-button">
-              <ButtonAdd
-                onClick={toggleClick}
-                type="button"
-                isClicked={isClicked}
-                className="card-button-add"
-              >
-                {isClicked ? 'Added' : 'Add to cart'}
-              </ButtonAdd>
-              <ButtonLike
-                type="button"
-                onClick={toggleFavorite}
-                className="card-button-like"
-              >
-                <IconSprite />
-                {isFavorite ? (
-                  <Icon
-                    spriteName="heart-field"
-                    fill={theme.colors.accentSecondary}
+          <ImagesBox>
+            <ImageSizeBox>
+              <CardImage src={currentImage} alt="Phone image" />
+            </ImageSizeBox>
+            <ImagesWrapper>
+              {device.images.map((img) => (
+                <ImagesSizeBox
+                  onClick={() => {
+                    setCurrentImage(img);
+                    setSelectedImage(img);
+                  }}
+                  className={selectedImage === img ? 'active' : ''}
+                >
+                  <SmallCardImage
+                    key={img}
+                    src={img}
+                    alt="Small phone image"
                   />
-                ) : (
-                  <Icon spriteName="heart" />
-                )}
-              </ButtonLike>
-            </ButtonsWrapper>
+                </ImagesSizeBox>
+              ))}
+            </ImagesWrapper>
+          </ImagesBox>
+          <CardInfo>
+            <CardWrapper>
+              <ChoiseWrapper>
+                <TitleChoise>Available colors</TitleChoise>
+                <ChoiseButtons>
+                  {device.colorsAvailable.map((color) => (
+                    <ColorButton
+                      className={selectedColor === color ? 'active' : ''}
+                      onClick={() => handleColorClick(color)}
+                      style={{ backgroundColor: colorMappings[color] }}
+                    ></ColorButton>
+                  ))}
+                </ChoiseButtons>
+              </ChoiseWrapper>
 
-            <DescrWrapper>
-              <DescrBox>
-                <DescrTitle>Screen</DescrTitle>
-                <DescrTitle>Resolution</DescrTitle>
-                <DescrTitle>Processor</DescrTitle>
-                <DescrTitle>Ram</DescrTitle>
-              </DescrBox>
+              <ChoiseWrapper>
+                <TitleChoise>Select capacity</TitleChoise>
+                <ChoiseButtons>
+                  {device.capacityAvailable.map((capacity) => (
+                    <MemoryButton
+                      className={selectedCapacity === capacity ? 'active' : ''}
+                      onClick={() => handleButtonClick(capacity)}
+                    >
+                      {capacity}
+                    </MemoryButton>
+                  ))}
+                </ChoiseButtons>
+              </ChoiseWrapper>
 
-              <DescrBox>
-                <DescrValue>{device.screen}</DescrValue>
-                <DescrValue>{device.resolution}</DescrValue>
-                <DescrValue>{device.processor}</DescrValue>
-                <DescrValue>{device.ram}</DescrValue>
-              </DescrBox>
-            </DescrWrapper>
+              <PriceWrapper className="card-price">
+                <CurrentPrice className="card-current-price">
+                  {`$${device.priceDiscount}`}
+                </CurrentPrice>
+                <OldPrice className="card-old-price">
+                  {`$${device.priceRegular}`}
+                </OldPrice>
+              </PriceWrapper>
+
+              <ButtonsWrapper className="card-button">
+                <ButtonAdd
+                  onClick={toggleClick}
+                  type="button"
+                  isClicked={isClicked}
+                  className="card-button-add"
+                >
+                  {isClicked ? 'Added' : 'Add to cart'}
+                </ButtonAdd>
+                <ButtonLike
+                  type="button"
+                  onClick={toggleFavorite}
+                  className="card-button-like"
+                >
+                  <IconSprite />
+                  {isFavorite ? (
+                    <Icon
+                      spriteName="heart-field"
+                      fill={theme.colors.accentSecondary}
+                    />
+                  ) : (
+                    <Icon spriteName="heart" />
+                  )}
+                </ButtonLike>
+              </ButtonsWrapper>
+
+              <DescrWrapper>
+                <DescrBox>
+                  <DescrTitle>Screen</DescrTitle>
+                  <DescrTitle>Resolution</DescrTitle>
+                  <DescrTitle>Processor</DescrTitle>
+                  <DescrTitle>Ram</DescrTitle>
+                </DescrBox>
+
+                <DescrBox>
+                  <DescrValue>{device.screen}</DescrValue>
+                  <DescrValue>{device.resolution}</DescrValue>
+                  <DescrValue>{device.processor}</DescrValue>
+                  <DescrValue>{device.ram}</DescrValue>
+                </DescrBox>
+              </DescrWrapper>
+            </CardWrapper>
+            <DeviceId>ID: {device._id}</DeviceId>
           </CardInfo>
           <AboutBlock>
             <H2>About</H2>
-            {device.description.map((info) => (
+            {device.description && device.description.map((info) => (
               <DescriptionWrapper key={info.title}>
                 <H3>{info.title}</H3>
-                {info.text.map((text) => (
+                {Array.isArray(info.text) && info.text.map((text: string) => (
                   <P>{text}</P>
                 ))}
               </DescriptionWrapper>
             ))}
           </AboutBlock>
           <SpecsBlock>
-            <H2>Tech Specs</H2>
+            <thead>
+              <TRow>
+                <Theader>Tech Spec</Theader>
+              </TRow>
+            </thead>
             <TechScecsInfo>
               {Object.entries(deviceData).map(([key, value]) => (
                 <TableRow key={key}>
