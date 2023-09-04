@@ -30,7 +30,6 @@ export const BarElement = styled.div<mobileProps>`
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
 
-
   @media (min-width: 1200px) {
     gap: 48px;
   }
@@ -235,9 +234,7 @@ export const IconElement = styled.div<IconElementProps>`
   }
 `;
 
-export const LinkWrapper = styled(NavLink)`
-
-`;
+export const LinkWrapper = styled(NavLink)``;
 
 export const BuregerWrapper = styled.div<mobileProps>`
   ${({ isMenuOpen }) => {

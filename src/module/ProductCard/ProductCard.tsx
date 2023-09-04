@@ -241,7 +241,7 @@ const ColorButton = styled.button`
 
   &::before,
   &::after {
-    content: "";
+    content: '';
     position: absolute;
     top: 0;
     left: 0;
@@ -273,7 +273,9 @@ export const CardImage = styled.img`
 export const ProductCard = () => {
   const [isClicked, setIsClicked] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
-  const [selectedCapacity, setSelectedCapacity] = React.useState(device.capacity);
+  const [selectedCapacity, setSelectedCapacity] = React.useState(
+    device.capacity,
+  );
   const [selectedColor, setSelectedColor] = React.useState(device.color);
 
   const toggleClick = () => {
@@ -308,13 +310,12 @@ export const ProductCard = () => {
             <ChoiseWrapper>
               <TitleChoise>Available colors</TitleChoise>
               <ChoiseButtons>
-                {device.colorsAvailable.map(color => (
+                {device.colorsAvailable.map((color) => (
                   <ColorButton
                     className={selectedColor === color ? 'active' : ''}
                     onClick={() => handleColorClick(color)}
                     style={{ backgroundColor: colorMappings[color] }}
-                  >
-                  </ColorButton>
+                  ></ColorButton>
                 ))}
               </ChoiseButtons>
             </ChoiseWrapper>
@@ -322,11 +323,11 @@ export const ProductCard = () => {
             <ChoiseWrapper>
               <TitleChoise>Select capacity</TitleChoise>
               <ChoiseButtons>
-                {device.capacityAvailable.map(capacity => (
+                {device.capacityAvailable.map((capacity) => (
                   <MemoryButton
                     className={selectedCapacity === capacity ? 'active' : ''}
                     onClick={() => handleButtonClick(capacity)}
-                >
+                  >
                     {capacity}
                   </MemoryButton>
                 ))}
@@ -334,8 +335,8 @@ export const ProductCard = () => {
             </ChoiseWrapper>
 
             <PriceWrapper className="card-price">
-              <CurrentPrice className="card-current-price"
-                >{`$${device.priceDiscount}`}
+              <CurrentPrice className="card-current-price">
+                {`$${device.priceDiscount}`}
               </CurrentPrice>
               <OldPrice className="card-old-price">
                 {`$${device.priceRegular}`}

@@ -35,11 +35,11 @@ export const CurrentPath = styled.p`
 `;
 
 export const HomeIconWrapper = styled(Link)`
-display: inline-block;
-width: ${({ theme }) => theme.colors.sizeS};
-height: ${({ theme }) => theme.colors.sizeS};
+  display: inline-block;
+  width: ${({ theme }) => theme.colors.sizeS};
+  height: ${({ theme }) => theme.colors.sizeS};
 
-&:hover svg use {
-  fill: ${({ theme }) => theme.colors.graySecondary};
-}
+  &:hover svg use {
+    fill: ${({ theme }) => theme.colors.graySecondary};
+  }
 `;
