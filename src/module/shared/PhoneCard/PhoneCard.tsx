@@ -1,5 +1,6 @@
+/* eslint-disable no-console */
 /* eslint-disable max-len */
-import React from 'react';
+import React, { useContext } from 'react';
 import { useTheme } from 'styled-components';
 
 import {
@@ -16,33 +17,49 @@ import {
   ButtonsWrapper,
   ButtonAdd,
   ButtonLike,
+  ImageBox,
 } from './PhoneCard.styled';
 
-import phnoneImg from '../../../assets/images/phones/apple-iphone-xs-max/spacegray/01.jpg';
 import { Icon, IconSprite } from '../Sprites';
+import { Phone } from '../../../types/Phone';
+import { FavoriteContext, CartContext } from '../../../context';
 
-export const PhoneCard: React.FC = () => {
+type Props = {
+  phone: Phone;
+};
+
+export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
 
-  const [isClicked, setIsClicked] = React.useState(false);
-  const [isFavorite, setIsFavorite] = React.useState(false);
+  const { addItem, cartProducts } = useContext(CartContext);
 
-  const toggleClick = () => {
-    setIsClicked((prev) => !prev);
+  const { addFavoriteProduct, favoriteProducts } = useContext(FavoriteContext);
+
+  console.log(cartProducts);
+
+  const isSelected = cartProducts.find((product) => product._id === phone._id);
+  const isFavorite = favoriteProducts.find(
+    (product) => product._id === phone._id,
+  );
+
+  const toggleClick = (phoneData: Phone) => {
+    addItem(phoneData);
   };
 
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
+  const toggleFavorite = (phoneData: Phone) => {
+    addFavoriteProduct(phoneData);
   };
 
   return (
     <CardWrapper>
-      <CardImage src={phnoneImg} alt="Phone Image" />
-      <CardTitle>Apple iPhone Xs 64GB Silver (iMT9G2FS/A)</CardTitle>
+      <ImageBox>
+        <CardImage src={phone.images[0]} alt="Phone Image" />
+      </ImageBox>
+      <CardTitle>{phone.name}</CardTitle>
 
       <PriceWrapper>
-        <CurrentPrice>$799</CurrentPrice>
-        <OldPrice>$899</OldPrice>
+        <CurrentPrice>{`$${phone.priceDiscount}`}</CurrentPrice>
+        <OldPrice>{`$${phone.priceRegular}`}</OldPrice>
       </PriceWrapper>
 
       <DescrWrapper>
@@ -53,17 +70,21 @@ export const PhoneCard: React.FC = () => {
         </DescrBox>
 
         <DescrBox>
-          <DescrValue>5.8” OLED</DescrValue>
-          <DescrValue>64 GB</DescrValue>
-          <DescrValue>4 GB</DescrValue>
+          <DescrValue>{phone.screen}</DescrValue>
+          <DescrValue>{phone.capacity}</DescrValue>
+          <DescrValue>{phone.ram}</DescrValue>
         </DescrBox>
       </DescrWrapper>
 
       <ButtonsWrapper>
-        <ButtonAdd onClick={toggleClick} type="button" isClicked={isClicked}>
-          {isClicked ? 'Added' : 'Add to cart'}
+        <ButtonAdd
+          onClick={() => toggleClick(phone)}
+          type="button"
+          isClicked={isSelected}
+        >
+          {isSelected ? 'Added' : 'Add to cart'}
         </ButtonAdd>
-        <ButtonLike type="button" onClick={toggleFavorite}>
+        <ButtonLike type="button" onClick={() => toggleFavorite(phone)}>
           <IconSprite />
           {isFavorite ? (
             <Icon

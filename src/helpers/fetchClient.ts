@@ -1,6 +1,6 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-// axios.defaults.baseURL = 'http://localhost:3000/';
+axios.defaults.baseURL = 'https://nice-gadgets-be.onrender.com/api';
 
 const wait = (delay: number) => {
   return new Promise((resolve) => {
@@ -26,7 +26,7 @@ function request<T>(
   }
 
   return wait(300)
-    .then(() => axios.request<T>({ url, ...options }))
+    .then(() => axios.request<T>({ url }))
     .then((response) => {
       return response.data;
     });

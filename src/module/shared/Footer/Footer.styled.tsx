@@ -3,9 +3,12 @@ import { onDesktop, onTablet } from '../Mixins';
 
 export const StyledFooter = styled.footer`
   width: 100%;
+  margin-top: auto;
   padding: 32px 16px;
   display: flex;
   justify-content: center;
+
+  margin-bottom: 25px;
 
   box-shadow: 0px -1px 0px 0px ${({ theme }) => theme.colors.grayElements};
   font-family: ${({ theme }) => theme.fonts.name};

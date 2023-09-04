@@ -1,7 +1,22 @@
 import { client } from '../helpers/fetchClient';
+import { Phone } from '../types/Phone';
 
-export const getPhones = () => {
-  return client.get('../assets/data/phones.json'); // mock url
+type fetchParams = {
+  limit: number;
+  page: number;
+};
+
+type ServerAnsw = {
+  data: Phone[];
+  totalItems: number;
+  totalPages: number;
+  currentPage: number;
+};
+
+export const getPhones = ({ limit, page }: fetchParams) => {
+  return client.get<ServerAnsw>(
+    `/phones?${limit ? `limit=${limit}` : ''}${page ? `&page=${page}` : ''}`,
+  ); // mock url
 };
 
 export const getOnePhone = (phoneId: string) => {
