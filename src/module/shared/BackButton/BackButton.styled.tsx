@@ -13,14 +13,16 @@ export const Button = styled.button`
 
   width: 66px;
   height: 16px;
-`;
 
-export const Back = styled.p`
   color: ${({ theme }) => theme.colors.graySecondary};
   font-weight: ${({ theme }) => theme.fonts.weightRegular};
-  font-size: 12px;
+  font-size: ${({ theme }) => theme.fonts.sizeXxs};;
   font-style: normal;
   line-height: normal;
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.grayPrimary};
+  }
 `;
 
 export const IconWrapper = styled.div`

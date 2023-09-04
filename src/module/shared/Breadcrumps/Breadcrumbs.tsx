@@ -37,7 +37,7 @@ const BreadcrumbSegment: React.FC<BreadcrumbSegmentProps> = ({
 }) => (
   <PathItem>
     <IconWrapper>
-      <Icon spriteName="arrow-right" size='12px' fill="#B4BDC3" />
+      <Icon spriteName="arrow-right" size="12px" fill="#B4BDC3" />
     </IconWrapper>
     {isCurrent ? (
       <CurrentPath>{children}</CurrentPath>
