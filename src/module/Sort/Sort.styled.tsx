@@ -19,10 +19,14 @@ export const SortTitle = styled.h2`
 export const SortDropDown = styled.button`
   position: relative;
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   padding: 0 15px;
-  background-color: #fff;
+  background-color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
-  width: 160px;
+  min-width: 200px;
   height: 40px;
   border: 1px solid ${({ theme }) => theme.colors.grayIcons};
   text-align: left;
