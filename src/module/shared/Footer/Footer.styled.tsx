@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
 
-export const StyledFooter = styled.div`
+export const StyledFooter = styled.footer`
   width: 100%;
   padding: 32px 16px;
   display: flex;
@@ -80,24 +80,13 @@ export const Link = styled.a`
   }
 `;
 
-export const ButtonWrapper = styled.div`
-  display: flex;
-  align-items: center;
-  align-self: center;
-`;
-
-export const IconElement = styled.a`
+export const IconElement = styled.div`
   position: relative;
-  cursor: pointer;
   border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
   width: 32px;
   height: 32px;
   border-radius: 50px;
   transition: border ${({ theme }) => theme.transition.slower};
-
-  &:hover {
-    border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
-  }
 
   svg {
     position: absolute;
@@ -110,4 +99,22 @@ export const IconElement = styled.a`
 export const ButtonText = styled.p`
   margin: 0 16px 0 0;
   color: ${({ theme }) => theme.colors.graySecondary};
+  transition: color ${({ theme }) => theme.transition.slower};
+`;
+
+export const ButtonWrapper = styled.a`
+  display: flex;
+  align-items: center;
+  align-self: center;
+  cursor: pointer;
+
+  &:hover {
+    ${IconElement} {
+      border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
+    }
+
+    ${ButtonText} {
+      color: ${({ theme }) => theme.colors.grayPrimary};
+    }
+  }
 `;

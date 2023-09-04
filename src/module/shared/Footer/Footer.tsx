@@ -14,6 +14,10 @@ import logoFooter from '../../../assets/images/logo_footer.png';
 import { Icon, IconSprite } from '../Sprites';
 
 export const Footer = () => {
+  const scrollToTop = () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
   return (
     <StyledFooter>
       <FooterWrapper>
@@ -35,7 +39,7 @@ export const Footer = () => {
           </ListItem>
         </ListContainer>
 
-        <ButtonWrapper>
+        <ButtonWrapper onClick={scrollToTop}>
           <ButtonText>Back to top</ButtonText>
 
           <IconElement>
