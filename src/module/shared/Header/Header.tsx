@@ -61,7 +61,8 @@ export const Header = () => {
   return (
     <HeaderElement isMenuOpen={isMenuOpen}>
       <BarElement isMenuOpen={isMenuOpen}>
-        <ImgArea to="/"
+        <ImgArea
+          to="/"
           isMenuOpen={isMenuOpen}
           onClick={isMenuOpen ? closeMenu : undefined}
         >

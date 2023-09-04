@@ -235,9 +235,7 @@ export const IconElement = styled.div<IconElementProps>`
   }
 `;
 
-export const LinkWrapper = styled(NavLink)`
-
-`;
+export const LinkWrapper = styled(NavLink)``;
 
 export const BuregerWrapper = styled.div<mobileProps>`
   ${({ isMenuOpen }) => {
