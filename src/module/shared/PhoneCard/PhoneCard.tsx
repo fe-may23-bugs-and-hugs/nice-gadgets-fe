@@ -36,7 +36,9 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const { addFavoriteProduct, favoriteProducts } = useContext(FavoriteContext);
 
   const isSelected = cartProducts.find((product) => product._id === phone._id);
-  const isFavorite = favoriteProducts.find((product) => product._id === phone._id);
+  const isFavorite = favoriteProducts.find(
+    (product) => product._id === phone._id,
+  );
 
   const toggleClick = (phoneData: Phone, e: React.MouseEvent) => {
     e.preventDefault();

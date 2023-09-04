@@ -280,7 +280,7 @@ const ImagesSizeBox = styled.div`
   width: 50px;
   height: 50px;
 
-  border: 1px solid #C4C4C4;
+  border: 1px solid #c4c4c4;
   border-radius: 4px;
 
   &:hover {
@@ -361,8 +361,12 @@ export const ProductCard = () => {
   const [device, setDevice] = React.useState<Phone | null>(null);
   const [isClicked, setIsClicked] = React.useState(false);
   const [isFavorite, setIsFavorite] = React.useState(false);
-  const [selectedCapacity, setSelectedCapacity] = React.useState<string | null>(productId ? productId.split('-')[3] : null);
-  const [selectedColor, setSelectedColor] = React.useState<string | null>(productId ? productId.split('-')[4] : null);
+  const [selectedCapacity, setSelectedCapacity] = React.useState<string | null>(
+    productId ? productId.split('-')[3] : null,
+  );
+  const [selectedColor, setSelectedColor] = React.useState<string | null>(
+    productId ? productId.split('-')[4] : null,
+  );
   const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
   const [selectedImage, setSelectedImage] = React.useState<string>('');
   const [currentPoductId, setCurrentProductId] = React.useState(productId);
@@ -383,8 +387,7 @@ export const ProductCard = () => {
           setCurrentImage(responseData.images[0]);
           setSelectedImage(responseData.images[0]);
         }
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchData();
@@ -442,11 +445,7 @@ export const ProductCard = () => {
                   }}
                   className={selectedImage === img ? 'active' : ''}
                 >
-                  <SmallCardImage
-                    key={img}
-                    src={img}
-                    alt="Small phone image"
-                  />
+                  <SmallCardImage key={img} src={img} alt="Small phone image" />
                 </ImagesSizeBox>
               ))}
             </ImagesWrapper>
@@ -535,14 +534,14 @@ export const ProductCard = () => {
           </CardInfo>
           <AboutBlock>
             <H2>About</H2>
-            {device.description && device.description.map((info) => (
-              <DescriptionWrapper key={info.title}>
-                <H3>{info.title}</H3>
-                {Array.isArray(info.text) && info.text.map((text: string) => (
-                  <P>{text}</P>
-                ))}
-              </DescriptionWrapper>
-            ))}
+            {device.description
+              && device.description.map((info) => (
+                <DescriptionWrapper key={info.title}>
+                  <H3>{info.title}</H3>
+                  {Array.isArray(info.text)
+                    && info.text.map((text: string) => <P>{text}</P>)}
+                </DescriptionWrapper>
+              ))}
           </AboutBlock>
           <SpecsBlock>
             <thead>
