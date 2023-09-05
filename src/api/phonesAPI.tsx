@@ -28,8 +28,8 @@ export const getPhones = (
   );
 };
 
-export const getOnePhone = (phoneId: string) => {
-  return client.get(`../assets/data/phones/${phoneId}.json`); // mock url
+export const getOnePhone = (productId: string) => {
+  return client.get(`/products/${productId}`);
 };
 
 export const getSliderData = (path: string) => {
