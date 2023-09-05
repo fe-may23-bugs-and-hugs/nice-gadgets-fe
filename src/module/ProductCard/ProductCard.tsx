@@ -80,13 +80,11 @@ export const ProductCard = () => {
   const [device, setDevice] = React.useState<Phone | null>(null);
   const { addItem, cartProducts } = React.useContext(CartContext);
   const { addFavoriteProduct, favoriteProducts } = React.useContext(FavoriteContext);
-  // const [isClicked, setIsClicked] = React.useState(false);
-  // const [isFavorite, setIsFavorite] = React.useState(false);
   const [selectedCapacity, setSelectedCapacity] = React.useState<string | null>(
-    productId ? productId.split('-')[3] : null,
+    productId ? productId.split('-')[productId.split('-').length - 2] : null,
   );
   const [selectedColor, setSelectedColor] = React.useState<string | null>(
-    productId ? productId.split('-')[4] : null,
+    productId ? productId.split('-')[productId.split('-').length - 1] : null,
   );
   const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
   const [selectedImage, setSelectedImage] = React.useState<string>('');
@@ -103,8 +101,15 @@ export const ProductCard = () => {
           const responseData = response as Phone;
 
           setDevice(responseData);
-          setSelectedCapacity(responseData.capacity);
-          setSelectedColor(responseData.color);
+
+          if (responseData.capacity) {
+            setSelectedCapacity(responseData.capacity);
+          }
+
+          if (responseData.color) {
+            setSelectedColor(responseData.color);
+          }
+
           setCurrentImage(responseData.images[0]);
           setSelectedImage(responseData.images[0]);
         }
@@ -184,32 +189,36 @@ export const ProductCard = () => {
           </ImagesBox>
           <CardInfo>
             <CardWrapper>
-              <ChoiseWrapper>
-                <TitleChoise>Available colors</TitleChoise>
-                <ChoiseButtons>
-                  {device.colorsAvailable.map((color) => (
-                    <ColorButton
-                      className={selectedColor === color ? 'active' : ''}
-                      onClick={() => handleColorClick(color)}
-                      style={{ backgroundColor: colorMappings[color] }}
-                    ></ColorButton>
-                  ))}
-                </ChoiseButtons>
-              </ChoiseWrapper>
+              {device.colorsAvailable && (
+                <ChoiseWrapper>
+                  <TitleChoise>Available colors</TitleChoise>
+                  <ChoiseButtons>
+                    {device.colorsAvailable.map((color) => (
+                      <ColorButton
+                        className={selectedColor === color ? 'active' : ''}
+                        onClick={() => handleColorClick(color)}
+                        style={{ backgroundColor: colorMappings[color] }}
+                      ></ColorButton>
+                    ))}
+                  </ChoiseButtons>
+                </ChoiseWrapper>
+              )}
 
-              <ChoiseWrapper>
-                <TitleChoise>Select capacity</TitleChoise>
-                <ChoiseButtons>
-                  {device.capacityAvailable.map((capacity) => (
-                    <MemoryButton
-                      className={selectedCapacity === capacity ? 'active' : ''}
-                      onClick={() => handleButtonClick(capacity)}
-                    >
-                      {capacity}
-                    </MemoryButton>
-                  ))}
-                </ChoiseButtons>
-              </ChoiseWrapper>
+              {device.capacityAvailable && (
+                <ChoiseWrapper>
+                  <TitleChoise>Select capacity</TitleChoise>
+                  <ChoiseButtons>
+                    {device.capacityAvailable.map((capacity) => (
+                      <MemoryButton
+                        className={selectedCapacity === capacity ? 'active' : ''}
+                        onClick={() => handleButtonClick(capacity)}
+                      >
+                        {capacity}
+                      </MemoryButton>
+                    ))}
+                  </ChoiseButtons>
+                </ChoiseWrapper>
+              )}
 
               <PriceWrapper className="card-price">
                 <CurrentPrice className="card-current-price">
@@ -252,10 +261,18 @@ export const ProductCard = () => {
 
               <DescrWrapper>
                 <DescrBox>
-                  <DescrTitle>Screen</DescrTitle>
-                  <DescrTitle>Resolution</DescrTitle>
-                  <DescrTitle>Processor</DescrTitle>
-                  <DescrTitle>Ram</DescrTitle>
+                  {device.screen && (
+                    <DescrTitle>Screen</DescrTitle>
+                  )}
+                  {device.resolution && (
+                    <DescrTitle>Resolution</DescrTitle>
+                  )}
+                  {device.processor && (
+                    <DescrTitle>Processor</DescrTitle>
+                  )}
+                  {device.ram && (
+                    <DescrTitle>Ram</DescrTitle>
+                  )}
                 </DescrBox>
 
                 <DescrBox>
@@ -287,14 +304,16 @@ export const ProductCard = () => {
             </THead>
             <TechScecsInfo>
               {Object.entries(deviceData).map(([key, value]) => (
-                <TableRow key={key}>
-                  <TableHeader>
-                    {key.charAt(0).toUpperCase() + key.slice(1)}
-                  </TableHeader>
-                  <TableData>
-                    {Array.isArray(value) ? value.join(' ') : value}
-                  </TableData>
-                </TableRow>
+                value && (
+                  <TableRow key={key}>
+                    <TableHeader>
+                      {key.charAt(0).toUpperCase() + key.slice(1)}
+                    </TableHeader>
+                    <TableData>
+                      {Array.isArray(value) ? value.join(' ') : value}
+                    </TableData>
+                  </TableRow>
+                )
               ))}
             </TechScecsInfo>
           </SpecsBlock>
