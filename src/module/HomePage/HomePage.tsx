@@ -4,6 +4,7 @@ import { ProductsSlider } from './components/ProductsSlider/ProductsSlider';
 import { Phone } from '../../types/Phone';
 import { PhonesContext } from '../../context';
 import { WelcomeSlider } from './components/WelcomeSlider/WelcomeSlider';
+import { Title } from './HomePage.styled';
 
 export const HomePage = () => {
   const [newData, setNewData] = useState<Phone[]>([]);
@@ -17,17 +18,17 @@ export const HomePage = () => {
 
   return (
     <ContentLayout>
-      <h1>Welcome to Nice Gadgets store!</h1>
+      <Title>Welcome to Nice Gadgets store!</Title>
       <WelcomeSlider />
       <ProductsSlider
         data={newData}
-        uniqueKey='new'
-        subtitle='Brand new models'
+        uniqueKey="new"
+        subtitle="Brand new models"
       />
       <ProductsSlider
         data={discountData}
-        uniqueKey='discount'
-        subtitle='Hot prices'
+        uniqueKey="discount"
+        subtitle="Hot prices"
       />
     </ContentLayout>
   );

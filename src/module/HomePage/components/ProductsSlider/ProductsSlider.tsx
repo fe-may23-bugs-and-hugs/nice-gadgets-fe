@@ -19,9 +19,9 @@ import { Phone } from '../../../../types/Phone';
 import { PhoneCard } from '../../../shared/PhoneCard';
 
 type Props = {
-  data: Phone[],
-  uniqueKey: string,
-  subtitle: string,
+  data: Phone[];
+  uniqueKey: string;
+  subtitle: string;
 };
 
 export const ProductsSlider: React.FC<Props> = ({
@@ -70,8 +70,9 @@ export const ProductsSlider: React.FC<Props> = ({
           },
         }}
       >
-        {data.map(phone => (
+        {data.map((phone) => (
           <SwiperSlide
+            key={phone._id}
             style={{
               display: 'flex',
               justifyContent: 'center',
