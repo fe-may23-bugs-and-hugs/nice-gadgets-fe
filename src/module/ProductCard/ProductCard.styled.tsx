@@ -243,7 +243,10 @@ export const DeviceId = styled.span`
 
 export const ImageSizeBox = styled.div`
   width: 100%;
-  height: 464px;
+
+  ${onDesktop(`
+    height: 464px;
+  `)}
 `;
 
 export const ImagesSizeBox = styled.div`
