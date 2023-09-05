@@ -19,13 +19,11 @@ export const HomePage = () => {
     <ContentLayout>
       <h1>Welcome to Nice Gadgets store!</h1>
       <WelcomeSlider />
-      
       <ProductsSlider
         data={newData}
         uniqueKey='new'
         subtitle='Brand new models'
       />
-
       <ProductsSlider
         data={discountData}
         uniqueKey='discount'
