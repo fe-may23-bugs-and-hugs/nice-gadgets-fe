@@ -3,6 +3,7 @@ import { ContentLayout } from '../shared/ContentLayout';
 import { ProductsSlider } from './components/ProductsSlider/ProductsSlider';
 import { Phone } from '../../types/Phone';
 import { PhonesContext } from '../../context';
+import { WelcomeSlider } from './components/WelcomeSlider/WelcomeSlider';
 
 export const HomePage = () => {
   const [newData, setNewData] = useState<Phone[]>([]);
@@ -16,6 +17,9 @@ export const HomePage = () => {
 
   return (
     <ContentLayout>
+      <h1>Welcome to Nice Gadgets store!</h1>
+      <WelcomeSlider />
+      
       <ProductsSlider
         data={newData}
         uniqueKey='new'

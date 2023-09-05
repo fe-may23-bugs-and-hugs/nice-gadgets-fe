@@ -2,18 +2,22 @@
 import React, { createContext, useState } from 'react';
 import { Phone } from '../types/Phone';
 import { getPhones, getSliderData } from '../api/phonesAPI';
+import { getPhones } from '../api/phonesAPI';
+import { SORTING } from '../types/sortEnum';
+import { ORDER } from '../types/OrderEnum';
+import { useSearchParams } from 'react-router-dom';
 
 interface IContext {
   phones: Phone[];
-  loadPhones: () => void;
-  loadSliderData: (pathname: string, clb: (data: any) => void) => void;
+  loadPhones: (pathname: string) => void;
+  loadSliderData: (pathname: string, callback: (data: Phone[]) => void) => void;
   phonesLoading: boolean;
-  updatePage: (numPage: number) => void;
-  updateLimit: (numLimit: number) => void;
   currentPage: number;
   currentLimit: number;
   totalPages: number;
   totalModels: number;
+  sortField: SORTING;
+  order: ORDER;
 }
 
 export const PhonesContext = createContext<IContext>({
@@ -21,12 +25,12 @@ export const PhonesContext = createContext<IContext>({
   loadPhones: () => { },
   loadSliderData: () => { },
   phonesLoading: false,
-  updatePage: () => { },
-  updateLimit: () => { },
   currentPage: 1,
   currentLimit: 16,
   totalPages: 0,
   totalModels: 0,
+  sortField: SORTING.NEWEST,
+  order: ORDER.DESC,
 });
 
 type Props = {
@@ -37,26 +41,27 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const [phones, setPhones] = useState<Phone[]>([]);
   const [phonesLoading, setPhonesLoading] = useState(false);
   const [errors, setErrors] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [currentLimit, setCurrentLimit] = useState(16);
 
+  const [searchParams] = useSearchParams();
+  const sort = (searchParams.get('sort') || SORTING.NEWEST) as SORTING;
+  const order = (searchParams.get('order') || ORDER.DESC) as ORDER;
+  const page = +(searchParams.get('page') || 1);
+  const limit = +(searchParams.get('limit') || 16);
   const [totalPages, setTotalPages] = useState(0);
   const [totalModels, setTotalModels] = useState(0);
 
-  const updatePage = (numPage: number) => {
-    setCurrentPage(numPage);
-  };
-
-  const updateLimit = (numLimit: number) => {
-    setCurrentLimit(numLimit);
-  };
-
-  console.log(currentLimit);
-
-  const loadPhones = () => {
+  const loadPhones = (pathname: string) => {
     setPhonesLoading(true);
 
-    getPhones({ page: currentPage, limit: currentLimit })
+    getPhones(
+      {
+        page,
+        limit,
+        sort,
+        order,
+      },
+      pathname,
+    )
       .then((phonesFromServer) => {
         setPhones(phonesFromServer.data);
         setTotalPages(phonesFromServer.totalPages);
@@ -70,8 +75,12 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     pathname: string,
     callback: (data: Phone[]) => void
   ) => {
+    setPhonesLoading(true);
+    
     getSliderData(pathname)
-      .then((result) => callback(result));
+      .then((result) => callback(result))
+      .catch(() => setErrors(true))
+      .finally(() => setPhonesLoading(false));
   };
 
   const value = {
@@ -79,12 +88,12 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     loadPhones,
     loadSliderData,
     phonesLoading,
-    updateLimit,
-    updatePage,
-    currentLimit,
-    currentPage,
+    currentLimit: limit,
+    currentPage: page,
     totalPages,
     totalModels,
+    sortField: sort,
+    order,
   };
 
   return (

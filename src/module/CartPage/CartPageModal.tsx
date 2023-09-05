@@ -4,11 +4,11 @@ import {
   ModalContainer,
   ModalContent,
   ModalTitle,
-  ModalActions,
   ModalBody,
   ModalImage,
   ModalText,
-  ModalFooter,
+  ModalIconClose,
+  ModalTitleContainer,
 } from './CartPageModal.styled';
 
 interface ModalProps {
@@ -17,10 +17,17 @@ interface ModalProps {
   actions: React.ReactNode;
 }
 
-const CartPageModal = ({ title, content, actions }: ModalProps): ReactElement | null => {
+const CartPageModal = ({
+  title,
+  content,
+  actions,
+}: ModalProps): ReactElement | null => {
   const [showModal, setShowModal] = useState(true);
 
-  const useClickOutside = (ref: React.RefObject<HTMLElement>, callback: () => void) => {
+  const useClickOutside = (
+    ref: React.RefObject<HTMLElement>,
+    callback: () => void,
+  ) => {
     const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         callback();
@@ -54,17 +61,23 @@ const CartPageModal = ({ title, content, actions }: ModalProps): ReactElement | 
 
   useClickOutside(modalRef, handleClose);
 
-  useKeyDown(e => {
+  useKeyDown((e) => {
     if (e.key === 'Escape') {
       handleClose();
     }
   });
 
-  return (
-    showModal ? (
+  return showModal ? (
     <ModalContainer>
       <ModalContent ref={modalRef}>
-        <ModalTitle>{title}</ModalTitle>
+        <ModalTitleContainer>
+        <ModalTitle>
+          {title}
+        </ModalTitle>
+        <ModalIconClose>
+          {actions}
+        </ModalIconClose>
+        </ModalTitleContainer>
         <ModalBody>
           <ModalImage
             src="https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Success-Place-Order-Complete-Shopping-Tick-512.png"
@@ -72,15 +85,9 @@ const CartPageModal = ({ title, content, actions }: ModalProps): ReactElement | 
           />
           <ModalText>{content}</ModalText>
         </ModalBody>
-        <ModalFooter>
-          <ModalActions>
-            {actions}
-          </ModalActions>
-        </ModalFooter>
       </ModalContent>
     </ModalContainer>
-    ) : null
-  );
+  ) : null;
 };
 
 export default CartPageModal;

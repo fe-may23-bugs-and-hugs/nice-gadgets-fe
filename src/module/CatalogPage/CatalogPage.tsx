@@ -1,23 +1,18 @@
 /* eslint-disable*/
-import React, { useContext, useEffect, useState } from 'react';
-import { IconSprite, Icon } from '../shared';
+import React, { useContext, useEffect } from 'react';
 import { ContentLayout } from '../shared/ContentLayout';
 import {
   CatalogTitle,
   CatalogModelsLeft,
-  SortWrapper,
-  SortTitle,
-  SortDropDown,
-  SortDropdownContent,
   BreadcrumbsWrapper,
 } from './CatalogPage.styled';
 import { Catalog } from '../Catalog/Catalog';
 import { PhonesContext } from '../../context/phonesContext';
 import { Spinner } from '../Spinner';
-import { SortLink } from '../SortLink';
 import { Pagination } from '../Pagination/Pagination';
-import { LimitLink } from '../LimitLink';
 import { Breadcrumbs } from '../shared/Breadcrumps';
+import { Sort } from '../Sort';
+import { useLocation } from 'react-router-dom';
 
 export const CatalogPage: React.FC = () => {
   const {
@@ -27,33 +22,23 @@ export const CatalogPage: React.FC = () => {
     currentPage,
     currentLimit,
     totalModels,
+    sortField,
+    order,
   } = useContext(PhonesContext);
-  useEffect(() => {
-    loadPhones();
-  }, [currentPage, currentLimit]);
 
-  const [openSort, setOpenSort] = useState(false);
-  const [openLimit, setOpenLimit] = useState(false);
+  const { pathname } = useLocation();
 
   useEffect(() => {
-    const handleDocumentClick = (event: MouseEvent) => {
-      if (
-        !event.target ||
-        !(event.target instanceof Element) ||
-        (!event.target.closest('#sort-dropdown') &&
-          !event.target.closest('#limit-dropdown'))
-      ) {
-        setOpenSort(false);
-        setOpenLimit(false);
-      }
-    };
+    loadPhones(pathname);
+  }, [currentPage, currentLimit, sortField, order, pathname]);
 
-    document.addEventListener('click', handleDocumentClick);
+  const isModelsExist =
+    totalModels > 0 ? `${totalModels} models` : 'There are no such models';
 
-    return () => {
-      document.removeEventListener('click', handleDocumentClick);
-    };
-  }, []);
+  const normalizeTitle = pathname.slice(1);
+
+  const finalTitle =
+    normalizeTitle.slice(0, 1).toUpperCase() + normalizeTitle.slice(1);
 
   return (
     <>
@@ -66,66 +51,19 @@ export const CatalogPage: React.FC = () => {
               <Breadcrumbs />
             </BreadcrumbsWrapper>
 
-            <CatalogTitle>Mobile Phones</CatalogTitle>
-            <CatalogModelsLeft>{totalModels} models</CatalogModelsLeft>
+            <CatalogTitle>{finalTitle}</CatalogTitle>
+            <CatalogModelsLeft>{isModelsExist}</CatalogModelsLeft>
 
-            <SortWrapper>
-              <div
-                id="sort-dropdown"
-                onClick={() => setOpenSort((prev) => !prev)}
-              >
-                <SortTitle>Sort by</SortTitle>
-                <SortDropDown>
-                  Newest
-                  <IconSprite />
-                  {openSort ? (
-                    <Icon spriteName="arrow-up" />
-                  ) : (
-                    <Icon spriteName="arrow-down" />
-                  )}
-                </SortDropDown>
-                {openSort && (
-                  <SortDropdownContent>
-                    <li>
-                      <SortLink title="Newer" />
-                    </li>
-
-                    <li>
-                      <SortLink title="Newer" />
-                    </li>
-
-                    <li>
-                      <SortLink title="Newer" />
-                    </li>
-                  </SortDropdownContent>
-                )}
-              </div>
-
-              <div
-                id="limit-dropdown"
-                onClick={() => setOpenLimit((prev) => !prev)}
-              >
-                <SortTitle>Items on page</SortTitle>
-                <SortDropDown>
-                  {currentLimit}
-                  <IconSprite />
-                  {openLimit ? (
-                    <Icon spriteName="arrow-up" />
-                  ) : (
-                    <Icon spriteName="arrow-down" />
-                  )}
-                </SortDropDown>
-                {openLimit && (
-                  <SortDropdownContent>
-                    {['4', '8', '16', 'All'].map((num) => (
-                      <LimitLink key={num} num={num} />
-                    ))}
-                  </SortDropdownContent>
-                )}
-              </div>
-            </SortWrapper>
-
-            <Catalog phonesData={phones} />
+            {totalModels === 0 ? (
+              <CatalogTitle>
+                Right now we don't have availiable products. Try later
+              </CatalogTitle>
+            ) : (
+              <>
+                <Sort />
+                <Catalog phonesData={phones} />
+              </>
+            )}
           </>
         )}
         <Pagination />
