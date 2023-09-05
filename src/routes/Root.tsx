@@ -9,37 +9,40 @@ import {
   PageNotFound,
   ProductCard,
 } from '../module';
+import { PhonesProvider } from '../context';
 
 export const Root = () => (
   <BrowserRouter>
-    <Routes>
-      <Route path="/" element={<App />}>
-        <Route index element={<HomePage />} />
+    <PhonesProvider>
+      <Routes>
+        <Route path="/" element={<App />}>
+          <Route index element={<HomePage />} />
 
-        <Route path="phones">
-          <Route index element={<CatalogPage />} />
-          <Route path=":productId" element={<ProductCard />} />
+          <Route path="phones">
+            <Route index element={<CatalogPage />} />
+            <Route path=":productId" element={<ProductCard />} />
+          </Route>
+
+          <Route path="tablets">
+            <Route index element={<CatalogPage />} />
+            <Route path=":productId" element={<ProductCard />} />
+          </Route>
+
+          <Route path="accessories">
+            <Route index element={<CatalogPage />} />
+            <Route path=":productId" element={<ProductCard />} />
+          </Route>
+
+          <Route path="favorites">
+            <Route index element={<Favorites />} />
+            <Route path=":productId" element={<ProductCard />} />
+          </Route>
+
+          <Route path="cart" element={<CartPage />} />
+
+          <Route path="*" element={<PageNotFound />} />
         </Route>
-
-        <Route path="tablets">
-          <Route index element={<CatalogPage />} />
-          <Route path=":productId" element={<ProductCard />} />
-        </Route>
-
-        <Route path="accessories">
-          <Route index element={<CatalogPage />} />
-          <Route path=":productId" element={<ProductCard />} />
-        </Route>
-
-        <Route path="favorites">
-          <Route index element={<Favorites />} />
-          <Route path=":productId" element={<ProductCard />} />
-        </Route>
-
-        <Route path="cart" element={<CartPage />} />
-
-        <Route path="*" element={<PageNotFound />} />
-      </Route>
-    </Routes>
+      </Routes>
+    </PhonesProvider>
   </BrowserRouter>
 );
