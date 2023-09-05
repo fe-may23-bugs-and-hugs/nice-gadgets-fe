@@ -32,7 +32,7 @@ export const ImageBox = styled.div`
 export const CardImage = styled.img`
   height: 100%;
   display: block;
-  object-fit: cover;
+  object-fit: conatin;
 
   margin: 0 auto;
 `;
