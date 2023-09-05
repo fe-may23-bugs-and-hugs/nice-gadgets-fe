@@ -19,7 +19,7 @@ type ServerAnsw = {
 
 export const getPhones = ({ limit, page, sort, order }: fetchParams) => {
   return client.get<ServerAnsw>(
-    `/phones?${limit ? `limit=${limit}` : ''}${
+    `/products?${limit ? `limit=${limit}` : ''}${
       page ? `&page=${page}` : ''
     }&sort=${sort}&order=${order}`,
   );
