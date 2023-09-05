@@ -1,3 +1,10 @@
+import { ContentLayout } from '../shared/ContentLayout';
+import { ProductsSlider } from './components/ProductsSlider/ProductsSlider';
+
 export const HomePage = () => {
-  return <h2>Home page</h2>;
+  return (
+    <ContentLayout>
+      <ProductsSlider />
+    </ContentLayout>
+  );
 };
