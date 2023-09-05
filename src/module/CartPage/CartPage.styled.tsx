@@ -137,10 +137,25 @@ export const IconClose = styled.div`
   display: flex;
   width: 32px;
   height: 32px;
-  /* border-radius: 50%; */
-  /* border: 1px solid ${({ theme }) => theme.colors.grayElements}; */
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.grayElements};
   align-items: center;
   justify-content: center;
+
+  cursor: pointer;
+  transition: background-color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.graySecondary};
+  }
+
+  @media (max-width: 1200px) {
+    padding: 8px;
+  }
+
+  @media (min-width: 641px) {
+    padding: 8px;
+  }
 `;
 
 export const IconElement = styled.button`
@@ -245,6 +260,49 @@ export const CartCheckout = styled.button`
 export const CartEmpty = styled.div`
   display: flex;
   justify-content: center;
+  align-items: center;
+  height: 50vh;
+
+  font-size: ${({ theme }) => theme.fonts.sizeXxxl};
+  font-family: ${({ theme }) => theme.fonts.name};
+  color: black;
+  font-weight: bold;
+
+  @media (max-width: 1200px) {
+    font-size: ${({ theme }) => theme.fonts.sizeXxl};
+  }
+
+  @media (max-width: 500px) {
+    font-size: ${({ theme }) => theme.fonts.sizeL};
+  }
+`;
+
+export const ModalIconClose = styled.div`
+  display: flex;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  border: 1px solid ${({ theme }) => theme.colors.grayElements};
+  align-items: center;
+
+  cursor: pointer;
+  transition: background-color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.graySecondary};
+  }
+
+  @media (max-width: 1200px) {
+    padding: 8px;
+  }
+
+  @media (min-width: 641px) {
+    padding: 8px;
+  }
+`;
+
+export const CartEmptyImage = styled.div`
+  display: flex;
   align-items: center;
   height: 100vh;
 
