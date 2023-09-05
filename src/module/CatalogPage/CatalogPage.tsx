@@ -12,6 +12,7 @@ import { Spinner } from '../Spinner';
 import { Pagination } from '../Pagination/Pagination';
 import { Breadcrumbs } from '../shared/Breadcrumps';
 import { Sort } from '../Sort';
+import { useLocation } from 'react-router-dom';
 
 export const CatalogPage: React.FC = () => {
   const {
@@ -25,9 +26,19 @@ export const CatalogPage: React.FC = () => {
     order,
   } = useContext(PhonesContext);
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
-    loadPhones();
-  }, [currentPage, currentLimit, sortField, order]);
+    loadPhones(pathname);
+  }, [currentPage, currentLimit, sortField, order, pathname]);
+
+  const isModelsExist =
+    totalModels > 0 ? `${totalModels} models` : 'There are no such models';
+
+  const normalizeTitle = pathname.slice(1);
+
+  const finalTitle =
+    normalizeTitle.slice(0, 1).toUpperCase() + normalizeTitle.slice(1);
 
   return (
     <>
@@ -40,12 +51,19 @@ export const CatalogPage: React.FC = () => {
               <Breadcrumbs />
             </BreadcrumbsWrapper>
 
-            <CatalogTitle>Mobile Phones</CatalogTitle>
-            <CatalogModelsLeft>{totalModels} models</CatalogModelsLeft>
+            <CatalogTitle>{finalTitle}</CatalogTitle>
+            <CatalogModelsLeft>{isModelsExist}</CatalogModelsLeft>
 
-            <Sort />
-
-            <Catalog phonesData={phones} />
+            {totalModels === 0 ? (
+              <CatalogTitle>
+                Right now we don't have availiable products. Try later
+              </CatalogTitle>
+            ) : (
+              <>
+                <Sort />
+                <Catalog phonesData={phones} />
+              </>
+            )}
           </>
         )}
         <Pagination />
