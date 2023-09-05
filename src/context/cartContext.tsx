@@ -5,14 +5,16 @@ import { Phone } from '../types/Phone';
 
 interface ICartContext {
   cartProducts: any[];
-  addItem: (product: any) => void;
+  addItem: (product: Phone) => void;
   totalItems: number;
+  setCartProducts: (newCartProducts: Phone[]) => void;
 }
 
 export const CartContext = createContext<ICartContext>({
   cartProducts: [],
   addItem: () => {},
   totalItems: 0,
+  setCartProducts: () => {},
 });
 
 type Props = {
@@ -47,6 +49,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     cartProducts,
     addItem,
     totalItems: cartProducts.length,
+    setCartProducts,
   };
 
   return <CartContext.Provider value={value}>{children}</CartContext.Provider>;

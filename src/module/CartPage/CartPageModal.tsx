@@ -4,11 +4,11 @@ import {
   ModalContainer,
   ModalContent,
   ModalTitle,
-  ModalActions,
   ModalBody,
   ModalImage,
   ModalText,
-  ModalFooter,
+  ModalIconClose,
+  ModalTitleContainer,
 } from './CartPageModal.styled';
 
 interface ModalProps {
@@ -70,7 +70,14 @@ const CartPageModal = ({
   return showModal ? (
     <ModalContainer>
       <ModalContent ref={modalRef}>
-        <ModalTitle>{title}</ModalTitle>
+        <ModalTitleContainer>
+        <ModalTitle>
+          {title}
+        </ModalTitle>
+        <ModalIconClose>
+          {actions}
+        </ModalIconClose>
+        </ModalTitleContainer>
         <ModalBody>
           <ModalImage
             src="https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Success-Place-Order-Complete-Shopping-Tick-512.png"
@@ -78,9 +85,6 @@ const CartPageModal = ({
           />
           <ModalText>{content}</ModalText>
         </ModalBody>
-        <ModalFooter>
-          <ModalActions>{actions}</ModalActions>
-        </ModalFooter>
       </ModalContent>
     </ModalContainer>
   ) : null;

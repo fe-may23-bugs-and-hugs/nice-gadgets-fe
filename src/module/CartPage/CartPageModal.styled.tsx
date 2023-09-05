@@ -22,7 +22,13 @@ export const ModalContent = styled.div`
   border-radius: 10px;
 `;
 
+export const ModalTitleContainer = styled.h2`
+  display: flex;
+  justify-content: space-between;
+`;
+
 export const ModalTitle = styled.h2`
+  display: flex;
   margin-top: 0;
   color: ${({ theme }) => theme.colors.accentSecondary};
   font-family: ${({ theme }) => theme.fonts.name};
@@ -57,3 +63,5 @@ export const ModalText = styled.p`
   font-family: ${({ theme }) => theme.fonts.name};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
 `;
+
+export const ModalIconClose = styled.div``;
