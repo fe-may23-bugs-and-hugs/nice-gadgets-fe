@@ -79,7 +79,8 @@ export const ProductCard = () => {
   const navigate = useNavigate();
   const [device, setDevice] = React.useState<Phone | null>(null);
   const { addItem, cartProducts } = React.useContext(CartContext);
-  const { addFavoriteProduct, favoriteProducts } = React.useContext(FavoriteContext);
+  const { addFavoriteProduct, favoriteProducts }
+    = React.useContext(FavoriteContext);
   const [selectedCapacity, setSelectedCapacity] = React.useState<string | null>(
     productId ? productId.split('-')[productId.split('-').length - 2] : null,
   );
@@ -142,13 +143,11 @@ export const ProductCard = () => {
     (product) => product._id === device._id,
   );
 
-  const toggleClick = (phoneData: Phone, e: React.MouseEvent) => {
-    e.preventDefault();
+  const toggleClick = (phoneData: Phone) => {
     addItem(phoneData);
   };
 
-  const toggleFavorite = (phoneData: Phone, e: React.MouseEvent) => {
-    e.preventDefault();
+  const toggleFavorite = (phoneData: Phone) => {
     addFavoriteProduct(phoneData);
   };
 
@@ -210,7 +209,9 @@ export const ProductCard = () => {
                   <ChoiseButtons>
                     {device.capacityAvailable.map((capacity) => (
                       <MemoryButton
-                        className={selectedCapacity === capacity ? 'active' : ''}
+                        className={
+                          selectedCapacity === capacity ? 'active' : ''
+                        }
                         onClick={() => handleButtonClick(capacity)}
                       >
                         {capacity}
@@ -231,8 +232,8 @@ export const ProductCard = () => {
 
               <ButtonsWrapper className="card-button">
                 <ButtonAdd
-                  onClick={(e) => {
-                    toggleClick(device, e);
+                  onClick={() => {
+                    toggleClick(device);
                   }}
                   type="button"
                   isClicked={isSelected}
@@ -242,8 +243,8 @@ export const ProductCard = () => {
                 </ButtonAdd>
                 <ButtonLike
                   type="button"
-                  onClick={(e) => {
-                    toggleFavorite(device, e);
+                  onClick={() => {
+                    toggleFavorite(device);
                   }}
                   className="card-button-like"
                 >
@@ -261,18 +262,10 @@ export const ProductCard = () => {
 
               <DescrWrapper>
                 <DescrBox>
-                  {device.screen && (
-                    <DescrTitle>Screen</DescrTitle>
-                  )}
-                  {device.resolution && (
-                    <DescrTitle>Resolution</DescrTitle>
-                  )}
-                  {device.processor && (
-                    <DescrTitle>Processor</DescrTitle>
-                  )}
-                  {device.ram && (
-                    <DescrTitle>Ram</DescrTitle>
-                  )}
+                  {device.screen && <DescrTitle>Screen</DescrTitle>}
+                  {device.resolution && <DescrTitle>Resolution</DescrTitle>}
+                  {device.processor && <DescrTitle>Processor</DescrTitle>}
+                  {device.ram && <DescrTitle>Ram</DescrTitle>}
                 </DescrBox>
 
                 <DescrBox>
@@ -303,18 +296,19 @@ export const ProductCard = () => {
               </TRow>
             </THead>
             <TechScecsInfo>
-              {Object.entries(deviceData).map(([key, value]) => (
-                value && (
-                  <TableRow key={key}>
-                    <TableHeader>
-                      {key.charAt(0).toUpperCase() + key.slice(1)}
-                    </TableHeader>
-                    <TableData>
-                      {Array.isArray(value) ? value.join(' ') : value}
-                    </TableData>
-                  </TableRow>
-                )
-              ))}
+              {Object.entries(deviceData).map(
+                ([key, value]) =>
+                  value && (
+                    <TableRow key={key}>
+                      <TableHeader>
+                        {key.charAt(0).toUpperCase() + key.slice(1)}
+                      </TableHeader>
+                      <TableData>
+                        {Array.isArray(value) ? value.join(' ') : value}
+                      </TableData>
+                    </TableRow>
+                  ),
+              )}
             </TechScecsInfo>
           </SpecsBlock>
         </ItemCard>
