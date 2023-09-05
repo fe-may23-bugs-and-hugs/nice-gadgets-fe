@@ -9,8 +9,10 @@ import {
 } from './ThemeToggler.styled';
 
 export const ThemeToggler = () => {
-  const themeContext = useTheme()
-    || { isDarkTheme: false, toggleTheme: () => {} };
+  const themeContext = useTheme() || {
+    isDarkTheme: false,
+    toggleTheme: () => {},
+  };
 
   const { isDarkTheme, toggleTheme } = themeContext;
 
@@ -25,10 +27,10 @@ export const ThemeToggler = () => {
         />
         <IconSprite />
         <IconWrapper>
-          <Icon spriteName='sun' size='10px' fill='#FAFBFC'/>
+          <Icon spriteName="sun" size="10px" fill="#FAFBFC" />
         </IconWrapper>
         <IconWrapper>
-          <Icon spriteName='moon' size='8px' fill='#75767F'/>
+          <Icon spriteName="moon" size="8px" fill="#75767F" />
         </IconWrapper>
         <Span isDarkTheme={isDarkTheme}></Span>
       </Label>

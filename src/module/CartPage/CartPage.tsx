@@ -140,11 +140,15 @@ export const CartPage: React.FC = () => {
 
     if (action === 'increment') {
       newCartItems[index].quantity += 1;
-      newCartItems[index].price = newCartItems[index].unitPrice * newCartItems[index].quantity;
+
+      newCartItems[index].price
+        = newCartItems[index].unitPrice * newCartItems[index].quantity;
     } else if (action === 'decrement') {
       if (newCartItems[index].quantity > 1) {
         newCartItems[index].quantity -= 1;
-        newCartItems[index].price = newCartItems[index].unitPrice * newCartItems[index].quantity;
+
+        newCartItems[index].price
+          = newCartItems[index].unitPrice * newCartItems[index].quantity;
       }
     }
 
