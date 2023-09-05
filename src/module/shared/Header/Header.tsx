@@ -104,8 +104,8 @@ export const Header = () => {
       </BarElement>
       <IconsSection isMenuOpen={isMenuOpen}>
         <IconElement
-          hasPinkCircle={!!totalItems}
-          circleText={totalItems}
+          hasPinkCircle={!!totalFavorite}
+          circleText={totalFavorite}
           isMenuOpen={isMenuOpen}
         >
           <LinkWrapper
@@ -117,8 +117,8 @@ export const Header = () => {
           </LinkWrapper>
         </IconElement>
         <IconElement
-          hasPinkCircle={!!totalFavorite}
-          circleText={totalFavorite}
+          hasPinkCircle={!!totalItems}
+          circleText={totalItems}
           isMenuOpen={isMenuOpen}
         >
           <LinkWrapper to="/cart" onClick={isMenuOpen ? closeMenu : undefined}>

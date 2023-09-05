@@ -43,3 +43,10 @@ export const HomeIconWrapper = styled(Link)`
     fill: ${({ theme }) => theme.colors.graySecondary};
   }
 `;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
+`;

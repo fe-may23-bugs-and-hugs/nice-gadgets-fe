@@ -1,9 +1,13 @@
 import { client } from '../helpers/fetchClient';
+import { ORDER } from '../types/OrderEnum';
 import { Phone } from '../types/Phone';
+import { SORTING } from '../types/sortEnum';
 
 type fetchParams = {
   limit: number;
   page: number;
+  sort: SORTING;
+  order: ORDER;
 };
 
 type ServerAnsw = {
@@ -13,9 +17,11 @@ type ServerAnsw = {
   currentPage: number;
 };
 
-export const getPhones = ({ limit, page }: fetchParams) => {
+export const getPhones = ({ limit, page, sort, order }: fetchParams) => {
   return client.get<ServerAnsw>(
-    `/products?${limit ? `limit=${limit}` : ''}${page ? `&page=${page}` : ''}`,
+    `/phones?${limit ? `limit=${limit}` : ''}${
+      page ? `&page=${page}` : ''
+    }&sort=${sort}&order=${order}`,
   );
 };
 
