@@ -2,7 +2,6 @@
 import React, { createContext, useState } from 'react';
 import { Phone } from '../types/Phone';
 import { getPhones, getSliderData } from '../api/phonesAPI';
-import { getPhones } from '../api/phonesAPI';
 import { SORTING } from '../types/sortEnum';
 import { ORDER } from '../types/OrderEnum';
 import { useSearchParams } from 'react-router-dom';
