@@ -11,6 +11,10 @@ export const SortLinkWrapper = styled.div`
   color: $color-primary;
   transition: all ${({ theme }) => theme.transition.slower};
 
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+
   cursor: pointer;
   &:hover {
     background-color: #f4f6f8;

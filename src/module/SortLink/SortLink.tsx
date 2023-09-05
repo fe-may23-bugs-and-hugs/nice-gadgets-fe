@@ -1,14 +1,20 @@
 import React from 'react';
 import { SortLinkWrapper } from './SortLink.styled';
+import { SORTING } from '../../types/sortEnum';
+import { ORDER } from '../../types/OrderEnum';
 
 type Props = {
-  title: string;
+  sortField: {
+    sort: SORTING;
+    order: ORDER;
+    title: string;
+  };
 };
 
-export const SortLink: React.FC<Props> = ({ title }) => {
+export const SortLink: React.FC<Props> = ({ sortField }) => {
   return (
     <SortLinkWrapper>
-      <span>{title}</span>
+      <span>{sortField.title}</span>
     </SortLinkWrapper>
   );
 };

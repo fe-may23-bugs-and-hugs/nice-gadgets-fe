@@ -1,3 +1,11 @@
+import { ContentLayout } from '../shared/ContentLayout';
+import { WelcomeSlider } from './components/WelcomeSlider/WelcomeSlider';
+
 export const HomePage = () => {
-  return <h2>Home page</h2>;
+  return (
+    <ContentLayout>
+      <h2>Home page</h2>
+      <WelcomeSlider />
+    </ContentLayout>
+  );
 };
