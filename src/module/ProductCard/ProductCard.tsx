@@ -1,11 +1,41 @@
 /* eslint-disable max-len */
 import React from 'react';
-import styled from 'styled-components';
-import { MainElement } from './ProductCard.styled';
-import { onDesktop, onTablet } from '../shared/Mixins';
 import { theme } from '../../styles';
 import { ContentLayout } from '../shared/ContentLayout';
 import { useParams, useNavigate } from 'react-router-dom';
+import {
+  MainElement,
+  PathAndBack,
+  Title,
+  H2,
+  H3,
+  P,
+  Theader,
+  THead,
+  TRow,
+  DescriptionWrapper,
+  ItemCard,
+  ImagesBox,
+  CardInfo,
+  AboutBlock,
+  SpecsBlock,
+  CardWrapper,
+  TechScecsInfo,
+  TableRow,
+  TableHeader,
+  TableData,
+  ChoiseWrapper,
+  ChoiseButtons,
+  MemoryButton,
+  TitleChoise,
+  ColorButton,
+  DeviceId,
+  ImageSizeBox,
+  ImagesSizeBox,
+  CardImage,
+  ImagesWrapper,
+  SmallCardImage,
+} from './ProductCard.styled';
 
 import {
   CurrentPrice,
@@ -23,6 +53,9 @@ import { Icon, IconSprite } from '../shared';
 import { colorMappings } from './colorMappings';
 import { getOnePhone } from '../../api/phonesAPI';
 import { Phone } from '../../types/Phone';
+import { BackButton } from '../shared/BackButton';
+import { Breadcrumbs } from '../shared/Breadcrumps';
+import { CartContext, FavoriteContext } from '../../context';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};
@@ -41,326 +74,14 @@ function extractData(obj: Record<string, any>) {
   return result;
 }
 
-const PathAndBack = styled.div`
-  display: flex;
-  flex-direction: column;
-  grid-column: 1 / -1;
-`;
-
-const Span1Element = styled.span``;
-
-const Span2Element = styled.span``;
-
-const Title = styled.h1`
-  grid-column: 1 / -1;
-  font-size: ${theme.fonts.sizeM};
-  line-height: ${theme.fonts.lineHeightXl};
-  color: ${theme.colors.grayPrimary};
-  margin-bottom: 32px;
-
-  ${onTablet(`
-    font-size: ${theme.fonts.sizeXxl};
-    line-height: ${theme.fonts.lineHeightXxl};
-    margin-bottom: 40px;
-  `)}
-`;
-
-const H2 = styled.h2`
-  color: ${theme.colors.grayPrimary};
-  font-size: ${theme.fonts.sizeM};
-  line-height: ${theme.fonts.lineHeightL};
-  font-weight: ${theme.fonts.weightBold};
-  border-bottom: 1px solid ${theme.colors.grayElements};
-  margin-bottom: 32px;
-  height: 42px;
-
-  ${onTablet(`
-    font-size: ${theme.fonts.sizeL};
-    line-height: ${theme.fonts.lineHeightXl};
-  `)}
-`;
-
-const Theader = styled.th`
-  display: block;
-  color: ${theme.colors.grayPrimary};
-  font-size: ${theme.fonts.sizeM};
-  line-height: ${theme.fonts.lineHeightL};
-  font-weight: ${theme.fonts.weightBold};
-  border-bottom: 1px solid ${theme.colors.grayElements};
-  height: 42px;
-  width: 100%;
-  text-align: left;
-
-  ${onTablet(`
-    font-size: ${theme.fonts.sizeL};
-    line-height: ${theme.fonts.lineHeightXl};
-  `)}
-`;
-
-const TRow = styled.tr`
-  display: block;
-  width: 100%;
-  margin-bottom: 32px;
-`;
-
-const DescriptionWrapper = styled.div`
-  &:not(:last-child) {
-    margin-bottom: 32px;
-  }
-`;
-
-const H3 = styled.h3`
-  color: ${theme.colors.grayPrimary};
-  font-size: ${theme.fonts.sizeS};
-  line-height: ${theme.fonts.lineHeightM};
-  font-weight: ${theme.fonts.weightSemiBold};
-  margin-bottom: 16px;
-
-  ${onTablet(`
-    font-size: ${theme.fonts.sizeM};
-    line-height: ${theme.fonts.lineHeightL};
-  `)}
-`;
-
-const P = styled.p`
-  font-size: ${theme.fonts.sizeXs};
-  line-height: ${theme.fonts.lineHeightM};
-  font-weight: ${theme.fonts.weightRegular};
-
-  &:not(:last-child) {
-    margin-bottom: 16px;
-  }
-`;
-
-const ItemCard = styled.div`
-  display: grid;
-  grid-template-columns: repeat(1, 1fr);
-  column-gap: 64px;
-  row-gap: 56px;
-
-  ${onTablet(`
-    grid-template-columns:repeat(2, 1fr);
-    row-gap: 80px;
-  `)}
-`;
-
-const ImagesBox = styled.div`
-  display: flex;
-  justify-content: space-between;
-  flex-direction: column;
-
-  ${onTablet(`
-    flex-direction: row-reverse;
-    gap: 16px;
-  `)}
-`;
-
-const CardInfo = styled.div`
-  position: relative;
-`;
-const AboutBlock = styled.div``;
-const SpecsBlock = styled.table``;
-
-const CardWrapper = styled.div`
-  width: 100%;
-
-  ${onDesktop(`
-    max-width: 320px;
-  `)}
-`;
-
-const TechScecsInfo = styled.tbody`
-  display: flex;
-  flex-direction: column;
-`;
-const TableRow = styled.tr`
-  display: flex;
-  justify-content: space-between;
-
-  font-size: ${theme.fonts.sizeXxs};
-  line-height: ${theme.fonts.lineHeightS};
-`;
-const TableHeader = styled.th`
-  font-weight: 500;
-`;
-const TableData = styled.td`
-  color: ${theme.colors.grayPrimary};
-  font-weight: ${theme.fonts.weightRegular};
-`;
-
-const ChoiseWrapper = styled.div`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 32px;
-  border-bottom: 1px solid ${theme.colors.grayElements};
-`;
-
-const ChoiseButtons = styled.div`
-  margin-bottom: 24px;
-`;
-
-const MemoryButton = styled.button`
-  box-sizing: content-box;
-  background-color: ${theme.colors.grayBackground};
-  color: ${theme.colors.grayPrimary};
-  border: 1px solid ${theme.colors.grayIcons};
-  border-radius: 4px;
-  width: 60px;
-  height: 32px;
-  cursor: pointer;
-
-  font-size: ${theme.fonts.sizeXs};
-  line-height: ${theme.fonts.lineHeightM};
-
-  margin-right: 8px;
-
-  &.active {
-    background-color: ${theme.colors.grayPrimary};
-    color: ${theme.colors.white};
-  }
-`;
-
-const TitleChoise = styled.span`
-  font-size: ${theme.fonts.sizeXxs};
-  line-height: ${theme.fonts.lineHeightS};
-  font-weight: ${theme.fonts.weightRegular};
-  margin-bottom: 8px;
-`;
-
-const ColorButton = styled.button`
-  position: relative;
-  border: none;
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  cursor: pointer;
-
-  margin-right: 8px;
-
-  &:before,
-  &:after {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border-radius: 50%;
-    border: 3px solid ${theme.colors.white};
-    box-sizing: border-box;
-  }
-
-  &::after {
-    border-radius: 50%;
-    border: 1px solid ${theme.colors.grayElements};
-  }
-
-  &.active {
-    border: 1px solid ${theme.colors.grayPrimary};
-  }
-`;
-
-const DeviceId = styled.span`
-  font-size: ${theme.fonts.sizeXxs};
-  line-height: ${theme.fonts.lineHeightS};
-  font-weight: ${theme.fonts.weightSemiBold};
-  color: ${theme.colors.grayIcons};
-
-  position: absolute;
-  top: 0;
-  right: 0;
-`;
-
-const ImageSizeBox = styled.div`
-  width: 100%;
-`;
-
-const ImagesSizeBox = styled.div`
-  cursor: pointer;
-  width: 50px;
-  height: 50px;
-
-  border: 1px solid #c4c4c4;
-  border-radius: 4px;
-
-  &:hover {
-    border-color: ${theme.colors.grayPrimary};
-  }
-
-  &.active {
-    border-color: ${theme.colors.grayPrimary};
-  }
-
-  ${onDesktop(`
-    width: 80px;
-    height: 80px;
-  `)}
-`;
-
-export const CardImage = styled.img`
-  width: auto;
-  height: 288px;
-  display: block;
-
-  margin: 0 auto;
-
-  ${onTablet(`
-    width: auto;
-    height: auto;
-    max-height: 288px;
-  `)}
-
-  ${onDesktop(`
-    width: auto;
-    height: auto;
-    max-height: 464px;
-  `)}
-`;
-
-const ImagesWrapper = styled.div`
-  display: flex;
-  justify-content: center;
-  flex-direction: row;
-  margin-top: 20px;
-  gap: 8px;
-
-  width: 100%;
-  height: 50px;
-
-  ${onTablet(`
-    flex-direction: column;
-    width: 49px;
-    height: 288px;
-    margin-top: 0;
-  `)}
-
-  ${onDesktop(`
-    justify-content: space-between;
-    width: 80px;
-    height: 464px;
-  `)}
-`;
-
-export const SmallCardImage = styled.img`
-  height: 41px;
-  display: block;
-  object-fit: cover;
-  margin: auto;
-  margin-top: 2px;
-
-  ${onDesktop(`
-    margin: auto;
-    margin-top: 4px;
-    height: 70px;
-  `)}
-`;
-
 export const ProductCard = () => {
   const { productId } = useParams();
   const navigate = useNavigate();
   const [device, setDevice] = React.useState<Phone | null>(null);
-  const [isClicked, setIsClicked] = React.useState(false);
-  const [isFavorite, setIsFavorite] = React.useState(false);
+  const { addItem, cartProducts } = React.useContext(CartContext);
+  const { addFavoriteProduct, favoriteProducts } = React.useContext(FavoriteContext);
+  // const [isClicked, setIsClicked] = React.useState(false);
+  // const [isFavorite, setIsFavorite] = React.useState(false);
   const [selectedCapacity, setSelectedCapacity] = React.useState<string | null>(
     productId ? productId.split('-')[3] : null,
   );
@@ -369,16 +90,16 @@ export const ProductCard = () => {
   );
   const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
   const [selectedImage, setSelectedImage] = React.useState<string>('');
-  const [currentPoductId, setCurrentProductId] = React.useState(productId);
+  const [currentProductId, setCurrentProductId] = React.useState(productId);
 
   // eslint-disable-next-line no-console
-  console.log(currentPoductId);
+  console.log(currentProductId);
 
   React.useEffect(() => {
     const fetchData = async() => {
       try {
-        if (currentPoductId) {
-          const response = await getOnePhone(currentPoductId);
+        if (currentProductId) {
+          const response = await getOnePhone(currentProductId);
           const responseData = response as Phone;
 
           setDevice(responseData);
@@ -394,7 +115,11 @@ export const ProductCard = () => {
   }, [productId]);
 
   React.useEffect(() => {
-    const newProductId = `apple-iphone-11-${selectedCapacity?.toLowerCase()}-${selectedColor}`;
+    const firstPartCurrentPoductId = currentProductId
+      ?.split('-')
+      .slice(0, -2)
+      .join('-');
+    const newProductId = `${firstPartCurrentPoductId}-${selectedCapacity?.toLowerCase()}-${selectedColor}`;
 
     setCurrentProductId(newProductId);
 
@@ -407,12 +132,19 @@ export const ProductCard = () => {
 
   const deviceData = extractData(device);
 
-  const toggleClick = () => {
-    setIsClicked((prev) => !prev);
+  const isSelected = cartProducts.find((product) => product._id === device._id);
+  const isFavorite = favoriteProducts.find(
+    (product) => product._id === device._id,
+  );
+
+  const toggleClick = (phoneData: Phone, e: React.MouseEvent) => {
+    e.preventDefault();
+    addItem(phoneData);
   };
 
-  const toggleFavorite = () => {
-    setIsFavorite((prev) => !prev);
+  const toggleFavorite = (phoneData: Phone, e: React.MouseEvent) => {
+    e.preventDefault();
+    addFavoriteProduct(phoneData);
   };
 
   const handleButtonClick = (capacity: string) => {
@@ -427,8 +159,8 @@ export const ProductCard = () => {
     <ContentLayout>
       <MainElement>
         <PathAndBack>
-          <Span1Element>шлях додому</Span1Element>
-          <Span2Element>повернутись на попередню сторінку</Span2Element>
+          <Breadcrumbs />
+          <BackButton />
         </PathAndBack>
         <Title>{device.name}</Title>
         <ItemCard>
@@ -490,16 +222,20 @@ export const ProductCard = () => {
 
               <ButtonsWrapper className="card-button">
                 <ButtonAdd
-                  onClick={toggleClick}
+                  onClick={(e) => {
+                    toggleClick(device, e);
+                  }}
                   type="button"
-                  isClicked={isClicked}
+                  isClicked={isSelected}
                   className="card-button-add"
                 >
-                  {isClicked ? 'Added' : 'Add to cart'}
+                  {isSelected ? 'Added' : 'Add to cart'}
                 </ButtonAdd>
                 <ButtonLike
                   type="button"
-                  onClick={toggleFavorite}
+                  onClick={(e) => {
+                    toggleFavorite(device, e);
+                  }}
                   className="card-button-like"
                 >
                   <IconSprite />
@@ -544,11 +280,11 @@ export const ProductCard = () => {
               ))}
           </AboutBlock>
           <SpecsBlock>
-            <thead>
+            <THead>
               <TRow>
                 <Theader>Tech Spec</Theader>
               </TRow>
-            </thead>
+            </THead>
             <TechScecsInfo>
               {Object.entries(deviceData).map(([key, value]) => (
                 <TableRow key={key}>
