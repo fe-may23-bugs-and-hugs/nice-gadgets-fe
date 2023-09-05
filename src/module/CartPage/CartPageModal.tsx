@@ -17,10 +17,17 @@ interface ModalProps {
   actions: React.ReactNode;
 }
 
-const CartPageModal = ({ title, content, actions }: ModalProps): ReactElement | null => {
+const CartPageModal = ({
+  title,
+  content,
+  actions,
+}: ModalProps): ReactElement | null => {
   const [showModal, setShowModal] = useState(true);
 
-  const useClickOutside = (ref: React.RefObject<HTMLElement>, callback: () => void) => {
+  const useClickOutside = (
+    ref: React.RefObject<HTMLElement>,
+    callback: () => void,
+  ) => {
     const handleClickOutside = (e: MouseEvent) => {
       if (ref.current && !ref.current.contains(e.target as Node)) {
         callback();
@@ -54,14 +61,13 @@ const CartPageModal = ({ title, content, actions }: ModalProps): ReactElement | 
 
   useClickOutside(modalRef, handleClose);
 
-  useKeyDown(e => {
+  useKeyDown((e) => {
     if (e.key === 'Escape') {
       handleClose();
     }
   });
 
-  return (
-    showModal ? (
+  return showModal ? (
     <ModalContainer>
       <ModalContent ref={modalRef}>
         <ModalTitle>{title}</ModalTitle>
@@ -73,14 +79,11 @@ const CartPageModal = ({ title, content, actions }: ModalProps): ReactElement | 
           <ModalText>{content}</ModalText>
         </ModalBody>
         <ModalFooter>
-          <ModalActions>
-            {actions}
-          </ModalActions>
+          <ModalActions>{actions}</ModalActions>
         </ModalFooter>
       </ModalContent>
     </ModalContainer>
-    ) : null
-  );
+  ) : null;
 };
 
 export default CartPageModal;

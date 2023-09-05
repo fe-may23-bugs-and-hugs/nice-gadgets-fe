@@ -16,7 +16,7 @@ export const Button = styled.button`
 
   color: ${({ theme }) => theme.colors.graySecondary};
   font-weight: ${({ theme }) => theme.fonts.weightRegular};
-  font-size: ${({ theme }) => theme.fonts.sizeXxs};;
+  font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-style: normal;
   line-height: normal;
 
