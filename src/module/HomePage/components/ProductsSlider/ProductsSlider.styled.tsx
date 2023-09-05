@@ -54,8 +54,6 @@ export const Button = styled.button`
   height: 32px;
   cursor: pointer;
   transition: border-color ${({ theme }) => theme.transition.slower};
-;
-
   &:hover {
     border-color: ${({ theme }) => theme.colors.grayPrimary};
   }

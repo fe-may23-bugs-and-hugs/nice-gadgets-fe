@@ -20,14 +20,14 @@ export const ProductsSlider = () => {
       <UpperWrapper>
         <Subtitle>Brand new models</Subtitle>
 
-        <ButtonsWrapper className='buttons-wrapper'>
+        <ButtonsWrapper className="buttons-wrapper">
           <IconSprite />
 
-          <Button id='prev-btn'>
+          <Button id="prev-btn">
             <Icon spriteName="arrow-left" fill="#000" />
           </Button>
 
-          <Button className='btn' id='next-btn'>
+          <Button className="btn" id="next-btn">
             <Icon spriteName="arrow-right" fill="#000" />
           </Button>
         </ButtonsWrapper>
@@ -50,62 +50,78 @@ export const ProductsSlider = () => {
           },
         }}
       >
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
 
-        <SwiperSlide style={{
-          display: 'flex',
-          justifyContent: 'center',
-        }}>
+        <SwiperSlide
+          style={{
+            display: 'flex',
+            justifyContent: 'center',
+          }}
+        >
           <Card />
         </SwiperSlide>
       </Swiper>
-    </SlideWrapper >
+    </SlideWrapper>
   );
 };
