@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 
 interface IContext {
   phones: Phone[];
-  loadPhones: () => void;
+  loadPhones: (pathname: string) => void;
   phonesLoading: boolean;
   currentPage: number;
   currentLimit: number;
@@ -47,15 +47,18 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const [totalPages, setTotalPages] = useState(0);
   const [totalModels, setTotalModels] = useState(0);
 
-  const loadPhones = () => {
+  const loadPhones = (pathname: string) => {
     setPhonesLoading(true);
 
-    getPhones({
-      page,
-      limit,
-      sort,
-      order,
-    })
+    getPhones(
+      {
+        page,
+        limit,
+        sort,
+        order,
+      },
+      pathname,
+    )
       .then((phonesFromServer) => {
         setPhones(phonesFromServer.data);
         setTotalPages(phonesFromServer.totalPages);

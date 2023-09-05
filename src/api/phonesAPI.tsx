@@ -17,11 +17,14 @@ type ServerAnsw = {
   currentPage: number;
 };
 
-export const getPhones = ({ limit, page, sort, order }: fetchParams) => {
+export const getPhones = (
+  { limit, page, sort, order }: fetchParams,
+  pathname: string,
+) => {
   return client.get<ServerAnsw>(
-    `/products?${limit ? `limit=${limit}` : ''}${
-      page ? `&page=${page}` : ''
-    }&sort=${sort}&order=${order}`,
+    `/products?productType=${pathname.slice(1)}&${
+      limit ? `limit=${limit}` : ''
+    }${page ? `&page=${page}` : ''}&sort=${sort}&order=${order}`,
   );
 };
 
