@@ -22,3 +22,7 @@ export const getPhones = ({ limit, page }: fetchParams) => {
 export const getOnePhone = (phoneId: string) => {
   return client.get(`../assets/data/phones/${phoneId}.json`); // mock url
 };
+
+export const getSliderData = (path: string) => {
+  return client.get<Phone[]>(`products/${path}`);
+};

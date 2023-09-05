@@ -1,11 +1,12 @@
 /*eslint-disable*/
 import React, { createContext, useState } from 'react';
 import { Phone } from '../types/Phone';
-import { getPhones } from '../api/phonesAPI';
+import { getPhones, getSliderData } from '../api/phonesAPI';
 
 interface IContext {
   phones: Phone[];
   loadPhones: () => void;
+  loadSliderData: (pathname: string, clb: (data: any) => void) => void;
   phonesLoading: boolean;
   updatePage: (numPage: number) => void;
   updateLimit: (numLimit: number) => void;
@@ -17,10 +18,11 @@ interface IContext {
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => {},
+  loadPhones: () => { },
+  loadSliderData: () => { },
   phonesLoading: false,
-  updatePage: () => {},
-  updateLimit: () => {},
+  updatePage: () => { },
+  updateLimit: () => { },
   currentPage: 1,
   currentLimit: 16,
   totalPages: 0,
@@ -64,9 +66,18 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
       .finally(() => setPhonesLoading(false));
   };
 
+  const loadSliderData = (
+    pathname: string,
+    callback: (data: Phone[]) => void
+  ) => {
+    getSliderData(pathname)
+      .then((result) => callback(result));
+  };
+
   const value = {
     phones,
     loadPhones,
+    loadSliderData,
     phonesLoading,
     updateLimit,
     updatePage,
