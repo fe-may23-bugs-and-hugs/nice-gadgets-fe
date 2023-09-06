@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { onTablet } from '../../../shared/Mixins';
+import { onTablet } from '../../shared/Mixins';
 import { Link } from 'react-router-dom';
 
 export const SectionWrapper = styled.div`
