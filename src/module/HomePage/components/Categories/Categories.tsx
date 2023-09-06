@@ -1,5 +1,4 @@
-import React, { useCallback } from 'react';
-import data from '../../../../assets/data/phones.json';
+import React from 'react';
 import {
   SectionWrapper,
   CategoriesTitle,
@@ -30,21 +29,6 @@ const categoriesData = [
 ];
 
 export const Categories: React.FC = () => {
-  const calculateNumberOfModels = useCallback(
-    (category: string) => {
-      const categoryCounts: { [key: string]: number } = {};
-
-      data.forEach((product) => {
-        if (product.category === category) {
-          categoryCounts[category] = (categoryCounts[category] || 0) + 1;
-        }
-      });
-
-      return categoryCounts[category] || 0;
-    },
-    [data],
-  );
-
   return (
     <SectionWrapper>
       <CategoriesTitle>Shop by category</CategoriesTitle>
@@ -55,7 +39,6 @@ export const Categories: React.FC = () => {
             key={categoryData.category}
             image={categoryData.image}
             title={categoryData.title}
-            numberOfModels={calculateNumberOfModels(categoryData.category)}
             category={categoryData.category}
           />
         ))}

@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 import { useContext } from 'react';
-import { Breadcrumbs } from '../shared/Breadcrumps';
+import { Breadcrumbs } from '../shared/Breadcrumbs';
 import { ContentLayout } from '../shared/ContentLayout';
 import {
   BreadcrumbsWrapper,

@@ -51,6 +51,7 @@ export const ProductsSlider: React.FC<Props> = ({
       </UpperWrapper>
 
       <Swiper
+        style={{ margin: '0 -15px -30px', padding: '0 15px 30px' }}
         modules={[Navigation]}
         spaceBetween={16}
         slidesPerView={1}

@@ -55,10 +55,10 @@ import { colorMappings } from './colorMappings';
 import { getOnePhone } from '../../api/phonesAPI';
 import { Phone } from '../../types/Phone';
 import { BackButton } from '../shared/BackButton';
-import { Breadcrumbs } from '../shared/Breadcrumps';
 import { CartContext, FavoriteContext, PhonesContext } from '../../context';
 import { ProductsSlider } from '../HomePage/components/ProductsSlider/ProductsSlider';
 import { TailSpin } from 'react-loader-spinner';
+import { Breadcrumbs } from '../shared/Breadcrumbs';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};
@@ -87,7 +87,6 @@ export const ProductCard = () => {
   const [selectedColor, setSelectedColor] = React.useState<string>('');
   const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
   const [selectedImage, setSelectedImage] = React.useState<string>('');
-  const [recommendedData, setRecommendedData] = React.useState<Phone[]>([]);
   const [loading, setLoading] = React.useState(true);
 
   const navigate = useNavigate();
@@ -135,10 +134,11 @@ export const ProductCard = () => {
     fetchData();
   }, [productId]);
 
-  const phonesContext = useContext(PhonesContext);
+  const { loadPhones, newData }
+    = useContext(PhonesContext);
 
   React.useEffect(() => {
-    phonesContext.loadSliderData('recommended/recommended', setRecommendedData);
+    loadPhones('recommended/recommended');
   }, []);
 
   if (!device) {
@@ -356,7 +356,7 @@ export const ProductCard = () => {
       {!loading && (
         <RecommendedBlock>
           <ProductsSlider
-            data={recommendedData}
+            data={newData}
             uniqueKey="recommended"
             subtitle="You may also like"
           />

@@ -1,19 +1,23 @@
-import React, { useState, useEffect, useContext } from 'react';
+/* eslint-disable no-console */
+
+import React, { useEffect, useContext } from 'react';
 import { ContentLayout } from '../shared/ContentLayout';
 import { ProductsSlider } from './components/ProductsSlider/ProductsSlider';
-import { Phone } from '../../types/Phone';
 import { PhonesContext } from '../../context';
 import { WelcomeSlider } from './components/WelcomeSlider/WelcomeSlider';
 import { Title } from './HomePage.styled';
+import { Categories } from './components/Categories';
 
 export const HomePage = () => {
-  const [newData, setNewData] = useState<Phone[]>([]);
-  const [discountData, setDiscountData] = useState<Phone[]>([]);
-  const phonesContext = useContext(PhonesContext);
+  const { loadNewData, loadDiscountData, newData, discountData }
+    = useContext(PhonesContext);
 
   useEffect(() => {
-    phonesContext.loadSliderData('new', setNewData);
-    phonesContext.loadSliderData('discount', setDiscountData);
+    loadNewData();
+  }, []);
+
+  useEffect(() => {
+    loadDiscountData();
   }, []);
 
   return (
@@ -25,6 +29,7 @@ export const HomePage = () => {
         uniqueKey="new"
         subtitle="Brand new models"
       />
+      <Categories />
       <ProductsSlider
         data={discountData}
         uniqueKey="discount"
