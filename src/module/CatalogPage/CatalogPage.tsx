@@ -8,11 +8,11 @@ import {
 } from './CatalogPage.styled';
 import { Catalog } from '../Catalog/Catalog';
 import { PhonesContext } from '../../context/phonesContext';
-import { Spinner } from '../Spinner';
 import { Pagination } from '../Pagination/Pagination';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
 import { Sort } from '../Sort';
 import { useLocation } from 'react-router-dom';
+import { Loader } from '../Loader';
 
 export const CatalogPage: React.FC = () => {
   const {
@@ -43,29 +43,25 @@ export const CatalogPage: React.FC = () => {
   return (
     <>
       <ContentLayout>
-        {phonesLoading ? (
-          <Spinner />
+        <BreadcrumbsWrapper>
+          <Breadcrumbs />
+        </BreadcrumbsWrapper>
+
+        <CatalogTitle>{finalTitle}</CatalogTitle>
+        <CatalogModelsLeft>{isModelsExist}</CatalogModelsLeft>
+
+        {totalModels === 0 ? (
+          <CatalogTitle>
+            Right now we don't have availiable products. Try later
+          </CatalogTitle>
         ) : (
           <>
-            <BreadcrumbsWrapper>
-              <Breadcrumbs />
-            </BreadcrumbsWrapper>
-
-            <CatalogTitle>{finalTitle}</CatalogTitle>
-            <CatalogModelsLeft>{isModelsExist}</CatalogModelsLeft>
-
-            {totalModels === 0 ? (
-              <CatalogTitle>
-                Right now we don't have availiable products. Try later
-              </CatalogTitle>
-            ) : (
-              <>
-                <Sort />
-                <Catalog phonesData={phones} />
-              </>
-            )}
+            <Sort />
+            <Catalog phonesData={phones} />
           </>
         )}
+
+        <Loader visible={phonesLoading} />
         <Pagination />
       </ContentLayout>
     </>

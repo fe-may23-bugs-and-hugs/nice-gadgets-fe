@@ -5,3 +5,4 @@ export * from './HomePage';
 export * from './ProductCard';
 export * from './PageNotFound';
 export * from './CatalogPage';
+export * from './Loader';
