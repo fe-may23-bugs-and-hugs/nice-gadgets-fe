@@ -26,13 +26,14 @@ interface IContext {
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => {},
-  loadNewData: () => {},
-  loadDiscountData: () => {},
+  loadPhones: () => { },
+  loadNewData: () => { },
+  loadDiscountData: () => { },
   newLoader: false,
   discountLoader: false,
   newData: [],
   discountData: [],
+
   phonesLoading: false,
   currentPage: 1,
   currentLimit: 16,

@@ -26,6 +26,7 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
   const [quantity, setQuantity] = useState(product.quantity);
   const oneItemPrice = quantity * product.priceDiscount;
 
+
   const handleChangeQuantity = (action: string) => {
     if (action === 'increment') {
       setQuantity(quantity + 1);
