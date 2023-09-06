@@ -54,8 +54,8 @@ import { colorMappings } from './colorMappings';
 import { getOnePhone } from '../../api/phonesAPI';
 import { Phone } from '../../types/Phone';
 import { BackButton } from '../shared/BackButton';
-import { Breadcrumbs } from '../shared/Breadcrumps';
 import { CartContext, FavoriteContext } from '../../context';
+import { Breadcrumbs } from '../shared/Breadcrumbs';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};
