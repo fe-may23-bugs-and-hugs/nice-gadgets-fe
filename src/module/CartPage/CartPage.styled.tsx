@@ -337,7 +337,7 @@ export const ModalIconClose = styled.div`
 
 export const CartEmptyImage = styled.div`
   display: flex;
-  
+
   align-items: center;
   height: 100vh;
 

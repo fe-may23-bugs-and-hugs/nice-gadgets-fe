@@ -63,9 +63,7 @@ const CartPageModal: React.FC<ModalProps> = ({
             src="https://cdn2.iconfinder.com/data/icons/shopping-e-commerce-2-1/32/Success-Place-Order-Complete-Shopping-Tick-512.png"
             alt="order-completed-image"
           />
-          <ModalText>
-            {content}
-          </ModalText>
+          <ModalText>{content}</ModalText>
         </ModalBody>
       </ModalContent>
     </ModalContainer>

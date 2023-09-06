@@ -83,6 +83,7 @@ export const ModalText = styled.p`
   margin-left: 10px;
   text-align: center;
 
+  
   color: ${({ theme }) => theme.colors.accentSecondary};
   font-family: ${({ theme }) => theme.fonts.name};
   font-weight: ${({ theme }) => theme.fonts.weightBold};

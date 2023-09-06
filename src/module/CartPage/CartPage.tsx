@@ -23,29 +23,36 @@ import { CartItemPage } from './CartItemPage';
 export const CartPage: React.FC = () => {
   const { cartProducts, setCartProducts } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
-  const [totalItems, setTotalItems] = useState(cartProducts
-    .reduce((total, product) => total + product.quantity, 0));
-  const [totalPrice, setTotalPrice] = useState(cartProducts
-    .reduce((total, product) => total + product.priceDiscount, 0));
+  const [totalItems, setTotalItems] = useState(
+    cartProducts.reduce((total, product) => total + product.quantity, 0),
+  );
+  const [totalPrice, setTotalPrice] = useState(
+    cartProducts.reduce((total, product) => total + product.priceDiscount, 0),
+  );
 
   const handleToggle = () => {
     setShowModal(!showModal);
   };
 
   useEffect(() => {
-    setTotalItems(cartProducts
-      .reduce((total, product) => total + product.quantity, 0));
+    setTotalItems(
+      cartProducts.reduce((total, product) => total + product.quantity, 0),
+    );
 
-    setTotalPrice(cartProducts
-      .reduce((total, product) => total
-      + (product.quantity * product.priceDiscount), 0));
+    setTotalPrice(
+      cartProducts.reduce(
+        (total, product) => total + product.quantity * product.priceDiscount,
+        0,
+      ),
+    );
   }, [cartProducts]);
 
   const handleDelete = (id: string) => {
     const newCartProducts = cartProducts.filter((item) => item._id !== id);
 
-    setTotalItems(newCartProducts
-      .reduce((total, product) => total + product.quantity, 0));
+    setTotalItems(
+      newCartProducts.reduce((total, product) => total + product.quantity, 0),
+    );
     setCartProducts(newCartProducts);
   };
 
