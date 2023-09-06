@@ -21,8 +21,8 @@ interface IContext {
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => { },
-  loadSliderData: () => { },
+  loadPhones: () => {},
+  loadSliderData: () => {},
   phonesLoading: false,
   currentPage: 1,
   currentLimit: 16,
@@ -68,7 +68,7 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   };
   const loadSliderData = (
     pathname: string,
-    callback: (data: Phone[]) => void
+    callback: (data: Phone[]) => void,
   ) => {
     setPhonesLoading(true);
     getSliderData(pathname)
