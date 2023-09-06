@@ -10,7 +10,7 @@ import { Catalog } from '../Catalog/Catalog';
 import { PhonesContext } from '../../context/phonesContext';
 import { Spinner } from '../Spinner';
 import { Pagination } from '../Pagination/Pagination';
-import { Breadcrumbs } from '../shared/Breadcrumps';
+import { Breadcrumbs } from '../shared/Breadcrumbs';
 import { Sort } from '../Sort';
 import { useLocation } from 'react-router-dom';
 
