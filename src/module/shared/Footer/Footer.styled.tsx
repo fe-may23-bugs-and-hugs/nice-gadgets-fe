@@ -1,16 +1,25 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
 
-export const StyledFooter = styled.footer`
+interface DarkTheme {
+  isDarkTheme: boolean,
+};
+
+export const StyledFooter = styled.footer<DarkTheme>`
   width: 100%;
   margin-top: auto;
   padding: 32px 16px;
   display: flex;
   justify-content: center;
 
-  margin-bottom: 25px;
+  background-color: ${({ isDarkTheme }) => isDarkTheme
+    ? ({ theme }) => theme.darkThemeColors.black
+    : ({ theme }) => theme.colors.white};
 
-  box-shadow: 0px -1px 0px 0px ${({ theme }) => theme.colors.grayElements};
+  box-shadow: 0px -1px 0px 0px ${({ isDarkTheme }) => isDarkTheme
+    ? ({ theme }) => theme.darkThemeColors.grayElements
+    : ({ theme }) => theme.colors.grayElements};
+
   font-family: ${({ theme }) => theme.fonts.name};
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
@@ -48,6 +57,16 @@ export const LogoFooter = styled.img`
   `)}
 `;
 
+export const LogoFooterDark = styled.img`
+  width: 89px;
+  margin-bottom: 32px;
+  cursor: pointer;
+
+  ${onTablet(`
+    margin: 0;
+  `)}
+`;
+
 export const ListContainer = styled.ul`
   display: flex;
   flex-direction: column;
@@ -70,22 +89,26 @@ export const ListContainer = styled.ul`
     `)}
 `;
 
-export const ListItem = styled.li`
-  color: ${({ theme }) => theme.colors.graySecondary};
+export const ListItem = styled.li<DarkTheme>`
+  color: ${({ isDarkTheme }) => isDarkTheme
+    ? ({ theme }) => theme.darkThemeColors.white
+    : ({ theme }) => theme.colors.graySecondary};
 `;
 
-export const Link = styled.a`
+export const Link = styled.a<DarkTheme>`
   cursor: pointer;
   transition: color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.grayPrimary};
+    color: ${({ isDarkTheme }) => isDarkTheme
+    ? ({ theme }) => theme.darkThemeColors.graySecondary
+    : ({ theme }) => theme.colors.grayPrimary};
   }
 `;
 
 export const IconElement = styled.div`
   position: relative;
-  border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
+  border: ${({ theme }) => `1px solid ${theme.colors.grayIcons}`};
   width: 32px;
   height: 32px;
   border-radius: 50px;
@@ -99,13 +122,16 @@ export const IconElement = styled.div`
   }
 `;
 
-export const ButtonText = styled.p`
+export const ButtonText = styled.p<DarkTheme>`
   margin: 0 16px 0 0;
-  color: ${({ theme }) => theme.colors.graySecondary};
+  color: ${({ isDarkTheme }) => isDarkTheme
+    ? ({ theme }) => theme.darkThemeColors.graySecondary
+    : ({ theme }) => theme.colors.graySecondary};
+
   transition: color ${({ theme }) => theme.transition.slower};
 `;
 
-export const ButtonWrapper = styled.a`
+export const ButtonWrapper = styled.a<DarkTheme>`
   display: flex;
   align-items: center;
   align-self: center;
@@ -113,11 +139,15 @@ export const ButtonWrapper = styled.a`
 
   &:hover {
     ${IconElement} {
-      border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
+      border: ${({ theme }) => `1px solid ${(isDarkTheme: DarkTheme) => isDarkTheme
+    ? theme.darkThemeColors.graySecondary
+    : theme.colors.grayPrimary}`};
     }
 
     ${ButtonText} {
-      color: ${({ theme }) => theme.colors.grayPrimary};
+      color: ${({ isDarkTheme }) => isDarkTheme
+    ? ({ theme }) => theme.darkThemeColors.graySecondary
+    : ({ theme }) => theme.colors.grayPrimary};
     }
   }
 `;
