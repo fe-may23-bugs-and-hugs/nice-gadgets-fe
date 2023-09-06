@@ -9,7 +9,7 @@ export const onTablet: StylesFunction = (styles) => `
 `;
 
 export const onSmallDesktop: StylesFunction = (styles) => `
-  @media (min-width: 768px) {
+  @media (min-width: 900px) {
     ${styles}
   }
 `;
