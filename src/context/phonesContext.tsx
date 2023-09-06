@@ -21,8 +21,8 @@ interface IContext {
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => {},
-  loadSliderData: () => {},
+  loadPhones: () => { },
+  loadSliderData: () => { },
   phonesLoading: false,
   currentPage: 1,
   currentLimit: 16,
@@ -40,7 +40,6 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const [phones, setPhones] = useState<Phone[]>([]);
   const [phonesLoading, setPhonesLoading] = useState(false);
   const [errors, setErrors] = useState(false);
-
   const [searchParams] = useSearchParams();
   const sort = (searchParams.get('sort') || SORTING.NEWEST) as SORTING;
   const order = (searchParams.get('order') || ORDER.DESC) as ORDER;
@@ -48,10 +47,8 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const limit = +(searchParams.get('limit') || 16);
   const [totalPages, setTotalPages] = useState(0);
   const [totalModels, setTotalModels] = useState(0);
-
   const loadPhones = (pathname: string) => {
     setPhonesLoading(true);
-
     getPhones(
       {
         page,
@@ -69,19 +66,16 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
       .catch(() => setErrors(true))
       .finally(() => setPhonesLoading(false));
   };
-
   const loadSliderData = (
     pathname: string,
-    callback: (data: Phone[]) => void,
+    callback: (data: Phone[]) => void
   ) => {
     setPhonesLoading(true);
-
     getSliderData(pathname)
       .then((result) => callback(result))
       .catch(() => setErrors(true))
       .finally(() => setPhonesLoading(false));
   };
-
   const value = {
     phones,
     loadPhones,
@@ -94,7 +88,6 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     sortField: sort,
     order,
   };
-
   return (
     <PhonesContext.Provider value={value}>{children}</PhonesContext.Provider>
   );
