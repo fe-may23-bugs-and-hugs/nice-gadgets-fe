@@ -22,16 +22,16 @@ export const getPhones = (
   pathname: string,
 ) => {
   return client.get<ServerAnsw>(
-    `/products?productType=${pathname.slice(1)}&${
+    `/api/products?productType=${pathname.slice(1)}&${
       limit ? `limit=${limit}` : ''
     }${page ? `&page=${page}` : ''}&sort=${sort}&order=${order}`,
   );
 };
 
 export const getOnePhone = (productId: string) => {
-  return client.get(`/products/${productId}`);
+  return client.get(`/api/products/${productId}`);
 };
 
 export const getSliderData = (path: string) => {
-  return client.get<Phone[]>(`products/${path}`);
+  return client.get<Phone[]>(`/api/products/${path}`);
 };
