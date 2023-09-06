@@ -1,46 +1,35 @@
 import styled from 'styled-components';
 
 export const CartContainer = styled.div`
-  margin: 2rem;
   display: flex;
-  gap: 16px;
+  margin-bottom: 80px;
 
   @media (max-width: 1200px) {
     display: flex;
     flex-direction: column;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 500px) {
     display: flex;
     flex-direction: column;
   }
 `;
 
-export const CartBack = styled.div`
-  display: flex;
-  margin-bottom: 16px;
-`;
-
-export const CartBar = styled.div`
-  margin-top: 24px;
-  display: flex;
-  color: ${({ theme }) => theme.colors.graySecondary};
-  font-size: ${({ theme }) => theme.fonts.sizeXxs};
-  font-family: ${({ theme }) => theme.fonts.name};
-  gap: 4px;
-`;
-
-export const IconArrow = styled.div`
-  display: flex;
+export const BackButtonContainer = styled.div`
+  margin-top: 40px;
+  margin-left: 16px;
 `;
 
 export const CartHeader = styled.header`
   display: flex;
+  margin-top: 16px;
+  margin-left: 16px;
+  margin-bottom: 32px;
   gap: 32px;
   font-size: ${({ theme }) => theme.fonts.sizeL};
   font-family: ${({ theme }) => theme.fonts.name};
 
-  @media (max-width: 640px) {
+  @media (max-width: 500px) {
     font-size: ${({ theme }) => theme.fonts.sizeS};
   }
 `;
@@ -49,9 +38,10 @@ export const CartList = styled.ul`
   display: flex;
   flex-direction: column;
   gap: 16px;
+  margin-right: 16px;
 `;
 
-export const CartItem = styled.div`
+export const CartItem = styled.li`
   display: flex;
   align-items: center;
   gap: 24px;
@@ -66,19 +56,34 @@ export const CartItem = styled.div`
     justify-content: space-between;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 550px) {
     display: flex;
     flex-direction: column;
+    padding: 16px;
   }
 `;
 
 export const ImgContainer = styled.div`
   display: flex;
-  width: 66px;
-  height: 66px;
+  width: 80px;
+  height: 80px;
 `;
 
-export const ImgElement = styled.img``;
+export const ImgElement = styled.img`
+  width: 100%;
+  object-fit: contain;
+  padding: 7px;
+
+  @media (max-width: 1200px) {
+    min-width: 66px;
+    height: auto;
+  }
+
+  @media (max-width: 500px) {
+    min-width: 66px;
+    height: auto;
+  }
+`;
 
 export const ItemDescription = styled.div`
   display: flex;
@@ -89,7 +94,7 @@ export const ItemDescription = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 500px) {
     width: 128px;
   }
 `;
@@ -104,10 +109,19 @@ export const MobileContainer = styled.div`
     justify-content: space-between;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 500px) {
     display: flex;
     gap: 16px;
-    padding: 24px;
+    /* padding: 16px; */
+    font-size: ${({ theme }) => theme.fonts.sizeXs};
+  }
+
+  @media (max-width: 400px) {
+    display: flex;
+    gap: 16px;
+    /* padding: 16px; */
+    width: 100%;
+    object-fit: contain;
   }
 `;
 
@@ -118,7 +132,7 @@ export const IconContainer = styled.div`
 
 export const IconPriceContainer = styled.div`
   display: flex;
-  gap: 24px;
+  gap: 53px;
   align-items: center;
 
   @media (max-width: 1200px) {
@@ -126,9 +140,15 @@ export const IconPriceContainer = styled.div`
     justify-content: space-between;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 500px) {
     display: flex;
-    gap: 50px;
+    justify-content: space-between;
+  }
+
+  @media (max-width: 400px) {
+    display: flex;
+    width: 100%;
+    gap: 0px;
     justify-content: space-between;
   }
 `;
@@ -184,14 +204,21 @@ export const ItemQuantity = styled.div`
 `;
 
 export const ItemPrice = styled.div`
+  /* padding-left: 29px; */
   display: flex;
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-size: ${({ theme }) => theme.fonts.sizeL};
   font-family: ${({ theme }) => theme.fonts.name};
+  justify-content: flex-end;
+  min-width: 80px;
 
   @media (max-width: 1200px) {
     display: flex;
     justify-content: end;
+  }
+
+  @media (max-width: 500px) {
+    font-size: ${({ theme }) => theme.fonts.sizeL};
   }
 `;
 
@@ -210,7 +237,7 @@ export const CartSummary = styled.div`
     width: 100%;
   }
 
-  @media (max-width: 640px) {
+  @media (max-width: 500px) {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -238,9 +265,9 @@ export const TotalItems = styled.div`
 export const CartCheckout = styled.button`
   position: relative;
   width: 100%;
+  height: 48px;
   background-color: ${({ theme }) => theme.colors.accentPrimary};
   color: ${({ theme }) => theme.colors.white};
-  padding: 0.5rem 1rem;
   border: none;
   border-radius: 8px;
   font-size: ${({ theme }) => theme.fonts.sizeXs};
@@ -254,6 +281,13 @@ export const CartCheckout = styled.button`
     height: 1px;
     width: 100%;
     background-color: ${({ theme }) => theme.colors.grayElements};
+  }
+
+  cursor: pointer;
+  transition: background-color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    background-color: ${({ theme }) => theme.colors.graySecondary};
   }
 `;
 
@@ -303,6 +337,7 @@ export const ModalIconClose = styled.div`
 
 export const CartEmptyImage = styled.div`
   display: flex;
+
   align-items: center;
   height: 100vh;
 
