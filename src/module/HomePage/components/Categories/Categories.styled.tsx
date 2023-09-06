@@ -1,7 +1,18 @@
 import styled from 'styled-components';
-import { onTablet } from '../../../shared/Mixins';
+import { onDesktop, onTablet } from '../../../shared/Mixins';
 
 export const SectionWrapper = styled.section`
+  position: relative;
+  margin-bottom: 57px;
+
+  ${onTablet(`
+    margin-bottom: 64px;
+  `)}
+
+  ${onDesktop(`
+    margin-bottom: 80px;
+  `)}
+
   display: flex;
   flex-direction: column;
   gap: 24px;

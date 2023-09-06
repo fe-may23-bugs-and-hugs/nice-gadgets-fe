@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { useLocation } from 'react-router';
-import data from '../../../assets/data/phones.json';
 import { Icon, IconSprite } from '../Sprites';
 import {
   BlockWrapper,
@@ -12,17 +11,6 @@ import {
   PathLink,
   PathWrapper,
 } from './Breadcrumbs.styled';
-
-interface Phone {
-  id: string;
-  name: string;
-}
-
-function getPhoneName(phoneId: string): string {
-  const foundPhone = data.find((phone: Phone) => phone.id === phoneId);
-
-  return foundPhone ? foundPhone.name : '';
-}
 
 interface BreadcrumbSegmentProps {
   isCurrent: boolean;
@@ -62,13 +50,15 @@ export const Breadcrumbs: React.FC = () => {
       <PathWrapper>
         {pathSegments.map((segment, index) => {
           const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
-          const displayName = segment.replace(/^\w/, (c) => c.toUpperCase());
-          const isCurrent = index === pathSegments.length - 1;
-          const phoneId = pathSegments[1];
+          const displayName = segment
+            .split('-')
+            .map(s => s.replace(/^\w/, (c) => c.toUpperCase()))
+            .join(' ');
+          const isCurrent = index === (pathSegments.length - 1);
 
           return (
             <BreadcrumbSegment key={path} isCurrent={isCurrent} path={path}>
-              {index === 1 ? getPhoneName(phoneId) : displayName}
+              {displayName}
             </BreadcrumbSegment>
           );
         })}

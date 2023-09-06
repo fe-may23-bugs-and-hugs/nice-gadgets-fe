@@ -1,11 +1,12 @@
 import styled from 'styled-components';
-import { onTablet } from '../Mixins';
+import { onDesktop, onTablet } from '../Mixins';
+import { Link } from 'react-router-dom';
 
 interface ButtonProps {
   isClicked: boolean;
 }
 
-export const CardWrapper = styled.div`
+export const CardWrapper = styled(Link)`
   display: flex;
   flex-direction: column;
   align-self: flex-start;
@@ -42,8 +43,8 @@ export const CardTitle = styled.h2`
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-style: normal;
-  font-weight: ${({ theme }) => theme.fonts.sizeXs};
-  line-height: ${({ theme }) => theme.fonts.weightSemiBold};
+  font-weight: ${({ theme }) => theme.fonts.weightRegular};
+  line-height: ${({ theme }) => theme.fonts.lineHeightS};
 
   height: 42px;
 
@@ -58,6 +59,10 @@ export const PriceWrapper = styled.div`
   border-bottom: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
 
   padding-bottom: 8px;
+
+  &.card-price {
+    border-bottom: none;
+  }
 `;
 
 export const CurrentPrice = styled.h3`
@@ -67,11 +72,22 @@ export const CurrentPrice = styled.h3`
   line-height: ${({ theme }) => theme.fonts.lineHeightXl};
 
   color: ${({ theme }) => theme.colors.grayPrimary};
+
+  &.card-current-price {
+    font-size: ${({ theme }) => theme.fonts.sizeXxl};
+    height: ${({ theme }) => theme.fonts.lineHeightXxl};
+  }
 `;
 
 export const OldPrice = styled(CurrentPrice)`
   color: ${({ theme }) => theme.colors.graySecondary};
   text-decoration: line-through;
+
+  &.card-old-price {
+    font-size: ${({ theme }) => theme.fonts.sizeL};
+    height: ${({ theme }) => theme.fonts.lineHeightL};
+    font-weight: ${({ theme }) => theme.fonts.weightRegular};
+  }
 `;
 
 export const DescrWrapper = styled.div`
@@ -110,6 +126,10 @@ export const ButtonsWrapper = styled.div`
   gap: 8px;
 
   margin-top: auto;
+
+  &.card-button {
+    margin-bottom: 32px;
+  }
 `;
 
 export const ButtonAdd = styled.button<ButtonProps>`
@@ -140,6 +160,16 @@ export const ButtonAdd = styled.button<ButtonProps>`
   &:hover {
     box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
   }
+
+  &.card-button-add {
+    min-width: 231px;
+    width: 80%;
+    height: 48px;
+
+    ${onDesktop(`
+      width: 263px;
+  `)}
+  }
 `;
 
 export const ButtonLike = styled.button`
@@ -160,5 +190,10 @@ export const ButtonLike = styled.button`
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+
+  &.card-button-like {
+    width: 48px;
+    height: 48px;
   }
 `;

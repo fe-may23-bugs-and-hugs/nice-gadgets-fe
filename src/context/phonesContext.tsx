@@ -75,7 +75,7 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     callback: (data: Phone[]) => void
   ) => {
     setPhonesLoading(true);
-    
+
     getSliderData(pathname)
       .then((result) => callback(result))
       .catch(() => setErrors(true))

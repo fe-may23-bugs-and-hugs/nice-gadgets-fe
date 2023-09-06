@@ -18,13 +18,15 @@ export const PathItem = styled.li`
   display: flex;
   gap: 8px;
   align-items: center;
-  font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
+  font-weight: ${({ theme }) => theme.fonts.weightRegular};
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-style: normal;
   line-height: normal;
 `;
 
 export const PathLink = styled.p`
+  color: ${({ theme }) => theme.colors.grayPrimary};
+
   &:hover {
     color: ${({ theme }) => theme.colors.graySecondary};
   }

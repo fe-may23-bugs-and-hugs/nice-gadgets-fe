@@ -40,16 +40,18 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
     (product) => product._id === phone._id,
   );
 
-  const toggleClick = (phoneData: Phone) => {
+  const toggleClick = (phoneData: Phone, e: React.MouseEvent) => {
+    e.preventDefault();
     addItem(phoneData);
   };
 
-  const toggleFavorite = (phoneData: Phone) => {
+  const toggleFavorite = (phoneData: Phone, e: React.MouseEvent) => {
+    e.preventDefault();
     addFavoriteProduct(phoneData);
   };
 
   return (
-    <CardWrapper>
+    <CardWrapper to={phone._id}>
       <ImageBox>
         <CardImage src={phone.images[0]} alt="Phone Image" />
       </ImageBox>
@@ -76,13 +78,21 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
 
       <ButtonsWrapper>
         <ButtonAdd
-          onClick={() => toggleClick(phone)}
+          onClick={(e) => {
+            toggleClick(phone, e);
+          }}
           type="button"
           isClicked={isSelected}
         >
           {isSelected ? 'Added' : 'Add to cart'}
         </ButtonAdd>
-        <ButtonLike type="button" onClick={() => toggleFavorite(phone)}>
+        <ButtonLike
+          type="button"
+          // eslint-disable-next-line no-shadow
+          onClick={(e) => {
+            toggleFavorite(phone, e);
+          }}
+        >
           <IconSprite />
           {isFavorite ? (
             <Icon

@@ -7,8 +7,6 @@ export const CategoryWrapper = styled.article`
   gap: 24px;
 
   box-sizing: border-box;
-
-  background: ${({ theme }) => theme.colors.white};
 `;
 
 export const CategoryImage = styled.img`

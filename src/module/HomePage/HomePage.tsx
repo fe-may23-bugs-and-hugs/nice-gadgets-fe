@@ -5,6 +5,7 @@ import { Phone } from '../../types/Phone';
 import { PhonesContext } from '../../context';
 import { WelcomeSlider } from './components/WelcomeSlider/WelcomeSlider';
 import { Title } from './HomePage.styled';
+import { Categories } from './components/Categories';
 
 export const HomePage = () => {
   const [newData, setNewData] = useState<Phone[]>([]);
@@ -25,6 +26,7 @@ export const HomePage = () => {
         uniqueKey="new"
         subtitle="Brand new models"
       />
+      <Categories />
       <ProductsSlider
         data={discountData}
         uniqueKey="discount"
