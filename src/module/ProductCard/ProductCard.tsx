@@ -106,7 +106,9 @@ export const ProductCard = () => {
           }
 
           if (!responseData.capacity) {
-            setSelectedCapacity(productId.split('-')[productId.split('-').length - 2]);
+            setSelectedCapacity(
+              productId.split('-')[productId.split('-').length - 2],
+            );
           }
 
           if (responseData.color) {
@@ -114,7 +116,9 @@ export const ProductCard = () => {
           }
 
           if (!responseData.color) {
-            setSelectedColor(productId.split('-')[productId.split('-').length - 1]);
+            setSelectedColor(
+              productId.split('-')[productId.split('-').length - 1],
+            );
           }
 
           setDevice(responseData);
@@ -123,7 +127,6 @@ export const ProductCard = () => {
           setSelectedImage(responseData.images[0]);
         }
       } catch (error) {
-
       } finally {
         setLoading(false);
       }
@@ -196,154 +199,158 @@ export const ProductCard = () => {
             visible={true}
           />
         ) : (
-        <>
-          <Title>{device.name}</Title>
-          <ItemCard>
-            <ImagesBox>
-              <ImageSizeBox>
-                <CardImage src={currentImage} alt="Phone image" />
-              </ImageSizeBox>
-              <ImagesWrapper>
-                {device.images.map((img) => (
-                  <ImagesSizeBox
-                    onClick={() => {
-                      setCurrentImage(img);
-                      setSelectedImage(img);
-                    }}
-                    className={selectedImage === img ? 'active' : ''}
-                  >
-                    <SmallCardImage key={img} src={img} alt="Small phone image" />
-                  </ImagesSizeBox>
-                ))}
-              </ImagesWrapper>
-            </ImagesBox>
-            <CardInfo>
-              <CardWrapper>
-                {device.colorsAvailable && (
-                  <ChoiseWrapper>
-                    <TitleChoise>Available colors</TitleChoise>
-                    <ChoiseButtons>
-                      {device.colorsAvailable.map((color) => (
-                        <ColorButton
-                          className={selectedColor === color ? 'active' : ''}
-                          onClick={() => handleColorClick(color)}
-                          style={{ backgroundColor: colorMappings[color] }}
-                        ></ColorButton>
-                      ))}
-                    </ChoiseButtons>
-                  </ChoiseWrapper>
-                )}
-
-                {device.capacityAvailable && (
-                  <ChoiseWrapper>
-                    <TitleChoise>Select capacity</TitleChoise>
-                    <ChoiseButtons>
-                      {device.capacityAvailable.map((capacity) => (
-                        <MemoryButton
-                          className={
-                            selectedCapacity === capacity ? 'active' : ''
-                          }
-                          onClick={() => handleButtonClick(capacity)}
-                        >
-                          {capacity}
-                        </MemoryButton>
-                      ))}
-                    </ChoiseButtons>
-                  </ChoiseWrapper>
-                )}
-
-                <PriceWrapper className="card-price">
-                  <CurrentPrice className="card-current-price">
-                    {`$${device.priceDiscount}`}
-                  </CurrentPrice>
-                  <OldPrice className="card-old-price">
-                    {`$${device.priceRegular}`}
-                  </OldPrice>
-                </PriceWrapper>
-
-                <ButtonsWrapper className="card-button">
-                  <ButtonAdd
-                    onClick={() => {
-                      toggleClick(device);
-                    }}
-                    type="button"
-                    isClicked={isSelected}
-                    className="card-button-add"
-                  >
-                    {isSelected ? 'Added' : 'Add to cart'}
-                  </ButtonAdd>
-                  <ButtonLike
-                    type="button"
-                    onClick={() => {
-                      toggleFavorite(device);
-                    }}
-                    className="card-button-like"
-                  >
-                    <IconSprite />
-                    {isFavorite ? (
-                      <Icon
-                        spriteName="heart-field"
-                        fill={theme.colors.accentSecondary}
+          <>
+            <Title>{device.name}</Title>
+            <ItemCard>
+              <ImagesBox>
+                <ImageSizeBox>
+                  <CardImage src={currentImage} alt="Phone image" />
+                </ImageSizeBox>
+                <ImagesWrapper>
+                  {device.images.map((img) => (
+                    <ImagesSizeBox
+                      onClick={() => {
+                        setCurrentImage(img);
+                        setSelectedImage(img);
+                      }}
+                      className={selectedImage === img ? 'active' : ''}
+                    >
+                      <SmallCardImage
+                        key={img}
+                        src={img}
+                        alt="Small phone image"
                       />
-                    ) : (
-                      <Icon spriteName="heart" />
-                    )}
-                  </ButtonLike>
-                </ButtonsWrapper>
+                    </ImagesSizeBox>
+                  ))}
+                </ImagesWrapper>
+              </ImagesBox>
+              <CardInfo>
+                <CardWrapper>
+                  {device.colorsAvailable && (
+                    <ChoiseWrapper>
+                      <TitleChoise>Available colors</TitleChoise>
+                      <ChoiseButtons>
+                        {device.colorsAvailable.map((color) => (
+                          <ColorButton
+                            className={selectedColor === color ? 'active' : ''}
+                            onClick={() => handleColorClick(color)}
+                            style={{ backgroundColor: colorMappings[color] }}
+                          ></ColorButton>
+                        ))}
+                      </ChoiseButtons>
+                    </ChoiseWrapper>
+                  )}
 
-                <DescrWrapper>
-                  <DescrBox>
-                    {device.screen && <DescrTitle>Screen</DescrTitle>}
-                    {device.resolution && <DescrTitle>Resolution</DescrTitle>}
-                    {device.processor && <DescrTitle>Processor</DescrTitle>}
-                    {device.ram && <DescrTitle>Ram</DescrTitle>}
-                  </DescrBox>
+                  {device.capacityAvailable && (
+                    <ChoiseWrapper>
+                      <TitleChoise>Select capacity</TitleChoise>
+                      <ChoiseButtons>
+                        {device.capacityAvailable.map((capacity) => (
+                          <MemoryButton
+                            className={
+                              selectedCapacity === capacity ? 'active' : ''
+                            }
+                            onClick={() => handleButtonClick(capacity)}
+                          >
+                            {capacity}
+                          </MemoryButton>
+                        ))}
+                      </ChoiseButtons>
+                    </ChoiseWrapper>
+                  )}
 
-                  <DescrBox>
-                    <DescrValue>{device.screen}</DescrValue>
-                    <DescrValue>{device.resolution}</DescrValue>
-                    <DescrValue>{device.processor}</DescrValue>
-                    <DescrValue>{device.ram}</DescrValue>
-                  </DescrBox>
-                </DescrWrapper>
-              </CardWrapper>
-              <DeviceId>ID: {device._id}</DeviceId>
-            </CardInfo>
-            <AboutBlock>
-              <H2>About</H2>
-              {device.description
-                && device.description.map((info) => (
-                  <DescriptionWrapper key={info.title}>
-                    <H3>{info.title}</H3>
-                    {Array.isArray(info.text)
-                      && info.text.map((text: string) => <P>{text}</P>)}
-                  </DescriptionWrapper>
-                ))}
-            </AboutBlock>
-            <SpecsBlock>
-              <THead>
-                <TRow>
-                  <Theader>Tech Spec</Theader>
-                </TRow>
-              </THead>
-              <TechScecsInfo>
-                {Object.entries(deviceData).map(
-                  ([key, value]) =>
-                    value && (
-                      <TableRow key={key}>
-                        <TableHeader>
-                          {key.charAt(0).toUpperCase() + key.slice(1)}
-                        </TableHeader>
-                        <TableData>
-                          {Array.isArray(value) ? value.join(' ') : value}
-                        </TableData>
-                      </TableRow>
-                    ),
-                )}
-              </TechScecsInfo>
-            </SpecsBlock>
-          </ItemCard>
-        </>
+                  <PriceWrapper className="card-price">
+                    <CurrentPrice className="card-current-price">
+                      {`$${device.priceDiscount}`}
+                    </CurrentPrice>
+                    <OldPrice className="card-old-price">
+                      {`$${device.priceRegular}`}
+                    </OldPrice>
+                  </PriceWrapper>
+
+                  <ButtonsWrapper className="card-button">
+                    <ButtonAdd
+                      onClick={() => {
+                        toggleClick(device);
+                      }}
+                      type="button"
+                      isClicked={isSelected}
+                      className="card-button-add"
+                    >
+                      {isSelected ? 'Added' : 'Add to cart'}
+                    </ButtonAdd>
+                    <ButtonLike
+                      type="button"
+                      onClick={() => {
+                        toggleFavorite(device);
+                      }}
+                      className="card-button-like"
+                    >
+                      <IconSprite />
+                      {isFavorite ? (
+                        <Icon
+                          spriteName="heart-field"
+                          fill={theme.colors.accentSecondary}
+                        />
+                      ) : (
+                        <Icon spriteName="heart" />
+                      )}
+                    </ButtonLike>
+                  </ButtonsWrapper>
+
+                  <DescrWrapper>
+                    <DescrBox>
+                      {device.screen && <DescrTitle>Screen</DescrTitle>}
+                      {device.resolution && <DescrTitle>Resolution</DescrTitle>}
+                      {device.processor && <DescrTitle>Processor</DescrTitle>}
+                      {device.ram && <DescrTitle>Ram</DescrTitle>}
+                    </DescrBox>
+
+                    <DescrBox>
+                      <DescrValue>{device.screen}</DescrValue>
+                      <DescrValue>{device.resolution}</DescrValue>
+                      <DescrValue>{device.processor}</DescrValue>
+                      <DescrValue>{device.ram}</DescrValue>
+                    </DescrBox>
+                  </DescrWrapper>
+                </CardWrapper>
+                <DeviceId>ID: {device._id}</DeviceId>
+              </CardInfo>
+              <AboutBlock>
+                <H2>About</H2>
+                {device.description
+                  && device.description.map((info) => (
+                    <DescriptionWrapper key={info.title}>
+                      <H3>{info.title}</H3>
+                      {Array.isArray(info.text)
+                        && info.text.map((text: string) => <P>{text}</P>)}
+                    </DescriptionWrapper>
+                  ))}
+              </AboutBlock>
+              <SpecsBlock>
+                <THead>
+                  <TRow>
+                    <Theader>Tech Spec</Theader>
+                  </TRow>
+                </THead>
+                <TechScecsInfo>
+                  {Object.entries(deviceData).map(
+                    ([key, value]) =>
+                      value && (
+                        <TableRow key={key}>
+                          <TableHeader>
+                            {key.charAt(0).toUpperCase() + key.slice(1)}
+                          </TableHeader>
+                          <TableData>
+                            {Array.isArray(value) ? value.join(' ') : value}
+                          </TableData>
+                        </TableRow>
+                      ),
+                  )}
+                </TechScecsInfo>
+              </SpecsBlock>
+            </ItemCard>
+          </>
         )}
       </MainElement>
       {!loading && (

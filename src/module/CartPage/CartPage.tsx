@@ -22,9 +22,7 @@ import { CartContext } from '../../context';
 import { CartItemPage } from './CartItemPage';
 
 export const CartPage: React.FC = () => {
-  const {
-    cartProducts,
-  } = useContext(CartContext);
+  const { cartProducts } = useContext(CartContext);
 
   const [showModal, setShowModal] = useState(false);
 
@@ -71,10 +69,12 @@ export const CartPage: React.FC = () => {
               <CartPageModal
                 title="Success!!!"
                 content="Your order has been placed successfully."
-                actions={<ModalIconClose onClick={handleClose}>
-                  <IconSprite />
-                  <Icon spriteName="close" size="16px" fill="#B4BDC3" />
-                </ModalIconClose>}
+                actions={
+                  <ModalIconClose onClick={handleClose}>
+                    <IconSprite />
+                    <Icon spriteName="close" size="16px" fill="#B4BDC3" />
+                  </ModalIconClose>
+                }
               />
             )}
           </CartSummary>
@@ -82,8 +82,8 @@ export const CartPage: React.FC = () => {
       ) : (
         <CartEmpty>
           <CartEmptyImage
-            // src="https://cdn-icons-png.flaticon.com/512/126/126083.png"
-            // alt="empty-basket-image"
+          // src="https://cdn-icons-png.flaticon.com/512/126/126083.png"
+          // alt="empty-basket-image"
           />
           <p>Your cart is empty</p>
         </CartEmpty>

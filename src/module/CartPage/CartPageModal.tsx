@@ -71,12 +71,8 @@ const CartPageModal = ({
     <ModalContainer>
       <ModalContent ref={modalRef}>
         <ModalTitleContainer>
-        <ModalTitle>
-          {title}
-        </ModalTitle>
-        <ModalIconClose>
-          {actions}
-        </ModalIconClose>
+          <ModalTitle>{title}</ModalTitle>
+          <ModalIconClose>{actions}</ModalIconClose>
         </ModalTitleContainer>
         <ModalBody>
           <ModalImage
