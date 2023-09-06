@@ -75,6 +75,10 @@ export const WelcomeSlider = () => {
           </SliderWrapper>
         </SwiperSlide>
       </Swiper>
+
+      {/* <Button id={prevBtnId}>
+        <Icon spriteName="arrow-left" fill="#000" />
+      </Button> */}
     </Wrapper>
   );
 };

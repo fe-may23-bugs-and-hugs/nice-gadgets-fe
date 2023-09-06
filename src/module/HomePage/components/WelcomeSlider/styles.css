@@ -1,9 +1,23 @@
 .swiper-button-next {
   color: #fff;
+  top: 22px;
+  right: 0;
+  background-color: #222;
+  opacity: 0.8;
+  border-radius: 8px;
+  height: 100%;
+  width: 44px;
 }
 
 .swiper-button-prev {
   color: #fff;
+  top: 22px;
+  left: 0;
+  background-color: #222;
+  opacity: 0.8;
+  border-radius: 8px;
+  height: 100%;
+  width: 44px;
 }
 
 .swiper-pagination-bullet {
@@ -13,6 +27,7 @@
   opacity: 0.5;
   margin: 10px !important;
   border: 1px solid #0f0f11;
+  box-shadow: 7px 2px 7px rgba(0, 4, 0, 0.9);
 }
 .swiper-pagination-bullet-active {
   background-color: #fff !important;
