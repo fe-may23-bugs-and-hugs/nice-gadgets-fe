@@ -18,14 +18,14 @@ import { SearchLink } from '../shared/SearchLink';
 
 const sortOptions = [
   { sort: SORTING.NEWEST, order: ORDER.DESC, title: 'Newer' },
-  { sort: SORTING.CHEAPEST, order: ORDER.ASC, title: 'Oldest' },
+  { sort: SORTING.NEWEST, order: ORDER.ASC, title: 'Oldest' },
   {
     sort: SORTING.ALPH,
     order: ORDER.ASC,
     title: 'Name [A-Z]',
   },
   {
-    sort: SORTING.CHEAPEST,
+    sort: SORTING.ALPH,
     order: ORDER.DESC,
     title: 'Name [Z-A]',
   },
@@ -41,9 +41,11 @@ export const Sort: React.FC = () => {
   const [openLimit, setOpenLimit] = useState(false);
 
   const sort = (searchParams.get('sort') || SORTING.NEWEST) as SORTING;
+  const order = (searchParams.get('order') || ORDER.DESC) as ORDER;
 
-  const currentTitle = sortOptions.find((sortValue) => sortValue.sort === sort)
-    ?.title;
+  const currentTitle = sortOptions.find(
+    (sortValue) => sortValue.sort === sort && sortValue.order === order,
+  )?.title;
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {

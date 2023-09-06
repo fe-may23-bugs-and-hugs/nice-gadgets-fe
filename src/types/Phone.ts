@@ -9,7 +9,6 @@ export type Phone = {
   capacityAvailable: string[];
   priceRegular: number;
   priceDiscount: number;
-
   colorsAvailable: string[];
   color: string;
   images: string[];
@@ -23,3 +22,7 @@ export type Phone = {
   cell: string[];
   year: number;
 };
+
+export interface PhoneWithQuantity extends Phone {
+  quantity: number;
+}
