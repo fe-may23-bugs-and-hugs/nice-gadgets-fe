@@ -1,12 +1,14 @@
 import { styled } from 'styled-components';
-import { onDesktop, onTablet, pageGridMixin } from '../../../shared/Mixins';
+import { onTablet } from '../../../shared/Mixins';
 import { Link } from 'react-router-dom';
 
 export const SectionWrapper = styled.div`
   margin-top: 57px;
   margin-bottom: 57px;
-  display: grid;
-  ${pageGridMixin}
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   color: ${({ theme }) => theme.colors.grayPrimary};
   font-size: ${({ theme }) => theme.fonts.sizeS};
   font-weight: ${({ theme }) => theme.fonts.weightRegular};
@@ -15,19 +17,15 @@ export const SectionWrapper = styled.div`
 `;
 
 export const FormWrapper = styled.div`
-  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 16px;
+  width: 100%;
+  max-width: 500px;
 
   ${onTablet(`
-    grid-column: 3 / -3;
     gap: 24px;
-  `)}
-
-  ${onDesktop(`
-    grid-column: 5 / -5;
   `)}
 `;
 
