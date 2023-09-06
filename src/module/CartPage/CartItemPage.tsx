@@ -37,7 +37,7 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
       setCartProducts((prevItems: Phone[]) => {
         return prevItems.map((prevItem) => {
           if (prevItem._id === product._id) {
-            // prevItem.quantity += 1;
+            prevItem.quantity += 1;
 
             return prevItem;
           }
@@ -52,7 +52,7 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
         setCartProducts((prevItems: Phone[]) => {
           return prevItems.map((prevItem) => {
             if (prevItem._id === product._id) {
-              // prevItem.quantity -= 1;
+              prevItem.quantity -= 1;
 
               return prevItem;
             }

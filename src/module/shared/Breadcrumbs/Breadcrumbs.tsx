@@ -52,9 +52,9 @@ export const Breadcrumbs: React.FC = () => {
           const path = `/${pathSegments.slice(0, index + 1).join('/')}`;
           const displayName = segment
             .split('-')
-            .map(s => s.replace(/^\w/, (c) => c.toUpperCase()))
+            .map((s) => s.replace(/^\w/, (c) => c.toUpperCase()))
             .join(' ');
-          const isCurrent = index === (pathSegments.length - 1);
+          const isCurrent = index === pathSegments.length - 1;
 
           return (
             <BreadcrumbSegment key={path} isCurrent={isCurrent} path={path}>
