@@ -68,14 +68,24 @@ export const WelcomeSlider = () => {
         <SwiperSlide>
           <SliderWrapper>
             <StyledImageMobile src={sliderPhones} />
-            <StyledImageTablet src={bannerTwo} />
+            <StyledImageTablet
+              src={bannerTwo}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
           </SliderWrapper>
         </SwiperSlide>
 
         <SwiperSlide>
           <SliderWrapper>
             <StyledImageMobile src={sliderTabs} />
-            <StyledImageTablet src={bannerThree} />
+            <StyledImageTablet
+              src={bannerThree}
+              style={{
+                objectFit: 'cover',
+              }}
+            />
           </SliderWrapper>
         </SwiperSlide>
       </Swiper>
