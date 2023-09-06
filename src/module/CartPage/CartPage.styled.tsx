@@ -39,6 +39,11 @@ export const CartList = styled.ul`
   flex-direction: column;
   gap: 16px;
   margin-right: 16px;
+
+  @media (max-width: 1200px) {
+    margin-bottom: 32px;
+    margin-right: 0px;
+  }
 `;
 
 export const CartItem = styled.li`
@@ -111,12 +116,14 @@ export const MobileContainer = styled.div`
 
   @media (max-width: 500px) {
     display: flex;
-    gap: 16px;
+    width: 100%;
+    justify-content: space-around;
+    /* gap: 16px; */
     /* padding: 16px; */
     font-size: ${({ theme }) => theme.fonts.sizeXs};
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 330px) {
     display: flex;
     gap: 16px;
     /* padding: 16px; */
@@ -142,10 +149,11 @@ export const IconPriceContainer = styled.div`
 
   @media (max-width: 500px) {
     display: flex;
-    justify-content: space-between;
+    width: 100%;
+    justify-content: space-around;
   }
 
-  @media (max-width: 400px) {
+  @media (max-width: 330px) {
     display: flex;
     width: 100%;
     gap: 0px;
