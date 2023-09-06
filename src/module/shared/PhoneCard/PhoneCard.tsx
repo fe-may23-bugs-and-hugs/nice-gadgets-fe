@@ -33,7 +33,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
 
   const { addItem, cartProducts } = useContext(CartContext);
-  const { phonesLoading } = useContext(PhonesContext);
+  const { phonesLoading, newLoader, discountLoader } = useContext(PhonesContext);
 
   const { addFavoriteProduct, favoriteProducts } = useContext(FavoriteContext);
 
@@ -54,7 +54,9 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
 
   return (
     <CardWrapper to={phone._id}>
-      {phonesLoading ? (
+      {phonesLoading
+        || newLoader
+        || discountLoader ? (
         <>
           <ContentLoader
             speed={2}
@@ -71,6 +73,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
             <rect x="0" y="408" rx="0" ry="0" width="206" height="40" />
           </ContentLoader>
         </>
+        // eslint-disable-next-line indent
       ) : (
         <>
           <ImageBox>
@@ -126,6 +129,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
             </ButtonLike>
           </ButtonsWrapper>
         </>
+        // eslint-disable-next-line indent
       )}
     </CardWrapper>
   );
