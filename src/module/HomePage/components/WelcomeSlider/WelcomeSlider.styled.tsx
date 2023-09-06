@@ -111,6 +111,7 @@ export const StyledImageTablet = styled.img`
   width: 100%;
   height: 400px;
   display: none;
+  border-radius: 8px;
   ${onTablet(`
     display: block;
   `)}
