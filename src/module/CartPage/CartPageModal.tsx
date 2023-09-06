@@ -1,5 +1,5 @@
 /* eslint-disable max-len */
-import React, { useState, useEffect, useRef, ReactElement } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import {
   ModalContainer,
   ModalContent,
@@ -15,68 +15,48 @@ interface ModalProps {
   title: string;
   content: string;
   actions: React.ReactNode;
+  handleToggle: () => void;
 }
 
-const CartPageModal = ({
+const CartPageModal: React.FC<ModalProps> = ({
   title,
   content,
   actions,
-}: ModalProps): ReactElement | null => {
-  const [showModal, setShowModal] = useState(true);
-
-  const useClickOutside = (
-    ref: React.RefObject<HTMLElement>,
-    callback: () => void,
-  ) => {
-    const handleClickOutside = (e: MouseEvent) => {
-      if (ref.current && !ref.current.contains(e.target as Node)) {
-        callback();
-      }
-    };
-
-    useEffect(() => {
-      document.addEventListener('click', handleClickOutside, true);
-
-      return () => {
-        document.removeEventListener('click', handleClickOutside, true);
-      };
-    }, [ref, callback]);
-  };
-
-  const useKeyDown = (callback: (e: KeyboardEvent) => void) => {
-    useEffect(() => {
-      document.addEventListener('keydown', callback);
-
-      return () => {
-        document.removeEventListener('keydown', callback);
-      };
-    }, [callback]);
-  };
-
-  const handleClose = () => {
-    setShowModal(false);
-  };
+  handleToggle,
+}: ModalProps) => {
+  const [isOpen] = useState(true);
 
   const modalRef = useRef<HTMLDivElement>(null);
 
-  useClickOutside(modalRef, handleClose);
-
-  useKeyDown((e) => {
-    if (e.key === 'Escape') {
-      handleClose();
+  const handleDocumentClick = () => {
+    if (
+      !modalRef.current
+      || !modalRef.current.contains(document.activeElement)
+    ) {
+      handleToggle();
     }
-  });
+  };
 
-  return showModal ? (
+  const handleKeyDown = () => {
+    handleToggle();
+  };
+
+  useEffect(() => {
+    document.addEventListener('click', handleDocumentClick, true);
+    document.addEventListener('keydown', handleKeyDown);
+
+    return () => {
+      document.removeEventListener('click', handleDocumentClick);
+      document.removeEventListener('keydown', handleKeyDown);
+    };
+  }, []);
+
+  return isOpen ? (
     <ModalContainer>
       <ModalContent ref={modalRef}>
         <ModalTitleContainer>
-        <ModalTitle>
-          {title}
-        </ModalTitle>
-        <ModalIconClose>
-          {actions}
-        </ModalIconClose>
+          <ModalTitle>{title}</ModalTitle>
+          <ModalIconClose>{actions}</ModalIconClose>
         </ModalTitleContainer>
         <ModalBody>
           <ModalImage
