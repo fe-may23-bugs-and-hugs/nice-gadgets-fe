@@ -115,3 +115,9 @@ export const StyledImageTablet = styled.img`
     display: block;
   `)}
 `;
+
+export const BulletsContainner = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+`;
