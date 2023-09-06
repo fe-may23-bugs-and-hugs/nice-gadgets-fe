@@ -14,7 +14,7 @@ interface IContext {
   newLoader: boolean;
   discountLoader: boolean;
   newData: Phone[];
-  discountData: Phone[],
+  discountData: Phone[];
   phonesLoading: boolean;
   currentPage: number;
   currentLimit: number;
@@ -26,13 +26,14 @@ interface IContext {
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => { },
-  loadNewData: () => { },
-  loadDiscountData: () => { },
+  loadPhones: () => {},
+  loadNewData: () => {},
+  loadDiscountData: () => {},
   newLoader: false,
   discountLoader: false,
   newData: [],
   discountData: [],
+
   phonesLoading: false,
   currentPage: 1,
   currentLimit: 16,
