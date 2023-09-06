@@ -32,7 +32,6 @@ export const BarElement = styled.div<mobileProps>`
 
   @media (min-width: 1200px) {
     gap: 48px;
-    margin: 0 24px;
   }
 `;
 

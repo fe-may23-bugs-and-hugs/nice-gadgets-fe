@@ -1,6 +1,17 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../../../shared/Mixins';
 
+export const Wrapper = styled.div`
+  display: block;
+  margin-bottom: 88px;
+  ${onTablet(`
+    margin-bottom: 96px;
+  `)}
+  ${onDesktop(`
+    margin-bottom: 112px;
+  `)}
+`;
+
 export const SliderWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -37,9 +48,12 @@ export const TextWrapper = styled.div`
 
 export const BunnerTitle = styled.h2`
   margin: 0 16px 16px 0;
-  font-size: 24px;
+  font-size: 18px;
   font-weight: 700;
   color: #216cff;
+  ${onDesktop(`
+    font-size: 40px;
+  `)}
   ${onDesktop(`
     font-size: 40px;
   `)}
@@ -95,8 +109,15 @@ export const StyledImageMobile = styled.img`
 
 export const StyledImageTablet = styled.img`
   width: 100%;
+  height: 400px;
   display: none;
   ${onTablet(`
     display: block;
   `)}
+`;
+
+export const BulletsContainner = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 `;
