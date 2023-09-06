@@ -7,7 +7,7 @@ interface ICartContext {
   cartProducts: any[];
   addItem: (product: Phone) => void;
   totalItems: number;
-  setCartProducts: (newCartProducts: Phone[]) => void;
+  setCartProducts: (newCartProducts: Phone[] | ((newCartProducts: Phone[]) => Phone[])) => void;
 }
 
 export const CartContext = createContext<ICartContext>({
