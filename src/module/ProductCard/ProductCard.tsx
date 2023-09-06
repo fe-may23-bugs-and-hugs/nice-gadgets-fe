@@ -134,8 +134,7 @@ export const ProductCard = () => {
     fetchData();
   }, [productId]);
 
-  const { loadPhones, newData }
-    = useContext(PhonesContext);
+  const { loadPhones, newData } = useContext(PhonesContext);
 
   React.useEffect(() => {
     loadPhones('recommended/recommended');
