@@ -9,7 +9,12 @@ import { useSearchParams } from 'react-router-dom';
 interface IContext {
   phones: Phone[];
   loadPhones: (pathname: string) => void;
-  loadSliderData: (pathname: string, callback: (data: Phone[]) => void) => void;
+  loadNewData: () => void;
+  loadDiscountData: () => void;
+  newLoader: boolean;
+  discountLoader: boolean;
+  newData: Phone[];
+  discountData: Phone[],
   phonesLoading: boolean;
   currentPage: number;
   currentLimit: number;
@@ -21,8 +26,14 @@ interface IContext {
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => {},
-  loadSliderData: () => {},
+  loadPhones: () => { },
+  loadNewData: () => { },
+  loadDiscountData: () => { },
+  newLoader: false,
+  discountLoader: false,
+  newData: [],
+  discountData: [],
+
   phonesLoading: false,
   currentPage: 1,
   currentLimit: 16,
@@ -48,6 +59,10 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const limit = +(searchParams.get('limit') || 16);
   const [totalPages, setTotalPages] = useState(0);
   const [totalModels, setTotalModels] = useState(0);
+  const [newData, setNewData] = useState<Phone[]>([]);
+  const [discountData, setDiscountData] = useState<Phone[]>([]);
+  const [newLoader, setNewLoader] = useState(false);
+  const [discountLoader, setDiscountLoader] = useState(false);
 
   const loadPhones = (pathname: string) => {
     setPhonesLoading(true);
@@ -70,22 +85,33 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
       .finally(() => setPhonesLoading(false));
   };
 
-  const loadSliderData = (
-    pathname: string,
-    callback: (data: Phone[]) => void,
-  ) => {
-    setPhonesLoading(true);
+  const loadNewData = () => {
+    setNewLoader(true);
 
-    getSliderData(pathname)
-      .then((result) => callback(result))
+    getSliderData('/new')
+      .then(setNewData)
       .catch(() => setErrors(true))
-      .finally(() => setPhonesLoading(false));
+      .finally(() => setNewLoader(false));
+  };
+
+  const loadDiscountData = () => {
+    setDiscountLoader(true);
+
+    getSliderData('/discount')
+      .then(setDiscountData)
+      .catch(() => setErrors(true))
+      .finally(() => setDiscountLoader(false));
   };
 
   const value = {
     phones,
     loadPhones,
-    loadSliderData,
+    loadNewData,
+    loadDiscountData,
+    newLoader,
+    discountLoader,
+    newData,
+    discountData,
     phonesLoading,
     currentLimit: limit,
     currentPage: page,

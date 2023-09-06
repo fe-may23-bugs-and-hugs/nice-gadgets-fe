@@ -111,7 +111,14 @@ export const StyledImageTablet = styled.img`
   width: 100%;
   height: 400px;
   display: none;
+  border-radius: 8px;
   ${onTablet(`
     display: block;
   `)}
+`;
+
+export const BulletsContainner = styled.div`
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 `;

@@ -1,5 +1,5 @@
 import React, { useState, useContext } from 'react';
-import { Phone } from '../../types/Phone';
+import { PhoneWithQuantity } from '../../types/Phone';
 import { IconSprite, Icon } from '../shared';
 import {
   CartItem,
@@ -17,28 +17,48 @@ import {
 import { CartContext } from '../../context';
 
 type Props = {
-  product: Phone;
+  product: PhoneWithQuantity;
+  handleDelete: (id: string) => void;
 };
 
-export const CartItemPage: React.FC<Props> = ({ product }) => {
-  const { cartProducts, setCartProducts } = useContext(CartContext);
+export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
+  const { setCartProducts } = useContext(CartContext);
+  const [quantity, setQuantity] = useState(product.quantity);
+  const oneItemPrice = quantity * product.priceDiscount;
 
-  const [quantity, setQuantity] = useState(1);
 
   const handleChangeQuantity = (action: string) => {
     if (action === 'increment') {
       setQuantity(quantity + 1);
+
+      setCartProducts((prevItems: PhoneWithQuantity[]) => {
+        return prevItems.map((prevItem) => {
+          if (prevItem._id === product._id) {
+            prevItem.quantity += 1;
+
+            return prevItem;
+          }
+
+          return prevItem;
+        });
+      });
     } else if (action === 'decrement') {
       if (quantity > 1) {
         setQuantity(quantity - 1);
+
+        setCartProducts((prevItems: PhoneWithQuantity[]) => {
+          return prevItems.map((prevItem) => {
+            if (prevItem._id === product._id) {
+              prevItem.quantity -= 1;
+
+              return prevItem;
+            }
+
+            return prevItem;
+          });
+        });
       }
     }
-  };
-
-  const handleDelete = (id: string) => {
-    const newCartProducts = cartProducts.filter((item) => item._id !== id);
-
-    setCartProducts(newCartProducts);
   };
 
   return (
@@ -70,7 +90,7 @@ export const CartItemPage: React.FC<Props> = ({ product }) => {
           </IconElement>
         </IconContainer>
         <ItemPrice>
-          <p>${product.priceDiscount}</p>
+          <p>${oneItemPrice}</p>
         </ItemPrice>
       </IconPriceContainer>
     </CartItem>

@@ -1,13 +1,12 @@
-/* eslint-disable max-len */
-import React, { useState, useContext } from 'react';
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-console */
+import React, { useState, useContext, useEffect } from 'react';
 import { Icon, IconSprite } from '../shared/Sprites';
 import { ContentLayout } from '../shared/ContentLayout';
 import CartPageModal from './CartPageModal';
+import { BackButton } from '../shared/BackButton/';
 import {
   CartContainer,
-  CartBack,
-  CartBar,
-  IconArrow,
   CartHeader,
   CartList,
   CartSummary,
@@ -16,35 +15,52 @@ import {
   CartCheckout,
   CartEmpty,
   ModalIconClose,
-  CartEmptyImage,
+  BackButtonContainer,
 } from './CartPage.styled';
 import { CartContext } from '../../context';
 import { CartItemPage } from './CartItemPage';
 
 export const CartPage: React.FC = () => {
-  const { cartProducts } = useContext(CartContext);
-
+  const { cartProducts, setCartProducts } = useContext(CartContext);
   const [showModal, setShowModal] = useState(false);
-
-  const handleClose = () => {
-    setShowModal(false);
-  };
+  const [totalItems, setTotalItems] = useState(
+    cartProducts.reduce((total, product) => total + product.quantity, 0),
+  );
+  const [totalPrice, setTotalPrice] = useState(
+    cartProducts.reduce((total, product) => total + product.priceDiscount, 0),
+  );
 
   const handleToggle = () => {
     setShowModal(!showModal);
   };
 
+  useEffect(() => {
+    setTotalItems(
+      cartProducts.reduce((total, product) => total + product.quantity, 0),
+    );
+
+    setTotalPrice(
+      cartProducts.reduce(
+        (total, product) => total + product.quantity * product.priceDiscount,
+        0,
+      ),
+    );
+  }, [cartProducts]);
+
+  const handleDelete = (id: string) => {
+    const newCartProducts = cartProducts.filter((item) => item._id !== id);
+
+    setTotalItems(
+      newCartProducts.reduce((total, product) => total + product.quantity, 0),
+    );
+    setCartProducts(newCartProducts);
+  };
+
   return (
     <ContentLayout>
-      <CartBack>
-        <CartBar>
-          <IconArrow>
-            <IconSprite />
-            <Icon spriteName="arrow-left" size="10px" fill="#B4BDC3" />
-          </IconArrow>
-          <p>Back</p>
-        </CartBar>
-      </CartBack>
+      <BackButtonContainer>
+        <BackButton />
+      </BackButtonContainer>
       <CartHeader>
         <h1>Cart</h1>
       </CartHeader>
@@ -52,39 +68,40 @@ export const CartPage: React.FC = () => {
         <CartContainer>
           <CartList>
             {cartProducts.map((product) => (
-              <CartItemPage key={product._id} product={product} />
+              <CartItemPage
+                key={product._id}
+                product={product}
+                handleDelete={handleDelete}
+              />
             ))}
           </CartList>
           <CartSummary>
             <TotalPrice>
-              <p>$5000</p>
+              <p>${totalPrice}</p>
             </TotalPrice>
             <TotalItems>
-              <p>Total for {cartProducts.length} items</p>
+              <p>Total for {totalItems} items</p>
             </TotalItems>
             <CartCheckout onClick={handleToggle}>
               <p>Checkout</p>
             </CartCheckout>
             {showModal && (
               <CartPageModal
-                title="Success!!!"
+                title="Success!"
                 content="Your order has been placed successfully."
                 actions={
-                  <ModalIconClose onClick={handleClose}>
+                  <ModalIconClose onClick={handleToggle}>
                     <IconSprite />
                     <Icon spriteName="close" size="16px" fill="#B4BDC3" />
                   </ModalIconClose>
                 }
+                handleToggle={handleToggle}
               />
             )}
           </CartSummary>
         </CartContainer>
       ) : (
         <CartEmpty>
-          <CartEmptyImage
-          // src="https://cdn-icons-png.flaticon.com/512/126/126083.png"
-          // alt="empty-basket-image"
-          />
           <p>Your cart is empty</p>
         </CartEmpty>
       )}

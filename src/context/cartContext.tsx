@@ -1,13 +1,15 @@
 /*eslint-disable*/
 import React, { createContext } from 'react';
 import { useLocalStorage } from 'usehooks-ts';
-import { Phone } from '../types/Phone';
+import { Phone, PhoneWithQuantity } from '../types/Phone';
 
 interface ICartContext {
   cartProducts: any[];
   addItem: (product: Phone) => void;
   totalItems: number;
-  setCartProducts: (newCartProducts: Phone[]) => void;
+  setCartProducts: (
+    newCartProducts: PhoneWithQuantity[] | ((newCartProducts: PhoneWithQuantity[]) => PhoneWithQuantity[]),
+  ) => void;
 }
 
 export const CartContext = createContext<ICartContext>({
@@ -22,7 +24,7 @@ type Props = {
 };
 
 export const CartProvider: React.FC<Props> = ({ children }) => {
-  const [cartProducts, setCartProducts] = useLocalStorage<Phone[]>(
+  const [cartProducts, setCartProducts] = useLocalStorage<PhoneWithQuantity[]>(
     'cartProducts',
     [],
   );
@@ -42,7 +44,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       return;
     }
 
-    setCartProducts((prev) => [...prev, product]);
+    setCartProducts((prev) => [...prev, { ...product, quantity: 1 }]);
   };
 
   const value = {
