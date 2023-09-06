@@ -20,6 +20,8 @@ export const Button = styled.button`
   font-style: normal;
   line-height: normal;
 
+  transition: color ${({ theme }) => theme.transition.faster};
+
   &:hover {
     color: ${({ theme }) => theme.colors.grayPrimary};
   }

@@ -1,9 +1,10 @@
+/* eslint-disable indent */
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
 
 interface DarkTheme {
-  isDarkTheme: boolean,
-};
+  isDarkTheme: boolean;
+}
 
 export const StyledFooter = styled.footer<DarkTheme>`
   width: 100%;
@@ -12,13 +13,12 @@ export const StyledFooter = styled.footer<DarkTheme>`
   display: flex;
   justify-content: center;
 
-  background-color: ${({ isDarkTheme }) => isDarkTheme
-    ? ({ theme }) => theme.darkThemeColors.black
-    : ({ theme }) => theme.colors.white};
+  background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.black
+      : ({ theme }) => theme.colors.white};
 
-  box-shadow: 0px -1px 0px 0px ${({ isDarkTheme }) => isDarkTheme
-    ? ({ theme }) => theme.darkThemeColors.grayElements
-    : ({ theme }) => theme.colors.grayElements};
+  box-shadow: 0px -1px 0px 0px ${({ isDarkTheme }) => (isDarkTheme ? ({ theme }) => theme.darkThemeColors.grayElements : ({ theme }) => theme.colors.grayElements)};
 
   font-family: ${({ theme }) => theme.fonts.name};
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
@@ -90,9 +90,10 @@ export const ListContainer = styled.ul`
 `;
 
 export const ListItem = styled.li<DarkTheme>`
-  color: ${({ isDarkTheme }) => isDarkTheme
-    ? ({ theme }) => theme.darkThemeColors.white
-    : ({ theme }) => theme.colors.graySecondary};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.graySecondary};
 `;
 
 export const Link = styled.a<DarkTheme>`
@@ -100,9 +101,10 @@ export const Link = styled.a<DarkTheme>`
   transition: color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    color: ${({ isDarkTheme }) => isDarkTheme
-    ? ({ theme }) => theme.darkThemeColors.graySecondary
-    : ({ theme }) => theme.colors.grayPrimary};
+    color: ${({ isDarkTheme }) =>
+      isDarkTheme
+        ? ({ theme }) => theme.darkThemeColors.graySecondary
+        : ({ theme }) => theme.colors.grayPrimary};
   }
 `;
 
@@ -124,9 +126,10 @@ export const IconElement = styled.div`
 
 export const ButtonText = styled.p<DarkTheme>`
   margin: 0 16px 0 0;
-  color: ${({ isDarkTheme }) => isDarkTheme
-    ? ({ theme }) => theme.darkThemeColors.graySecondary
-    : ({ theme }) => theme.colors.graySecondary};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.graySecondary};
 
   transition: color ${({ theme }) => theme.transition.slower};
 `;
@@ -137,17 +140,22 @@ export const ButtonWrapper = styled.a<DarkTheme>`
   align-self: center;
   cursor: pointer;
 
+  transition: color ${({ theme }) => theme.transition.slower};
+
   &:hover {
     ${IconElement} {
-      border: ${({ theme }) => `1px solid ${(isDarkTheme: DarkTheme) => isDarkTheme
-    ? theme.darkThemeColors.graySecondary
-    : theme.colors.grayPrimary}`};
+      border: 1px solid
+        ${({ isDarkTheme }) =>
+          isDarkTheme
+            ? ({ theme }) => theme.darkThemeColors.graySecondary
+            : ({ theme }) => theme.colors.grayPrimary};
     }
 
     ${ButtonText} {
-      color: ${({ isDarkTheme }) => isDarkTheme
-    ? ({ theme }) => theme.darkThemeColors.graySecondary
-    : ({ theme }) => theme.colors.grayPrimary};
+      color: ${({ isDarkTheme }) =>
+        isDarkTheme
+          ? ({ theme }) => theme.darkThemeColors.graySecondary
+          : ({ theme }) => theme.colors.grayPrimary};
     }
   }
 `;

@@ -8,8 +8,8 @@ import sliderOneImg from '../../../../assets/images/welcome_slider_1.png';
 import sliderTabImg from '../../../../assets/images/welcome-slider_banner.png';
 import sliderPhones from '../../../../assets/images/category-phones.png';
 import sliderTabs from '../../../../assets/images/category-tablets.png';
-import bannerTwo from '../../../../assets/images/banner-phones.png';
-import bannerThree from '../../../../assets/images/banner-tablets.png';
+import bannerTwo from '../../../../assets/images/lg-banner.jpg';
+import bannerThree from '../../../../assets/images/airpods.jpg';
 import okIcon from '../../../../assets/images/ok-icon.png';
 import {
   BannerButton,
