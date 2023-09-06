@@ -8,6 +8,7 @@ import {
   SortTitle,
   SortDropDown,
   SortDropdownContent,
+  SortDropDownSmall,
 } from './Sort.styled';
 import { PhonesContext } from '../../context';
 import { SORTING } from '../../types/sortEnum';
@@ -17,16 +18,16 @@ import { SearchLink } from '../shared/SearchLink';
 
 const sortOptions = [
   { sort: SORTING.NEWEST, order: ORDER.DESC, title: 'Newer' },
-  { sort: SORTING.CHEAPEST, order: ORDER.ASC, title: 'Oldest' },
+  { sort: SORTING.NEWEST, order: ORDER.ASC, title: 'Oldest' },
   {
     sort: SORTING.ALPH,
     order: ORDER.ASC,
-    title: 'Alphabetically [A-Z]',
+    title: 'Name [A-Z]',
   },
   {
-    sort: SORTING.CHEAPEST,
+    sort: SORTING.ALPH,
     order: ORDER.DESC,
-    title: 'Alphabetically [Z-A]',
+    title: 'Name [Z-A]',
   },
   { sort: SORTING.CHEAPEST, order: ORDER.ASC, title: 'Cheapest' },
   { sort: SORTING.CHEAPEST, order: ORDER.DESC, title: 'Expensive' },
@@ -40,9 +41,11 @@ export const Sort: React.FC = () => {
   const [openLimit, setOpenLimit] = useState(false);
 
   const sort = (searchParams.get('sort') || SORTING.NEWEST) as SORTING;
+  const order = (searchParams.get('order') || ORDER.DESC) as ORDER;
 
-  const currentTitle = sortOptions.find((sortValue) => sortValue.sort === sort)
-    ?.title;
+  const currentTitle = sortOptions.find(
+    (sortValue) => sortValue.sort === sort && sortValue.order === order,
+  )?.title;
 
   useEffect(() => {
     const handleDocumentClick = (event: MouseEvent) => {
@@ -93,7 +96,7 @@ export const Sort: React.FC = () => {
 
       <div id="limit-dropdown" onClick={() => setOpenLimit((prev) => !prev)}>
         <SortTitle>Items on page</SortTitle>
-        <SortDropDown>
+        <SortDropDownSmall>
           {currentLimit}
           <IconSprite />
           {openLimit ? (
@@ -101,7 +104,7 @@ export const Sort: React.FC = () => {
           ) : (
             <Icon spriteName="arrow-down" />
           )}
-        </SortDropDown>
+        </SortDropDownSmall>
         {openLimit && (
           <SortDropdownContent>
             {['4', '8', '16', 'All'].map((num) => (
