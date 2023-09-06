@@ -26,7 +26,7 @@ export const SortDropDown = styled.button`
   padding: 0 15px;
   background-color: ${({ theme }) => theme.colors.white};
   cursor: pointer;
-  min-width: 200px;
+  min-width: 140px;
   height: 40px;
   border: 1px solid ${({ theme }) => theme.colors.grayIcons};
   text-align: left;
@@ -59,6 +59,10 @@ export const SortDropDown = styled.button`
     right: 4px;
     transform: translate(-50%, -50%);
   }
+`;
+
+export const SortDropDownSmall = styled(SortDropDown)`
+  min-width: 100px;
 `;
 
 export const SortDropdownContent = styled.ul`
