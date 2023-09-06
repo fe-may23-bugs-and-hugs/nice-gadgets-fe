@@ -21,10 +21,7 @@ type Props = {
 };
 
 export const CartItemPage: React.FC<Props> = ({ product }) => {
-  const {
-    cartProducts,
-    setCartProducts,
-  } = useContext(CartContext);
+  const { cartProducts, setCartProducts } = useContext(CartContext);
 
   const [quantity, setQuantity] = useState(1);
 
@@ -60,18 +57,14 @@ export const CartItemPage: React.FC<Props> = ({ product }) => {
       </MobileContainer>
       <IconPriceContainer>
         <IconContainer>
-          <IconElement
-            onClick={() => handleChangeQuantity('decrement')}
-          >
+          <IconElement onClick={() => handleChangeQuantity('decrement')}>
             <IconSprite />
             <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
           </IconElement>
           <ItemQuantity>
             <p>{quantity}</p>
           </ItemQuantity>
-          <IconElement
-            onClick={() => handleChangeQuantity('increment')}
-          >
+          <IconElement onClick={() => handleChangeQuantity('increment')}>
             <IconSprite />
             <Icon spriteName="plus" size="16px" />
           </IconElement>

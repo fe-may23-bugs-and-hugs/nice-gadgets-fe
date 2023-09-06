@@ -17,17 +17,16 @@ interface Props {
   category: string;
 }
 
-export const Category: React.FC<Props> = ({
-  image,
-  title,
-  category,
-}) => {
+export const Category: React.FC<Props> = ({ image, title, category }) => {
   const [numberOfModels, setNumberOfModels] = useState(0);
 
   useEffect(() => {
     getPhones(
       {
-        limit: 1, page: 1, sort: SORTING.ALPH, order: ORDER.ASC,
+        limit: 1,
+        page: 1,
+        sort: SORTING.ALPH,
+        order: ORDER.ASC,
       },
       `/${category}`,
     )

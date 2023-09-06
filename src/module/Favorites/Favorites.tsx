@@ -14,27 +14,27 @@ import { Catalog } from '../Catalog';
 export const Favorites = () => {
   const { favoriteProducts } = useContext(FavoriteContext);
 
-  return <ContentLayout>
-    <BreadcrumbsWrapper>
-      <Breadcrumbs />
-    </BreadcrumbsWrapper>
+  return (
+    <ContentLayout>
+      <BreadcrumbsWrapper>
+        <Breadcrumbs />
+      </BreadcrumbsWrapper>
 
-    <Title>Favorites</Title>
-    <ItemsCount>
-      {favoriteProducts.length > 0 ? (
-        <>
-          {favoriteProducts.length} {favoriteProducts.length === 1
-            ? 'Item'
-            : 'Items'
-          }
-        </>
-      ) : (
-        'No favorite items yet, please add some products!'
-      )}
-    </ItemsCount>
+      <Title>Favorites</Title>
+      <ItemsCount>
+        {favoriteProducts.length > 0 ? (
+          <>
+            {favoriteProducts.length}{' '}
+            {favoriteProducts.length === 1 ? 'Item' : 'Items'}
+          </>
+        ) : (
+          'No favorite items yet, please add some products!'
+        )}
+      </ItemsCount>
 
-    <CatalogWrapper>
-      <Catalog phonesData={favoriteProducts}/>
-    </CatalogWrapper>
-  </ContentLayout>;
+      <CatalogWrapper>
+        <Catalog phonesData={favoriteProducts} />
+      </CatalogWrapper>
+    </ContentLayout>
+  );
 };

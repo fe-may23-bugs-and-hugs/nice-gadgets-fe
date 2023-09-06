@@ -56,11 +56,10 @@ export const SubmitButton = styled.button`
   text-align: center;
   cursor: pointer;
   border-radius: 8px;
-  background: ${(props) =>
-    props.theme.colors.accentPrimary};
+  background: ${(props) => props.theme.colors.accentPrimary};
   color: ${(props) => props.theme.colors.white};
   border: none;
-  transition: all .3s;
+  transition: all 0.3s;
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-weight: ${({ theme }) => theme.fonts.weightRegular};
@@ -82,8 +81,7 @@ export const SubmitButton = styled.button`
 `;
 
 export const Label = styled.label`
-  color: ${(props) =>
-    props.theme.colors.grayPrimary};
+  color: ${(props) => props.theme.colors.grayPrimary};
 `;
 
 export const Input = styled.input`
@@ -98,8 +96,7 @@ export const Input = styled.input`
 
   &::placeholder {
     font-size: ${({ theme }) => theme.fonts.sizeXs};
-    color: ${(props) =>
-    props.theme.colors.graySecondary};
+    color: ${(props) => props.theme.colors.graySecondary};
   }
 `;
 
@@ -108,7 +105,6 @@ export const FormLink = styled(Link)`
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
 
   &:hover {
-    color: ${(props) =>
-    props.theme.colors.graySecondary};
+    color: ${(props) => props.theme.colors.graySecondary};
   }
 `;

@@ -29,10 +29,12 @@ const formTypeData = [
 
 export const LoginForm = () => {
   const currentLocation = useLocation();
-  const currentForm = formTypeData
-    .find((form) => form.path === currentLocation.pathname);
-  const otherForm = formTypeData
-    .find((form) => form.path !== currentLocation.pathname);
+  const currentForm = formTypeData.find(
+    (form) => form.path === currentLocation.pathname,
+  );
+  const otherForm = formTypeData.find(
+    (form) => form.path !== currentLocation.pathname,
+  );
 
   const [userName, setUserName] = useState('');
   const [email, setEmail] = useState('');
@@ -75,22 +77,19 @@ export const LoginForm = () => {
       <FormWrapper>
         <h2>{currentForm ? currentForm.type : 'Log In'}</h2>
         <Form onSubmit={handleSubmit}>
-          {
-            currentForm?.type === 'Sign Up'
-            && (
-              <InputWrapper>
-                <Label htmlFor="name">Name</Label>
-                <Input
-                  type="text"
-                  id="name"
-                  value={userName}
-                  onChange={handleNameChange}
-                  placeholder="Enter name"
-                  required
-                />
-              </InputWrapper>
-            )
-          }
+          {currentForm?.type === 'Sign Up' && (
+            <InputWrapper>
+              <Label htmlFor="name">Name</Label>
+              <Input
+                type="text"
+                id="name"
+                value={userName}
+                onChange={handleNameChange}
+                placeholder="Enter name"
+                required
+              />
+            </InputWrapper>
+          )}
           <InputWrapper>
             <Label htmlFor="email">Email</Label>
             <Input
@@ -117,10 +116,9 @@ export const LoginForm = () => {
             {currentForm ? currentForm.type : 'Log In'}
           </SubmitButton>
         </Form>
-        <FormLink to={otherForm?.path || '/signUp'} >
+        <FormLink to={otherForm?.path || '/signUp'}>
           {otherForm?.type || 'Sign Up'}
         </FormLink>
-
       </FormWrapper>
     </SectionWrapper>
   );
