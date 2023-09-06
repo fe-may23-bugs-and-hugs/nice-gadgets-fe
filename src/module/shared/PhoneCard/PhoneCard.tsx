@@ -50,8 +50,10 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
     addFavoriteProduct(phoneData);
   };
 
+  const fullPath = `/${phone.category}/${phone._id}`;
+
   return (
-    <CardWrapper to={phone._id}>
+    <CardWrapper to={fullPath}>
       <ImageBox>
         <CardImage src={phone.images[0]} alt="Phone Image" />
       </ImageBox>

@@ -184,6 +184,10 @@ export const MemoryButton = styled.button`
 
   margin-right: 8px;
 
+  &:hover {
+    background-color: ${theme.colors.grayElements};
+  }
+
   &.active {
     background-color: ${theme.colors.grayPrimary};
     color: ${theme.colors.white};
@@ -220,7 +224,14 @@ export const ColorButton = styled.button`
     box-sizing: border-box;
   }
 
-  &::after {
+  &:hover {
+    &:after {
+      border-radius: 50%;
+      border: 3px solid ${theme.colors.grayElements};
+    }
+  }
+
+  &:after {
     border-radius: 50%;
     border: 1px solid ${theme.colors.grayElements};
   }
@@ -318,7 +329,8 @@ export const ImagesWrapper = styled.div`
 export const SmallCardImage = styled.img`
   height: 41px;
   display: block;
-  object-fit: cover;
+  object-fit: contain;
+  padding: 2px;
   margin: auto;
   margin-top: 2px;
 
@@ -326,5 +338,16 @@ export const SmallCardImage = styled.img`
     margin: auto;
     margin-top: 4px;
     height: 70px;
+  `)}
+`;
+
+export const RecommendedBlock = styled.div`
+  display: flex;
+  flex-direction: column;
+  margin-top: 56px;
+  margin-bottom: 0;
+
+  ${onTablet(`
+    margin-top: 80px 0;
   `)}
 `;
