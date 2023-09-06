@@ -42,7 +42,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
       return;
     }
 
-    setCartProducts((prev) => [...prev, {...product, quantity: 1}]);
+    setCartProducts((prev) => [...prev, { ...product, quantity: 1 }]);
   };
 
   const value = {

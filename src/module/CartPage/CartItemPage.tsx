@@ -25,10 +25,7 @@ type Props = {
   handleDelete: (id: string) => void;
 };
 
-export const CartItemPage: React.FC<Props> = ({
-  product,
-  handleDelete,
-}) => {
+export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
   const { setCartProducts } = useContext(CartContext);
   const [quantity, setQuantity] = useState(product.quantity);
   const oneItemPrice = quantity * product.priceDiscount;
@@ -38,9 +35,9 @@ export const CartItemPage: React.FC<Props> = ({
       setQuantity(quantity + 1);
 
       // @ts-ignore
-      setCartProducts(prevItems => {
+      setCartProducts((prevItems) => {
         // @ts-ignore
-        return prevItems.map(prevItem => {
+        return prevItems.map((prevItem) => {
           if (prevItem._id === product._id) {
             prevItem.quantity += 1;
 
@@ -55,9 +52,9 @@ export const CartItemPage: React.FC<Props> = ({
         setQuantity(quantity - 1);
 
         // @ts-ignore
-        setCartProducts(prevItems => {
-        // @ts-ignore
-          return prevItems.map(prevItem => {
+        setCartProducts((prevItems) => {
+          // @ts-ignore
+          return prevItems.map((prevItem) => {
             if (prevItem._id === product._id) {
               prevItem.quantity -= 1;
 

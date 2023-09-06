@@ -1,8 +1,7 @@
-// import { Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { AppLayout } from './module/shared/AppLayout/AppLayout';
 import { Header, Footer } from './module/shared';
 import { styled } from 'styled-components';
-import { CartPage } from './module';
 
 const MainWrapper = styled.div`
   display: flex;
@@ -14,8 +13,7 @@ export const App = () => (
   <MainWrapper>
     <Header />
     <AppLayout>
-      <CartPage />
-      {/* <Outlet /> */}
+      <Outlet />
     </AppLayout>
     <Footer />
   </MainWrapper>
