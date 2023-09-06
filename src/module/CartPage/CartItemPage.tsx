@@ -16,32 +16,59 @@ import {
 } from './CartPage.styled';
 import { CartContext } from '../../context';
 
+interface PhoneWithQuantity extends Phone {
+  quantity: number;
+}
+
 type Props = {
-  product: Phone;
+  product: PhoneWithQuantity;
+  handleDelete: (id: string) => void;
 };
 
-export const CartItemPage: React.FC<Props> = ({ product }) => {
-  const {
-    cartProducts,
-    setCartProducts,
-  } = useContext(CartContext);
-
-  const [quantity, setQuantity] = useState(1);
+export const CartItemPage: React.FC<Props> = ({
+  product,
+  handleDelete,
+}) => {
+  const { setCartProducts } = useContext(CartContext);
+  const [quantity, setQuantity] = useState(product.quantity);
+  const oneItemPrice = quantity * product.priceDiscount;
 
   const handleChangeQuantity = (action: string) => {
     if (action === 'increment') {
       setQuantity(quantity + 1);
+
+      // @ts-ignore
+      setCartProducts(prevItems => {
+        // @ts-ignore
+        return prevItems.map(prevItem => {
+          if (prevItem._id === product._id) {
+            prevItem.quantity += 1;
+
+            return prevItem;
+          }
+
+          return prevItem;
+        });
+      });
     } else if (action === 'decrement') {
       if (quantity > 1) {
         setQuantity(quantity - 1);
+
+        // @ts-ignore
+        setCartProducts(prevItems => {
+        // @ts-ignore
+          return prevItems.map(prevItem => {
+            if (prevItem._id === product._id) {
+              prevItem.quantity -= 1;
+
+              return prevItem;
+            }
+
+            return prevItem;
+          });
+        });
       }
     }
-  };
-
-  const handleDelete = (id: string) => {
-    const newCartProducts = cartProducts.filter((item) => item._id !== id);
-
-    setCartProducts(newCartProducts);
   };
 
   return (
@@ -60,24 +87,20 @@ export const CartItemPage: React.FC<Props> = ({ product }) => {
       </MobileContainer>
       <IconPriceContainer>
         <IconContainer>
-          <IconElement
-            onClick={() => handleChangeQuantity('decrement')}
-          >
+          <IconElement onClick={() => handleChangeQuantity('decrement')}>
             <IconSprite />
             <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
           </IconElement>
           <ItemQuantity>
             <p>{quantity}</p>
           </ItemQuantity>
-          <IconElement
-            onClick={() => handleChangeQuantity('increment')}
-          >
+          <IconElement onClick={() => handleChangeQuantity('increment')}>
             <IconSprite />
             <Icon spriteName="plus" size="16px" />
           </IconElement>
         </IconContainer>
         <ItemPrice>
-          <p>${product.priceDiscount}</p>
+          <p>${oneItemPrice}</p>
         </ItemPrice>
       </IconPriceContainer>
     </CartItem>
