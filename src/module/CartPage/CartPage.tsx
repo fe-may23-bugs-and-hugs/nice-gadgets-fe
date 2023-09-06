@@ -82,7 +82,9 @@ export const CartPage: React.FC = () => {
             <TotalItems>
               <p>Total for {totalItems} items</p>
             </TotalItems>
-            <CartCheckout onClick={handleToggle}>
+            <CartCheckout
+              onClick={handleToggle}
+            >
               <p>Checkout</p>
             </CartCheckout>
             {showModal && (

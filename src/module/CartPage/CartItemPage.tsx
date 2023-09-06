@@ -80,14 +80,18 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
       </MobileContainer>
       <IconPriceContainer>
         <IconContainer>
-          <IconElement onClick={() => handleChangeQuantity('decrement')}>
+          <IconElement
+            onClick={() => handleChangeQuantity('decrement')}
+          >
             <IconSprite />
             <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
           </IconElement>
           <ItemQuantity>
             <p>{quantity}</p>
           </ItemQuantity>
-          <IconElement onClick={() => handleChangeQuantity('increment')}>
+          <IconElement
+            onClick={() => handleChangeQuantity('increment')}
+          >
             <IconSprite />
             <Icon spriteName="plus" size="16px" />
           </IconElement>

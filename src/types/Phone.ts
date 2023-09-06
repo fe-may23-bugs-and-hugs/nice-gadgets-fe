@@ -9,7 +9,6 @@ export type Phone = {
   capacityAvailable: string[];
   priceRegular: number;
   priceDiscount: number;
-
   quantity: number;
 
   colorsAvailable: string[];
