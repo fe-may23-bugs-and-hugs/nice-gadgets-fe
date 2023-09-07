@@ -3,6 +3,7 @@
 import styled, { css, ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
+import { DarkTheme } from '../../../types/DarkTheme';
 
 interface IconElementProps {
   hasPinkCircle?: boolean;
@@ -14,10 +15,6 @@ const IconsBurgerLeft = 1;
 
 export interface mobileProps {
   isMenuOpen: boolean;
-}
-
-export interface DarkTheme {
-  isDarkTheme: boolean;
 }
 
 type HeaderElementProps = mobileProps & DarkTheme & IconElementProps;
@@ -277,7 +274,6 @@ export const IconElement = styled.div<HeaderElementProps>`
   &:not(:nth-child(-n + ${IconsBurgerLeft})) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
-
       if (!theme) {
         return '';
       }

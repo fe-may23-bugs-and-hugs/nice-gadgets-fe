@@ -56,7 +56,10 @@ export const Header = () => {
       'No',
       () => {
         onLogoutUser();
-        Notiflix.Notify.success('Successfully loggout');
+        Notiflix.Notify.init({
+          position: 'right-bottom',
+        });
+        Notiflix.Notify.success('Successfully loggout', { timeout: 1000 });
       },
       () => {
         return;

@@ -1,10 +1,7 @@
 /* eslint-disable indent */
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
-
-interface DarkTheme {
-  isDarkTheme: boolean;
-}
+import { DarkTheme } from '../../../types/DarkTheme';
 
 export const StyledFooter = styled.footer<DarkTheme>`
   width: 100%;
