@@ -1,25 +1,33 @@
 /*eslint-disable*/
 
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   Form,
+  FormLink,
   FormWrapper,
+  IconWrapper,
   Input,
   InputWrapper,
   Label,
   SectionWrapper,
   SubmitButton,
+  ToggleButton,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { RegisterData } from '../../../../types/Register';
 import { AuthContext } from '../../../../context';
 import { Navigate } from 'react-router-dom';
+import Notiflix from 'notiflix';
+import { Icon, IconSprite } from '../../../shared';
 
 export const RegistrationForm: React.FC = () => {
-  const { onRegisterUser, isAuth } = useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const { onRegisterUser, isAuth, registrError, onResetErrors } = useContext(AuthContext);
+  
   const {
     register,
     handleSubmit,
+    setError,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
@@ -36,11 +44,38 @@ export const RegistrationForm: React.FC = () => {
     onRegisterUser(values);
   };
 
+  const clearError = (fieldName: string) => {
+    onResetErrors();
+    //@ts-ignore
+    setError(fieldName, {
+      type: 'manual',
+      message: '',
+    });
+  };
+
+  useEffect(() => {
+    onResetErrors();
+  }, []);
+
+  useEffect(() => {
+    if (isAuth) {
+      Notiflix.Notify.success('Successfully register');
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (registrError) {
+      Notiflix.Notify.failure('There is a problem with registration');
+    }
+  }, [registrError]);
+
   if (isAuth) {
     return <Navigate to="/" />;
   }
 
-  console.log(errors);
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
 
   return (
     <SectionWrapper>
@@ -61,7 +96,7 @@ export const RegistrationForm: React.FC = () => {
               type="text"
               id="name"
               placeholder="Enter name"
-              required
+              onChange={() => clearError('fullName')}
             />
             {errors.fullName && (
               <span style={{ color: 'red' }}>{errors.fullName.message}</span>
@@ -70,11 +105,18 @@ export const RegistrationForm: React.FC = () => {
           <InputWrapper>
             <Label htmlFor="email">Email</Label>
             <Input
-              {...register('email', { required: 'Please,write your email' })}
+              {...register('email', {
+                required: 'Please, write your email',
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/,
+                  message: 'Invalid email address',
+                },
+              })}
               type="email"
               id="email"
               placeholder="Enter email"
               required
+              onChange={() => clearError('email')}
             />
           </InputWrapper>
           <InputWrapper>
@@ -87,11 +129,22 @@ export const RegistrationForm: React.FC = () => {
                   message: 'Password should be at least 4 characters long',
                 },
               })}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               placeholder="Enter password"
               required
+              onChange={() => clearError('password')}
             />
+            <ToggleButton onClick={handlePasswordToggle}>
+              <IconSprite />
+              <IconWrapper>
+                {showPassword ? (
+                  <Icon spriteName="eye-closed" />
+                ) : (
+                  <Icon spriteName="eye-open" />
+                )}
+              </IconWrapper>
+            </ToggleButton>
             {errors.password && (
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
@@ -100,6 +153,7 @@ export const RegistrationForm: React.FC = () => {
             Register
           </SubmitButton>
         </Form>
+        {/* <FormLink to="/auth/logIn">Log In</FormLink> */}
       </FormWrapper>
     </SectionWrapper>
   );

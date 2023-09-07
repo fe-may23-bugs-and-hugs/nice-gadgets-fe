@@ -17,16 +17,20 @@ import {
   BuregerWrapper,
   LinkWrapper,
 } from './Header.styled';
-import { FavoriteContext, CartContext } from '../../../context';
+import { FavoriteContext, CartContext, AuthContext } from '../../../context';
 import { ThemeToggler } from '../ThemeToggler';
-import { useTheme } from '../../../context';
+import { useTheme as customUseTheme } from '../../../context';
+import Notiflix from 'notiflix';
+import { useTheme } from 'styled-components';
 
 export const Header = () => {
+  const theme = useTheme();
   const { totalItems } = useContext(CartContext);
   const { totalFavorite } = useContext(FavoriteContext);
+  const { isAuth, onLogoutUser } = useContext(AuthContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
+  const { isDarkTheme } = customUseTheme() || { isDarkTheme: false };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -34,6 +38,31 @@ export const Header = () => {
 
   const closeMenu = () => {
     setIsMenuOpen(false);
+  };
+
+  const logout = () => {
+    Notiflix.Confirm.init({
+      fontFamily: 'Mont',
+      cancelButtonColor: '#000',
+      cancelButtonBackground: theme.colors.grayElements,
+      messageFontSize: '16px',
+      titleColor: theme.colors.accentSecondary,
+      okButtonBackground: theme.colors.accentPrimary,
+    });
+    Notiflix.Confirm.show(
+      'Modal control',
+      'Are you sure you want to logout?',
+      'Yes',
+      'No',
+      () => {
+        onLogoutUser();
+        Notiflix.Notify.success('Successfully loggout');
+      },
+      () => {
+        return;
+      },
+      {},
+    );
   };
 
   useEffect(() => {
@@ -128,15 +157,22 @@ export const Header = () => {
             : <Icon spriteName="search" size="18px" />
           }
         </IconElement>
-        <IconElement
-          isMenuOpen={isMenuOpen}
-          isDarkTheme={isDarkTheme}
-        >
-          <LinkWrapper to="/account">
-            <IconSprite />
-            <Icon spriteName="account" size="18px" />
-          </LinkWrapper>
-        </IconElement>
+
+        {isAuth ? (
+          <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
+            <div onClick={logout}>
+              <IconSprite />
+              <Icon spriteName="close" size="18px" />
+            </div>
+          </IconElement>
+        ) : (
+          <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
+            <LinkWrapper to="/auth/logIn">
+              <IconSprite />
+              <Icon spriteName="account" size="18px" />
+            </LinkWrapper>
+          </IconElement>
+        )}
 
         <IconElement
           hasPinkCircle={!!totalFavorite}
