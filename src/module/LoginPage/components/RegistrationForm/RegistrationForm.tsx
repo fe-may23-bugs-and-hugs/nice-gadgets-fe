@@ -96,7 +96,13 @@ export const RegistrationForm: React.FC = () => {
           <InputWrapper>
             <Label htmlFor="email">Email</Label>
             <Input
-              {...register('email', { required: 'Please,write your email' })}
+              {...register('email', {
+                required: 'Please, write your email',
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/,
+                  message: 'Invalid email address',
+                },
+              })}
               type="email"
               id="email"
               placeholder="Enter email"

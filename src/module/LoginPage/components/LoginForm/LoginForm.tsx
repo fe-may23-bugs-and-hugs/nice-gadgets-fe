@@ -79,7 +79,13 @@ export const LoginForm: React.FC = () => {
               type="email"
               id="email"
               placeholder="Enter email"
-              {...register('email', { required: 'Please,write your email' })}
+              {...register('email', {
+                required: 'Please, write your email',
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/,
+                  message: 'Invalid email address',
+                },
+              })}
               onChange={() => clearError('email')}
             />
             {errors.email && (
