@@ -7,13 +7,7 @@ interface ButtonProps {
   isClicked: boolean;
 }
 
-interface DarkTheme {
-  isDarkTheme: boolean,
-}
-
-type CardProps = ButtonProps & DarkTheme;
-
-export const CardWrapper = styled.div<DarkTheme>`
+export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-self: flex-start;
@@ -21,23 +15,15 @@ export const CardWrapper = styled.div<DarkTheme>`
   box-sizing: border-box;
   padding: 32px;
   width: 272px;
-  background: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.surface1 + ' !important'
-      : ({ theme }) => theme.colors.white + ' !important'};
 
   /* ${onTablet(`
     width: 229px;
   `)} */
 
   border-radius: 8px;
-  border: 1px solid
-  ${({ isDarkTheme, theme }) =>
-    isDarkTheme
-      ? theme.darkThemeColors.grayElements
-      : theme.colors.grayElements};
-
+  border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
   background: ${({ theme }) => theme.colors.white};
+
   transition: box-shadow ${({ theme }) => theme.transition.slower};
 
   &:hover {
@@ -67,11 +53,8 @@ export const CardImage = styled.img`
   margin: 0 auto;
 `;
 
-export const CardTitle = styled(Link) <DarkTheme>`
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.white
-      : ({ theme }) => theme.colors.grayPrimary};
+export const CardTitle = styled(Link)`
+  color: ${({ theme }) => theme.colors.grayPrimary};
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-style: normal;
@@ -89,16 +72,12 @@ export const CardTitle = styled(Link) <DarkTheme>`
   }
 `;
 
-export const PriceWrapper = styled.div<DarkTheme>`
+export const PriceWrapper = styled.div`
   display: flex;
   gap: 8px;
 
   margin-bottom: 8px;
-  border-bottom: 1px solid
-  ${({ isDarkTheme, theme }) =>
-    isDarkTheme
-      ? theme.darkThemeColors.grayElements
-      : theme.colors.grayElements};
+  border-bottom: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
 
   padding-bottom: 8px;
 
@@ -107,15 +86,13 @@ export const PriceWrapper = styled.div<DarkTheme>`
   }
 `;
 
-export const CurrentPrice = styled.h3<DarkTheme>`
+export const CurrentPrice = styled.h3`
   font-size: ${({ theme }) => theme.fonts.lineHeightM};
   font-style: normal;
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightXl};
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.white
-      : ({ theme }) => theme.colors.grayPrimary};
+
+  color: ${({ theme }) => theme.colors.grayPrimary};
 
   &.card-current-price {
     font-size: ${({ theme }) => theme.fonts.sizeXxl};
@@ -123,13 +100,8 @@ export const CurrentPrice = styled.h3<DarkTheme>`
   }
 `;
 
-export const OldPrice = styled(CurrentPrice) <DarkTheme>`
+export const OldPrice = styled(CurrentPrice)`
   color: ${({ theme }) => theme.colors.graySecondary};
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.graySecondary
-      : ({ theme }) => theme.colors.graySecondary};
-
   text-decoration: line-through;
 
   &.card-old-price {
@@ -151,23 +123,16 @@ export const DescrBox = styled.div`
   gap: 8px;
 `;
 
-export const DescrTitle = styled.h3<DarkTheme>`
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.graySecondary
-      : ({ theme }) => theme.colors.graySecondary};
+export const DescrTitle = styled.h3`
+  color: ${({ theme: { colors } }) => colors.graySecondary};
 
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
   line-height: normal;
 `;
 
-export const DescrValue = styled.p<DarkTheme>`
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.white
-      : ({ theme }) => theme.colors.grayPrimary};
-
+export const DescrValue = styled.p`
+  color: ${({ theme }) => theme.colors.grayPrimary};
   text-align: right;
   font-family: Mont;
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
@@ -188,60 +153,26 @@ export const ButtonsWrapper = styled.div`
   }
 `;
 
-export const ButtonAdd = styled.button<CardProps>`
+export const ButtonAdd = styled.button<ButtonProps>`
   width: 160px;
   height: 40px;
-  color: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return props.theme.darkThemeColors.white;
-      }
 
-      return props.theme.colors.accentPrimary;
-    }
+  color: ${(props) =>
+    props.isClicked
+      ? props.theme.colors.accentPrimary
+      : props.theme.colors.white};
 
-    if (props.isDarkTheme) {
-      return props.theme.darkThemeColors.white;
-    }
-
-    return props.theme.colors.white;
-  }};
-
-  border: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return 'none';
-      }
-
-      return `1px solid ${props.theme.colors.grayElements}`;
-    }
-
-    if (props.isDarkTheme) {
-      return 'none';
-    }
-
-    return 'none';
-  }};
+  border: ${(props) =>
+    props.isClicked ? `1px solid ${props.theme.colors.grayElements}` : 'none'};
 
   text-align: center;
   cursor: pointer;
 
   border-radius: 8px;
-  background-color: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return props.theme.darkThemeColors.surface2;
-      }
-
-      return props.theme.colors.white;
-    }
-
-    if (props.isDarkTheme) {
-      return props.theme.darkThemeColors.accentPrimary;
-    }
-
-    return props.theme.colors.accentPrimary;
-  }};
+  background-color: ${(props) =>
+    props.isClicked
+      ? props.theme.colors.white
+      : props.theme.colors.accentPrimary};
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
@@ -250,21 +181,7 @@ export const ButtonAdd = styled.button<CardProps>`
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return props.theme.darkThemeColors.grayIcons;
-      }
-
-      return props.theme.colors.whiteLight;
-    }
-
-    if (props.isDarkTheme) {
-      return props.theme.darkThemeColors.lightAccent;
-    }
-
-    return props.theme.colors.lightAccent;
-  }};
+    background-color: ${(props) => (props.isClicked ? `#fafafa` : `#2190ff`)};
   }
 
   &.card-button-add {
@@ -278,40 +195,11 @@ export const ButtonAdd = styled.button<CardProps>`
   }
 `;
 
-export const ButtonLike = styled.button<CardProps>`
+export const ButtonLike = styled.button`
   position: relative;
   cursor: pointer;
-  border: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return `1px solid ${props.theme.darkThemeColors.grayElements}`;
-      }
-
-      return `1px solid ${props.theme.colors.grayIcons}`;
-    }
-
-    if (props.isDarkTheme) {
-      return 'none';
-    }
-
-    return `1px solid ${props.theme.colors.grayIcons}`;
-  }};
-  background-color: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return props.theme.darkThemeColors.surface1;
-      }
-
-      return props.theme.colors.white;
-    }
-
-    if (props.isDarkTheme) {
-      return props.theme.darkThemeColors.surface2;
-    }
-
-    return props.theme.colors.white;
-  }};
-
+  border: ${(props) => `1px solid ${props.theme.colors.grayIcons}`};
+  background-color: ${({ theme }) => theme.colors.white};
   width: 40px;
 
   border-radius: 48px;
@@ -319,21 +207,7 @@ export const ButtonLike = styled.button<CardProps>`
   transition: border ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    border: ${(props) => {
-    if (props.isClicked) {
-      if (props.isDarkTheme) {
-        return `1px solid ${props.theme.darkThemeColors.grayIcons}`;
-      }
-
-      return `1px solid ${props.theme.colors.grayPrimary}`;
-    }
-
-    if (props.isDarkTheme) {
-      return `1px solid ${props.theme.darkThemeColors.grayIcons}`;
-    }
-
-    return `1px solid ${props.theme.colors.grayPrimary}`;
-  }};
+    border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
   }
 
   svg {

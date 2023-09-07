@@ -1,10 +1,6 @@
 import { styled } from 'styled-components';
 import { onTablet } from '../../../shared/Mixins';
 
-interface DarkTheme {
-  isDarkTheme: boolean;
-}
-
 export const CategoryWrapper = styled.article`
   display: flex;
   flex-direction: column;
@@ -30,13 +26,8 @@ export const CategoryContent = styled.div`
   gap: 4px;
 `;
 
-export const CategoryTitle = styled.h4<DarkTheme>`
+export const CategoryTitle = styled.h4`
   color: ${({ theme }) => theme.colors.grayPrimary};
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.white
-      : ({ theme }) => theme.colors.grayPrimary};
-
   font-weight: ${({ theme }) => theme.fonts.weightSemiBold};
   font-size: ${({ theme }) => theme.fonts.sizeM};
   line-height: normal;

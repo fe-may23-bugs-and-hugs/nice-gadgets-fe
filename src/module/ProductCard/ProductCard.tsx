@@ -1,8 +1,10 @@
+/* eslint-disable operator-linebreak */
+/* eslint-disable space-before-function-paren */
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { theme } from '../../styles';
 import { ContentLayout } from '../shared/ContentLayout';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   MainElement,
   PathAndBack,
@@ -55,10 +57,10 @@ import { colorMappings } from './colorMappings';
 import { getOnePhone } from '../../api/phonesAPI';
 import { Phone } from '../../types/Phone';
 import { BackButton } from '../shared/BackButton';
-import { CartContext, FavoriteContext, PhonesContext, useTheme } from '../../context';
+import { CartContext, FavoriteContext, PhonesContext } from '../../context';
 import { ProductsSlider } from '../HomePage/components/ProductsSlider/ProductsSlider';
-import { TailSpin } from 'react-loader-spinner';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
+import { Loader } from '../Loader';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};
@@ -81,19 +83,21 @@ export const ProductCard = () => {
   const { productId } = useParams();
   const [device, setDevice] = React.useState<Phone | null>(null);
   const { addItem, cartProducts } = React.useContext(CartContext);
-  const { addFavoriteProduct, favoriteProducts }
-    = React.useContext(FavoriteContext);
+  const { addFavoriteProduct, favoriteProducts } =
+    React.useContext(FavoriteContext);
   const [selectedCapacity, setSelectedCapacity] = React.useState<string>('');
   const [selectedColor, setSelectedColor] = React.useState<string>('');
   const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
   const [selectedImage, setSelectedImage] = React.useState<string>('');
   const [loading, setLoading] = React.useState(true);
-  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
+  const { loadRecommendedData, recommendedData } = useContext(PhonesContext);
+  const { pathname } = useLocation();
+
+  const path = pathname.split('/')[pathname.split('/').length - 1];
   const navigate = useNavigate();
 
   React.useEffect(() => {
-    // eslint-disable-next-line
     const fetchData = async () => {
       setLoading(true);
 
@@ -127,6 +131,10 @@ export const ProductCard = () => {
           setCurrentImage(responseData.images[0]);
           setSelectedImage(responseData.images[0]);
         }
+
+        if (path) {
+          loadRecommendedData(path);
+        }
       } catch (error) {
       } finally {
         setLoading(false);
@@ -134,16 +142,10 @@ export const ProductCard = () => {
     };
 
     fetchData();
-  }, [productId]);
-
-  const { loadPhones, newData } = useContext(PhonesContext);
-
-  React.useEffect(() => {
-    loadPhones('recommended/recommended');
-  }, []);
+  }, [productId, path]);
 
   if (!device) {
-    return null;
+    return <Loader visible={loading} />;
   }
 
   const deviceData = extractData(device);
@@ -189,16 +191,7 @@ export const ProductCard = () => {
           <BackButton />
         </PathAndBack>
         {loading ? (
-          <TailSpin
-            height="80"
-            width="80"
-            color="#89939A"
-            ariaLabel="tail-spin-loading"
-            radius="1"
-            wrapperStyle={{}}
-            wrapperClass=""
-            visible={true}
-          />
+          <Loader visible={loading} />
         ) : (
           <>
             <Title>{device.name}</Title>
@@ -260,18 +253,17 @@ export const ProductCard = () => {
                     </ChoiseWrapper>
                   )}
 
-                  <PriceWrapper className="card-price" isDarkTheme={isDarkTheme}>
-                    <CurrentPrice className="card-current-price" isDarkTheme={isDarkTheme}>
+                  <PriceWrapper className="card-price">
+                    <CurrentPrice className="card-current-price">
                       {`$${device.priceDiscount}`}
                     </CurrentPrice>
-                    <OldPrice className="card-old-price" isDarkTheme={isDarkTheme}>
+                    <OldPrice className="card-old-price">
                       {`$${device.priceRegular}`}
                     </OldPrice>
                   </PriceWrapper>
 
                   <ButtonsWrapper className="card-button">
                     <ButtonAdd
-                      isDarkTheme={isDarkTheme}
                       onClick={() => {
                         toggleClick(device);
                       }}
@@ -283,49 +275,36 @@ export const ProductCard = () => {
                     </ButtonAdd>
                     <ButtonLike
                       type="button"
-                      isDarkTheme={isDarkTheme}
-                      isClicked={!!isFavorite}
                       onClick={() => {
                         toggleFavorite(device);
                       }}
                       className="card-button-like"
                     >
                       <IconSprite />
-                      {isFavorite && <Icon
-                        spriteName="heart-field"
-                        fill={theme.colors.accentSecondary}
-                      />}
-
-                      {!isFavorite && (
+                      {isFavorite ? (
                         <Icon
-                          spriteName="heart"
+                          spriteName="heart-field"
+                          fill={theme.colors.accentSecondary}
                         />
+                      ) : (
+                        <Icon spriteName="heart" />
                       )}
-
-                      {isDarkTheme && isFavorite && <Icon
-                        spriteName="heart-field"
-                        fill={theme.colors.accentSecondary}
-                      />}
-
-                      {isDarkTheme && !isFavorite && <Icon
-                        spriteName="heart-white"
-                      />}
                     </ButtonLike>
                   </ButtonsWrapper>
 
                   <DescrWrapper>
                     <DescrBox>
-                      {device.screen && <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>}
-                      {device.resolution && <DescrTitle isDarkTheme={isDarkTheme}>Resolution</DescrTitle>}
-                      {device.processor && <DescrTitle isDarkTheme={isDarkTheme}>Processor</DescrTitle>}
-                      {device.ram && <DescrTitle isDarkTheme={isDarkTheme}>Ram</DescrTitle>}
+                      {device.screen && <DescrTitle>Screen</DescrTitle>}
+                      {device.resolution && <DescrTitle>Resolution</DescrTitle>}
+                      {device.processor && <DescrTitle>Processor</DescrTitle>}
+                      {device.ram && <DescrTitle>Ram</DescrTitle>}
                     </DescrBox>
 
                     <DescrBox>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.screen}</DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.resolution}</DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.processor}</DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.ram}</DescrValue>
+                      <DescrValue>{device.screen}</DescrValue>
+                      <DescrValue>{device.resolution}</DescrValue>
+                      <DescrValue>{device.processor}</DescrValue>
+                      <DescrValue>{device.ram}</DescrValue>
                     </DescrBox>
                   </DescrWrapper>
                 </CardWrapper>
@@ -333,12 +312,12 @@ export const ProductCard = () => {
               </CardInfo>
               <AboutBlock>
                 <H2>About</H2>
-                {device.description
-                  && device.description.map((info) => (
+                {device.description &&
+                  device.description.map((info) => (
                     <DescriptionWrapper key={info.title}>
                       <H3>{info.title}</H3>
-                      {Array.isArray(info.text)
-                        && info.text.map((text: string) => <P>{text}</P>)}
+                      {Array.isArray(info.text) &&
+                        info.text.map((text: string) => <P>{text}</P>)}
                     </DescriptionWrapper>
                   ))}
               </AboutBlock>
@@ -371,7 +350,7 @@ export const ProductCard = () => {
       {!loading && (
         <RecommendedBlock>
           <ProductsSlider
-            data={newData}
+            data={recommendedData}
             uniqueKey="recommended"
             subtitle="You may also like"
           />

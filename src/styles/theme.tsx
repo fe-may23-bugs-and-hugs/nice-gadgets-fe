@@ -1,12 +1,10 @@
 export const theme = {
   colors: {
     white: '#fff',
-    whiteLight: '#fafafa',
     black: '#000',
     red: '#EB5757',
     green: '#27AE60',
     orange: '#FCDBC1',
-    lightAccent: '#2190ff',
     accentPrimary: '#216CFF',
     accentSecondary: '#F447AF',
     grayPrimary: '#0F0F11',
@@ -20,7 +18,6 @@ export const theme = {
     black: '#0F1121',
     red: '#EB5757',
     green: '#27AE60',
-    lightAccent: '#A378FF',
     accentPrimary: '#905BFF',
     graySecondary: '#75767F',
     grayIcons: '#4A4D58',

@@ -3,6 +3,7 @@
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { useTheme } from 'styled-components';
+
 import {
   CardImage,
   CardTitle,
@@ -30,7 +31,6 @@ type Props = {
 
 export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
-  const { isDarkTheme } = useCustomTheme() || { isDarkTheme: false };
 
   const { addItem, cartProducts } = useContext(CartContext);
 
@@ -64,7 +64,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
         <CurrentPrice isDarkTheme={isDarkTheme}>{`$${phone.priceDiscount}`}</CurrentPrice>
         <OldPrice isDarkTheme={isDarkTheme}>{`$${phone.priceRegular}`}</OldPrice>
       </PriceWrapper>
-
+      
       <DescrWrapper>
         <DescrBox>
           <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>
@@ -73,9 +73,9 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
         </DescrBox>
 
         <DescrBox>
-          <DescrValue isDarkTheme={isDarkTheme}>{phone.screen}</DescrValue>
-          <DescrValue isDarkTheme={isDarkTheme}>{phone.capacity}</DescrValue>
-          <DescrValue isDarkTheme={isDarkTheme}>{phone.ram}</DescrValue>
+          <DescrValue isDarkTheme={isDarkTheme}>{phone.screen || 'N/A'}</DescrValue>
+          <DescrValue isDarkTheme={isDarkTheme}>{phone.capacity || 'N/A'}</DescrValue>
+          <DescrValue isDarkTheme={isDarkTheme}>{phone.ram || 'N/A'}</DescrValue>
         </DescrBox>
       </DescrWrapper>
 

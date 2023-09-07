@@ -1,5 +1,5 @@
 import { styled } from 'styled-components';
-import { onTablet } from '../../../shared/Mixins';
+import { onTablet } from '../../shared/Mixins';
 import { Link } from 'react-router-dom';
 
 export const SectionWrapper = styled.div`
@@ -46,6 +46,8 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
+  position: relative;
 `;
 
 export const SubmitButton = styled.button`
@@ -54,7 +56,10 @@ export const SubmitButton = styled.button`
   text-align: center;
   cursor: pointer;
   border-radius: 8px;
-  background: ${(props) => props.theme.colors.accentPrimary};
+  background: ${(props) =>
+    props.disabled
+      ? props.theme.colors.grayIcons
+      : props.theme.colors.accentPrimary};
   color: ${(props) => props.theme.colors.white};
   border: none;
   transition: all 0.3s;
@@ -88,6 +93,8 @@ export const Input = styled.input`
   border: 1px solid gray;
   text-indent: 4px;
 
+  width: 100%;
+
   ${onTablet(`
     height: 50px;
   `)}
@@ -104,5 +111,42 @@ export const FormLink = styled(Link)`
 
   &:hover {
     color: ${(props) => props.theme.colors.graySecondary};
+  }
+`;
+
+export const ToggleButton = styled.span`
+  background-color: ${(props) => props.theme.colors.white};
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+
+  border: none;
+  cursor: pointer;
+
+  ${onTablet(`
+    right: 14px;
+    bottom: 15px;
+  `)}
+
+  &:hover svg use {
+    fill: ${(props) => props.theme.colors.graySecondary};
+  }
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
+`;
+
+export const EyeWrapper = styled.div`
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
   }
 `;
