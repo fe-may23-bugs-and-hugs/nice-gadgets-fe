@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
 
 import { App } from '../App';
@@ -11,6 +12,8 @@ import {
 } from '../module';
 import { PhonesProvider } from '../context';
 import { LoginPage } from '../module/LoginPage';
+import { RegistrationForm } from '../module/LoginPage/components/RegistrationForm';
+import { LoginForm } from '../module/LoginPage/components/LoginForm/LoginForm';
 
 export const Root = () => (
   <BrowserRouter>
@@ -39,8 +42,10 @@ export const Root = () => (
             <Route path=":productId" element={<ProductCard />} />
           </Route>
 
-          <Route path="logIn" element={<LoginPage />} />
-          <Route path="signUp" element={<LoginPage />} />
+          <Route path="auth" element={<LoginPage />}>
+            <Route path="logIn" element={<LoginForm />} />
+            <Route path="signUp" element={<RegistrationForm />} />
+          </Route>
 
           <Route path="cart" element={<CartPage />} />
 
