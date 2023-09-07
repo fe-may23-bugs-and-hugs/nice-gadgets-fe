@@ -197,6 +197,7 @@ export const IconElement = styled.button<{ isClickable?: boolean }>`
   height: 32px;
   border-radius: 50%;
   border: 1px solid ${({ theme }) => theme.colors.grayElements};
+  background-color: transparent;
   align-items: center;
   justify-content: center;
 
@@ -298,10 +299,11 @@ export const CartCheckout = styled.button`
   }
 
   cursor: pointer;
+
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.graySecondary};
+    background-color: #2190ff;
   }
 `;
 
