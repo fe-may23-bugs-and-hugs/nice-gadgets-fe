@@ -15,7 +15,7 @@ import {
   BannerButton,
   BannerText,
   BannerWrapper,
-  BulletsContainner,
+  // BulletsContainner,
   BunnerTitle,
   OkIcon,
   SliderBanner,
@@ -90,7 +90,9 @@ export const WelcomeSlider = () => {
         </SwiperSlide>
       </Swiper>
 
-      <BulletsContainner id="custom-bullets-container" />
+      {/* <BulletsContainner id="custom-bullets-container">
+        <SwiperPaginationBullet />
+      </BulletsContainner> */}
     </Wrapper>
   );
 };
