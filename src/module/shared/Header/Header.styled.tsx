@@ -82,7 +82,7 @@ export const ImgArea = styled(NavLink)<mobileProps>`
 `;
 
 export const ImgElement = styled.img`
-  height: auto;
+  height: 23px;
   max-width: 64px;
   align-self: center;
   margin: 13px 16px;
@@ -98,8 +98,9 @@ export const ImgElement = styled.img`
 
 export const UlElement = styled.ul<mobileProps>`
   display: flex;
-  gap: 16px;
+  gap: ${({ isMenuOpen }) => (isMenuOpen ? '32px' : '16px')};
   align-items: center;
+  margin-top: ${({ isMenuOpen }) => (isMenuOpen ? '40px' : 'none')};
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
 
@@ -182,14 +183,7 @@ export const IconsSection = styled.div<HeaderElementProps>`
   align-items: center;
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
   height: ${({ isMenuOpen }) => (isMenuOpen ? '48px' : 'auto')};
-  border-top: ${({ isMenuOpen, theme }) =>
-    isMenuOpen
-      ? `1px solid ${(isDarkTheme: DarkTheme) =>
-          isDarkTheme
-            ? theme.darkThemeColors.surface2
-            : theme.colors.grayElements}
-      ;`
-      : 'none'};
+  border-top: 1px solid ${({ isMenuOpen, theme }) => (isMenuOpen ? theme.colors.grayElements : 'none')};
 `;
 
 export const IconElement = styled.div<HeaderElementProps>`
@@ -234,7 +228,7 @@ export const IconElement = styled.div<HeaderElementProps>`
     width: 64px;
   }
 
-  &:nth-child(-n + ${IconsBurgerLeft}) {
+  &:nth-child(n) {
     ${({ isMenuOpen }) => {
       return (
         isMenuOpen &&
@@ -243,20 +237,32 @@ export const IconElement = styled.div<HeaderElementProps>`
         `
       );
     }};
+  }
+
+  &:first-child {
+    ${({ isMenuOpen }) => {
+      return (
+        isMenuOpen &&
+        css`
+          width: 48px;
+          display: block;
+        `
+      );
+    }};
+  }
+
+  @media (max-width: 639px) {
+    &.swipetheme {
+    position: fixed;
+      margin-right: 48px;
+      width: 48px;
+      height: 48px;
+      top: 15px;
+      right: 0;
+    }
   }
 
   &:not(:nth-child(-n + ${IconsBurgerLeft})) {
-    ${({ isMenuOpen }) => {
-      return (
-        isMenuOpen &&
-        css`
-          display: none;
-        `
-      );
-    }};
-  }
-
-  &:not(:nth-child(-n + 2)) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
 
@@ -324,24 +330,22 @@ export const LinkWrapper = styled(NavLink)``;
 
 export const BuregerWrapper = styled.div<HeaderElementProps>`
   border-left: 1px solid
-    ${({ isDarkTheme }) =>
+    ${({ isDarkTheme, theme }) =>
       isDarkTheme
-        ? ({ theme }) => theme.darkThemeColors.surface2
-        : ({ theme }) => theme.colors.grayElements};
+        ? theme.darkThemeColors.surface2
+        : theme.colors.grayElements};
 
   ${({ isMenuOpen }) => {
-    const theme = useContext(ThemeContext);
-
-    if (!theme) {
-      return '';
-    }
-
     return isMenuOpen
       ? css`
           position: fixed;
-          width: 48px;
+          width: 49px;
           top: 0;
           right: 0;
+
+          svg {
+            margin-top: 1px;
+          }
         `
       : 'position: relative;';
   }};

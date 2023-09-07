@@ -131,16 +131,10 @@ export const IconSprite = () => {
         <symbol viewBox="0 0 16 16" id="moon">
           <path d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z" />
         </symbol>
-        <symbol viewBox="0 0 24 24" fill="none" stroke-width="0" id="account">
-          <path
-            fill-rule="evenodd"
-            clip-rule="evenodd"
-            d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
-            stroke="#000000"
-            stroke-width="1.8"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
+        <symbol viewBox="0 0 128.00 128.00" fill="#000000" stroke="#000000" stroke-width="1.92" id="account">
+          <g id="SVGRepo_bgCarrier" stroke-width="0"/>
+          <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+          <g id="SVGRepo_iconCarrier"> <g> <path d="M30,49c0,18.7,15.3,34,34,34s34-15.3,34-34S82.7,15,64,15S30,30.3,30,49z M90,49c0,14.3-11.7,26-26,26S38,63.3,38,49 s11.7-26,26-26S90,34.7,90,49z"/> <path d="M24.4,119.4C35,108.8,49,103,64,103s29,5.8,39.6,16.4l5.7-5.7C97.2,101.7,81.1,95,64,95s-33.2,6.7-45.3,18.7L24.4,119.4z"/> </g> </g>
         </symbol>
         <symbol viewBox="0 0 24 24" fill="none" stroke-width="0" id="logout">
           <path

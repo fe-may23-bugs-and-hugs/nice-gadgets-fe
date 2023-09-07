@@ -148,7 +148,11 @@ export const Header = () => {
       </BarElement>
 
       <IconsSection isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
-        <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
+        <IconElement
+          isMenuOpen={isMenuOpen}
+          isDarkTheme={isDarkTheme}
+          className="swipetheme"
+        >
           <ThemeToggler />
         </IconElement>
 
@@ -156,12 +160,12 @@ export const Header = () => {
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
             <div onClick={logout}>
               <IconSprite />
-              <Icon spriteName="close" size="18px" />
+              <Icon spriteName="logout" size="18px" />
             </div>
           </IconElement>
         ) : (
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
-            <LinkWrapper to="/auth/logIn">
+            <LinkWrapper to="/auth/logIn" onClick={isMenuOpen ? closeMenu : undefined}>
               <IconSprite />
               <Icon spriteName="account" size="18px" />
             </LinkWrapper>
