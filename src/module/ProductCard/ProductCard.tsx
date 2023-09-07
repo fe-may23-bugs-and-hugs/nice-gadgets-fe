@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 import { theme } from '../../styles';
 import { ContentLayout } from '../shared/ContentLayout';
-import { useParams, useNavigate } from 'react-router-dom';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import {
   MainElement,
   PathAndBack,
@@ -135,9 +135,10 @@ export const ProductCard = () => {
   }, [productId]);
 
   const { loadPhones, newData } = useContext(PhonesContext);
+  const { pathname } = useLocation();
 
   React.useEffect(() => {
-    loadPhones('recommended/recommended');
+    loadPhones(`${pathname}/recommended`);
   }, []);
 
   if (!device) {

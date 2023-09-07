@@ -189,7 +189,16 @@ export const IconElement = styled.div<IconElementProps>`
     width: 64px;
   }
 
-  &:not(:last-child) {
+  &:nth-child(-n+2) {
+    ${({ isMenuOpen }) => {
+      return isMenuOpen
+        && css`
+          display: none;
+        `;
+    }};
+  }
+
+  &:not(:nth-child(-n+2)) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
 
@@ -199,33 +208,26 @@ export const IconElement = styled.div<IconElementProps>`
 
       return isMenuOpen
         ? css`
-            &:first-child {
-              display: block;
-              width: 100%;
-              position: relative;
+          &:not(:nth-child(-n+2)){
+            display: block;
+            width: 100%;
+            position: relative;
 
-              svg {
-                margin-left: auto;
-                margin-right: auto;
-              }
+            svg {
+              margin-left: auto;
+              margin-right: auto;
             }
-            &:nth-child(2) {
-              display: block;
-              width: 100%;
-              position: relative;
-              border-left: 1px solid ${theme.colors.grayElements};
-
-              svg {
-                margin-left: auto;
-                margin-right: auto;
-              }
-            }
+          }
           `
         : 'display: none';
     }};
   }
 
-  &:hover {
+  &:not(:first-child) {
+    border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
+  }
+
+  &:not(:first-child):hover {
     background-color: ${({ theme }) => theme.colors.grayBackground};
     transition: background-color ${({ theme }) => theme.transition.slower};
   }
@@ -241,7 +243,6 @@ export const IconElement = styled.div<IconElementProps>`
       height: ${({ theme }) => theme.fonts.lineHeightDesktop};
     }
   }
-  border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
 
   @media (min-width: 640px) {
     &:not(:last-child) {
@@ -256,6 +257,7 @@ export const IconElement = styled.div<IconElementProps>`
 export const LinkWrapper = styled(NavLink)``;
 
 export const BuregerWrapper = styled.div<mobileProps>`
+  border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
   ${({ isMenuOpen }) => {
     const theme = useContext(ThemeContext);
 
