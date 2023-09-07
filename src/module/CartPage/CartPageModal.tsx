@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable max-len */
 import React, { useState, useRef, useEffect } from 'react';
 import {
@@ -37,8 +38,10 @@ const CartPageModal: React.FC<ModalProps> = ({
     }
   };
 
-  const handleKeyDown = () => {
-    handleToggle();
+  const handleKeyDown = (e: KeyboardEvent) => {
+    if (e.key === 'Escape') {
+      handleToggle();
+    }
   };
 
   useEffect(() => {

@@ -110,7 +110,10 @@ export const Sort: React.FC = () => {
             {['4', '8', '16', 'All'].map((num) => (
               <SearchLink
                 key={num}
-                params={{ limit: num === 'All' ? totalModels.toString() : num }}
+                params={{
+                  limit: num === 'All' ? totalModels.toString() : num,
+                  page: null,
+                }}
               >
                 <LimitLink num={num} />
               </SearchLink>

@@ -140,9 +140,7 @@ export const IconSprite = () => {
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
-          >
-            {' '}
-          </path>
+          />
         </symbol>
         <symbol viewBox="0 0 24 24" fill="none" stroke-width="0" id="logout">
           <path
@@ -153,7 +151,7 @@ export const IconSprite = () => {
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"
-          ></path>
+          />
         </symbol>
       </svg>
     </svg>
