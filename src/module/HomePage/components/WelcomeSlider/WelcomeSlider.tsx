@@ -11,7 +11,13 @@ import sliderTabs from '../../../../assets/images/category-tablets.png';
 import bannerTwo from '../../../../assets/images/lg-banner.jpg';
 import bannerThree from '../../../../assets/images/airpods.jpg';
 import {
+  BannerButton,
+  BannerText,
+  BannerWrapper,
   BulletsContainner,
+  BunnerTitle,
+  OkIcon,
+  SliderBanner,
   SliderWrapper,
   StyledImageMobile,
   StyledImageTablet,

@@ -17,7 +17,7 @@ import {
 import { Icon, IconSprite, Skeleton } from '../../../shared';
 import { Phone } from '../../../../types/Phone';
 import { PhoneCard } from '../../../shared/PhoneCard';
-import { PhonesContext } from '../../../../context';
+import { useTheme, PhonesContext } from '../../../../context';
 
 type Props = {
   data: Phone[];
@@ -33,13 +33,14 @@ export const ProductsSlider: React.FC<Props> = ({
   const prevBtnId = `prev-btn-${uniqueKey}`;
   const nextBtnId = `next-btn-${uniqueKey}`;
 
-  const { discountData, discountLoader, newLoader, newData }
-    = useContext(PhonesContext);
-
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
+  const { discountData, discountLoader, newLoader, newData } = useContext(PhonesContext);
+  
   return (
     <SlideWrapper>
       <UpperWrapper>
-        <Subtitle>{subtitle}</Subtitle>
+        <Subtitle isDarkTheme={isDarkTheme}>{subtitle}</Subtitle>
+
         <ButtonsWrapper className="buttons-wrapper">
           <IconSprite />
 

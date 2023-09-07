@@ -23,7 +23,7 @@ import {
 
 import { Icon, IconSprite } from '../Sprites';
 import { Phone } from '../../../types/Phone';
-import { FavoriteContext, CartContext } from '../../../context';
+import { FavoriteContext, CartContext, PhonesContext, useTheme as useCustomTheme } from '../../../context';
 
 type Props = {
   phone: Phone;
@@ -31,6 +31,7 @@ type Props = {
 
 export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
+  const { isDarkTheme } = useCustomTheme() || { isDarkTheme: false };
 
   const { addItem, cartProducts } = useContext(CartContext);
 
@@ -54,59 +55,96 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const fullPath = `/${phone.category}/${phone._id}`;
 
   return (
-    <CardWrapper>
-      <ImageBox to={fullPath}>
-        <CardImage src={phone.images[0]} alt="Phone Image" />
-      </ImageBox>
-      <CardTitle to={phone._id}>{phone.name}</CardTitle>
+    <CardWrapper isDarkTheme={isDarkTheme}>
+      {phonesLoading || newLoader || discountLoader ? (
+        <>
+          <ContentLoader
+            speed={2}
+            width={206}
+            height={453}
+            viewBox="0 0 206 453"
+            backgroundColor="#f3f3f3"
+            foregroundColor="#ecebeb"
+          >
+            <rect x="0" y="0" rx="0" ry="0" width="208" height="208" />
+            <rect x="0" y="228" rx="0" ry="0" width="206" height="21" />
+            <rect x="0" y="268" rx="0" ry="0" width="206" height="40" />
+            <rect x="0" y="327" rx="0" ry="0" width="206" height="67" />
+            <rect x="0" y="408" rx="0" ry="0" width="206" height="40" />
+          </ContentLoader>
+        </>
+      ) : (
+        // eslint-disable-next-line indent
+        <>
+          <ImageBox to={fullPath}>
+            <CardImage src={phone.images[0]} alt="Phone Image" />
+          </ImageBox>
+          <CardTitle to={phone._id} isDarkTheme={isDarkTheme}>{phone.name}</CardTitle>
 
-      <PriceWrapper>
-        <CurrentPrice>{`$${phone.priceDiscount}`}</CurrentPrice>
-        <OldPrice>{`$${phone.priceRegular}`}</OldPrice>
-      </PriceWrapper>
+          <PriceWrapper isDarkTheme={isDarkTheme}>
+            <CurrentPrice isDarkTheme={isDarkTheme}>{`$${phone.priceDiscount}`}</CurrentPrice>
+            <OldPrice isDarkTheme={isDarkTheme}>{`$${phone.priceRegular}`}</OldPrice>
+          </PriceWrapper>
 
-      <DescrWrapper>
-        <DescrBox>
-          <DescrTitle>Screen</DescrTitle>
-          <DescrTitle>Capacity</DescrTitle>
-          <DescrTitle>RAM</DescrTitle>
-        </DescrBox>
+          <DescrWrapper>
+            <DescrBox>
+              <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>
+              <DescrTitle isDarkTheme={isDarkTheme}>Capacity</DescrTitle>
+              <DescrTitle isDarkTheme={isDarkTheme}>RAM</DescrTitle>
+            </DescrBox>
 
-        <DescrBox>
-          <DescrValue>{phone.screen || 'N/A'}</DescrValue>
-          <DescrValue>{phone.capacity || 'N/A'}</DescrValue>
-          <DescrValue>{phone.ram || 'N/A'}</DescrValue>
-        </DescrBox>
-      </DescrWrapper>
+            <DescrBox>
+              <DescrValue isDarkTheme={isDarkTheme}>{phone.screen}</DescrValue>
+              <DescrValue isDarkTheme={isDarkTheme}>{phone.capacity}</DescrValue>
+              <DescrValue isDarkTheme={isDarkTheme}>{phone.ram}</DescrValue>
+            </DescrBox>
+          </DescrWrapper>
 
-      <ButtonsWrapper>
-        <ButtonAdd
-          onClick={(e) => {
-            toggleClick(phone, e);
-          }}
-          type="button"
-          isClicked={isSelected}
-        >
-          {isSelected ? 'Added' : 'Add to cart'}
-        </ButtonAdd>
-        <ButtonLike
-          type="button"
-          // eslint-disable-next-line no-shadow
-          onClick={(e) => {
-            toggleFavorite(phone, e);
-          }}
-        >
-          <IconSprite />
-          {isFavorite ? (
-            <Icon
-              spriteName="heart-field"
-              fill={theme.colors.accentSecondary}
-            />
-          ) : (
-            <Icon spriteName="heart" />
-          )}
-        </ButtonLike>
-      </ButtonsWrapper>
+          <ButtonsWrapper>
+            <ButtonAdd
+              isDarkTheme={isDarkTheme}
+              onClick={(e) => {
+                toggleClick(phone, e);
+              }}
+              type="button"
+              isClicked={isSelected}
+            >
+              {isSelected ? 'Added' : 'Add to cart'}
+            </ButtonAdd>
+            <ButtonLike
+              isDarkTheme={isDarkTheme}
+              isClicked={!!isFavorite}
+              type="button"
+              // eslint-disable-next-line no-shadow
+              onClick={(e) => {
+                toggleFavorite(phone, e);
+              }}
+            >
+              <IconSprite />
+              {isFavorite && <Icon
+                spriteName="heart-field"
+                fill={theme.colors.accentSecondary}
+              />}
+
+              {!isFavorite && (
+                <Icon
+                  spriteName="heart"
+                />
+              )}
+
+              {isDarkTheme && isFavorite && <Icon
+                spriteName="heart-field"
+                fill={theme.colors.accentSecondary}
+              />}
+
+              {isDarkTheme && !isFavorite && <Icon
+                spriteName="heart-white"
+              />}
+            </ButtonLike>
+          </ButtonsWrapper>
+        </>
+        // eslint-disable-next-line indent
+      )}
     </CardWrapper>
   );
 };
