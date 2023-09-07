@@ -81,9 +81,9 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
           <ImgElement src={product.images[0]} />
         </ImgContainer>
         <Link to={`/${product.category}/${product._id}`}>
-        <ItemDescription>
-          <p>{product.name}</p>
-        </ItemDescription>
+          <ItemDescription>
+            <p>{product.name}</p>
+          </ItemDescription>
         </Link>
       </MobileContainer>
       <IconPriceContainer>
