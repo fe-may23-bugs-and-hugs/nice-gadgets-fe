@@ -25,37 +25,32 @@ export const Footer = () => {
   return (
     <StyledFooter isDarkTheme={isDarkTheme}>
       <FooterWrapper>
-        <Link
-          href="/"
-          isDarkTheme={isDarkTheme}
-        >
-          {isDarkTheme
-            ? <LogoFooterDark src={logoFooterWhite} />
-            : <LogoFooter src={logoFooter} />
-          }
+        <Link href="/" isDarkTheme={isDarkTheme}>
+          {isDarkTheme ? (
+            <LogoFooterDark src={logoFooterWhite} />
+          ) : (
+            <LogoFooter src={logoFooter} />
+          )}
         </Link>
 
         <ListContainer>
           <ListItem isDarkTheme={isDarkTheme}>
             <Link
               href="https://github.com/fe-may23-bugs-and-hugs"
-              isDarkTheme={isDarkTheme}>
+              isDarkTheme={isDarkTheme}
+            >
               Github
             </Link>
           </ListItem>
 
           <ListItem isDarkTheme={isDarkTheme}>
-            <Link
-              href="#"
-              isDarkTheme={isDarkTheme}>
+            <Link href="#" isDarkTheme={isDarkTheme}>
               Contacts
             </Link>
           </ListItem>
 
           <ListItem isDarkTheme={isDarkTheme}>
-            <Link
-              href="#"
-              isDarkTheme={isDarkTheme}>
+            <Link href="#" isDarkTheme={isDarkTheme}>
               rights
             </Link>
           </ListItem>
@@ -66,10 +61,11 @@ export const Footer = () => {
 
           <IconElement>
             <IconSprite />
-            {isDarkTheme
-              ? <Icon spriteName="arrow-up-white" />
-              : <Icon spriteName="arrow-up" />
-            }
+            {isDarkTheme ? (
+              <Icon spriteName="arrow-up-white" />
+            ) : (
+              <Icon spriteName="arrow-up" />
+            )}
           </IconElement>
         </ButtonWrapper>
       </FooterWrapper>

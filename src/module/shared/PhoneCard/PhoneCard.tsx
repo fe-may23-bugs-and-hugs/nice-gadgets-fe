@@ -54,6 +54,8 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
     addFavoriteProduct(phoneData);
   };
 
+  const fullPath = `/${phone.category}/${phone._id}`;
+
   return (
     <CardWrapper>
       {phonesLoading || newLoader || discountLoader ? (
@@ -76,7 +78,7 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
       ) : (
         // eslint-disable-next-line indent
         <>
-          <ImageBox to={phone._id}>
+          <ImageBox to={fullPath}>
             <CardImage src={phone.images[0]} alt="Phone Image" />
           </ImageBox>
           <CardTitle to={phone._id}>{phone.name}</CardTitle>
