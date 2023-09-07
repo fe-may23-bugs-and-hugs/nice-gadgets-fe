@@ -1,9 +1,6 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-console */
 import React, { useState, useContext, useEffect } from 'react';
 import { Icon, IconSprite } from '../shared/Sprites';
 import { ContentLayout } from '../shared/ContentLayout';
-import CartPageModal from './CartPageModal';
 import { BackButton } from '../shared/BackButton/';
 import {
   CartContainer,
@@ -19,7 +16,8 @@ import {
   CartTitle,
 } from './CartPage.styled';
 import { CartContext, useTheme } from '../../context';
-import { CartItemPage } from './CartItemPage';
+import { CartItemPage } from './components/CartItemPage/CartItemPage';
+import CartPageModal from './components/CartPageModal/CartPageModal';
 
 export const CartPage: React.FC = () => {
   const { cartProducts, setCartProducts } = useContext(CartContext);

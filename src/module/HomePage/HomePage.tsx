@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React, { useEffect, useContext } from 'react';
 import { ContentLayout } from '../shared/ContentLayout';
 import { ProductsSlider } from './components/ProductsSlider/ProductsSlider';

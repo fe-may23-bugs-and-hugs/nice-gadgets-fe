@@ -183,10 +183,8 @@ export const IconClose = styled.div<DarkTheme>`
   height: 32px;
   border-radius: 50%;
   border: 1px solid
-  ${({ isDarkTheme, theme }) =>
-    isDarkTheme
-      ? theme.darkThemeColors.white
-      : theme.colors.grayElements};
+    ${({ isDarkTheme, theme }) =>
+    isDarkTheme ? theme.darkThemeColors.white : theme.colors.grayElements};
   align-items: center;
   justify-content: center;
 
@@ -196,10 +194,8 @@ export const IconClose = styled.div<DarkTheme>`
   &:hover {
     /* background-color: ${({ theme }) => theme.colors.graySecondary}; */
     border: 1px solid
-  ${({ isDarkTheme, theme }) =>
-    isDarkTheme
-      ? theme.darkThemeColors.grayIcons
-      : theme.colors.black};
+      ${({ isDarkTheme, theme }) =>
+    isDarkTheme ? theme.darkThemeColors.grayIcons : theme.colors.black};
   }
 
   @media (max-width: 1200px) {

@@ -130,6 +130,6 @@ export const BulletsContainner = styled.div<DarkTheme>`
     background-color: ${({ isDarkTheme }) =>
     isDarkTheme
       ? ({ theme }) => theme.darkThemeColors.graySecondary
-      : ({ theme }) => theme.colors.grayPrimary} !important
+      : ({ theme }) => theme.colors.grayPrimary} !important;
   }
 `;

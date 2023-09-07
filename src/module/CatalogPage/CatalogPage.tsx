@@ -1,4 +1,3 @@
-/* eslint-disable*/
 import React, { useContext, useEffect, useState } from 'react';
 import { ContentLayout } from '../shared/ContentLayout';
 import {
@@ -6,13 +5,13 @@ import {
   CatalogModelsLeft,
   BreadcrumbsWrapper,
 } from './CatalogPage.styled';
-import { Catalog } from '../Catalog/Catalog';
+import { Catalog } from '../shared/Catalog/Catalog';
 import { PhonesContext } from '../../context/phonesContext';
-import { Pagination } from '../Pagination/Pagination';
+import { Pagination } from './components/Pagination/Pagination';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
-import { Sort } from '../Sort';
+import { Sort } from './components/Sort';
 import { useLocation } from 'react-router-dom';
-import { Loader } from '../Loader';
+import { Loader } from '../shared/Loader';
 import { useTheme } from '../../context';
 
 export const CatalogPage: React.FC = () => {
@@ -41,13 +40,13 @@ export const CatalogPage: React.FC = () => {
       });
   }, [currentPage, currentLimit, sortField, order, pathname]);
 
-  const isModelsExist =
-    totalModels > 0 ? `${totalModels} models` : 'There are no such models';
+  const isModelsExist
+    = totalModels > 0 ? `${totalModels} models` : 'There are no such models';
 
   const normalizeTitle = pathname.slice(1);
 
-  const finalTitle =
-    normalizeTitle.slice(0, 1).toUpperCase() + normalizeTitle.slice(1);
+  const finalTitle
+    = normalizeTitle.slice(0, 1).toUpperCase() + normalizeTitle.slice(1);
 
   return (
     <>

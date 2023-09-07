@@ -1,10 +1,7 @@
-/*eslint-disable*/
 import React, { createContext, useState } from 'react';
-import { LoginTypes } from '../types/Login';
-import { fetchAuthMe, fetchLogin, fetchRegister } from '../api/authAPI';
+import { LoginTypes, RegisterData, UserLogin } from '../types';
 import { useLocalStorage } from 'usehooks-ts';
-import { UserLogin } from '../types/UserLogin';
-import { RegisterData } from '../types/Register';
+import { fetchLogin, fetchRegister } from '../api';
 
 interface IAuthContext {
   userData: UserLogin | null;

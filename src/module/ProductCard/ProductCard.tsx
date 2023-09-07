@@ -65,7 +65,7 @@ import {
 } from '../../context';
 import { ProductsSlider } from '../HomePage/components/ProductsSlider/ProductsSlider';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
-import { Loader } from '../Loader';
+import { Loader } from '../shared/Loader';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};

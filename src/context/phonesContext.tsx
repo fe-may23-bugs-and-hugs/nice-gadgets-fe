@@ -1,10 +1,7 @@
-/*eslint-disable*/
 import React, { createContext, useState } from 'react';
-import { Phone } from '../types/Phone';
-import { getPhones, getSliderData } from '../api/phonesAPI';
-import { SORTING } from '../types/sortEnum';
-import { ORDER } from '../types/OrderEnum';
+import { ORDER, Phone, SORTING } from '../types';
 import { useSearchParams } from 'react-router-dom';
+import { getPhones, getSliderData } from '../api';
 
 interface IContext {
   phones: Phone[];
@@ -26,6 +23,7 @@ interface IContext {
   sortField: SORTING;
   order: ORDER;
   limit: number;
+  errors: boolean;
 }
 
 export const PhonesContext = createContext<IContext>({
@@ -48,6 +46,7 @@ export const PhonesContext = createContext<IContext>({
   totalModels: 0,
   sortField: SORTING.NEWEST,
   order: ORDER.DESC,
+  errors: false,
 });
 
 type Props = {
@@ -73,7 +72,7 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const [recommendedData, setRecommendedData] = useState<Phone[]>([]);
   const [recommendedLoader, setRecommendedLoader] = useState(false);
 
-  const loadPhones = async (pathname: string): Promise<void> => {
+  const loadPhones = async(pathname: string): Promise<void> => {
     setPhonesLoading(true);
 
     try {
@@ -144,6 +143,7 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     sortField: sort,
     order,
     limit,
+    errors,
   };
 
   return (

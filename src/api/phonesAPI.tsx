@@ -1,7 +1,5 @@
-import { client } from '../helpers/fetchClient';
-import { ORDER } from '../types/OrderEnum';
-import { Phone } from '../types/Phone';
-import { SORTING } from '../types/sortEnum';
+import { client } from '../helpers';
+import { ORDER, Phone, SORTING } from '../types';
 
 type fetchParams = {
   limit: number;

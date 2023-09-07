@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import { useState, useEffect, useContext } from 'react';
 import { Icon, IconSprite } from '../Sprites';
 import logo from './../../../assets/images/logo.png';
@@ -17,9 +16,13 @@ import {
   BuregerWrapper,
   LinkWrapper,
 } from './Header.styled';
-import { FavoriteContext, CartContext, AuthContext } from '../../../context';
+import {
+  FavoriteContext,
+  CartContext,
+  AuthContext,
+  useTheme as customUseTheme,
+} from '../../../context';
 import { ThemeToggler } from '../ThemeToggler';
-import { useTheme as customUseTheme } from '../../../context';
 import Notiflix from 'notiflix';
 import { useTheme } from 'styled-components';
 
@@ -49,6 +52,7 @@ export const Header = () => {
       titleColor: theme.colors.accentSecondary,
       okButtonBackground: theme.colors.accentPrimary,
     });
+
     Notiflix.Confirm.show(
       'Modal control',
       'Are you sure you want to logout?',
@@ -56,14 +60,13 @@ export const Header = () => {
       'No',
       () => {
         onLogoutUser();
+
         Notiflix.Notify.init({
           position: 'right-bottom',
         });
         Notiflix.Notify.success('Successfully loggout', { timeout: 1000 });
       },
-      () => {
-        return;
-      },
+      () => {},
       {},
     );
   };

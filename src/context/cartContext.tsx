@@ -1,7 +1,6 @@
-/*eslint-disable*/
 import React, { createContext } from 'react';
+import { Phone, PhoneWithQuantity } from '../types';
 import { useLocalStorage } from 'usehooks-ts';
-import { Phone, PhoneWithQuantity } from '../types/Phone';
 
 interface ICartContext {
   cartProducts: any[];
@@ -10,7 +9,7 @@ interface ICartContext {
   setCartProducts: (
     newCartProducts:
       | PhoneWithQuantity[]
-      | ((newCartProducts: PhoneWithQuantity[]) => PhoneWithQuantity[]),
+      | ((currentProducts: PhoneWithQuantity[]) => PhoneWithQuantity[]),
   ) => void;
 }
 
@@ -31,8 +30,6 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
     [],
   );
 
-  console.log(cartProducts);
-
   const addItem = (product: Phone) => {
     const isProductExist = cartProducts.find(
       (baseProduct) => baseProduct._id === product._id,
@@ -40,8 +37,7 @@ export const CartProvider: React.FC<Props> = ({ children }) => {
 
     if (isProductExist) {
       setCartProducts((prev) =>
-        prev.filter((item) => item._id !== product._id),
-      );
+        prev.filter((item) => item._id !== product._id));
 
       return;
     }

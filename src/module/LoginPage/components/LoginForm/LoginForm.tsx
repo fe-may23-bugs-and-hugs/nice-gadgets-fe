@@ -1,4 +1,3 @@
-/*eslint-disable*/
 import React, { useContext, useEffect, useState } from 'react';
 import {
   SectionWrapper,
@@ -24,8 +23,8 @@ import { useTheme } from '../../../../context';
 
 export const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { onSendLogin, isAuth, loginError, onResetErrors } =
-    useContext(AuthContext);
+  const { onSendLogin, isAuth, loginError, onResetErrors }
+    = useContext(AuthContext);
   const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const {
@@ -66,7 +65,7 @@ export const LoginForm: React.FC = () => {
   const onHandleSubmit = (values: LoginTypes) => {
     const data = onSendLogin(values);
 
-    console.log(data);
+    return data;
   };
 
   if (isAuth) {
@@ -74,8 +73,6 @@ export const LoginForm: React.FC = () => {
   }
 
   const disabledFunc = Boolean(errors.email || errors.password);
-
-  console.log(errors);
 
   const handleEmailInputChange = () => {
     clearErrors('email');
@@ -96,7 +93,9 @@ export const LoginForm: React.FC = () => {
 
         <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <InputWrapper>
-            <Label isDarkTheme={isDarkTheme} htmlFor="email">Email</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="email">
+              Email
+            </Label>
             <Input
               type="email"
               id="email"
@@ -115,7 +114,9 @@ export const LoginForm: React.FC = () => {
             )}
           </InputWrapper>
           <InputWrapper>
-            <Label isDarkTheme={isDarkTheme} htmlFor="password">Password</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="password">
+              Password
+            </Label>
             <EyeWrapper>
               <Input
                 type={showPassword ? 'text' : 'password'}
@@ -149,7 +150,9 @@ export const LoginForm: React.FC = () => {
             Log In
           </SubmitButton>
         </Form>
-        <FormLink isDarkTheme={isDarkTheme} to="/auth/signUp">Sign Up</FormLink>
+        <FormLink isDarkTheme={isDarkTheme} to="/auth/signUp">
+          Sign Up
+        </FormLink>
       </FormWrapper>
     </SectionWrapper>
   );

@@ -1,5 +1,3 @@
-/* eslint-disable indent */
-/* eslint-disable operator-linebreak */
 import styled, { css, ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -117,9 +115,9 @@ export const LinkElement = styled(NavLink)<DarkTheme>`
 
   &.active {
     color: ${({ isDarkTheme }) =>
-      isDarkTheme
-        ? ({ theme }) => theme.darkThemeColors.white
-        : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 
     font-weight: ${({ theme }) => theme.fonts.weightBold};
 
@@ -131,9 +129,9 @@ export const LinkElement = styled(NavLink)<DarkTheme>`
       width: 100%;
       height: 3px;
       background-color: ${({ isDarkTheme }) =>
-        isDarkTheme
-          ? ({ theme }) => theme.darkThemeColors.white
-          : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
     }
   }
 
@@ -144,9 +142,9 @@ export const LinkElement = styled(NavLink)<DarkTheme>`
     width: 0%;
     height: 3px;
     background-color: ${({ isDarkTheme }) =>
-      isDarkTheme
-        ? ({ theme }) => theme.darkThemeColors.white
-        : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 
     transition: all ${({ theme }) => theme.transition.faster};
     display: block;
@@ -161,9 +159,9 @@ export const LiElement = styled.li<DarkTheme>`
 
   &:hover {
     color: ${({ isDarkTheme }) =>
-      isDarkTheme
-        ? ({ theme }) => theme.darkThemeColors.white
-        : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 
     transition: color ${({ theme }) => theme.transition.slower};
 
@@ -182,7 +180,7 @@ export const IconsSection = styled.div<HeaderElementProps>`
   height: ${({ isMenuOpen }) => (isMenuOpen ? '48px' : 'auto')};
   border-top: 1px solid
     ${({ isMenuOpen, theme }) =>
-      isMenuOpen ? theme.colors.grayElements : 'none'};
+    isMenuOpen ? theme.colors.grayElements : 'none'};
 `;
 
 export const IconElement = styled.div<HeaderElementProps>`
@@ -192,8 +190,8 @@ export const IconElement = styled.div<HeaderElementProps>`
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   ${({ hasPinkCircle, circleText }) =>
-    hasPinkCircle &&
-    css`
+    hasPinkCircle
+    && css`
       &:before {
         content: '${circleText}';
         font-size: 10px;
@@ -229,58 +227,58 @@ export const IconElement = styled.div<HeaderElementProps>`
 
   &:nth-child(n) {
     ${({ isMenuOpen }) => {
-      return (
-        isMenuOpen &&
-        css`
+    return (
+      isMenuOpen
+        && css`
           display: none;
         `
-      );
-    }};
+    );
+  }};
   }
 
   &:first-child {
     ${({ isMenuOpen }) => {
-      return (
-        isMenuOpen &&
-        css`
+    return (
+      isMenuOpen
+        && css`
           width: 48px;
           display: block;
         `
-      );
-    }};
+    );
+  }};
   }
 
   @media (max-width: 639px) {
     &.swipetheme {
       ${({ isMenuOpen }) => {
-      return isMenuOpen
-        ? css`
-          position: fixed;
-          margin-right: 48px;
-          width: 48px;
-          height: 48px;
-          top: 15px;
-          right: 0;
+    return isMenuOpen
+      ? css`
+              position: fixed;
+              margin-right: 48px;
+              width: 48px;
+              height: 48px;
+              top: 15px;
+              right: 0;
 
-            svg {
-              margin-top: 1px;
-            }
-          `
-        : 'position: relative;';
-      }};
+              svg {
+                margin-top: 1px;
+              }
+            `
+      : 'position: relative;';
+  }};
     }
   }
 
   &:not(:nth-child(-n + ${IconsBurgerLeft})) {
     ${({ isMenuOpen }) => {
-      const theme = useContext(ThemeContext);
+    const theme = useContext(ThemeContext);
 
-      if (!theme) {
-        return '';
-      }
+    if (!theme) {
+      return '';
+    }
 
-      return isMenuOpen
-        ? css`
+    return isMenuOpen
+      ? css`
             &:not(:nth-child(-n + ${IconsBurgerLeft})) {
               display: block;
               width: 100%;
@@ -292,23 +290,23 @@ export const IconElement = styled.div<HeaderElementProps>`
               }
             }
           `
-        : 'display: none';
-    }};
+      : 'display: none';
+  }};
   }
 
   &:not(:first-child) {
     border-left: 1px solid
       ${({ isDarkTheme }) =>
-        isDarkTheme
-          ? ({ theme }) => theme.darkThemeColors.surface2
-          : ({ theme }) => theme.colors.grayElements};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.surface2
+      : ({ theme }) => theme.colors.grayElements};
   }
 
   &:not(:first-child):hover {
     background-color: ${({ isDarkTheme }) =>
-      isDarkTheme
-        ? ({ theme }) => theme.darkThemeColors.grayIcons
-        : ({ theme }) => theme.colors.grayBackground};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.grayIcons
+      : ({ theme }) => theme.colors.grayBackground};
 
     transition: background-color ${({ theme }) => theme.transition.slower};
   }
@@ -340,7 +338,7 @@ export const LinkWrapper = styled(NavLink)``;
 export const BuregerWrapper = styled.div<HeaderElementProps>`
   border-left: 1px solid
     ${({ isDarkTheme, theme }) =>
-      isDarkTheme ? theme.darkThemeColors.surface2 : theme.colors.grayElements};
+    isDarkTheme ? theme.darkThemeColors.surface2 : theme.colors.grayElements};
 
   ${({ isMenuOpen }) => {
     return isMenuOpen
