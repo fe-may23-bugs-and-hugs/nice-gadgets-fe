@@ -30,8 +30,8 @@ const CartPageModal: React.FC<ModalProps> = ({
 
   const handleDocumentClick = () => {
     if (
-      !modalRef.current
-      || !modalRef.current.contains(document.activeElement)
+      !modalRef.current ||
+      !modalRef.current.contains(document.activeElement)
     ) {
       handleToggle();
     }

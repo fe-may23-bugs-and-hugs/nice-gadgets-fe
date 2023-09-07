@@ -42,8 +42,8 @@ export const Span = styled.span<{ isDarkTheme: boolean }>`
     background: linear-gradient(180deg, #f447af, #fcdbc1);
 
     ${({ isDarkTheme }) =>
-    isDarkTheme
-      && `
+      isDarkTheme &&
+      `
         left: calc(100% - 2px);
         transform: translateX(-100%);
         background: linear-gradient(180deg, #905BFF, #0F0F11);

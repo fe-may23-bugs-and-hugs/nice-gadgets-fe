@@ -1,4 +1,5 @@
 import { createGlobalStyle } from 'styled-components';
+import { onDesktop } from '../module/shared/Mixins';
 import 'modern-normalize';
 import './index.css';
 
@@ -17,6 +18,10 @@ export const GlobalStyle = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-weight: normal;
+
+    ${onDesktop(`
+      overflow: scroll;
+    `)}
   }
 
   h1, h2, h3, h4, h5, p, ul {

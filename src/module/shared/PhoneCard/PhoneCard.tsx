@@ -1,3 +1,4 @@
+/* eslint-disable operator-linebreak */
 /* eslint-disable no-console */
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
@@ -33,8 +34,8 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
 
   const { addItem, cartProducts } = useContext(CartContext);
-  const { phonesLoading, newLoader, discountLoader }
-    = useContext(PhonesContext);
+  const { phonesLoading, newLoader, discountLoader } =
+    useContext(PhonesContext);
 
   const { addFavoriteProduct, favoriteProducts } = useContext(FavoriteContext);
 
@@ -53,8 +54,10 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
     addFavoriteProduct(phoneData);
   };
 
+  const fullPath = `/${phone.category}/${phone._id}`;
+
   return (
-    <CardWrapper to={phone._id}>
+    <CardWrapper>
       {phonesLoading || newLoader || discountLoader ? (
         <>
           <ContentLoader
@@ -75,10 +78,10 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
       ) : (
         // eslint-disable-next-line indent
         <>
-          <ImageBox>
+          <ImageBox to={fullPath}>
             <CardImage src={phone.images[0]} alt="Phone Image" />
           </ImageBox>
-          <CardTitle>{phone.name}</CardTitle>
+          <CardTitle to={phone._id}>{phone.name}</CardTitle>
 
           <PriceWrapper>
             <CurrentPrice>{`$${phone.priceDiscount}`}</CurrentPrice>
