@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   SectionWrapper,
   Form,
@@ -21,7 +21,8 @@ import { Icon, IconSprite } from '../../../shared';
 
 export const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { onSendLogin, isAuth, error, onResetErrors } = useContext(AuthContext);
+  const { onSendLogin, isAuth, loginError, onResetErrors } =
+    useContext(AuthContext);
 
   const {
     register,
@@ -33,7 +34,7 @@ export const LoginForm: React.FC = () => {
       email: '',
       password: '',
     },
-    mode: 'onBlur',
+    mode: 'onSubmit',
   });
 
   useEffect(() => {
@@ -70,10 +71,6 @@ export const LoginForm: React.FC = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
-
-  const clearError = () => {
-    onResetErrors();
-  };
 
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
