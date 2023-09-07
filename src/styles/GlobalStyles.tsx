@@ -1,7 +1,7 @@
 import { createGlobalStyle } from 'styled-components';
 import 'modern-normalize';
 import './index.css';
-import { onDesktop } from '../module/shared/Mixins';
+import { onTablet } from '../module/shared/Mixins';
 import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
@@ -20,20 +20,20 @@ export const GlobalStyle = createGlobalStyle`
     -moz-osx-font-smoothing: grayscale;
     font-weight: normal;
 
-    ${onDesktop(`
+    ${onTablet(`
       overflow: scroll;
       overflow-x: hidden;
     `)}
   }
 
-  ${onDesktop(`
+  ${onTablet(`
     ::-webkit-scrollbar {
       width: 8px;
     }
 
     ::-webkit-scrollbar-thumb {
       background-color: ${theme.colors.graySecondary};
-      border-radius: 2px;
+      border-radius: 5px;
     }
 
     ::-webkit-scrollbar-thumb:hover {

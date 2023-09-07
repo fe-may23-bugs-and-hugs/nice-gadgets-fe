@@ -10,6 +10,8 @@ interface IconElementProps {
   isMenuOpen?: boolean;
 }
 
+const IconsBurgerLeft = 1;
+
 export interface mobileProps {
   isMenuOpen: boolean;
 }
@@ -20,7 +22,7 @@ export const HeaderElement = styled.header<mobileProps>`
   align-items: center;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grayElements};
 
-  height: ${({ isMenuOpen }) => (isMenuOpen ? '100vh' : 'auto')};
+  height: ${({ isMenuOpen }) => (isMenuOpen ? '100dvh' : 'auto')};
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
 `;
 
@@ -161,6 +163,10 @@ export const IconElement = styled.div<IconElementProps>`
   cursor: pointer;
   transition: background-color ${({ theme }) => theme.transition.slower};
 
+  &.search-open {
+  width: 250px;
+}
+
   ${({ hasPinkCircle, circleText }) =>
     hasPinkCircle &&
     css`
@@ -197,7 +203,7 @@ export const IconElement = styled.div<IconElementProps>`
     width: 64px;
   }
 
-  &:nth-child(-n + 2) {
+  &:nth-child(-n + ${IconsBurgerLeft}) {
     ${({ isMenuOpen }) => {
       return (
         isMenuOpen &&
@@ -208,7 +214,7 @@ export const IconElement = styled.div<IconElementProps>`
     }};
   }
 
-  &:not(:nth-child(-n + 2)) {
+  &:not(:nth-child(-n + ${IconsBurgerLeft})) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
 
@@ -218,7 +224,7 @@ export const IconElement = styled.div<IconElementProps>`
 
       return isMenuOpen
         ? css`
-            &:not(:nth-child(-n + 2)) {
+            &:not(:nth-child(-n + ${IconsBurgerLeft})) {
               display: block;
               width: 100%;
               position: relative;

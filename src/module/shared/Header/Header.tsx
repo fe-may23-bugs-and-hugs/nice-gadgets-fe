@@ -107,10 +107,10 @@ export const Header = () => {
         <IconElement isMenuOpen={isMenuOpen}>
           <ThemeToggler />
         </IconElement>
-        <IconElement isMenuOpen={isMenuOpen}>
+        {/* <IconElement isMenuOpen={isMenuOpen}>
           <IconSprite />
           <Icon spriteName="search" size="18px" />
-        </IconElement>
+        </IconElement> */}
         <IconElement isMenuOpen={isMenuOpen}>
           <LinkWrapper to="/account">
             <IconSprite />
