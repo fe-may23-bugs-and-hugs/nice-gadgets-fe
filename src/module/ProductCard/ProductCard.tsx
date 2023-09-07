@@ -57,7 +57,7 @@ import { colorMappings } from './colorMappings';
 import { getOnePhone } from '../../api/phonesAPI';
 import { Phone } from '../../types/Phone';
 import { BackButton } from '../shared/BackButton';
-import { CartContext, FavoriteContext, PhonesContext, useTheme } from '../../context';
+import { CartContext, FavoriteContext, PhonesContext } from '../../context';
 import { ProductsSlider } from '../HomePage/components/ProductsSlider/ProductsSlider';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
 import { Loader } from '../Loader';
@@ -90,7 +90,6 @@ export const ProductCard = () => {
   const [currentImage, setCurrentImage] = React.useState(device?.images[0]);
   const [selectedImage, setSelectedImage] = React.useState<string>('');
   const [loading, setLoading] = React.useState(true);
-  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const { loadRecommendedData, recommendedData } = useContext(PhonesContext);
   const { pathname } = useLocation();
@@ -254,18 +253,17 @@ export const ProductCard = () => {
                     </ChoiseWrapper>
                   )}
 
-                  <PriceWrapper className="card-price" isDarkTheme={isDarkTheme}>
-                    <CurrentPrice className="card-current-price" isDarkTheme={isDarkTheme}>
+                  <PriceWrapper className="card-price">
+                    <CurrentPrice className="card-current-price">
                       {`$${device.priceDiscount}`}
                     </CurrentPrice>
-                    <OldPrice className="card-old-price" isDarkTheme={isDarkTheme}>
+                    <OldPrice className="card-old-price">
                       {`$${device.priceRegular}`}
                     </OldPrice>
                   </PriceWrapper>
 
                   <ButtonsWrapper className="card-button">
                     <ButtonAdd
-                      isDarkTheme={isDarkTheme}
                       onClick={() => {
                         toggleClick(device);
                       }}
@@ -277,49 +275,36 @@ export const ProductCard = () => {
                     </ButtonAdd>
                     <ButtonLike
                       type="button"
-                      isDarkTheme={isDarkTheme}
-                      isClicked={!!isFavorite}
                       onClick={() => {
                         toggleFavorite(device);
                       }}
                       className="card-button-like"
                     >
                       <IconSprite />
-                      {isFavorite && <Icon
-                        spriteName="heart-field"
-                        fill={theme.colors.accentSecondary}
-                      />}
-
-                      {!isFavorite && (
+                      {isFavorite ? (
                         <Icon
-                          spriteName="heart"
+                          spriteName="heart-field"
+                          fill={theme.colors.accentSecondary}
                         />
+                      ) : (
+                        <Icon spriteName="heart" />
                       )}
-
-                      {isDarkTheme && isFavorite && <Icon
-                        spriteName="heart-field"
-                        fill={theme.colors.accentSecondary}
-                      />}
-
-                      {isDarkTheme && !isFavorite && <Icon
-                        spriteName="heart-white"
-                      />}
                     </ButtonLike>
                   </ButtonsWrapper>
 
                   <DescrWrapper>
                     <DescrBox>
-                      {device.screen && <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>}
-                      {device.resolution && <DescrTitle isDarkTheme={isDarkTheme}>Resolution</DescrTitle>}
-                      {device.processor && <DescrTitle isDarkTheme={isDarkTheme}>Processor</DescrTitle>}
-                      {device.ram && <DescrTitle isDarkTheme={isDarkTheme}>Ram</DescrTitle>}
+                      {device.screen && <DescrTitle>Screen</DescrTitle>}
+                      {device.resolution && <DescrTitle>Resolution</DescrTitle>}
+                      {device.processor && <DescrTitle>Processor</DescrTitle>}
+                      {device.ram && <DescrTitle>Ram</DescrTitle>}
                     </DescrBox>
 
                     <DescrBox>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.screen}</DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.resolution}</DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.processor}</DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>{device.ram}</DescrValue>
+                      <DescrValue>{device.screen}</DescrValue>
+                      <DescrValue>{device.resolution}</DescrValue>
+                      <DescrValue>{device.processor}</DescrValue>
+                      <DescrValue>{device.ram}</DescrValue>
                     </DescrBox>
                   </DescrWrapper>
                 </CardWrapper>
