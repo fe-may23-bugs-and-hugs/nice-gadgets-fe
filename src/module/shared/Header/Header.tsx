@@ -2,6 +2,7 @@
 import { useState, useEffect, useContext } from 'react';
 import { Icon, IconSprite } from '../Sprites';
 import logo from './../../../assets/images/logo.png';
+import logoWhite from './../../../assets/images/logo_header_white.png';
 import {
   HeaderElement,
   BarElement,
@@ -18,6 +19,7 @@ import {
 } from './Header.styled';
 import { FavoriteContext, CartContext, AuthContext } from '../../../context';
 import { ThemeToggler } from '../ThemeToggler';
+import { useTheme as customUseTheme } from '../../../context';
 import Notiflix from 'notiflix';
 import { useTheme } from 'styled-components';
 
@@ -28,6 +30,7 @@ export const Header = () => {
   const { isAuth, onLogoutUser } = useContext(AuthContext);
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const { isDarkTheme } = customUseTheme() || { isDarkTheme: false };
 
   const toggleMenu = () => {
     setIsMenuOpen(!isMenuOpen);
@@ -89,42 +92,52 @@ export const Header = () => {
   }, [isMenuOpen]);
 
   return (
-    <HeaderElement isMenuOpen={isMenuOpen}>
+    <HeaderElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
       <BarElement isMenuOpen={isMenuOpen}>
         <ImgArea
           to="/"
           isMenuOpen={isMenuOpen}
           onClick={isMenuOpen ? closeMenu : undefined}
         >
-          <ImgElement src={logo} />
+          {isDarkTheme
+            ? <ImgElement src={logoWhite} />
+            : <ImgElement src={logo} />
+          }
         </ImgArea>
-        <NavElement isMenuOpen={isMenuOpen}>
+        <NavElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
           <UlElement isMenuOpen={isMenuOpen}>
-            <LiElement>
-              <LinkElement to="/" onClick={isMenuOpen ? closeMenu : undefined}>
+            <LiElement isDarkTheme={isDarkTheme}>
+              <LinkElement
+                to="/"
+                onClick={isMenuOpen ? closeMenu : undefined}
+                isDarkTheme={isDarkTheme}
+              >
                 Home
               </LinkElement>
             </LiElement>
-            <LiElement>
+            <LiElement isDarkTheme={isDarkTheme}>
               <LinkElement
                 to="/phones"
                 onClick={isMenuOpen ? closeMenu : undefined}
+                isDarkTheme={isDarkTheme}
               >
                 Phones
               </LinkElement>
             </LiElement>
-            <LiElement>
+            <LiElement isDarkTheme={isDarkTheme}>
               <LinkElement
                 to="/tablets"
                 onClick={isMenuOpen ? closeMenu : undefined}
+                isDarkTheme={isDarkTheme}
               >
                 Tablets
               </LinkElement>
             </LiElement>
-            <LiElement>
+            <LiElement isDarkTheme={isDarkTheme}>
               <LinkElement
                 to="/accessories"
                 onClick={isMenuOpen ? closeMenu : undefined}
+                isDarkTheme={isDarkTheme}
               >
                 Accessories
               </LinkElement>
@@ -132,40 +145,50 @@ export const Header = () => {
           </UlElement>
         </NavElement>
       </BarElement>
-      <IconsSection isMenuOpen={isMenuOpen}>
-        <IconElement isMenuOpen={isMenuOpen}>
+
+      <IconsSection isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
+        <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
           <ThemeToggler />
         </IconElement>
-        <IconElement isMenuOpen={isMenuOpen}>
+        <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
           <IconSprite />
-          <Icon spriteName="search" size="18px" />
+          {isDarkTheme
+            ? <Icon spriteName="search-white" size="18px" />
+            : <Icon spriteName="search" size="18px" />
+          }
         </IconElement>
+
         {isAuth ? (
-          <IconElement isMenuOpen={isMenuOpen}>
+          <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
             <div onClick={logout}>
               <IconSprite />
               <Icon spriteName="close" size="18px" />
             </div>
           </IconElement>
         ) : (
-          <IconElement isMenuOpen={isMenuOpen}>
+          <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
             <LinkWrapper to="/auth/logIn">
               <IconSprite />
               <Icon spriteName="account" size="18px" />
             </LinkWrapper>
           </IconElement>
         )}
+
         <IconElement
           hasPinkCircle={!!totalFavorite}
           circleText={totalFavorite}
           isMenuOpen={isMenuOpen}
+          isDarkTheme={isDarkTheme}
         >
           <LinkWrapper
             to="/favorites"
             onClick={isMenuOpen ? closeMenu : undefined}
           >
             <IconSprite />
-            <Icon spriteName="heart" size="18px" />
+            {isDarkTheme
+              ? <Icon spriteName="heart-white" size="18px" />
+              : <Icon spriteName="heart" size="18px" />
+            }
           </LinkWrapper>
         </IconElement>
 
@@ -173,17 +196,32 @@ export const Header = () => {
           hasPinkCircle={!!totalItems}
           circleText={totalItems}
           isMenuOpen={isMenuOpen}
+          isDarkTheme={isDarkTheme}
         >
           <LinkWrapper to="/cart" onClick={isMenuOpen ? closeMenu : undefined}>
             <IconSprite />
-            <Icon spriteName="shopping-bag" size="18px" />
+            {isDarkTheme
+              ? <Icon spriteName="shopping-bag-white" size="18px" />
+              : <Icon spriteName="shopping-bag" size="18px" />
+            }
           </LinkWrapper>
         </IconElement>
 
-        <BuregerWrapper onClick={toggleMenu} isMenuOpen={isMenuOpen}>
-          <IconElement className={isMenuOpen ? 'close' : 'burger'}>
+        <BuregerWrapper
+          onClick={toggleMenu}
+          isMenuOpen={isMenuOpen}
+          isDarkTheme={isDarkTheme}
+        >
+          <IconElement
+            className={isMenuOpen ? 'close' : 'burger'}
+            isMenuOpen={isMenuOpen}
+            isDarkTheme={isDarkTheme}
+          >
             <IconSprite />
-            <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
+            {isDarkTheme
+              ? <Icon spriteName={isMenuOpen ? 'close-white' : 'burger-white'} size="18px" />
+              : <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
+            }
           </IconElement>
         </BuregerWrapper>
       </IconsSection>

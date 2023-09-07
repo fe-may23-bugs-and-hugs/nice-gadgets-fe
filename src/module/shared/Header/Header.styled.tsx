@@ -14,11 +14,21 @@ export interface mobileProps {
   isMenuOpen: boolean;
 }
 
-export const HeaderElement = styled.header<mobileProps>`
+export interface DarkTheme {
+  isDarkTheme: boolean;
+}
+
+type HeaderElementProps = mobileProps & DarkTheme & IconElementProps;
+
+export const HeaderElement = styled.header<HeaderElementProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grayElements};
+  background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.black
+      : ({ theme }) => theme.colors.white};
 
   height: ${({ isMenuOpen }) => (isMenuOpen ? '100vh' : 'auto')};
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
@@ -41,11 +51,15 @@ export const BarElement = styled.div<mobileProps>`
   }
 `;
 
-export const NavElement = styled.nav<mobileProps>`
+export const NavElement = styled.nav<HeaderElementProps>`
   font-family: ${({ theme }) => theme.fonts.name};
   font-size: ${({ theme }) => theme.fonts.sizeXxs};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
-  color: ${({ theme }) => theme.colors.graySecondary};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.graySecondary};
+
   line-height: ${({ theme }) => theme.fonts.lineHeightTablet};
   align-items: center;
 
@@ -58,7 +72,7 @@ export const NavElement = styled.nav<mobileProps>`
   }
 `;
 
-export const ImgArea = styled(NavLink)<mobileProps>`
+export const ImgArea = styled(NavLink) <mobileProps>`
   width: 100%;
 
   border-bottom: ${({ isMenuOpen, theme }) =>
@@ -96,13 +110,17 @@ export const UlElement = styled.ul<mobileProps>`
   }
 `;
 
-export const LinkElement = styled(NavLink)`
+export const LinkElement = styled(NavLink) <DarkTheme>`
   display: block;
   position: relative;
   text-transform: uppercase;
 
   &.active {
-    color: ${({ theme }) => theme.colors.grayPrimary};
+    color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
+
     font-weight: ${({ theme }) => theme.fonts.weightBold};
 
     &:after {
@@ -112,7 +130,10 @@ export const LinkElement = styled(NavLink)`
       left: 0;
       width: 100%;
       height: 3px;
-      background-color: ${({ theme }) => theme.colors.grayPrimary};
+      background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
     }
   }
 
@@ -122,20 +143,28 @@ export const LinkElement = styled(NavLink)`
     bottom: 0;
     width: 0%;
     height: 3px;
-    background-color: ${({ theme }) => theme.colors.grayPrimary};
+    background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
+
     transition: all ${({ theme }) => theme.transition.faster};
     display: block;
     right: 0;
   }
 `;
 
-export const LiElement = styled.li`
+export const LiElement = styled.li<DarkTheme>`
   list-style-type: none;
   cursor: pointer;
   transition: color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.grayPrimary};
+    color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
+
     transition: color ${({ theme }) => theme.transition.slower};
 
     ${LinkElement}::after {
@@ -145,17 +174,21 @@ export const LiElement = styled.li`
   }
 `;
 
-export const IconsSection = styled.div<mobileProps>`
+export const IconsSection = styled.div<HeaderElementProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
   height: ${({ isMenuOpen }) => (isMenuOpen ? '48px' : 'auto')};
   border-top: ${({ isMenuOpen, theme }) =>
-    isMenuOpen ? `1px solid ${theme.colors.grayElements}` : 'none'};
+    isMenuOpen ? `1px solid ${(isDarkTheme: DarkTheme) =>
+      isDarkTheme
+        ? theme.darkThemeColors.surface2
+        : theme.colors.grayElements}
+      ;` : 'none'};
 `;
 
-export const IconElement = styled.div<IconElementProps>`
+export const IconElement = styled.div<HeaderElementProps>`
   position: relative;
   width: 48px;
   cursor: pointer;
@@ -210,12 +243,21 @@ export const IconElement = styled.div<IconElementProps>`
 
   &:not(:nth-child(-n + 2)) {
     ${({ isMenuOpen }) => {
-      const theme = useContext(ThemeContext);
+    return isMenuOpen
+      && css`
+          display: none;
+        `;
+  }};
+  }
 
-      if (!theme) {
-        return '';
-      }
+  &:not(:nth-child(-n+2)) {
+    ${({ isMenuOpen }) => {
+    const theme = useContext(ThemeContext);
 
+
+    if (!theme) {
+      return '';
+    }
       return isMenuOpen
         ? css`
             &:not(:nth-child(-n + 2)) {
@@ -229,16 +271,23 @@ export const IconElement = styled.div<IconElementProps>`
               }
             }
           `
-        : 'display: none';
-    }};
+      : 'display: none';
+  }};
   }
 
   &:not(:first-child) {
-    border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
+    border-left: 1px solid ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.surface2
+      : ({ theme }) => theme.colors.grayElements};
   }
 
   &:not(:first-child):hover {
-    background-color: ${({ theme }) => theme.colors.grayBackground};
+    background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.grayIcons
+      : ({ theme }) => theme.colors.grayBackground};
+              
     transition: background-color ${({ theme }) => theme.transition.slower};
   }
 
@@ -266,8 +315,12 @@ export const IconElement = styled.div<IconElementProps>`
 
 export const LinkWrapper = styled(NavLink)``;
 
-export const BuregerWrapper = styled.div<mobileProps>`
-  border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
+export const BuregerWrapper = styled.div<HeaderElementProps>`
+  border-left: 1px solid ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.surface2
+      : ({ theme }) => theme.colors.grayElements};
+
   ${({ isMenuOpen }) => {
     const theme = useContext(ThemeContext);
 
