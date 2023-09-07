@@ -151,7 +151,11 @@ export const Header = () => {
       </BarElement>
 
       <IconsSection isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
-        <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
+        <IconElement
+          isMenuOpen={isMenuOpen}
+          isDarkTheme={isDarkTheme}
+          className="swipetheme"
+        >
           <ThemeToggler />
         </IconElement>
 
@@ -168,7 +172,10 @@ export const Header = () => {
           </IconElement>
         ) : (
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
-            <LinkWrapper to="/auth/logIn">
+            <LinkWrapper
+              to="/auth/logIn"
+              onClick={isMenuOpen ? closeMenu : undefined}
+            >
               <IconSprite />
               {isDarkTheme ? (
                 <Icon spriteName="account" size="18px" fill="#fff" />
