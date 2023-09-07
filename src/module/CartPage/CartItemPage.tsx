@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+import { Link } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import { PhoneWithQuantity } from '../../types/Phone';
 import { IconSprite, Icon } from '../shared';
@@ -67,23 +69,39 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
           <IconSprite />
           <Icon spriteName="close" size="16px" fill="#B4BDC3" />
         </IconClose>
-        <ImgContainer>
-          <ImgElement src={product.images[0]} />
-        </ImgContainer>
-        <ItemDescription>
-          <p>{product.name}</p>
-        </ItemDescription>
+        <Link to={`/${product.category}/${product._id}`}>
+          <ImgContainer>
+            <ImgElement src={product.images[0]} />
+          </ImgContainer>
+        </Link>
+        <Link to={`/${product.category}/${product._id}`}>
+          <ItemDescription>
+            <p>{product.name}</p>
+          </ItemDescription>
+        </Link>
       </MobileContainer>
       <IconPriceContainer>
         <IconContainer>
-          <IconElement onClick={() => handleChangeQuantity('decrement')}>
+          <IconElement
+            onClick={() => handleChangeQuantity('decrement')}
+            isClickable={quantity > 1}
+            isQuantityOne={quantity === 1}
+          >
             <IconSprite />
-            <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
+            {quantity > 1 ? (
+              <Icon spriteName="minus" size="16px" />
+            ) : (
+              <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
+            )}
           </IconElement>
           <ItemQuantity>
             <p>{quantity}</p>
           </ItemQuantity>
-          <IconElement onClick={() => handleChangeQuantity('increment')}>
+          <IconElement
+            onClick={() => handleChangeQuantity('increment')}
+            isClickable={quantity > 0}
+            // isQuantityOne={quantity === 1}
+          >
             <IconSprite />
             <Icon spriteName="plus" size="16px" />
           </IconElement>

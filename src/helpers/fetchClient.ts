@@ -1,6 +1,12 @@
 import axios, { AxiosRequestConfig } from 'axios';
 
-axios.defaults.baseURL = 'https://nice-gadgets-be.onrender.com/api';
+axios.defaults.baseURL = 'https://nice-gadgets-be.onrender.com';
+
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = window.localStorage.getItem('token');
+
+  return config;
+});
 
 const wait = (delay: number) => {
   return new Promise((resolve) => {
@@ -8,7 +14,7 @@ const wait = (delay: number) => {
   });
 };
 
-type RequestMethod = 'GET';
+type RequestMethod = 'GET' | 'POST' | 'PATCH' | 'DELETE';
 
 function request<T>(
   url: string,
@@ -26,7 +32,7 @@ function request<T>(
   }
 
   return wait(300)
-    .then(() => axios.request<T>({ url }))
+    .then(() => axios.request<T>({ url, method, data }))
     .then((response) => {
       return response.data;
     });
@@ -34,4 +40,5 @@ function request<T>(
 
 export const client = {
   get: <T>(url: string) => request<T>(url),
+  post: <T>(url: string, data: any) => request<T>(url, 'POST', data),
 };

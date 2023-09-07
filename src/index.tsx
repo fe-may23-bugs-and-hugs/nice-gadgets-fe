@@ -9,6 +9,7 @@ import {
   CartProvider,
   ThemeProvider as CustomThemeProvider,
 } from './context';
+import { AuthProvider } from './context/authContext';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement,
@@ -18,12 +19,14 @@ root.render(
   <React.StrictMode>
     <CustomThemeProvider>
       <ThemeProvider theme={theme}>
-        <FavoriteProvider>
-          <CartProvider>
-            <GlobalStyle />
-            <Root />
-          </CartProvider>
-        </FavoriteProvider>
+        <AuthProvider>
+          <FavoriteProvider>
+            <CartProvider>
+              <GlobalStyle />
+              <Root />
+            </CartProvider>
+          </FavoriteProvider>
+        </AuthProvider>
       </ThemeProvider>
     </CustomThemeProvider>
   </React.StrictMode>,

@@ -37,7 +37,11 @@ export const HeaderElement = styled.header<HeaderElementProps>`
 export const BarElement = styled.div<mobileProps>`
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 0px;
+
+  @media (min-width: 768px) {
+    gap: 24px;
+  }
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
@@ -92,10 +96,14 @@ export const ImgElement = styled.img`
 
 export const UlElement = styled.ul<mobileProps>`
   display: flex;
-  gap: 32px;
+  gap: 16px;
   align-items: center;
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
+
+  @media (min-width: 768px) {
+    gap: 32px;
+  }
 
   @media (min-width: 1200px) {
     gap: 64px;
@@ -222,7 +230,18 @@ export const IconElement = styled.div<HeaderElementProps>`
     width: 64px;
   }
 
-  &:nth-child(-n+2) {
+  &:nth-child(-n + 2) {
+    ${({ isMenuOpen }) => {
+      return (
+        isMenuOpen &&
+        css`
+          display: none;
+        `
+      );
+    }};
+  }
+
+  &:not(:nth-child(-n + 2)) {
     ${({ isMenuOpen }) => {
     return isMenuOpen
       && css`
@@ -235,22 +254,22 @@ export const IconElement = styled.div<HeaderElementProps>`
     ${({ isMenuOpen }) => {
     const theme = useContext(ThemeContext);
 
+
     if (!theme) {
       return '';
     }
+      return isMenuOpen
+        ? css`
+            &:not(:nth-child(-n + 2)) {
+              display: block;
+              width: 100%;
+              position: relative;
 
-    return isMenuOpen
-      ? css`
-          &:not(:nth-child(-n+2)){
-            display: block;
-            width: 100%;
-            position: relative;
-
-            svg {
-              margin-left: auto;
-              margin-right: auto;
+              svg {
+                margin-left: auto;
+                margin-right: auto;
+              }
             }
-          }
           `
       : 'display: none';
   }};
@@ -268,7 +287,7 @@ export const IconElement = styled.div<HeaderElementProps>`
     isDarkTheme
       ? ({ theme }) => theme.darkThemeColors.grayIcons
       : ({ theme }) => theme.colors.grayBackground};
-
+              
     transition: background-color ${({ theme }) => theme.transition.slower};
   }
 
@@ -301,6 +320,7 @@ export const BuregerWrapper = styled.div<HeaderElementProps>`
     isDarkTheme
       ? ({ theme }) => theme.darkThemeColors.surface2
       : ({ theme }) => theme.colors.grayElements};
+
   ${({ isMenuOpen }) => {
     const theme = useContext(ThemeContext);
 

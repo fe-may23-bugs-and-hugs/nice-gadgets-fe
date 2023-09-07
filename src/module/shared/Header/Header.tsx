@@ -116,6 +116,7 @@ export const Header = () => {
           </UlElement>
         </NavElement>
       </BarElement>
+
       <IconsSection isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
         <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
           <ThemeToggler />
