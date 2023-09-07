@@ -135,13 +135,25 @@ export const IconSprite = () => {
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
-            d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3" stroke="#000000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"> </path>
+            d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
+            stroke="#000000"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {' '}
+          </path>
         </symbol>
         <symbol viewBox="0 0 24 24" fill="none" stroke-width="0" id="logout">
           <path
             fill-rule="evenodd"
             clip-rule="evenodd"
-            d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M8 8L4 12M4 12L8 16M4 12L16 12" stroke="#000000" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+            d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M8 8L4 12M4 12L8 16M4 12L16 12"
+            stroke="#000000"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
         </symbol>
       </svg>
     </svg>

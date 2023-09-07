@@ -163,10 +163,6 @@ export const IconElement = styled.div<IconElementProps>`
   cursor: pointer;
   transition: background-color ${({ theme }) => theme.transition.slower};
 
-  &.search-open {
-  width: 250px;
-}
-
   ${({ hasPinkCircle, circleText }) =>
     hasPinkCircle &&
     css`
