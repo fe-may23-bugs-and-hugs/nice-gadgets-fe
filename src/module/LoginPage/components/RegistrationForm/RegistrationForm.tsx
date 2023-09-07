@@ -1,21 +1,27 @@
 /*eslint-disable*/
 
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import {
   Form,
+  FormLink,
   FormWrapper,
+  IconWrapper,
   Input,
   InputWrapper,
   Label,
   SectionWrapper,
   SubmitButton,
+  ToggleButton,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { RegisterData } from '../../../../types/Register';
 import { AuthContext } from '../../../../context';
 import { Navigate } from 'react-router-dom';
+import { Icon, IconSprite } from '../../../shared';
 
 export const RegistrationForm: React.FC = () => {
+  const [showPassword, setShowPassword] = useState(false);
+
   const { onRegisterUser, isAuth } = useContext(AuthContext);
   const {
     register,
@@ -39,6 +45,10 @@ export const RegistrationForm: React.FC = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
+
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
 
   console.log(errors);
 
@@ -87,11 +97,21 @@ export const RegistrationForm: React.FC = () => {
                   message: 'Password should be at least 4 characters long',
                 },
               })}
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               placeholder="Enter password"
               required
             />
+            <ToggleButton onClick={handlePasswordToggle}>
+              <IconSprite />
+              <IconWrapper>
+                {showPassword ? (
+                  <Icon spriteName="eye-closed" />
+                ) : (
+                  <Icon spriteName="eye-open" />
+                )}
+              </IconWrapper>
+            </ToggleButton>
             {errors.password && (
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
@@ -100,6 +120,7 @@ export const RegistrationForm: React.FC = () => {
             Register
           </SubmitButton>
         </Form>
+        {/* <FormLink to="/auth/logIn">Log In</FormLink> */}
       </FormWrapper>
     </SectionWrapper>
   );

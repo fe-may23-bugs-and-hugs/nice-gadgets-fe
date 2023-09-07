@@ -188,17 +188,16 @@ export const IconClose = styled.div`
 `;
 
 export const IconElement = styled.button<{
-  isClickable?: boolean,
-  isQuantityOne?: boolean,
+  isClickable?: boolean;
+  isQuantityOne?: boolean;
 }>`
   display: flex;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid ${({ theme, isQuantityOne }) =>
-    isQuantityOne
-      ? theme.colors.grayElements
-      : theme.colors.grayIcons};
+  border: 1px solid
+    ${({ theme, isQuantityOne }) =>
+    isQuantityOne ? theme.colors.grayElements : theme.colors.grayIcons};
   background-color: transparent;
   align-items: center;
   justify-content: center;
@@ -208,10 +207,9 @@ export const IconElement = styled.button<{
   &:hover {
     background-color: ${({ isClickable, theme }) =>
     isClickable ? theme.colors.graySecondary : 'inherit'};
-    border: 1px solid ${({ theme, isQuantityOne }) =>
-    isQuantityOne
-      ? theme.colors.grayElements
-      : theme.colors.black};
+    border: 1px solid
+      ${({ theme, isQuantityOne }) =>
+    isQuantityOne ? theme.colors.grayElements : theme.colors.black};
   }
 `;
 
