@@ -97,7 +97,7 @@ export const RegistrationForm: React.FC = () => {
             )}
           </InputWrapper>
           <SubmitButton disabled={!isValid} type="submit">
-            Sign Up
+            Register
           </SubmitButton>
         </Form>
       </FormWrapper>
