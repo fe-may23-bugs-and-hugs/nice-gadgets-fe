@@ -62,14 +62,6 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
     }
   };
 
-  const categoryToUrlMapping: { [key: string]: string } = {
-    phones: 'phones',
-    tablets: 'tablets',
-    accessories: 'accessories',
-  };
-
-  console.log(`/${categoryToUrlMapping[product.category]}/${product._id}`);
-
   return (
     <CartItem>
       <MobileContainer>
@@ -77,9 +69,11 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
           <IconSprite />
           <Icon spriteName="close" size="16px" fill="#B4BDC3" />
         </IconClose>
-        <ImgContainer>
-          <ImgElement src={product.images[0]} />
-        </ImgContainer>
+        <Link to={`/${product.category}/${product._id}`}>
+          <ImgContainer>
+            <ImgElement src={product.images[0]} />
+          </ImgContainer>
+        </Link>
         <Link to={`/${product.category}/${product._id}`}>
           <ItemDescription>
             <p>{product.name}</p>
@@ -91,9 +85,14 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
           <IconElement
             onClick={() => handleChangeQuantity('decrement')}
             isClickable={quantity > 1}
+            isQuantityOne={quantity === 1}
           >
             <IconSprite />
-            <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
+            {quantity > 1 ? (
+              <Icon spriteName="minus" size="16px" />
+            ) : (
+              <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
+            )}
           </IconElement>
           <ItemQuantity>
             <p>{quantity}</p>
@@ -101,6 +100,7 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
           <IconElement
             onClick={() => handleChangeQuantity('increment')}
             isClickable={quantity > 0}
+            // isQuantityOne={quantity === 1}
           >
             <IconSprite />
             <Icon spriteName="plus" size="16px" />

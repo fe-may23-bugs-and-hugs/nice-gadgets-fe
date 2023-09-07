@@ -1,5 +1,5 @@
 /* eslint-disable*/
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { ContentLayout } from '../shared/ContentLayout';
 import {
   CatalogTitle,
@@ -27,9 +27,16 @@ export const CatalogPage: React.FC = () => {
   } = useContext(PhonesContext);
 
   const { pathname } = useLocation();
+  const [isDataLoaded, setIsDataLoaded] = useState(false);
 
   useEffect(() => {
-    loadPhones(pathname);
+    loadPhones(pathname)
+      .then(() => {
+        setIsDataLoaded(true);
+      })
+      .catch(() => {
+        setIsDataLoaded(true);
+      });
   }, [currentPage, currentLimit, sortField, order, pathname]);
 
   const isModelsExist =
@@ -50,7 +57,7 @@ export const CatalogPage: React.FC = () => {
         <CatalogTitle>{finalTitle}</CatalogTitle>
         <CatalogModelsLeft>{isModelsExist}</CatalogModelsLeft>
 
-        {totalModels === 0 ? (
+        {isDataLoaded && totalModels === 0 ? (
           <CatalogTitle>
             Right now we don't have availiable products. Try later
           </CatalogTitle>

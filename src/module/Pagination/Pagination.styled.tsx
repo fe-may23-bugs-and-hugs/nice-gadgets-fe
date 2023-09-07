@@ -8,7 +8,6 @@ export const ReactPaginateStyled = styled(ReactPaginate)`
   gap: 16px;
   margin-bottom: 80px;
   flex-wrap: wrap;
-  margin-top: 40px;
 
   li {
     list-style: none;
