@@ -14,6 +14,7 @@ export const CatalogContentWrapper = styled.div`
   justify-content: center;
 
   margin: 0 auto;
+  margin-bottom: 40px;
 
   ${onTablet(`
     grid-template-columns: repeat(2, 1fr);

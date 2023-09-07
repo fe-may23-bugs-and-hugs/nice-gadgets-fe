@@ -3,7 +3,6 @@
 /* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { useTheme } from 'styled-components';
-import ContentLoader from 'react-content-loader';
 
 import {
   CardImage,
@@ -35,8 +34,6 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const { isDarkTheme } = useCustomTheme() || { isDarkTheme: false };
 
   const { addItem, cartProducts } = useContext(CartContext);
-  const { phonesLoading, newLoader, discountLoader } =
-    useContext(PhonesContext);
 
   const { addFavoriteProduct, favoriteProducts } = useContext(FavoriteContext);
 
