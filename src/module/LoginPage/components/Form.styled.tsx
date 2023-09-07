@@ -122,7 +122,7 @@ export const Input = styled.input`
   }
 `;
 
-export const FormLink = styled(Link) <DarkTheme>`
+export const FormLink = styled(Link)<DarkTheme>`
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
 

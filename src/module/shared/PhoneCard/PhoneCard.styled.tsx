@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
 import { Link } from 'react-router-dom';
@@ -31,9 +30,9 @@ export const CardWrapper = styled.div<DarkTheme>`
 
   border: 1px solid
     ${({ isDarkTheme, theme }) =>
-      isDarkTheme
-        ? theme.darkThemeColors.grayElements
-        : theme.colors.grayElements};
+    isDarkTheme
+      ? theme.darkThemeColors.grayElements
+      : theme.colors.grayElements};
   transition: box-shadow ${({ theme }) => theme.transition.slower};
 
   &:hover {
@@ -92,9 +91,9 @@ export const PriceWrapper = styled.div<DarkTheme>`
   margin-bottom: 8px;
   border-bottom: 1px solid
     ${({ isDarkTheme, theme }) =>
-      isDarkTheme
-        ? theme.darkThemeColors.grayElements
-        : theme.colors.grayElements};
+    isDarkTheme
+      ? theme.darkThemeColors.grayElements
+      : theme.colors.grayElements};
 
   padding-bottom: 8px;
 
@@ -246,20 +245,20 @@ export const ButtonAdd = styled.button<CardProps>`
 
   &:hover {
     background-color: ${(props) => {
-      if (props.isClicked) {
-        if (props.isDarkTheme) {
-          return props.theme.darkThemeColors.grayIcons;
-        }
-
-        return props.theme.colors.whiteLight;
-      }
-
+    if (props.isClicked) {
       if (props.isDarkTheme) {
-        return props.theme.darkThemeColors.lightAccent;
+        return props.theme.darkThemeColors.grayIcons;
       }
 
-      return props.theme.colors.lightAccent;
-    }};
+      return props.theme.colors.whiteLight;
+    }
+
+    if (props.isDarkTheme) {
+      return props.theme.darkThemeColors.lightAccent;
+    }
+
+    return props.theme.colors.lightAccent;
+  }};
   }
 
   &.card-button-add {
@@ -314,20 +313,20 @@ export const ButtonLike = styled.button<CardProps>`
 
   &:hover {
     border: ${(props) => {
-      if (props.isClicked) {
-        if (props.isDarkTheme) {
-          return `1px solid ${props.theme.darkThemeColors.grayIcons}`;
-        }
-
-        return `1px solid ${props.theme.colors.grayPrimary}`;
-      }
-
+    if (props.isClicked) {
       if (props.isDarkTheme) {
         return `1px solid ${props.theme.darkThemeColors.grayIcons}`;
       }
 
       return `1px solid ${props.theme.colors.grayPrimary}`;
-    }};
+    }
+
+    if (props.isDarkTheme) {
+      return `1px solid ${props.theme.darkThemeColors.grayIcons}`;
+    }
+
+    return `1px solid ${props.theme.colors.grayPrimary}`;
+  }};
   }
 
   svg {

@@ -1,4 +1,3 @@
-/* eslint-disable indent */
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
 import { DarkTheme } from '../../../types/DarkTheme';
@@ -99,9 +98,9 @@ export const Link = styled.a<DarkTheme>`
 
   &:hover {
     color: ${({ isDarkTheme }) =>
-      isDarkTheme
-        ? ({ theme }) => theme.darkThemeColors.graySecondary
-        : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.grayPrimary};
   }
 `;
 
@@ -143,16 +142,16 @@ export const ButtonWrapper = styled.a<DarkTheme>`
     ${IconElement} {
       border: 1px solid
         ${({ isDarkTheme }) =>
-          isDarkTheme
-            ? ({ theme }) => theme.darkThemeColors.graySecondary
-            : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.grayPrimary};
     }
 
     ${ButtonText} {
       color: ${({ isDarkTheme }) =>
-        isDarkTheme
-          ? ({ theme }) => theme.darkThemeColors.graySecondary
-          : ({ theme }) => theme.colors.grayPrimary};
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.grayPrimary};
     }
   }
 `;

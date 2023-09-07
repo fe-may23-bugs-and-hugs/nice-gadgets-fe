@@ -1,6 +1,4 @@
-/* eslint-disable max-len */
 import { BrowserRouter, Route, Routes } from 'react-router-dom';
-
 import { App } from '../App';
 import {
   CartPage,
@@ -12,7 +10,8 @@ import {
 } from '../module';
 import { PhonesProvider } from '../context';
 import { LoginPage } from '../module/LoginPage';
-import { RegistrationForm } from '../module/LoginPage/components/RegistrationForm';
+import { RegistrationForm } from
+  '../module/LoginPage/components/RegistrationForm';
 import { LoginForm } from '../module/LoginPage/components/LoginForm/LoginForm';
 
 export const Root = () => (

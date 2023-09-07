@@ -1,6 +1,3 @@
-/* eslint-disable operator-linebreak */
-/* eslint-disable no-console */
-/* eslint-disable max-len */
 import React, { useContext } from 'react';
 import { useTheme } from 'styled-components';
 

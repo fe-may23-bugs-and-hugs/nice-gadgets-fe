@@ -1,7 +1,6 @@
-/*eslint-disable*/
 import React, { createContext } from 'react';
+import { Phone } from '../types';
 import { useLocalStorage } from 'usehooks-ts';
-import { Phone } from '../types/Phone';
 
 interface IFavoriteContext {
   favoriteProducts: Phone[];
@@ -32,8 +31,7 @@ export const FavoriteProvider: React.FC<Props> = ({ children }) => {
 
     if (isProductExist) {
       setFavoriteProducts((prev) =>
-        prev.filter((item) => item._id !== product._id),
-      );
+        prev.filter((item) => item._id !== product._id));
 
       return;
     }

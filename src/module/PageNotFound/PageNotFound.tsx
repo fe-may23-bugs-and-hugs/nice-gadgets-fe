@@ -22,7 +22,9 @@ export const PageNotFound = () => {
           Please try again later or return on Home page.
         </NotFoundText>
 
-        <ButtonGoHome isDarkTheme={isDarkTheme} href="/">Go home</ButtonGoHome>
+        <ButtonGoHome isDarkTheme={isDarkTheme} href="/">
+          Go home
+        </ButtonGoHome>
       </NotFoundWrapper>
     </ContentLayout>
   );

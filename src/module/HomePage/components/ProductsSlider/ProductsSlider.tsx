@@ -1,5 +1,3 @@
-/* eslint-disable no-console */
-
 import React, { useContext } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';

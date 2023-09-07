@@ -21,7 +21,7 @@ export const BackButton = () => {
       <IconSprite />
       <IconWrapper>
         {isDarkTheme ? (
-          <Icon spriteName="arrow-left" size="12px" fill='#fff' />
+          <Icon spriteName="arrow-left" size="12px" fill="#fff" />
         ) : (
           <Icon spriteName="arrow-left" size="12px" />
         )}

@@ -1,4 +1,3 @@
-/* eslint-disable no-console */
 import { useContext } from 'react';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
 import { ContentLayout } from '../shared/ContentLayout';
@@ -9,7 +8,7 @@ import {
   Title,
 } from './Favorites.styled';
 import { FavoriteContext, useTheme } from '../../context';
-import { Catalog } from '../Catalog';
+import { Catalog } from '../shared/Catalog';
 
 export const Favorites = () => {
   const { favoriteProducts } = useContext(FavoriteContext);
