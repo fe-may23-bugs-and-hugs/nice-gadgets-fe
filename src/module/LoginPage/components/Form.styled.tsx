@@ -54,7 +54,10 @@ export const SubmitButton = styled.button`
   text-align: center;
   cursor: pointer;
   border-radius: 8px;
-  background: ${(props) => props.theme.colors.accentPrimary};
+  background: ${(props) =>
+    props.disabled
+      ? props.theme.colors.grayIcons
+      : props.theme.colors.accentPrimary};
   color: ${(props) => props.theme.colors.white};
   border: none;
   transition: all 0.3s;

@@ -2,6 +2,12 @@ import axios, { AxiosRequestConfig } from 'axios';
 
 axios.defaults.baseURL = 'https://nice-gadgets-be.onrender.com';
 
+axios.interceptors.request.use((config) => {
+  config.headers.Authorization = window.localStorage.getItem('token');
+
+  return config;
+});
+
 const wait = (delay: number) => {
   return new Promise((resolve) => {
     setTimeout(resolve, delay);
@@ -26,7 +32,7 @@ function request<T>(
   }
 
   return wait(300)
-    .then(() => axios.request<T>({ url, method }))
+    .then(() => axios.request<T>({ url, method, data }))
     .then((response) => {
       return response.data;
     });
