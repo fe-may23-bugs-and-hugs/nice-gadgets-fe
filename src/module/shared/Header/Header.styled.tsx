@@ -254,10 +254,10 @@ export const IconElement = styled.div<HeaderElementProps>`
     ${({ isMenuOpen }) => {
     const theme = useContext(ThemeContext);
 
-
     if (!theme) {
       return '';
     }
+
       return isMenuOpen
         ? css`
             &:not(:nth-child(-n + 2)) {
@@ -287,7 +287,7 @@ export const IconElement = styled.div<HeaderElementProps>`
     isDarkTheme
       ? ({ theme }) => theme.darkThemeColors.grayIcons
       : ({ theme }) => theme.colors.grayBackground};
-              
+
     transition: background-color ${({ theme }) => theme.transition.slower};
   }
 
