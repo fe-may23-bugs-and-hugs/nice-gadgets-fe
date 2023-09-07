@@ -174,7 +174,7 @@ export const IconClose = styled.div`
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.graySecondary};
+    /* background-color: ${({ theme }) => theme.colors.graySecondary}; */
     border: 1px solid ${({ theme }) => theme.colors.black};
   }
 
@@ -206,8 +206,8 @@ export const IconElement = styled.button<{
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: ${({ isClickable, theme }) =>
-    isClickable ? theme.colors.graySecondary : 'inherit'};
+    /* background-color: ${({ isClickable, theme }) =>
+    isClickable ? theme.colors.graySecondary : 'inherit'}; */
     border: 1px solid ${({ theme, isQuantityOne }) =>
     isQuantityOne
       ? theme.colors.grayElements
@@ -314,7 +314,7 @@ export const CartCheckout = styled.button`
 export const CartEmpty = styled.div`
   display: flex;
 
-  font-size: ${({ theme }) => theme.fonts.sizeM};
+  font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-family: ${({ theme }) => theme.fonts.name};
   color: ${({ theme }) => theme.colors.graySecondary};
   font-weight: bold;
@@ -332,7 +332,7 @@ export const ModalIconClose = styled.div`
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.graySecondary};
+    border: 1px solid ${({ theme }) => theme.colors.black};
   }
 
   @media (max-width: 1200px) {
