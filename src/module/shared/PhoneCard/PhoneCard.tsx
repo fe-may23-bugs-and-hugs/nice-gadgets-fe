@@ -96,9 +96,9 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
             </DescrBox>
 
             <DescrBox>
-              <DescrValue>{phone.screen}</DescrValue>
-              <DescrValue>{phone.capacity}</DescrValue>
-              <DescrValue>{phone.ram}</DescrValue>
+              <DescrValue>{phone.screen || 'N/A'}</DescrValue>
+              <DescrValue>{phone.capacity || 'N/A'}</DescrValue>
+              <DescrValue>{phone.ram || 'N/A'}</DescrValue>
             </DescrBox>
           </DescrWrapper>
 

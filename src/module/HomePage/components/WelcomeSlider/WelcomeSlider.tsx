@@ -10,19 +10,11 @@ import sliderPhones from '../../../../assets/images/category-phones.png';
 import sliderTabs from '../../../../assets/images/category-tablets.png';
 import bannerTwo from '../../../../assets/images/lg-banner.jpg';
 import bannerThree from '../../../../assets/images/airpods.jpg';
-import okIcon from '../../../../assets/images/ok-icon.png';
 import {
-  BannerButton,
-  BannerText,
-  BannerWrapper,
   BulletsContainner,
-  BunnerTitle,
-  OkIcon,
-  SliderBanner,
   SliderWrapper,
   StyledImageMobile,
   StyledImageTablet,
-  TextWrapper,
   Wrapper,
 } from './WelcomeSlider.styled';
 import './styles.css';
@@ -48,18 +40,6 @@ export const WelcomeSlider = () => {
       >
         <SwiperSlide>
           <SliderWrapper>
-            <SliderBanner>
-              <TextWrapper>
-                <BannerWrapper>
-                  <BunnerTitle>Now available in our store!</BunnerTitle>
-                  <OkIcon src={okIcon} />
-                </BannerWrapper>
-
-                <BannerText>Be the first!</BannerText>
-              </TextWrapper>
-              <BannerButton>Order now</BannerButton>
-            </SliderBanner>
-
             <StyledImageMobile src={sliderOneImg} />
             <StyledImageTablet src={sliderTabImg} />
           </SliderWrapper>
@@ -68,24 +48,14 @@ export const WelcomeSlider = () => {
         <SwiperSlide>
           <SliderWrapper>
             <StyledImageMobile src={sliderPhones} />
-            <StyledImageTablet
-              src={bannerTwo}
-              style={{
-                objectFit: 'cover',
-              }}
-            />
+            <StyledImageTablet src={bannerTwo} />
           </SliderWrapper>
         </SwiperSlide>
 
         <SwiperSlide>
           <SliderWrapper>
             <StyledImageMobile src={sliderTabs} />
-            <StyledImageTablet
-              src={bannerThree}
-              style={{
-                objectFit: 'cover',
-              }}
-            />
+            <StyledImageTablet src={bannerThree} />
           </SliderWrapper>
         </SwiperSlide>
       </Swiper>
