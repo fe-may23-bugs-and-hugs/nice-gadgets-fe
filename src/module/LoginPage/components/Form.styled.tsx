@@ -46,6 +46,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   position: relative;
 `;
 
@@ -92,6 +93,8 @@ export const Input = styled.input`
   border: 1px solid gray;
   text-indent: 4px;
 
+  width: 100%;
+
   ${onTablet(`
     height: 50px;
   `)}
@@ -111,7 +114,7 @@ export const FormLink = styled(Link)`
   }
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.span`
   background-color: ${(props) => props.theme.colors.white};
   position: absolute;
   right: 14px;
@@ -135,4 +138,15 @@ export const IconWrapper = styled.div`
   justify-content: center;
   height: 16px;
   width: 16px;
+`;
+
+export const EyeWrapper = styled.div`
+  position: relative;
+
+  svg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 `;

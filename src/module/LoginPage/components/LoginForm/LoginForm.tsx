@@ -11,6 +11,7 @@ import {
   FormLink,
   ToggleButton,
   IconWrapper,
+  EyeWrapper,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { LoginTypes } from '../../../../types/Login';
@@ -28,13 +29,13 @@ export const LoginForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    setError,
+    clearErrors,
   } = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
-    mode: 'onSubmit',
+    mode: 'onBlur',
   });
 
   useEffect(() => {
@@ -53,15 +54,6 @@ export const LoginForm: React.FC = () => {
     }
   }, [loginError]);
 
-  const clearError = (fieldName: string) => {
-    onResetErrors();
-    //@ts-ignore
-    setError(fieldName, {
-      type: 'manual',
-      message: '',
-    });
-  };
-
   const onHandleSubmit = (values: LoginTypes) => {
     const data = onSendLogin(values);
 
@@ -71,6 +63,18 @@ export const LoginForm: React.FC = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
+
+  const disabledFunc = Boolean(errors.email || errors.password);
+
+  console.log(errors);
+
+  const handleEmailInputChange = () => {
+    clearErrors('email');
+  };
+
+  const handlePasswordInputChange = () => {
+    clearErrors('password');
+  };
 
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
@@ -95,7 +99,7 @@ export const LoginForm: React.FC = () => {
                   message: 'Invalid email address',
                 },
               })}
-              onChange={() => clearError('email')}
+              onFocus={handleEmailInputChange}
             />
             {errors.email && (
               <span style={{ color: 'red' }}>{errors.email.message}</span>
@@ -103,34 +107,36 @@ export const LoginForm: React.FC = () => {
           </InputWrapper>
           <InputWrapper>
             <Label htmlFor="password">Password</Label>
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              placeholder="Enter password"
-              {...register('password', {
-                required: 'Please,write your password',
-                minLength: {
-                  value: 4,
-                  message: 'Password should be at least 4 characters long',
-                },
-              })}
-              onChange={() => clearError('password')}
-            />
-            <ToggleButton onClick={handlePasswordToggle}>
-              <IconSprite />
-              <IconWrapper>
-                {showPassword ? (
-                  <Icon spriteName="eye-closed" />
-                ) : (
-                  <Icon spriteName="eye-open" />
-                )}
-              </IconWrapper>
-            </ToggleButton>
+            <EyeWrapper>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                placeholder="Enter password"
+                {...register('password', {
+                  required: 'Please,write your password',
+                  minLength: {
+                    value: 4,
+                    message: 'Password should be at least 4 characters long',
+                  },
+                })}
+                onFocus={handlePasswordInputChange}
+              />
+              <ToggleButton onClick={handlePasswordToggle}>
+                <IconSprite />
+                <IconWrapper>
+                  {showPassword ? (
+                    <Icon spriteName="eye-closed" />
+                  ) : (
+                    <Icon spriteName="eye-open" />
+                  )}
+                </IconWrapper>
+              </ToggleButton>
+            </EyeWrapper>
             {errors.password && (
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
           </InputWrapper>
-          <SubmitButton disabled={!isValid} type="submit">
+          <SubmitButton disabled={disabledFunc || !isValid} type="submit">
             Log In
           </SubmitButton>
         </Form>
