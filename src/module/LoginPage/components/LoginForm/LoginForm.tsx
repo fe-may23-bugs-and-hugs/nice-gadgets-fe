@@ -12,6 +12,7 @@ import {
   ToggleButton,
   IconWrapper,
   EyeWrapper,
+  Title,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { LoginTypes } from '../../../../types/Login';
@@ -19,11 +20,13 @@ import { AuthContext } from '../../../../context/authContext';
 import { Navigate } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import { Icon, IconSprite } from '../../../shared';
+import { useTheme } from '../../../../context';
 
 export const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { onSendLogin, isAuth, loginError, onResetErrors } =
     useContext(AuthContext);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const {
     register,
@@ -89,11 +92,11 @@ export const LoginForm: React.FC = () => {
   return (
     <SectionWrapper>
       <FormWrapper>
-        <h2> Log In</h2>
+        <Title isDarkTheme={isDarkTheme}>Log In</Title>
 
         <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <InputWrapper>
-            <Label htmlFor="email">Email</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="email">Email</Label>
             <Input
               type="email"
               id="email"
@@ -112,7 +115,7 @@ export const LoginForm: React.FC = () => {
             )}
           </InputWrapper>
           <InputWrapper>
-            <Label htmlFor="password">Password</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="password">Password</Label>
             <EyeWrapper>
               <Input
                 type={showPassword ? 'text' : 'password'}
@@ -146,7 +149,7 @@ export const LoginForm: React.FC = () => {
             Log In
           </SubmitButton>
         </Form>
-        <FormLink to="/auth/signUp">Sign Up</FormLink>
+        <FormLink isDarkTheme={isDarkTheme} to="/auth/signUp">Sign Up</FormLink>
       </FormWrapper>
     </SectionWrapper>
   );

@@ -11,11 +11,12 @@ import {
   Label,
   SectionWrapper,
   SubmitButton,
+  Title,
   ToggleButton,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { RegisterData } from '../../../../types/Register';
-import { AuthContext } from '../../../../context';
+import { AuthContext, useTheme } from '../../../../context';
 import { Navigate } from 'react-router-dom';
 import Notiflix from 'notiflix';
 import { Icon, IconSprite } from '../../../shared';
@@ -24,6 +25,7 @@ export const RegistrationForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { onRegisterUser, isAuth, registrError, onResetErrors } =
     useContext(AuthContext);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const {
     register,
@@ -94,10 +96,10 @@ export const RegistrationForm: React.FC = () => {
   return (
     <SectionWrapper>
       <FormWrapper>
-        <h2> Sign up</h2>
+        <Title isDarkTheme={isDarkTheme}>Sign up</Title>
         <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <InputWrapper>
-            <Label htmlFor="name">Name</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="name">Name</Label>
             <Input
               {...register('fullName', {
                 required: 'Please,write your name',
@@ -117,7 +119,7 @@ export const RegistrationForm: React.FC = () => {
             )}
           </InputWrapper>
           <InputWrapper>
-            <Label htmlFor="email">Email</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="email">Email</Label>
             <Input
               {...register('email', {
                 required: 'Please, write your email',
@@ -134,7 +136,7 @@ export const RegistrationForm: React.FC = () => {
             />
           </InputWrapper>
           <InputWrapper>
-            <Label htmlFor="password">Password</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="password">Password</Label>
             <Input
               {...register('password', {
                 required: 'Please,write your password',
@@ -167,7 +169,7 @@ export const RegistrationForm: React.FC = () => {
             Register
           </SubmitButton>
         </Form>
-        <FormLink to="/auth/logIn">Log In</FormLink>
+        <FormLink isDarkTheme={isDarkTheme} to="/auth/logIn">Log In</FormLink>
       </FormWrapper>
     </SectionWrapper>
   );

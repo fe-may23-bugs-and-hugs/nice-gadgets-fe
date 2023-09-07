@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
 import { onTablet } from '../../shared/Mixins';
 import { Link } from 'react-router-dom';
+import { DarkTheme } from '../../../types/DarkTheme';
 
 export const SectionWrapper = styled.div`
   margin-top: 57px;
@@ -14,6 +15,19 @@ export const SectionWrapper = styled.div`
   font-weight: ${({ theme }) => theme.fonts.weightRegular};
   font-style: normal;
   line-height: ${({ theme }) => theme.fonts.lineHeightXl};
+`;
+
+export const Title = styled.h1<DarkTheme>`
+  font-family: Mont;
+  font-size: ${({ theme }) => theme.fonts.sizeXxxl};
+  font-weight: ${({ theme }) => theme.fonts.weightBold};
+  line-height: ${({ theme }) => theme.fonts.lineHeightXxxl};
+  letter-spacing: -0.48px;
+
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 `;
 
 export const FormWrapper = styled.div`
@@ -83,8 +97,11 @@ export const SubmitButton = styled.button`
   }
 `;
 
-export const Label = styled.label`
-  color: ${(props) => props.theme.colors.grayPrimary};
+export const Label = styled.label<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 `;
 
 export const Input = styled.input`
@@ -105,9 +122,14 @@ export const Input = styled.input`
   }
 `;
 
-export const FormLink = styled(Link)`
+export const FormLink = styled(Link) <DarkTheme>`
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
+
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 
   &:hover {
     color: ${(props) => props.theme.colors.graySecondary};
