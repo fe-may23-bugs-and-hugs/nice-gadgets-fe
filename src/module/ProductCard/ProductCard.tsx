@@ -83,7 +83,6 @@ export const ProductCard = () => {
   const { productId } = useParams();
   const [device, setDevice] = React.useState<Phone | null>(null);
   const { addItem, cartProducts } = React.useContext(CartContext);
-  // eslint-disable-next-line operator-linebreak
   const { addFavoriteProduct, favoriteProducts } =
     React.useContext(FavoriteContext);
   const [selectedCapacity, setSelectedCapacity] = React.useState<string>('');
@@ -92,6 +91,10 @@ export const ProductCard = () => {
   const [selectedImage, setSelectedImage] = React.useState<string>('');
   const [loading, setLoading] = React.useState(true);
 
+  const { loadRecommendedData, recommendedData } = useContext(PhonesContext);
+  const { pathname } = useLocation();
+
+  const path = pathname.split('/')[pathname.split('/').length - 1];
   const navigate = useNavigate();
 
   React.useEffect(() => {
@@ -128,6 +131,10 @@ export const ProductCard = () => {
           setCurrentImage(responseData.images[0]);
           setSelectedImage(responseData.images[0]);
         }
+
+        if (path) {
+          loadRecommendedData(path);
+        }
       } catch (error) {
       } finally {
         setLoading(false);
@@ -135,17 +142,10 @@ export const ProductCard = () => {
     };
 
     fetchData();
-  }, [productId]);
-
-  const { loadPhones, newData } = useContext(PhonesContext);
-  const { pathname } = useLocation();
-
-  React.useEffect(() => {
-    loadPhones(`${pathname}/recommended`);
-  }, []);
+  }, [productId, path]);
 
   if (!device) {
-    return null;
+    return <Loader visible={loading} />;
   }
 
   const deviceData = extractData(device);
@@ -350,7 +350,7 @@ export const ProductCard = () => {
       {!loading && (
         <RecommendedBlock>
           <ProductsSlider
-            data={newData}
+            data={recommendedData}
             uniqueKey="recommended"
             subtitle="You may also like"
           />

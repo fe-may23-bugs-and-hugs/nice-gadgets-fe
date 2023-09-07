@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import styled from 'styled-components';
 import { theme } from '../../styles';
 import { onDesktop, onTablet } from '../shared/Mixins';
@@ -178,7 +179,7 @@ export const MemoryButton = styled.button`
   width: 60px;
   height: 32px;
   cursor: pointer;
-
+  transition: background-color ${({ theme }) => theme.transition.slower};
   font-size: ${theme.fonts.sizeXs};
   line-height: ${theme.fonts.lineHeightM};
 
@@ -186,6 +187,7 @@ export const MemoryButton = styled.button`
 
   &:hover {
     background-color: ${theme.colors.grayElements};
+    transition: background-color ${({ theme }) => theme.transition.slower};
   }
 
   &.active {
@@ -208,8 +210,8 @@ export const ColorButton = styled.button`
   height: 32px;
   border-radius: 50%;
   cursor: pointer;
-
   margin-right: 8px;
+  transition: all ${({ theme }) => theme.transition.slower};
 
   &:before,
   &:after {
@@ -222,12 +224,14 @@ export const ColorButton = styled.button`
     border-radius: 50%;
     border: 3px solid ${theme.colors.white};
     box-sizing: border-box;
+
+    transition: all ${({ theme }) => theme.transition.slower};
   }
 
   &:hover {
     &:after {
       border-radius: 50%;
-      border: 3px solid ${theme.colors.grayElements};
+      border: 1px solid ${theme.colors.grayPrimary};
     }
   }
 
@@ -267,13 +271,16 @@ export const ImagesSizeBox = styled.div`
 
   border: 1px solid #c4c4c4;
   border-radius: 4px;
+  transition: all ${({ theme }) => theme.transition.slower};
 
   &:hover {
     border-color: ${theme.colors.grayPrimary};
+    transition: all ${({ theme }) => theme.transition.slower};
   }
 
   &.active {
     border-color: ${theme.colors.grayPrimary};
+    transition: transform ${({ theme }) => theme.transition.slower};
   }
 
   ${onDesktop(`
@@ -286,7 +293,6 @@ export const CardImage = styled.img`
   width: auto;
   height: 288px;
   display: block;
-
   margin: 0 auto;
 
   ${onTablet(`

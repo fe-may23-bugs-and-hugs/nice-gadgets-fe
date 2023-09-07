@@ -150,13 +150,6 @@ export const Header = () => {
         <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
           <ThemeToggler />
         </IconElement>
-        <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
-          <IconSprite />
-          {isDarkTheme
-            ? <Icon spriteName="search-white" size="18px" />
-            : <Icon spriteName="search" size="18px" />
-          }
-        </IconElement>
 
         {isAuth ? (
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>

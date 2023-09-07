@@ -11,10 +11,13 @@ interface IContext {
   loadPhones: (pathname: string) => Promise<void>;
   loadNewData: () => void;
   loadDiscountData: () => void;
+  loadRecommendedData: (path: string) => void;
   newLoader: boolean;
   discountLoader: boolean;
+  recommendedLoader: boolean;
   newData: Phone[];
   discountData: Phone[];
+  recommendedData: Phone[];
   phonesLoading: boolean;
   currentPage: number;
   currentLimit: number;
@@ -30,10 +33,13 @@ export const PhonesContext = createContext<IContext>({
   loadPhones: () => Promise.resolve(),
   loadNewData: () => {},
   loadDiscountData: () => {},
+  loadRecommendedData: () => {},
   newLoader: false,
   discountLoader: false,
+  recommendedLoader: false,
   newData: [],
   discountData: [],
+  recommendedData: [],
   limit: 16,
   phonesLoading: false,
   currentPage: 1,
@@ -64,6 +70,8 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const [discountData, setDiscountData] = useState<Phone[]>([]);
   const [newLoader, setNewLoader] = useState(false);
   const [discountLoader, setDiscountLoader] = useState(false);
+  const [recommendedData, setRecommendedData] = useState<Phone[]>([]);
+  const [recommendedLoader, setRecommendedLoader] = useState(false);
 
   const loadPhones = async (pathname: string): Promise<void> => {
     setPhonesLoading(true);
@@ -107,15 +115,27 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
       .finally(() => setDiscountLoader(false));
   };
 
+  const loadRecommendedData = (path: string) => {
+    setRecommendedLoader(true);
+
+    getSliderData(`${path}/recommended`)
+      .then(setRecommendedData)
+      .catch(() => setErrors(true))
+      .finally(() => setRecommendedLoader(false));
+  };
+
   const value = {
     phones,
     loadPhones,
     loadNewData,
     loadDiscountData,
+    loadRecommendedData,
     newLoader,
     discountLoader,
+    recommendedLoader,
     newData,
     discountData,
+    recommendedData,
     phonesLoading,
     currentLimit: limit,
     currentPage: page,

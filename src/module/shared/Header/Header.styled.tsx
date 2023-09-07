@@ -10,6 +10,8 @@ interface IconElementProps {
   isMenuOpen?: boolean;
 }
 
+const IconsBurgerLeft = 1;
+
 export interface mobileProps {
   isMenuOpen: boolean;
 }
@@ -30,7 +32,7 @@ export const HeaderElement = styled.header<HeaderElementProps>`
       ? ({ theme }) => theme.darkThemeColors.black
       : ({ theme }) => theme.colors.white};
 
-  height: ${({ isMenuOpen }) => (isMenuOpen ? '100vh' : 'auto')};
+  height: ${({ isMenuOpen }) => (isMenuOpen ? '100dvh' : 'auto')};
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
 `;
 
@@ -230,7 +232,8 @@ export const IconElement = styled.div<HeaderElementProps>`
     width: 64px;
   }
 
-  &:nth-child(-n + 2) {
+
+  &:nth-child(-n + ${IconsBurgerLeft}) {
     ${({ isMenuOpen }) => {
       return (
         isMenuOpen &&
@@ -241,7 +244,8 @@ export const IconElement = styled.div<HeaderElementProps>`
     }};
   }
 
-  &:not(:nth-child(-n + 2)) {
+
+  &:not(:nth-child(-n + ${IconsBurgerLeft})) {
     ${({ isMenuOpen }) => {
     return isMenuOpen
       && css`
@@ -260,7 +264,7 @@ export const IconElement = styled.div<HeaderElementProps>`
 
       return isMenuOpen
         ? css`
-            &:not(:nth-child(-n + 2)) {
+            &:not(:nth-child(-n + ${IconsBurgerLeft})) {
               display: block;
               width: 100%;
               position: relative;
