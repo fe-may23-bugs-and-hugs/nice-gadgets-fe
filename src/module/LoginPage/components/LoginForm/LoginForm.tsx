@@ -11,6 +11,7 @@ import {
   FormLink,
   ToggleButton,
   IconWrapper,
+  EyeWrapper,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { LoginTypes } from '../../../../types/Login';
@@ -106,29 +107,31 @@ export const LoginForm: React.FC = () => {
           </InputWrapper>
           <InputWrapper>
             <Label htmlFor="password">Password</Label>
-            <Input
-              type={showPassword ? 'text' : 'password'}
-              id="password"
-              placeholder="Enter password"
-              {...register('password', {
-                required: 'Please,write your password',
-                minLength: {
-                  value: 4,
-                  message: 'Password should be at least 4 characters long',
-                },
-              })}
-              onFocus={handlePasswordInputChange}
-            />
-            <ToggleButton onClick={handlePasswordToggle}>
-              <IconSprite />
-              <IconWrapper>
-                {showPassword ? (
-                  <Icon spriteName="eye-closed" />
-                ) : (
-                  <Icon spriteName="eye-open" />
-                )}
-              </IconWrapper>
-            </ToggleButton>
+            <EyeWrapper>
+              <Input
+                type={showPassword ? 'text' : 'password'}
+                id="password"
+                placeholder="Enter password"
+                {...register('password', {
+                  required: 'Please,write your password',
+                  minLength: {
+                    value: 4,
+                    message: 'Password should be at least 4 characters long',
+                  },
+                })}
+                onFocus={handlePasswordInputChange}
+              />
+              <ToggleButton onClick={handlePasswordToggle}>
+                <IconSprite />
+                <IconWrapper>
+                  {showPassword ? (
+                    <Icon spriteName="eye-closed" />
+                  ) : (
+                    <Icon spriteName="eye-open" />
+                  )}
+                </IconWrapper>
+              </ToggleButton>
+            </EyeWrapper>
             {errors.password && (
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
