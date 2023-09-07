@@ -53,8 +53,12 @@ export const Span = styled.span<{ isDarkTheme: boolean }>`
 
 export const IconWrapper = styled.div`
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   height: 16px;
   width: 16px;
+
+  :first-child {
+    margin: 0;
+  }
 `;

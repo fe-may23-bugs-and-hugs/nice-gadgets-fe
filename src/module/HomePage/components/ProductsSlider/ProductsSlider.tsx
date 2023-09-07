@@ -33,7 +33,8 @@ export const ProductsSlider: React.FC<Props> = ({
   const prevBtnId = `prev-btn-${uniqueKey}`;
   const nextBtnId = `next-btn-${uniqueKey}`;
 
-  const { discountLoader, newLoader } = useContext(PhonesContext);
+  const { discountData, discountLoader, newLoader, newData }
+    = useContext(PhonesContext);
 
   return (
     <SlideWrapper>
@@ -52,13 +53,17 @@ export const ProductsSlider: React.FC<Props> = ({
         </ButtonsWrapper>
       </UpperWrapper>
 
-      {discountLoader || newLoader ? (
+      {discountLoader
+      || discountData.length === 0
+      || newLoader
+      || newData.length === 0
+        ? (
         <>
           <div style={{ display: 'flex', gap: '16px' }}>
             <Skeleton itemsCount={4} />
           </div>
         </>
-      ) : (
+        ) : (
         <>
           <Swiper
             style={{ margin: '0 -15px -30px', padding: '0 15px 30px' }}
@@ -94,7 +99,7 @@ export const ProductsSlider: React.FC<Props> = ({
             ))}
           </Swiper>
         </>
-      )}
+        )}
     </SlideWrapper>
   );
 };
