@@ -3,7 +3,6 @@ import { styled } from 'styled-components';
 export const Wrapper = styled.div``;
 
 export const Label = styled.label<{ isDarkTheme: boolean }>`
-position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
