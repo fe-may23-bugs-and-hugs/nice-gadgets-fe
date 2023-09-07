@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+import { Link } from 'react-router-dom';
 import React, { useState, useContext } from 'react';
 import { PhoneWithQuantity } from '../../types/Phone';
 import { IconSprite, Icon } from '../shared';
@@ -60,6 +62,14 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
     }
   };
 
+  const categoryToUrlMapping: { [key: string]: string } = {
+    phones: 'phones',
+    tablets: 'tablets',
+    accessories: 'accessories',
+  };
+
+  console.log(`/${categoryToUrlMapping[product.category]}/${product._id}`);
+
   return (
     <CartItem>
       <MobileContainer>
@@ -70,20 +80,28 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
         <ImgContainer>
           <ImgElement src={product.images[0]} />
         </ImgContainer>
+        <Link to={`/${product.category}/${product._id}`}>
         <ItemDescription>
           <p>{product.name}</p>
         </ItemDescription>
+        </Link>
       </MobileContainer>
       <IconPriceContainer>
         <IconContainer>
-          <IconElement onClick={() => handleChangeQuantity('decrement')}>
+          <IconElement
+            onClick={() => handleChangeQuantity('decrement')}
+            isClickable={quantity > 1}
+          >
             <IconSprite />
             <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
           </IconElement>
           <ItemQuantity>
             <p>{quantity}</p>
           </ItemQuantity>
-          <IconElement onClick={() => handleChangeQuantity('increment')}>
+          <IconElement
+            onClick={() => handleChangeQuantity('increment')}
+            isClickable={quantity > 0}
+          >
             <IconSprite />
             <Icon spriteName="plus" size="16px" />
           </IconElement>
