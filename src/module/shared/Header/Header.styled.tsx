@@ -27,7 +27,11 @@ export const HeaderElement = styled.header<mobileProps>`
 export const BarElement = styled.div<mobileProps>`
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 0px;
+
+  @media (min-width: 768px) {
+    gap: 24px;
+  }
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
@@ -78,10 +82,14 @@ export const ImgElement = styled.img`
 
 export const UlElement = styled.ul<mobileProps>`
   display: flex;
-  gap: 32px;
+  gap: 16px;
   align-items: center;
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
+
+  @media (min-width: 768px) {
+    gap: 32px;
+  }
 
   @media (min-width: 1200px) {
     gap: 64px;
@@ -189,16 +197,18 @@ export const IconElement = styled.div<IconElementProps>`
     width: 64px;
   }
 
-  &:nth-child(-n+2) {
+  &:nth-child(-n + 2) {
     ${({ isMenuOpen }) => {
-      return isMenuOpen
-        && css`
+      return (
+        isMenuOpen &&
+        css`
           display: none;
-        `;
+        `
+      );
     }};
   }
 
-  &:not(:nth-child(-n+2)) {
+  &:not(:nth-child(-n + 2)) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
 
@@ -208,16 +218,16 @@ export const IconElement = styled.div<IconElementProps>`
 
       return isMenuOpen
         ? css`
-          &:not(:nth-child(-n+2)){
-            display: block;
-            width: 100%;
-            position: relative;
+            &:not(:nth-child(-n + 2)) {
+              display: block;
+              width: 100%;
+              position: relative;
 
-            svg {
-              margin-left: auto;
-              margin-right: auto;
+              svg {
+                margin-left: auto;
+                margin-right: auto;
+              }
             }
-          }
           `
         : 'display: none';
     }};

@@ -111,9 +111,7 @@ export const Header = () => {
           <IconSprite />
           <Icon spriteName="search" size="18px" />
         </IconElement>
-        <IconElement
-          isMenuOpen={isMenuOpen}
-        >
+        <IconElement isMenuOpen={isMenuOpen}>
           <LinkWrapper to="/account">
             <IconSprite />
             <Icon spriteName="account" size="18px" />
