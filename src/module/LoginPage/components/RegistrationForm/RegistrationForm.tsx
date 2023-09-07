@@ -1,6 +1,6 @@
 /*eslint-disable*/
 
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import {
   Form,
   FormLink,
@@ -22,8 +22,9 @@ import { Icon, IconSprite } from '../../../shared';
 
 export const RegistrationForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
-  const { onRegisterUser, isAuth, registrError, onResetErrors } = useContext(AuthContext);
-  
+  const { onRegisterUser, isAuth, registrError, onResetErrors } =
+    useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
