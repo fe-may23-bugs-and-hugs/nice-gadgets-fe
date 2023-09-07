@@ -56,6 +56,9 @@ export const Header = () => {
       'No',
       () => {
         onLogoutUser();
+        Notiflix.Notify.init({
+          position: 'right-bottom',
+        });
         Notiflix.Notify.success('Successfully loggout', { timeout: 1000 });
       },
       () => {
@@ -156,7 +159,7 @@ export const Header = () => {
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
             <div onClick={logout}>
               <IconSprite />
-              <Icon spriteName="close" size="18px" />
+              <Icon spriteName="logout" size="18px" />
             </div>
           </IconElement>
         ) : (
