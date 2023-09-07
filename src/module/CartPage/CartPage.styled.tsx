@@ -205,10 +205,9 @@ export const IconElement = styled.button<{
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    border: 1px solid ${({ theme, isQuantityOne }) =>
-    isQuantityOne
-      ? theme.colors.grayElements
-      : theme.colors.black};
+    border: 1px solid
+      ${({ theme, isQuantityOne }) =>
+    isQuantityOne ? theme.colors.grayElements : theme.colors.black};
   }
 `;
 

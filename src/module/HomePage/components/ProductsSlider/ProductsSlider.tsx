@@ -56,8 +56,7 @@ export const ProductsSlider: React.FC<Props> = ({
       {discountLoader
       || discountData.length === 0
       || newLoader
-      || newData.length === 0
-        ? (
+      || newData.length === 0 ? (
         <>
           <div style={{ display: 'flex', gap: '16px' }}>
             <Skeleton itemsCount={4} />

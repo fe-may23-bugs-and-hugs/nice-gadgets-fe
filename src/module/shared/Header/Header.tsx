@@ -99,10 +99,11 @@ export const Header = () => {
           isMenuOpen={isMenuOpen}
           onClick={isMenuOpen ? closeMenu : undefined}
         >
-          {isDarkTheme
-            ? <ImgElement src={logoWhite} />
-            : <ImgElement src={logo} />
-          }
+          {isDarkTheme ? (
+            <ImgElement src={logoWhite} />
+          ) : (
+            <ImgElement src={logo} />
+          )}
         </ImgArea>
         <NavElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
           <UlElement isMenuOpen={isMenuOpen}>
@@ -178,10 +179,11 @@ export const Header = () => {
             onClick={isMenuOpen ? closeMenu : undefined}
           >
             <IconSprite />
-            {isDarkTheme
-              ? <Icon spriteName="heart-white" size="18px" />
-              : <Icon spriteName="heart" size="18px" />
-            }
+            {isDarkTheme ? (
+              <Icon spriteName="heart-white" size="18px" />
+            ) : (
+              <Icon spriteName="heart" size="18px" />
+            )}
           </LinkWrapper>
         </IconElement>
 
@@ -193,10 +195,11 @@ export const Header = () => {
         >
           <LinkWrapper to="/cart" onClick={isMenuOpen ? closeMenu : undefined}>
             <IconSprite />
-            {isDarkTheme
-              ? <Icon spriteName="shopping-bag-white" size="18px" />
-              : <Icon spriteName="shopping-bag" size="18px" />
-            }
+            {isDarkTheme ? (
+              <Icon spriteName="shopping-bag-white" size="18px" />
+            ) : (
+              <Icon spriteName="shopping-bag" size="18px" />
+            )}
           </LinkWrapper>
         </IconElement>
 
@@ -211,10 +214,14 @@ export const Header = () => {
             isDarkTheme={isDarkTheme}
           >
             <IconSprite />
-            {isDarkTheme
-              ? <Icon spriteName={isMenuOpen ? 'close-white' : 'burger-white'} size="18px" />
-              : <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
-            }
+            {isDarkTheme ? (
+              <Icon
+                spriteName={isMenuOpen ? 'close-white' : 'burger-white'}
+                size="18px"
+              />
+            ) : (
+              <Icon spriteName={isMenuOpen ? 'close' : 'burger'} size="18px" />
+            )}
           </IconElement>
         </BuregerWrapper>
       </IconsSection>
