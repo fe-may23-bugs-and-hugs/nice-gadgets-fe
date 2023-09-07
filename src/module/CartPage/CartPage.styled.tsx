@@ -144,7 +144,7 @@ export const IconContainer = styled.div`
 
 export const IconPriceContainer = styled.div`
   display: flex;
-  gap: 53px;
+  gap: 52px;
   align-items: center;
 
   @media (max-width: 1200px) {
