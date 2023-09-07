@@ -46,7 +46,6 @@
 
   &:hover {
     opacity: 0.7;
-    background-color: black !important;
   }
 }
 .swiper-pagination-bullet-active {

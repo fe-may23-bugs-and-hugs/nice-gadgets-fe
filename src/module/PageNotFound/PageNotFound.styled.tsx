@@ -1,33 +1,41 @@
 import styled from 'styled-components';
+import { DarkTheme } from '../../types/DarkTheme';
 
 export const NotFoundWrapper = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: center;
+  justify-items: center;
   align-items: center;
   padding: 20px 0;
+  margin-top: 200px;
 `;
 
-export const NotFoundTitle = styled.h2`
+export const NotFoundTitle = styled.h2<DarkTheme>`
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-size: ${({ theme }) => theme.fonts.sizeL};
-
-  margin-bottom: 10px;
-
-  color: ${({ theme }) => theme.colors.grayPrimary};
+  margin-bottom: 30px;
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 `;
 
-export const NotFoundText = styled.p`
-  margin-bottom: 20px;
-  color: ${({ theme }) => theme.colors.grayPrimary};
+export const NotFoundText = styled.p<DarkTheme>`
+  margin-bottom: 30px;
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   font-size: ${({ theme }) => theme.fonts.sizeXs};
+  text-align: center;
 `;
 
 export const NotFoundGif = styled.img`
   width: 160px;
+  margin-bottom: 30px;
 `;
 
-export const ButtonGoHome = styled.a`
+export const ButtonGoHome = styled.a<DarkTheme>`
   display: flex;
   justify-content: center;
   align-items: center;
@@ -36,14 +44,21 @@ export const ButtonGoHome = styled.a`
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-weight: ${({ theme }) => theme.bold};
+  background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.accentPrimary
+      : ({ theme }) => theme.colors.accentPrimary};
 
-  background-color: ${({ theme }) => theme.colors.accentPrimary};
   color: ${({ theme }) => theme.colors.white};
   border-radius: 8px;
   cursor: pointer;
-  transition: box-shadow ${({ theme }) => theme.transition.slower};
+  transition: all ${({ theme }) => theme.transition.slower};
+
   &:hover {
-    box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+    background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.lightAccent
+      : ({ theme }) => theme.colors.lightAccent};
   }
 
   &:active {

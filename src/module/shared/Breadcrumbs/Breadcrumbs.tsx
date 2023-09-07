@@ -11,6 +11,7 @@ import {
   PathLink,
   PathWrapper,
 } from './Breadcrumbs.styled';
+import { useTheme } from '../../../context';
 
 interface BreadcrumbSegmentProps {
   isCurrent: boolean;
@@ -22,30 +23,43 @@ const BreadcrumbSegment: React.FC<BreadcrumbSegmentProps> = ({
   isCurrent,
   path,
   children,
-}) => (
-  <PathItem>
-    <IconWrapper>
-      <Icon spriteName="arrow-right" size="12px" fill="#B4BDC3" />
-    </IconWrapper>
-    {isCurrent ? (
-      <CurrentPath>{children}</CurrentPath>
-    ) : (
-      <Link to={path}>
-        <PathLink>{children}</PathLink>
-      </Link>
-    )}
-  </PathItem>
-);
+}) => {
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
+
+  return (
+    <PathItem>
+      <IconWrapper>
+        {isDarkTheme ? (
+          <Icon spriteName="arrow-right" size="12px" fill="#fff" />
+        ) : (
+          <Icon spriteName="arrow-right" size="12px" fill="#B4BDC3" />
+        )}
+      </IconWrapper>
+      {isCurrent ? (
+        <CurrentPath isDarkTheme={isDarkTheme}>{children}</CurrentPath>
+      ) : (
+        <Link to={path}>
+          <PathLink isDarkTheme={isDarkTheme}>{children}</PathLink>
+        </Link>
+      )}
+    </PathItem>
+  );
+};
 
 export const Breadcrumbs: React.FC = () => {
   const { pathname } = useLocation();
   const pathSegments = pathname.split('/').filter((segment) => segment !== '');
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   return (
     <BlockWrapper>
       <IconSprite />
       <HomeIconWrapper to="/">
-        <Icon spriteName="home" />
+        {isDarkTheme ? (
+          <Icon spriteName="home" fill="#fff" />
+        ) : (
+          <Icon spriteName="home" />
+        )}
       </HomeIconWrapper>
       <PathWrapper>
         {pathSegments.map((segment, index) => {

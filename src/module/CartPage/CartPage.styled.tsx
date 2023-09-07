@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DarkTheme } from '../../types/DarkTheme';
 
 export const CartContainer = styled.div`
   display: flex;
@@ -13,6 +14,17 @@ export const CartContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
+`;
+
+export const CartTitle = styled.h1<DarkTheme>`
+  font-size: ${({ theme }) => theme.fonts.sizeXxxl};
+  font-weight: ${({ theme }) => theme.fonts.weightBold};
+  line-height: ${({ theme }) => theme.fonts.lineHeightXxxl};
+  letter-spacing: -0.48px;
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.black};
 `;
 
 export const BackButtonContainer = styled.div`
@@ -93,10 +105,14 @@ export const ImgElement = styled.img`
   }
 `;
 
-export const ItemDescription = styled.div`
+export const ItemDescription = styled.div<DarkTheme>`
   display: flex;
   text-align: left;
   width: 336px;
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 
   @media (max-width: 1200px) {
     width: 100%;
@@ -161,12 +177,16 @@ export const IconPriceContainer = styled.div`
   }
 `;
 
-export const IconClose = styled.div`
+export const IconClose = styled.div<DarkTheme>`
   display: flex;
   width: 32px;
   height: 32px;
   border-radius: 50%;
-  border: 1px solid ${({ theme }) => theme.colors.grayElements};
+  border: 1px solid
+  ${({ isDarkTheme, theme }) =>
+    isDarkTheme
+      ? theme.darkThemeColors.white
+      : theme.colors.grayElements};
   align-items: center;
   justify-content: center;
 
@@ -175,7 +195,11 @@ export const IconClose = styled.div`
 
   &:hover {
     /* background-color: ${({ theme }) => theme.colors.graySecondary}; */
-    border: 1px solid ${({ theme }) => theme.colors.black};
+    border: 1px solid
+  ${({ isDarkTheme, theme }) =>
+    isDarkTheme
+      ? theme.darkThemeColors.grayIcons
+      : theme.colors.black};
   }
 
   @media (max-width: 1200px) {
@@ -190,14 +214,24 @@ export const IconClose = styled.div`
 export const IconElement = styled.button<{
   isClickable?: boolean;
   isQuantityOne?: boolean;
+  isDarkTheme: boolean;
 }>`
   display: flex;
   width: 32px;
   height: 32px;
   border-radius: 50%;
   border: 1px solid
-    ${({ theme, isQuantityOne }) =>
-    isQuantityOne ? theme.colors.grayElements : theme.colors.grayIcons};
+    ${({ theme, isQuantityOne, isDarkTheme }) => {
+    if (isQuantityOne) {
+      if (isDarkTheme) {
+        return theme.darkThemeColors.grayIcons;
+      }
+
+      return theme.colors.grayElements;
+    }
+
+    return theme.colors.grayIcons;
+  }};
   background-color: transparent;
   align-items: center;
   justify-content: center;
@@ -206,26 +240,47 @@ export const IconElement = styled.button<{
 
   &:hover {
     border: 1px solid
-      ${({ theme, isQuantityOne }) =>
-    isQuantityOne ? theme.colors.grayElements : theme.colors.black};
+      ${({ theme, isQuantityOne, isDarkTheme }) => {
+    if (isQuantityOne) {
+      if (isDarkTheme) {
+        return theme.darkThemeColors.grayIcons;
+      }
+
+      return theme.colors.grayElements;
+    }
+
+    if (isDarkTheme) {
+      return theme.darkThemeColors.grayIcons;
+    }
+
+    return theme.colors.black;
+  }};
   }
 `;
 
-export const ItemQuantity = styled.div`
+export const ItemQuantity = styled.div<DarkTheme>`
   display: flex;
   align-items: center;
   justify-content: center;
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-family: ${({ theme }) => theme.fonts.name};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 `;
 
-export const ItemPrice = styled.div`
+export const ItemPrice = styled.div<DarkTheme>`
   display: flex;
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-size: ${({ theme }) => theme.fonts.sizeL};
   font-family: ${({ theme }) => theme.fonts.name};
   justify-content: flex-end;
   min-width: 80px;
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
 
   @media (max-width: 1200px) {
     display: flex;
@@ -261,12 +316,16 @@ export const CartSummary = styled.div`
   }
 `;
 
-export const TotalPrice = styled.div`
+export const TotalPrice = styled.div<DarkTheme>`
   padding-bottom: 8px;
   font-size: ${({ theme }) => theme.fonts.sizeXxl};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   text-align: center;
   font-family: ${({ theme }) => theme.fonts.name};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.black};
 `;
 
 export const TotalItems = styled.div`
@@ -277,11 +336,14 @@ export const TotalItems = styled.div`
   font-family: ${({ theme }) => theme.fonts.name};
 `;
 
-export const CartCheckout = styled.button`
+export const CartCheckout = styled.button<DarkTheme>`
   position: relative;
   width: 100%;
   height: 48px;
-  background-color: ${({ theme }) => theme.colors.accentPrimary};
+  background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.accentPrimary
+      : ({ theme }) => theme.colors.accentPrimary};
   color: ${({ theme }) => theme.colors.white};
   border: none;
   border-radius: 8px;
@@ -303,7 +365,10 @@ export const CartCheckout = styled.button`
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: #2190ff;
+    background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.lightAccent
+      : ({ theme }) => theme.colors.lightAccent};
   }
 `;
 

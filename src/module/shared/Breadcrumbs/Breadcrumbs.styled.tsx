@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { styled } from 'styled-components';
+import { DarkTheme } from '../../../types/DarkTheme';
 
 export const BlockWrapper = styled.div`
   display: flex;
@@ -24,8 +25,11 @@ export const PathItem = styled.li`
   line-height: normal;
 `;
 
-export const PathLink = styled.p`
-  color: ${({ theme }) => theme.colors.grayPrimary};
+export const PathLink = styled.p<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.grayPrimary};
 
   transition: color ${({ theme }) => theme.transition.faster};
 
@@ -34,8 +38,11 @@ export const PathLink = styled.p`
   }
 `;
 
-export const CurrentPath = styled.p`
-  color: ${({ theme }) => theme.colors.graySecondary};
+export const CurrentPath = styled.p<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.graySecondary};
 `;
 
 export const HomeIconWrapper = styled(Link)`

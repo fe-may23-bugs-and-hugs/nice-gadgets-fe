@@ -2,6 +2,7 @@
 import styled from 'styled-components';
 import { theme } from '../../styles';
 import { onDesktop, onTablet } from '../shared/Mixins';
+import { DarkTheme } from '../../types/DarkTheme';
 
 export const MainElement = styled.main`
   color: ${theme.colors.graySecondary};
@@ -20,11 +21,14 @@ export const PathAndBack = styled.div`
   `)}
 `;
 
-export const Title = styled.h1`
+export const Title = styled.h1<DarkTheme>`
   grid-column: 1 / -1;
   font-size: ${theme.fonts.sizeM};
   line-height: ${theme.fonts.lineHeightXl};
-  color: ${theme.colors.grayPrimary};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   margin-bottom: 32px;
 
   ${onTablet(`
@@ -34,8 +38,11 @@ export const Title = styled.h1`
   `)}
 `;
 
-export const H2 = styled.h2`
-  color: ${theme.colors.grayPrimary};
+export const H2 = styled.h2<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   font-size: ${theme.fonts.sizeM};
   line-height: ${theme.fonts.lineHeightL};
   font-weight: ${theme.fonts.weightBold};
@@ -49,9 +56,12 @@ export const H2 = styled.h2`
   `)}
 `;
 
-export const Theader = styled.th`
+export const Theader = styled.th<DarkTheme>`
   display: block;
-  color: ${theme.colors.grayPrimary};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   font-size: ${theme.fonts.sizeM};
   line-height: ${theme.fonts.lineHeightL};
   font-weight: ${theme.fonts.weightBold};
@@ -80,8 +90,11 @@ export const DescriptionWrapper = styled.div`
   }
 `;
 
-export const H3 = styled.h3`
-  color: ${theme.colors.grayPrimary};
+export const H3 = styled.h3<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   font-size: ${theme.fonts.sizeS};
   line-height: ${theme.fonts.lineHeightM};
   font-weight: ${theme.fonts.weightSemiBold};
@@ -154,8 +167,11 @@ export const TableRow = styled.tr`
 export const TableHeader = styled.th`
   font-weight: 500;
 `;
-export const TableData = styled.td`
-  color: ${theme.colors.grayPrimary};
+export const TableData = styled.td<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   font-weight: ${theme.fonts.weightRegular};
 `;
 

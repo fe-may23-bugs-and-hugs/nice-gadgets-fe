@@ -16,7 +16,7 @@ import {
   ItemQuantity,
   ItemPrice,
 } from './CartPage.styled';
-import { CartContext } from '../../context';
+import { CartContext, useTheme } from '../../context';
 
 type Props = {
   product: PhoneWithQuantity;
@@ -27,6 +27,7 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
   const { setCartProducts } = useContext(CartContext);
   const [quantity, setQuantity] = useState(product.quantity);
   const oneItemPrice = quantity * product.priceDiscount;
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const handleChangeQuantity = (action: string) => {
     if (action === 'increment') {
@@ -65,7 +66,10 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
   return (
     <CartItem>
       <MobileContainer>
-        <IconClose onClick={() => handleDelete(product._id)}>
+        <IconClose
+          onClick={() => handleDelete(product._id)}
+          isDarkTheme={isDarkTheme}
+        >
           <IconSprite />
           <Icon spriteName="close" size="16px" fill="#B4BDC3" />
         </IconClose>
@@ -75,7 +79,7 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
           </ImgContainer>
         </Link>
         <Link to={`/${product.category}/${product._id}`}>
-          <ItemDescription>
+          <ItemDescription isDarkTheme={isDarkTheme}>
             <p>{product.name}</p>
           </ItemDescription>
         </Link>
@@ -83,30 +87,44 @@ export const CartItemPage: React.FC<Props> = ({ product, handleDelete }) => {
       <IconPriceContainer>
         <IconContainer>
           <IconElement
+            isDarkTheme={isDarkTheme}
             onClick={() => handleChangeQuantity('decrement')}
             isClickable={quantity > 1}
             isQuantityOne={quantity === 1}
           >
             <IconSprite />
             {quantity > 1 ? (
-              <Icon spriteName="minus" size="16px" />
+              <>
+                {isDarkTheme ? (
+                  <Icon spriteName="minus" size="16px" fill="#fff" />
+                ) : (
+                  <Icon spriteName="minus" size="16px" />
+                )}
+              </>
             ) : (
               <Icon spriteName="minus" size="16px" fill="#B4BDC3" />
             )}
           </IconElement>
-          <ItemQuantity>
+          <ItemQuantity isDarkTheme={isDarkTheme}>
             <p>{quantity}</p>
           </ItemQuantity>
           <IconElement
+            isDarkTheme={isDarkTheme}
             onClick={() => handleChangeQuantity('increment')}
             isClickable={quantity > 0}
-            // isQuantityOne={quantity === 1}
+          // isQuantityOne={quantity === 1}
           >
             <IconSprite />
-            <Icon spriteName="plus" size="16px" />
+            <>
+              {isDarkTheme ? (
+                <Icon spriteName="plus" size="16px" fill="#fff" />
+              ) : (
+                <Icon spriteName="plus" size="16px" />
+              )}
+            </>
           </IconElement>
         </IconContainer>
-        <ItemPrice>
+        <ItemPrice isDarkTheme={isDarkTheme}>
           <p>${oneItemPrice}</p>
         </ItemPrice>
       </IconPriceContainer>

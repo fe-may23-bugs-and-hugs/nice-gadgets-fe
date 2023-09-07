@@ -159,14 +159,22 @@ export const Header = () => {
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
             <div onClick={logout}>
               <IconSprite />
-              <Icon spriteName="logout" size="18px" />
+              {isDarkTheme ? (
+                <Icon spriteName="logout" size="18px" stroke="#fff" />
+              ) : (
+                <Icon spriteName="logout" size="18px" stroke="#000" />
+              )}
             </div>
           </IconElement>
         ) : (
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
             <LinkWrapper to="/auth/logIn">
               <IconSprite />
-              <Icon spriteName="account" size="18px" />
+              {isDarkTheme ? (
+                <Icon spriteName="account" size="18px" fill="#fff" />
+              ) : (
+                <Icon spriteName="account" size="18px" />
+              )}
             </LinkWrapper>
           </IconElement>
         )}
