@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/*eslint-disable*/
+import React, { useContext } from 'react';
 import {
   SectionWrapper,
   Form,
@@ -8,117 +9,83 @@ import {
   Input,
   FormWrapper,
   FormLink,
-} from './LoginForm.styled';
-import { useLocation } from 'react-router-dom';
+} from '../Form.styled';
+import { useForm } from 'react-hook-form';
+import { LoginTypes } from '../../../../types/Login';
+import { AuthContext } from '../../../../context/authContext';
+import { Navigate } from 'react-router-dom';
 
-// enum FORMTYPES {
-//   LOGIN = 'Log In',
-//   SIGNUP = 'Sign Up',
-// }
+export const LoginForm: React.FC = () => {
+  const { onSendLogin, isAuth, error, onResetErrors } = useContext(AuthContext);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isValid },
+  } = useForm({
+    defaultValues: {
+      email: 'test1@gmail.com',
+      password: '12345',
+    },
+    mode: 'onBlur',
+  });
 
-const formTypeData = [
-  {
-    type: 'Log In',
-    path: '/logIn',
-  },
-  {
-    type: 'Sign Up',
-    path: '/signUp',
-  },
-];
+  const onHandleSubmit = (values: LoginTypes) => {
+    const data = onSendLogin(values);
 
-export const LoginForm = () => {
-  const currentLocation = useLocation();
-  const currentForm = formTypeData.find(
-    (form) => form.path === currentLocation.pathname,
-  );
-  const otherForm = formTypeData.find(
-    (form) => form.path !== currentLocation.pathname,
-  );
-
-  const [userName, setUserName] = useState('');
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  const [userNameError, setUserNameError] = useState(false);
-  const [emailError, setEmailError] = useState(false);
-  const [passwordError, setPasswordError] = useState(false);
-
-  const handleNameChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setUserName(e.target.value);
+    console.log(data);
   };
 
-  const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-  };
+  if (isAuth) {
+    return <Navigate to="/" />;
+  }
 
-  const handlePasswordChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setPassword(e.target.value);
-  };
-
-  const handleSubmit = (e: React.ChangeEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    setUserNameError(currentForm?.type === 'Sign Up' && !userName);
-    setEmailError(!email);
-    setPasswordError(!password);
-
-    if (userNameError || emailError || passwordError) {
-      return;
-    }
-
-    setUserName('');
-    setEmail('');
-    setPassword('');
+  const clearError = () => {
+    onResetErrors();
   };
 
   return (
     <SectionWrapper>
       <FormWrapper>
-        <h2>{currentForm ? currentForm.type : 'Log In'}</h2>
-        <Form onSubmit={handleSubmit}>
-          {currentForm?.type === 'Sign Up' && (
-            <InputWrapper>
-              <Label htmlFor="name">Name</Label>
-              <Input
-                type="text"
-                id="name"
-                value={userName}
-                onChange={handleNameChange}
-                placeholder="Enter name"
-                required
-              />
-            </InputWrapper>
-          )}
+        <h2> Log In</h2>
+        {error && <div style={{ color: 'red' }}>{error}</div>}
+        <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <InputWrapper>
             <Label htmlFor="email">Email</Label>
             <Input
               type="email"
               id="email"
-              value={email}
-              onChange={handleEmailChange}
               placeholder="Enter email"
-              required
+              {...register('email', { required: 'Please,write your email' })}
+              onChange={clearError}
             />
+            {errors.email && (
+              <span style={{ color: 'red' }}>{errors.email.message}</span>
+            )}
           </InputWrapper>
           <InputWrapper>
             <Label htmlFor="password">Password</Label>
             <Input
               type="password"
               id="password"
-              value={password}
-              onChange={handlePasswordChange}
               placeholder="Enter password"
-              required
+              {...register('password', {
+                required: 'Please,write your password',
+                minLength: {
+                  value: 4,
+                  message: 'Password should be at least 4 characters long',
+                },
+              })}
+              onChange={clearError}
             />
+            {errors.password && (
+              <span style={{ color: 'red' }}>{errors.password.message}</span>
+            )}
           </InputWrapper>
-          <SubmitButton type="submit">
-            {currentForm ? currentForm.type : 'Log In'}
+          <SubmitButton disabled={!isValid} type="submit">
+            Log In
           </SubmitButton>
         </Form>
-        <FormLink to={otherForm?.path || '/signUp'}>
-          {otherForm?.type || 'Sign Up'}
-        </FormLink>
+        <FormLink to="/signUp">Sign Up</FormLink>
       </FormWrapper>
     </SectionWrapper>
   );
