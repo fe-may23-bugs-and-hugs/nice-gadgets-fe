@@ -1,5 +1,5 @@
 /*eslint-disable*/
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {
   SectionWrapper,
   Form,
@@ -16,22 +16,50 @@ import { useForm } from 'react-hook-form';
 import { LoginTypes } from '../../../../types/Login';
 import { AuthContext } from '../../../../context/authContext';
 import { Navigate } from 'react-router-dom';
+import Notiflix from 'notiflix';
 import { Icon, IconSprite } from '../../../shared';
 
 export const LoginForm: React.FC = () => {
   const [showPassword, setShowPassword] = useState(false);
   const { onSendLogin, isAuth, error, onResetErrors } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
     formState: { errors, isValid },
+    setError,
   } = useForm({
     defaultValues: {
-      email: 'test1@gmail.com',
-      password: '12345',
+      email: '',
+      password: '',
     },
     mode: 'onBlur',
   });
+
+  useEffect(() => {
+    onResetErrors();
+  }, [loginError]);
+
+  useEffect(() => {
+    if (isAuth) {
+      Notiflix.Notify.success('Successfully logged');
+    }
+  }, [isAuth]);
+
+  useEffect(() => {
+    if (loginError) {
+      Notiflix.Notify.failure('Invalid login or password');
+    }
+  }, [loginError]);
+
+  const clearError = (fieldName: string) => {
+    onResetErrors();
+    //@ts-ignore
+    setError(fieldName, {
+      type: 'manual',
+      message: '',
+    });
+  };
 
   const onHandleSubmit = (values: LoginTypes) => {
     const data = onSendLogin(values);
@@ -55,7 +83,7 @@ export const LoginForm: React.FC = () => {
     <SectionWrapper>
       <FormWrapper>
         <h2> Log In</h2>
-        {error && <div style={{ color: 'red' }}>{error}</div>}
+
         <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <InputWrapper>
             <Label htmlFor="email">Email</Label>
@@ -63,8 +91,14 @@ export const LoginForm: React.FC = () => {
               type="email"
               id="email"
               placeholder="Enter email"
-              {...register('email', { required: 'Please,write your email' })}
-              onChange={clearError}
+              {...register('email', {
+                required: 'Please, write your email',
+                pattern: {
+                  value: /^\S+@\S+\.\S+$/,
+                  message: 'Invalid email address',
+                },
+              })}
+              onChange={() => clearError('email')}
             />
             {errors.email && (
               <span style={{ color: 'red' }}>{errors.email.message}</span>
@@ -83,7 +117,7 @@ export const LoginForm: React.FC = () => {
                   message: 'Password should be at least 4 characters long',
                 },
               })}
-              onChange={clearError}
+              onChange={() => clearError('password')}
             />
             <ToggleButton onClick={handlePasswordToggle}>
               <IconSprite />
