@@ -40,7 +40,6 @@ export const RegistrationForm: React.FC = () => {
   });
 
   const onHandleSubmit = (values: RegisterData) => {
-    console.log(values);
 
     onRegisterUser(values);
   };
