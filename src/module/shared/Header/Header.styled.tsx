@@ -274,6 +274,7 @@ export const IconElement = styled.div<HeaderElementProps>`
   &:not(:nth-child(-n + ${IconsBurgerLeft})) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
+
       if (!theme) {
         return '';
       }
