@@ -9,16 +9,20 @@ import {
   Input,
   FormWrapper,
   FormLink,
+  ToggleButton,
+  IconWrapper,
 } from '../Form.styled';
 import { useForm } from 'react-hook-form';
 import { LoginTypes } from '../../../../types/Login';
 import { AuthContext } from '../../../../context/authContext';
 import { Navigate } from 'react-router-dom';
 import Notiflix from 'notiflix';
+import { Icon, IconSprite } from '../../../shared';
 
 export const LoginForm: React.FC = () => {
-  const { onSendLogin, isAuth, loginError, onResetErrors } =
-    useContext(AuthContext);
+  const [showPassword, setShowPassword] = useState(false);
+  const { onSendLogin, isAuth, error, onResetErrors } = useContext(AuthContext);
+
   const {
     register,
     handleSubmit,
@@ -67,6 +71,14 @@ export const LoginForm: React.FC = () => {
     return <Navigate to="/" />;
   }
 
+  const clearError = () => {
+    onResetErrors();
+  };
+
+  const handlePasswordToggle = () => {
+    setShowPassword(!showPassword);
+  };
+
   return (
     <SectionWrapper>
       <FormWrapper>
@@ -95,7 +107,7 @@ export const LoginForm: React.FC = () => {
           <InputWrapper>
             <Label htmlFor="password">Password</Label>
             <Input
-              type="password"
+              type={showPassword ? 'text' : 'password'}
               id="password"
               placeholder="Enter password"
               {...register('password', {
@@ -107,6 +119,16 @@ export const LoginForm: React.FC = () => {
               })}
               onChange={() => clearError('password')}
             />
+            <ToggleButton onClick={handlePasswordToggle}>
+              <IconSprite />
+              <IconWrapper>
+                {showPassword ? (
+                  <Icon spriteName="eye-closed" />
+                ) : (
+                  <Icon spriteName="eye-open" />
+                )}
+              </IconWrapper>
+            </ToggleButton>
             {errors.password && (
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
