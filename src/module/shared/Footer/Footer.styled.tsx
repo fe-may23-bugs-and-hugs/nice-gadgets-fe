@@ -102,9 +102,9 @@ export const Link = styled.a<DarkTheme>`
 
   &:hover {
     color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.graySecondary
-      : ({ theme }) => theme.colors.grayPrimary};
+      isDarkTheme
+        ? ({ theme }) => theme.darkThemeColors.graySecondary
+        : ({ theme }) => theme.colors.grayPrimary};
   }
 `;
 

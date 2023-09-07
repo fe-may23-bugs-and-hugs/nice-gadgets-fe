@@ -205,7 +205,7 @@ export const IconElement = styled.button<{ isClickable?: boolean }>`
 
   &:hover {
     background-color: ${({ isClickable, theme }) =>
-      isClickable ? theme.colors.graySecondary : 'inherit'};
+    isClickable ? theme.colors.graySecondary : 'inherit'};
   }
 `;
 

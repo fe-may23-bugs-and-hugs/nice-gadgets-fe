@@ -9,8 +9,8 @@ import { Title } from './HomePage.styled';
 import { Categories } from './components/Categories';
 
 export const HomePage = () => {
-  const { loadNewData, loadDiscountData, newData, discountData } =
-    useContext(PhonesContext);
+  const { loadNewData, loadDiscountData, newData, discountData }
+    = useContext(PhonesContext);
 
   useEffect(() => {
     loadNewData();
