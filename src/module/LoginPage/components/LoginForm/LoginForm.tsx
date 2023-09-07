@@ -44,13 +44,13 @@ export const LoginForm: React.FC = () => {
 
   useEffect(() => {
     if (isAuth) {
-      Notiflix.Notify.success('Successfully logged');
+      Notiflix.Notify.success('Successfully logged', { timeout: 1000 });
     }
   }, [isAuth]);
 
   useEffect(() => {
     if (loginError) {
-      Notiflix.Notify.failure('Invalid login or password');
+      Notiflix.Notify.failure('Invalid login or password', { timeout: 1000 });
     }
   }, [loginError]);
 
