@@ -89,10 +89,12 @@ export const BannerButton = styled.button`
   border: 1px solid#999;
   cursor: pointer;
   transition: all ${({ theme }) => theme.transition.slower};
+
   &:hover {
     color: ${({ theme }) => theme.colors.graySecondary};
     border-color: #fff;
   }
+
   ${onDesktop(`
     padding: 22px;
     margin: 40px;
@@ -112,6 +114,7 @@ export const StyledImageTablet = styled.img`
   height: 400px;
   display: none;
   border-radius: 8px;
+  object-fit: cover;
   ${onTablet(`
     display: block;
   `)}

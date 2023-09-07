@@ -10,6 +10,7 @@ import {
   ProductCard,
 } from '../module';
 import { PhonesProvider } from '../context';
+import { LoginPage } from '../module/LoginPage';
 
 export const Root = () => (
   <BrowserRouter>
@@ -37,6 +38,9 @@ export const Root = () => (
             <Route index element={<Favorites />} />
             <Route path=":productId" element={<ProductCard />} />
           </Route>
+
+          <Route path="logIn" element={<LoginPage />} />
+          <Route path="signUp" element={<LoginPage />} />
 
           <Route path="cart" element={<CartPage />} />
 

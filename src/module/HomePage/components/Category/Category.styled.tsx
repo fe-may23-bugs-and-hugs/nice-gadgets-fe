@@ -13,10 +13,10 @@ export const CategoryImage = styled.img`
   width: 100%;
   object-fit: cover;
 
-  transition: transform 0.5s;
+  transition: transform ${({ theme }) => theme.transition.faster};
 
   &:hover {
-    transform: scale(1.05);
+    transform: scale(1.03);
   }
 `;
 
@@ -36,6 +36,8 @@ export const CategoryTitle = styled.h4`
     font-size: 20px;
     line-height: 26px;
   `)};
+
+  transition: color ${({ theme }) => theme.transition.faster};
 
   &:hover {
     color: ${({ theme }) => theme.colors.graySecondary};

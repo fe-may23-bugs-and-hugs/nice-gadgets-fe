@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable operator-linebreak */
 import styled, { css, ThemeContext } from 'styled-components';
 import { useContext } from 'react';
 import { NavLink } from 'react-router-dom';
@@ -86,17 +88,6 @@ export const UlElement = styled.ul<mobileProps>`
   }
 `;
 
-export const LiElement = styled.li`
-  list-style-type: none;
-  cursor: pointer;
-  transition: color ${({ theme }) => theme.transition.slower};
-
-  &:hover {
-    color: ${({ theme }) => theme.colors.grayPrimary};
-    transition: color ${({ theme }) => theme.transition.slower};
-  }
-`;
-
 export const LinkElement = styled(NavLink)`
   display: block;
   position: relative;
@@ -114,6 +105,34 @@ export const LinkElement = styled(NavLink)`
       width: 100%;
       height: 3px;
       background-color: ${({ theme }) => theme.colors.grayPrimary};
+    }
+  }
+
+  &:after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    width: 0%;
+    height: 3px;
+    background-color: ${({ theme }) => theme.colors.grayPrimary};
+    transition: all ${({ theme }) => theme.transition.faster};
+    display: block;
+    right: 0;
+  }
+`;
+
+export const LiElement = styled.li`
+  list-style-type: none;
+  cursor: pointer;
+  transition: color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.grayPrimary};
+    transition: color ${({ theme }) => theme.transition.slower};
+
+    ${LinkElement}::after {
+      width: 100%;
+      left: 0;
     }
   }
 `;
@@ -135,8 +154,8 @@ export const IconElement = styled.div<IconElementProps>`
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   ${({ hasPinkCircle, circleText }) =>
-    hasPinkCircle
-    && css`
+    hasPinkCircle &&
+    css`
       &:before {
         content: '${circleText}';
         font-size: 10px;
@@ -172,14 +191,14 @@ export const IconElement = styled.div<IconElementProps>`
 
   &:not(:last-child) {
     ${({ isMenuOpen }) => {
-    const theme = useContext(ThemeContext);
+      const theme = useContext(ThemeContext);
 
-    if (!theme) {
-      return '';
-    }
+      if (!theme) {
+        return '';
+      }
 
-    return isMenuOpen
-      ? css`
+      return isMenuOpen
+        ? css`
             &:first-child {
               display: block;
               width: 100%;
@@ -202,8 +221,8 @@ export const IconElement = styled.div<IconElementProps>`
               }
             }
           `
-      : 'display: none';
-  }};
+        : 'display: none';
+    }};
   }
 
   &:hover {

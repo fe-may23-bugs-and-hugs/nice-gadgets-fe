@@ -1,5 +1,5 @@
 import React from 'react';
-import { Hourglass } from 'react-loader-spinner';
+import { ThreeDots } from 'react-loader-spinner';
 import {
   LoaderBackground,
   LoaderContent,
@@ -19,13 +19,11 @@ export const Loader: React.FC<Props> = ({ visible }) => {
     <LoaderOverlay>
       <LoaderBackground></LoaderBackground>
       <LoaderContent>
-        <Hourglass
+        <ThreeDots
           height={80}
           width={80}
-          ariaLabel="hourglass-loading"
-          wrapperStyle={{}}
-          wrapperClass=""
-          colors={['#306cce', '#72a1ed']}
+          ariaLabel="three-dots-loading"
+          color="#0F0F11"
         />
       </LoaderContent>
     </LoaderOverlay>

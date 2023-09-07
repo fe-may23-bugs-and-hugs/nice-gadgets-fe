@@ -8,7 +8,9 @@ interface ICartContext {
   addItem: (product: Phone) => void;
   totalItems: number;
   setCartProducts: (
-    newCartProducts: PhoneWithQuantity[] | ((newCartProducts: PhoneWithQuantity[]) => PhoneWithQuantity[]),
+    newCartProducts:
+      | PhoneWithQuantity[]
+      | ((newCartProducts: PhoneWithQuantity[]) => PhoneWithQuantity[]),
   ) => void;
 }
 

@@ -1,3 +1,4 @@
+/* eslint-disable indent */
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../Mixins';
 import { Link } from 'react-router-dom';
@@ -6,7 +7,7 @@ interface ButtonProps {
   isClicked: boolean;
 }
 
-export const CardWrapper = styled(Link)`
+export const CardWrapper = styled.div`
   display: flex;
   flex-direction: column;
   align-self: flex-start;
@@ -22,12 +23,26 @@ export const CardWrapper = styled(Link)`
   border-radius: 8px;
   border: ${(props) => `1px solid ${props.theme.colors.grayElements}`};
   background: ${({ theme }) => theme.colors.white};
+
+  transition: box-shadow ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    box-shadow:
+      rgba(0, 0, 0, 0.19) 0px 10px 20px,
+      rgba(0, 0, 0, 0.23) 0px 6px 6px;
+
+    & a:first-child {
+      transform: scale(1.05); /* Увеличение изображения при ховере */
+    }
+  }
 `;
 
-export const ImageBox = styled.div`
+export const ImageBox = styled(Link)`
   width: 208px;
   height: 208px;
   margin-bottom: 24px;
+
+  transition: transform ${({ theme }) => theme.transition.faster};
 `;
 
 export const CardImage = styled.img`
@@ -38,7 +53,7 @@ export const CardImage = styled.img`
   margin: 0 auto;
 `;
 
-export const CardTitle = styled.h2`
+export const CardTitle = styled(Link)`
   color: ${({ theme }) => theme.colors.grayPrimary};
 
   font-size: ${({ theme }) => theme.fonts.sizeXs};
@@ -49,6 +64,12 @@ export const CardTitle = styled.h2`
   height: 42px;
 
   margin-bottom: 8px;
+
+  transition: color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    color: ${({ theme }) => theme.colors.graySecondary};
+  }
 `;
 
 export const PriceWrapper = styled.div`
@@ -148,7 +169,7 @@ export const ButtonAdd = styled.button<ButtonProps>`
   cursor: pointer;
 
   border-radius: 8px;
-  background: ${(props) =>
+  background-color: ${(props) =>
     props.isClicked
       ? props.theme.colors.white
       : props.theme.colors.accentPrimary};
@@ -157,8 +178,10 @@ export const ButtonAdd = styled.button<ButtonProps>`
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightM};
 
+  transition: background-color ${({ theme }) => theme.transition.slower};
+
   &:hover {
-    box-shadow: 0px 3px 13px 0px rgba(23, 32, 49, 0.4);
+    background-color: ${(props) => (props.isClicked ? `#fafafa` : `#2190ff`)};
   }
 
   &.card-button-add {
@@ -180,6 +203,8 @@ export const ButtonLike = styled.button`
   width: 40px;
 
   border-radius: 48px;
+
+  transition: border ${({ theme }) => theme.transition.slower};
 
   &:hover {
     border: ${(props) => `1px solid ${props.theme.colors.grayPrimary}`};
