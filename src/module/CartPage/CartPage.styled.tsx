@@ -17,13 +17,13 @@ export const CartContainer = styled.div`
 
 export const BackButtonContainer = styled.div`
   margin-top: 40px;
-  margin-left: 16px;
+  /* margin-left: 16px; */
 `;
 
 export const CartHeader = styled.header`
   display: flex;
   margin-top: 16px;
-  margin-left: 16px;
+  /* margin-left: 16px; */
   margin-bottom: 32px;
   gap: 32px;
   font-size: ${({ theme }) => theme.fonts.sizeL};
@@ -55,6 +55,11 @@ export const CartItem = styled.li`
   border: 1px solid ${({ theme }) => theme.colors.grayElements};
   font-size: ${({ theme }) => theme.fonts.sizeXs};
   font-family: ${({ theme }) => theme.fonts.name};
+  transition: border-color ${({ theme }) => theme.transition.slower};
+
+  &:hover {
+    border-color: ${({ theme }) => theme.colors.graySecondary};
+  }
 
   @media (max-width: 1200px) {
     display: flex;
@@ -139,7 +144,7 @@ export const IconContainer = styled.div`
 
 export const IconPriceContainer = styled.div`
   display: flex;
-  gap: 53px;
+  gap: 52px;
   align-items: center;
 
   @media (max-width: 1200px) {
@@ -186,7 +191,7 @@ export const IconClose = styled.div`
   }
 `;
 
-export const IconElement = styled.button`
+export const IconElement = styled.button<{ isClickable?: boolean }>`
   display: flex;
   width: 32px;
   height: 32px;
@@ -195,13 +200,12 @@ export const IconElement = styled.button`
   background-color: transparent;
   align-items: center;
   justify-content: center;
-
-  cursor: pointer;
-
+  cursor: ${({ isClickable }) => (isClickable ? 'pointer' : 'default')};
   transition: background-color ${({ theme }) => theme.transition.slower};
 
   &:hover {
-    background-color: ${({ theme }) => theme.colors.graySecondary};
+    background-color: ${({ isClickable, theme }) =>
+    isClickable ? theme.colors.graySecondary : 'inherit'};
   }
 `;
 
