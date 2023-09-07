@@ -23,7 +23,11 @@ import {
 
 import { Icon, IconSprite } from '../Sprites';
 import { Phone } from '../../../types/Phone';
-import { FavoriteContext, CartContext, useTheme as useCustomTheme } from '../../../context';
+import {
+  FavoriteContext,
+  CartContext,
+  useTheme as useCustomTheme,
+} from '../../../context';
 
 type Props = {
   phone: Phone;
@@ -31,6 +35,7 @@ type Props = {
 
 export const PhoneCard: React.FC<Props> = ({ phone }) => {
   const theme = useTheme();
+  const { isDarkTheme } = useCustomTheme() || { isDarkTheme: false };
 
   const { addItem, cartProducts } = useContext(CartContext);
 
@@ -58,13 +63,19 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
       <ImageBox to={fullPath}>
         <CardImage src={phone.images[0]} alt="Phone Image" />
       </ImageBox>
-      <CardTitle to={phone._id} isDarkTheme={isDarkTheme}>{phone.name}</CardTitle>
+      <CardTitle to={phone._id} isDarkTheme={isDarkTheme}>
+        {phone.name}
+      </CardTitle>
 
       <PriceWrapper isDarkTheme={isDarkTheme}>
-        <CurrentPrice isDarkTheme={isDarkTheme}>{`$${phone.priceDiscount}`}</CurrentPrice>
-        <OldPrice isDarkTheme={isDarkTheme}>{`$${phone.priceRegular}`}</OldPrice>
+        <CurrentPrice
+          isDarkTheme={isDarkTheme}
+        >{`$${phone.priceDiscount}`}</CurrentPrice>
+        <OldPrice
+          isDarkTheme={isDarkTheme}
+        >{`$${phone.priceRegular}`}</OldPrice>
       </PriceWrapper>
-      
+
       <DescrWrapper>
         <DescrBox>
           <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>
@@ -73,9 +84,15 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
         </DescrBox>
 
         <DescrBox>
-          <DescrValue isDarkTheme={isDarkTheme}>{phone.screen || 'N/A'}</DescrValue>
-          <DescrValue isDarkTheme={isDarkTheme}>{phone.capacity || 'N/A'}</DescrValue>
-          <DescrValue isDarkTheme={isDarkTheme}>{phone.ram || 'N/A'}</DescrValue>
+          <DescrValue isDarkTheme={isDarkTheme}>
+            {phone.screen || 'N/A'}
+          </DescrValue>
+          <DescrValue isDarkTheme={isDarkTheme}>
+            {phone.capacity || 'N/A'}
+          </DescrValue>
+          <DescrValue isDarkTheme={isDarkTheme}>
+            {phone.ram || 'N/A'}
+          </DescrValue>
         </DescrBox>
       </DescrWrapper>
 
@@ -100,25 +117,23 @@ export const PhoneCard: React.FC<Props> = ({ phone }) => {
           }}
         >
           <IconSprite />
-          {isFavorite && <Icon
-            spriteName="heart-field"
-            fill={theme.colors.accentSecondary}
-          />}
-
-          {!isFavorite && (
+          {isFavorite && (
             <Icon
-              spriteName="heart"
+              spriteName="heart-field"
+              fill={theme.colors.accentSecondary}
             />
           )}
 
-          {isDarkTheme && isFavorite && <Icon
-            spriteName="heart-field"
-            fill={theme.colors.accentSecondary}
-          />}
+          {!isFavorite && <Icon spriteName="heart" />}
 
-          {isDarkTheme && !isFavorite && <Icon
-            spriteName="heart-white"
-          />}
+          {isDarkTheme && isFavorite && (
+            <Icon
+              spriteName="heart-field"
+              fill={theme.colors.accentSecondary}
+            />
+          )}
+
+          {isDarkTheme && !isFavorite && <Icon spriteName="heart-white" />}
         </ButtonLike>
       </ButtonsWrapper>
     </CardWrapper>

@@ -10,6 +10,7 @@ import {
 import { getPhones } from '../../../../api/phonesAPI';
 import { SORTING } from '../../../../types/sortEnum';
 import { ORDER } from '../../../../types/OrderEnum';
+import { useTheme } from '../../../../context';
 
 interface Props {
   image: string;
@@ -19,6 +20,7 @@ interface Props {
 
 export const Category: React.FC<Props> = ({ image, title, category }) => {
   const [numberOfModels, setNumberOfModels] = useState(0);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   useEffect(() => {
     getPhones(
@@ -46,7 +48,7 @@ export const Category: React.FC<Props> = ({ image, title, category }) => {
       </Link>
       <CategoryContent>
         <Link to={`/${category}`}>
-          <CategoryTitle>{title}</CategoryTitle>
+          <CategoryTitle isDarkTheme={isDarkTheme}>{title}</CategoryTitle>
         </Link>
 
         <CategoryModels>{numberOfModels} models</CategoryModels>
