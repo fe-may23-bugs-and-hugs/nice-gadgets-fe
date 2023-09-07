@@ -10,9 +10,9 @@ import {
 } from '../module';
 import { PhonesProvider } from '../context';
 import { LoginPage } from '../module/LoginPage';
-import { RegistrationForm } from
-  '../module/LoginPage/components/RegistrationForm';
 import { LoginForm } from '../module/LoginPage/components/LoginForm/LoginForm';
+// eslint-disable-next-line max-len
+import { RegistrationForm } from '../module/LoginPage/components/RegistrationForm';
 
 export const Root = () => (
   <BrowserRouter>

@@ -253,17 +253,17 @@ export const IconElement = styled.div<HeaderElementProps>`
       ${({ isMenuOpen }) => {
     return isMenuOpen
       ? css`
-          position: fixed;
-          margin-right: 48px;
-          width: 48px;
-          height: 48px;
-          top: 15px;
-          right: 0;
+              position: fixed;
+              margin-right: 48px;
+              width: 48px;
+              height: 48px;
+              top: 15px;
+              right: 0;
 
-            svg {
-              margin-top: 1px;
-            }
-          `
+              svg {
+                margin-top: 1px;
+              }
+            `
       : 'position: relative;';
   }};
     }

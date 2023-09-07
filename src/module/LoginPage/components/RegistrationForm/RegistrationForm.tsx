@@ -98,7 +98,9 @@ export const RegistrationForm: React.FC = () => {
         <Title isDarkTheme={isDarkTheme}>Sign up</Title>
         <Form onSubmit={handleSubmit(onHandleSubmit)}>
           <InputWrapper>
-            <Label isDarkTheme={isDarkTheme} htmlFor="name">Name</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="name">
+              Name
+            </Label>
             <Input
               {...register('fullName', {
                 required: 'Please,write your name',
@@ -118,7 +120,9 @@ export const RegistrationForm: React.FC = () => {
             )}
           </InputWrapper>
           <InputWrapper>
-            <Label isDarkTheme={isDarkTheme} htmlFor="email">Email</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="email">
+              Email
+            </Label>
             <Input
               {...register('email', {
                 required: 'Please, write your email',
@@ -135,7 +139,9 @@ export const RegistrationForm: React.FC = () => {
             />
           </InputWrapper>
           <InputWrapper>
-            <Label isDarkTheme={isDarkTheme} htmlFor="password">Password</Label>
+            <Label isDarkTheme={isDarkTheme} htmlFor="password">
+              Password
+            </Label>
             <Input
               {...register('password', {
                 required: 'Please,write your password',
@@ -168,7 +174,9 @@ export const RegistrationForm: React.FC = () => {
             Register
           </SubmitButton>
         </Form>
-        <FormLink isDarkTheme={isDarkTheme} to="/auth/logIn">Log In</FormLink>
+        <FormLink isDarkTheme={isDarkTheme} to="/auth/logIn">
+          Log In
+        </FormLink>
       </FormWrapper>
     </SectionWrapper>
   );
