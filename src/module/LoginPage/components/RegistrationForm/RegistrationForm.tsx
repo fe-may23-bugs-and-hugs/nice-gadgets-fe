@@ -28,12 +28,12 @@ export const RegistrationForm: React.FC = () => {
   const {
     register,
     handleSubmit,
-    setError,
+    clearErrors,
     formState: { errors, isValid },
   } = useForm({
     defaultValues: {
       fullName: '',
-      email: '@gmail.com',
+      email: '',
       password: '',
     },
     mode: 'onBlur',
@@ -45,18 +45,21 @@ export const RegistrationForm: React.FC = () => {
     onRegisterUser(values);
   };
 
-  const clearError = (fieldName: string) => {
-    onResetErrors();
-    //@ts-ignore
-    setError(fieldName, {
-      type: 'manual',
-      message: '',
-    });
+  const handleEmailInputChange = () => {
+    clearErrors('email');
+  };
+
+  const handlePasswordInputChange = () => {
+    clearErrors('password');
+  };
+
+  const handleNameInputChange = () => {
+    clearErrors('fullName');
   };
 
   useEffect(() => {
     onResetErrors();
-  }, []);
+  }, [registrError]);
 
   useEffect(() => {
     if (isAuth) {
@@ -73,6 +76,10 @@ export const RegistrationForm: React.FC = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
+
+  const disabledFunc = Boolean(
+    errors.email || errors.password || errors.fullName,
+  );
 
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
@@ -97,7 +104,7 @@ export const RegistrationForm: React.FC = () => {
               type="text"
               id="name"
               placeholder="Enter name"
-              onChange={() => clearError('fullName')}
+              onFocus={handleNameInputChange}
             />
             {errors.fullName && (
               <span style={{ color: 'red' }}>{errors.fullName.message}</span>
@@ -117,7 +124,7 @@ export const RegistrationForm: React.FC = () => {
               id="email"
               placeholder="Enter email"
               required
-              onChange={() => clearError('email')}
+              onFocus={handleEmailInputChange}
             />
           </InputWrapper>
           <InputWrapper>
@@ -134,7 +141,7 @@ export const RegistrationForm: React.FC = () => {
               id="password"
               placeholder="Enter password"
               required
-              onChange={() => clearError('password')}
+              onFocus={handlePasswordInputChange}
             />
             <ToggleButton onClick={handlePasswordToggle}>
               <IconSprite />
@@ -150,11 +157,11 @@ export const RegistrationForm: React.FC = () => {
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
           </InputWrapper>
-          <SubmitButton disabled={!isValid} type="submit">
+          <SubmitButton disabled={!isValid || disabledFunc} type="submit">
             Register
           </SubmitButton>
         </Form>
-        {/* <FormLink to="/auth/logIn">Log In</FormLink> */}
+        <FormLink to="/auth/logIn">Log In</FormLink>
       </FormWrapper>
     </SectionWrapper>
   );

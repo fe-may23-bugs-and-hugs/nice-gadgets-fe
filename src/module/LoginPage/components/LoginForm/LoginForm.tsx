@@ -28,13 +28,13 @@ export const LoginForm: React.FC = () => {
     register,
     handleSubmit,
     formState: { errors, isValid },
-    setError,
+    clearErrors,
   } = useForm({
     defaultValues: {
       email: '',
       password: '',
     },
-    mode: 'onSubmit',
+    mode: 'onBlur',
   });
 
   useEffect(() => {
@@ -53,15 +53,6 @@ export const LoginForm: React.FC = () => {
     }
   }, [loginError]);
 
-  const clearError = (fieldName: string) => {
-    onResetErrors();
-    //@ts-ignore
-    setError(fieldName, {
-      type: 'manual',
-      message: '',
-    });
-  };
-
   const onHandleSubmit = (values: LoginTypes) => {
     const data = onSendLogin(values);
 
@@ -71,6 +62,18 @@ export const LoginForm: React.FC = () => {
   if (isAuth) {
     return <Navigate to="/" />;
   }
+
+  const disabledFunc = Boolean(errors.email || errors.password);
+
+  console.log(errors);
+
+  const handleEmailInputChange = () => {
+    clearErrors('email');
+  };
+
+  const handlePasswordInputChange = () => {
+    clearErrors('password');
+  };
 
   const handlePasswordToggle = () => {
     setShowPassword(!showPassword);
@@ -95,7 +98,7 @@ export const LoginForm: React.FC = () => {
                   message: 'Invalid email address',
                 },
               })}
-              onChange={() => clearError('email')}
+              onFocus={handleEmailInputChange}
             />
             {errors.email && (
               <span style={{ color: 'red' }}>{errors.email.message}</span>
@@ -114,7 +117,7 @@ export const LoginForm: React.FC = () => {
                   message: 'Password should be at least 4 characters long',
                 },
               })}
-              onChange={() => clearError('password')}
+              onFocus={handlePasswordInputChange}
             />
             <ToggleButton onClick={handlePasswordToggle}>
               <IconSprite />
@@ -130,7 +133,7 @@ export const LoginForm: React.FC = () => {
               <span style={{ color: 'red' }}>{errors.password.message}</span>
             )}
           </InputWrapper>
-          <SubmitButton disabled={!isValid} type="submit">
+          <SubmitButton disabled={disabledFunc || !isValid} type="submit">
             Log In
           </SubmitButton>
         </Form>

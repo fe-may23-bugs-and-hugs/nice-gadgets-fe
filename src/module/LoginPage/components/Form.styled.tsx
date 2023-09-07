@@ -46,6 +46,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+
   position: relative;
 `;
 
@@ -111,7 +112,7 @@ export const FormLink = styled(Link)`
   }
 `;
 
-export const ToggleButton = styled.button`
+export const ToggleButton = styled.span`
   background-color: ${(props) => props.theme.colors.white};
   position: absolute;
   right: 14px;
