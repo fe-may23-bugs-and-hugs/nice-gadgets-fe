@@ -40,7 +40,6 @@ export const RegistrationForm: React.FC = () => {
   });
 
   const onHandleSubmit = (values: RegisterData) => {
-
     onRegisterUser(values);
   };
 
@@ -62,13 +61,16 @@ export const RegistrationForm: React.FC = () => {
 
   useEffect(() => {
     if (isAuth) {
-      Notiflix.Notify.success('Successfully register');
+      Notiflix.Notify.success('Successfully register', { timeout: 1000 });
     }
   }, [isAuth]);
 
   useEffect(() => {
     if (registrError) {
-      Notiflix.Notify.failure('There is a problem with registration');
+      Notiflix.Notify.init({ cssAnimationDuration: 200 });
+      Notiflix.Notify.failure('There is a problem with registration', {
+        timeout: 1000,
+      });
     }
   }, [registrError]);
 
