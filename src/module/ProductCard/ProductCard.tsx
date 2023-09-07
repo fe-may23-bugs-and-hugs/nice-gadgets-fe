@@ -200,7 +200,7 @@ export const ProductCard = () => {
           <Loader visible={loading} />
         ) : (
           <>
-            <Title>{device.name}</Title>
+            <Title isDarkTheme={isDarkTheme}>{device.name}</Title>
             <ItemCard>
               <ImagesBox>
                 <ImageSizeBox>
@@ -362,11 +362,11 @@ export const ProductCard = () => {
                 <DeviceId>ID: {device._id}</DeviceId>
               </CardInfo>
               <AboutBlock>
-                <H2>About</H2>
+                <H2 isDarkTheme={isDarkTheme}>About</H2>
                 {device.description &&
                   device.description.map((info) => (
                     <DescriptionWrapper key={info.title}>
-                      <H3>{info.title}</H3>
+                      <H3 isDarkTheme={isDarkTheme}>{info.title}</H3>
                       {Array.isArray(info.text) &&
                         info.text.map((text: string) => <P>{text}</P>)}
                     </DescriptionWrapper>
@@ -375,7 +375,7 @@ export const ProductCard = () => {
               <SpecsBlock>
                 <THead>
                   <TRow>
-                    <Theader>Tech Spec</Theader>
+                    <Theader isDarkTheme={isDarkTheme}>Tech Spec</Theader>
                   </TRow>
                 </THead>
                 <TechScecsInfo>
@@ -386,7 +386,7 @@ export const ProductCard = () => {
                           <TableHeader>
                             {key.charAt(0).toUpperCase() + key.slice(1)}
                           </TableHeader>
-                          <TableData>
+                          <TableData isDarkTheme={isDarkTheme}>
                             {Array.isArray(value) ? value.join(' ') : value}
                           </TableData>
                         </TableRow>

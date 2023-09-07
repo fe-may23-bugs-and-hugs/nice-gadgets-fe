@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../../../shared/Mixins';
+import { DarkTheme } from '../../../../types/DarkTheme';
 
 export const SectionWrapper = styled.section`
   position: relative;
@@ -29,11 +30,16 @@ export const CategoriesWrapper = styled.section`
   `)};
 `;
 
-export const CategoriesTitle = styled.h2`
+export const CategoriesTitle = styled.h2<DarkTheme>`
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   font-size: ${({ theme }) => theme.fonts.sizeL};
   line-height: ${({ theme }) => theme.fonts.lineHeightL};
   font-style: normal;
+
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.black};
 
   ${onTablet(`
       font-size: 32px;

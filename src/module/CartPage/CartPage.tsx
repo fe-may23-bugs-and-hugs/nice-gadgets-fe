@@ -16,8 +16,9 @@ import {
   CartEmpty,
   ModalIconClose,
   BackButtonContainer,
+  CartTitle,
 } from './CartPage.styled';
-import { CartContext } from '../../context';
+import { CartContext, useTheme } from '../../context';
 import { CartItemPage } from './CartItemPage';
 
 export const CartPage: React.FC = () => {
@@ -29,6 +30,7 @@ export const CartPage: React.FC = () => {
   const [totalPrice, setTotalPrice] = useState(
     cartProducts.reduce((total, product) => total + product.priceDiscount, 0),
   );
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const handleToggle = () => {
     setShowModal(!showModal);
@@ -62,7 +64,7 @@ export const CartPage: React.FC = () => {
         <BackButton />
       </BackButtonContainer>
       <CartHeader>
-        <h1>Cart</h1>
+        <CartTitle isDarkTheme={isDarkTheme}>Cart</CartTitle>
       </CartHeader>
       {cartProducts.length > 0 ? (
         <CartContainer>
@@ -76,13 +78,13 @@ export const CartPage: React.FC = () => {
             ))}
           </CartList>
           <CartSummary>
-            <TotalPrice>
+            <TotalPrice isDarkTheme={isDarkTheme}>
               <p>${totalPrice}</p>
             </TotalPrice>
             <TotalItems>
               <p>Total for {totalItems} items</p>
             </TotalItems>
-            <CartCheckout onClick={handleToggle}>
+            <CartCheckout isDarkTheme={isDarkTheme} onClick={handleToggle}>
               <p>Checkout</p>
             </CartCheckout>
             {showModal && (

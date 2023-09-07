@@ -18,8 +18,11 @@ import {
   Wrapper,
 } from './WelcomeSlider.styled';
 import './styles.css';
+import { useTheme } from '../../../../context';
 
 export const WelcomeSlider = () => {
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
+
   return (
     <Wrapper>
       <Swiper
@@ -60,7 +63,10 @@ export const WelcomeSlider = () => {
         </SwiperSlide>
       </Swiper>
 
-      <BulletsContainner id="custom-bullets-container" />
+      <BulletsContainner
+        isDarkTheme={isDarkTheme}
+        id="custom-bullets-container"
+      />
     </Wrapper>
   );
 };

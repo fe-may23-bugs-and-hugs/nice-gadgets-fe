@@ -1,6 +1,7 @@
 import { styled } from 'styled-components';
+import { DarkTheme } from '../../../types/DarkTheme';
 
-export const Button = styled.button`
+export const Button = styled.button<DarkTheme>`
   background: none;
   border: none;
   padding: 0;
@@ -23,7 +24,10 @@ export const Button = styled.button`
   transition: color ${({ theme }) => theme.transition.faster};
 
   &:hover {
-    color: ${({ theme }) => theme.colors.grayPrimary};
+    color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.grayPrimary};
   }
 `;
 

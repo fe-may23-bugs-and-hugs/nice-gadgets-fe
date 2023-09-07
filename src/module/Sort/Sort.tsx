@@ -10,7 +10,7 @@ import {
   SortDropdownContent,
   SortDropDownSmall,
 } from './Sort.styled';
-import { PhonesContext } from '../../context';
+import { PhonesContext, useTheme } from '../../context';
 import { SORTING } from '../../types/sortEnum';
 import { ORDER } from '../../types/OrderEnum';
 import { useSearchParams } from 'react-router-dom';
@@ -35,6 +35,7 @@ const sortOptions = [
 
 export const Sort: React.FC = () => {
   const { currentLimit, totalModels } = useContext(PhonesContext);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
   const [searchParams] = useSearchParams();
 
   const [openSort, setOpenSort] = useState(false);
@@ -71,13 +72,25 @@ export const Sort: React.FC = () => {
     <SortWrapper>
       <div id="sort-dropdown" onClick={() => setOpenSort((prev) => !prev)}>
         <SortTitle>Sort by</SortTitle>
-        <SortDropDown>
+        <SortDropDown isDarkTheme={isDarkTheme}>
           {currentTitle}
           <IconSprite />
           {openSort ? (
-            <Icon spriteName="arrow-up" />
+            <>
+              {isDarkTheme ? (
+                <Icon spriteName="arrow-up" fill="#75767F" />
+              ) : (
+                <Icon spriteName="arrow-up" />
+              )}
+            </>
           ) : (
-            <Icon spriteName="arrow-down" />
+            <>
+              {isDarkTheme ? (
+                <Icon spriteName="arrow-down" fill="#75767F" />
+              ) : (
+                <Icon spriteName="arrow-down" />
+              )}
+            </>
           )}
         </SortDropDown>
         {openSort && (
@@ -96,13 +109,25 @@ export const Sort: React.FC = () => {
 
       <div id="limit-dropdown" onClick={() => setOpenLimit((prev) => !prev)}>
         <SortTitle>Items on page</SortTitle>
-        <SortDropDownSmall>
+        <SortDropDownSmall isDarkTheme={isDarkTheme}>
           {currentLimit}
           <IconSprite />
           {openLimit ? (
-            <Icon spriteName="arrow-up" />
+            <>
+              {isDarkTheme ? (
+                <Icon spriteName="arrow-up" fill="#75767F" />
+              ) : (
+                <Icon spriteName="arrow-up" />
+              )}
+            </>
           ) : (
-            <Icon spriteName="arrow-down" />
+            <>
+              {isDarkTheme ? (
+                <Icon spriteName="arrow-down" fill="#75767F" />
+              ) : (
+                <Icon spriteName="arrow-down" />
+              )}
+            </>
           )}
         </SortDropDownSmall>
         {openLimit && (

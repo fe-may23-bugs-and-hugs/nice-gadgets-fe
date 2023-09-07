@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../../../shared/Mixins';
+import { DarkTheme } from '../../../../types/DarkTheme';
 
 export const Wrapper = styled.div`
   display: block;
@@ -120,8 +121,15 @@ export const StyledImageTablet = styled.img`
   `)}
 `;
 
-export const BulletsContainner = styled.div`
+export const BulletsContainner = styled.div<DarkTheme>`
   display: flex;
   justify-content: center;
   margin-top: 20px;
+
+  & span {
+    background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.graySecondary
+      : ({ theme }) => theme.colors.grayPrimary} !important
+  }
 `;

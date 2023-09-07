@@ -4,10 +4,12 @@ import { ReactPaginateStyled } from './Pagination.styled';
 import { Icon, IconSprite } from '../shared';
 import { useSearchParams } from 'react-router-dom';
 import { getSearchWith } from '../../helpers/searchHelper';
+import { useTheme } from '../../context';
 
 export const Pagination: React.FC = () => {
   const { totalPages, currentPage } = useContext(PhonesContext);
   const [selectedPage, setSelectedPage] = useState(currentPage);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -45,9 +47,21 @@ export const Pagination: React.FC = () => {
     <>
       <IconSprite />
       {lastDisabled ? (
-        <Icon spriteName="arrow-right" fill="#E2E6E9" />
+        <>
+          {isDarkTheme ? (
+            <Icon spriteName="arrow-right" fill="#4A4D58" />
+          ) : (
+            <Icon fill="#E2E6E9" spriteName="arrow-right" />
+          )}
+        </>
       ) : (
-        <Icon spriteName="arrow-right" />
+        <>
+          {isDarkTheme ? (
+            <Icon spriteName="arrow-right" fill="#F1F2F9" />
+          ) : (
+            <Icon spriteName="arrow-right" />
+          )}
+        </>
       )}
     </>
   );
@@ -57,9 +71,21 @@ export const Pagination: React.FC = () => {
       <IconSprite />
 
       {prevDisabled ? (
-        <Icon fill="#E2E6E9" spriteName="arrow-left" />
+        <>
+          {isDarkTheme ? (
+            <Icon spriteName="arrow-left" fill="#4A4D58" />
+          ) : (
+            <Icon fill="#E2E6E9" spriteName="arrow-left" />
+          )}
+        </>
       ) : (
-        <Icon spriteName="arrow-left" />
+        <>
+          {isDarkTheme ? (
+            <Icon spriteName="arrow-left" fill="#F1F2F9" />
+          ) : (
+            <Icon spriteName="arrow-left" />
+          )}
+        </>
       )}
     </>
   );
@@ -75,6 +101,7 @@ export const Pagination: React.FC = () => {
       previousLabel={prevArrow}
       renderOnZeroPageCount={null}
       forcePage={selectedPage - 1}
+      isDarkTheme={isDarkTheme}
     />
   );
 };

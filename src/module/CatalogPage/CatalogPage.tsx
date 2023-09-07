@@ -13,6 +13,7 @@ import { Breadcrumbs } from '../shared/Breadcrumbs';
 import { Sort } from '../Sort';
 import { useLocation } from 'react-router-dom';
 import { Loader } from '../Loader';
+import { useTheme } from '../../context';
 
 export const CatalogPage: React.FC = () => {
   const {
@@ -28,6 +29,7 @@ export const CatalogPage: React.FC = () => {
 
   const { pathname } = useLocation();
   const [isDataLoaded, setIsDataLoaded] = useState(false);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   useEffect(() => {
     loadPhones(pathname)
@@ -54,11 +56,11 @@ export const CatalogPage: React.FC = () => {
           <Breadcrumbs />
         </BreadcrumbsWrapper>
 
-        <CatalogTitle>{finalTitle}</CatalogTitle>
+        <CatalogTitle isDarkTheme={isDarkTheme}>{finalTitle}</CatalogTitle>
         <CatalogModelsLeft>{isModelsExist}</CatalogModelsLeft>
 
         {isDataLoaded && totalModels === 0 ? (
-          <CatalogTitle>
+          <CatalogTitle isDarkTheme={isDarkTheme}>
             Right now we don't have availiable products. Try later
           </CatalogTitle>
         ) : (

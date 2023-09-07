@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { DarkTheme } from '../../types/DarkTheme';
 
 export const SortWrapper = styled.div`
   display: flex;
@@ -16,7 +17,7 @@ export const SortTitle = styled.h2`
   margin-bottom: 4px;
 `;
 
-export const SortDropDown = styled.button`
+export const SortDropDown = styled.button<DarkTheme>`
   position: relative;
 
   white-space: nowrap;
@@ -24,7 +25,10 @@ export const SortDropDown = styled.button`
   text-overflow: ellipsis;
 
   padding: 0 15px;
-  background-color: ${({ theme }) => theme.colors.white};
+  background-color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.surface2
+      : ({ theme }) => theme.colors.white};
   cursor: pointer;
   min-width: 140px;
   height: 40px;
@@ -37,7 +41,10 @@ export const SortDropDown = styled.button`
   border: 1px solid ${({ theme }) => theme.colors.grayIcons};
   border-radius: 8px;
 
-  color: ${({ theme }) => theme.colors.grayPrimary};
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   /* Buttons */
   font-family: Mont;
   font-size: ${({ theme }) => theme.fonts.sizeXs};

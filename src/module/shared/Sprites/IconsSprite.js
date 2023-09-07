@@ -198,13 +198,7 @@ export const IconSprite = () => {
           <path d="M11.297 9.176a3.5 3.5 0 0 0-4.474-4.474l.823.823a2.5 2.5 0 0 1 2.829 2.829l.822.822zm-2.943 1.299.822.822a3.5 3.5 0 0 1-4.474-4.474l.823.823a2.5 2.5 0 0 0 2.829 2.829z" />
           <path d="M3.35 5.47c-.18.16-.353.322-.518.487A13.134 13.134 0 0 0 1.172 8l.195.288c.335.48.83 1.12 1.465 1.755C4.121 11.332 5.881 12.5 8 12.5c.716 0 1.39-.133 2.02-.36l.77.772A7.029 7.029 0 0 1 8 13.5C3 13.5 0 8 0 8s.939-1.721 2.641-3.238l.708.709zm10.296 8.884-12-12 .708-.708 12 12-.708.708z" />
         </symbol>
-        <symbol
-          viewBox="0 0 128.00 128.00"
-          fill="#000000"
-          stroke="#000000"
-          stroke-width="1.92"
-          id="account"
-        >
+        <symbol viewBox="0 0 128.00 128.00" stroke-width="1.92" id="account">
           <g id="SVGRepo_bgCarrier" stroke-width="0" />
           <g
             id="SVGRepo_tracerCarrier"
@@ -226,7 +220,6 @@ export const IconSprite = () => {
             fill-rule="evenodd"
             clip-rule="evenodd"
             d="M15 4H18C19.1046 4 20 4.89543 20 6V18C20 19.1046 19.1046 20 18 20H15M11 16L15 12M15 12L11 8M15 12H3"
-            stroke="#000000"
             stroke-width="1.8"
             stroke-linecap="round"
             stroke-linejoin="round"

@@ -8,11 +8,12 @@ import {
   ItemsCount,
   Title,
 } from './Favorites.styled';
-import { FavoriteContext } from '../../context';
+import { FavoriteContext, useTheme } from '../../context';
 import { Catalog } from '../Catalog';
 
 export const Favorites = () => {
   const { favoriteProducts } = useContext(FavoriteContext);
+  const { isDarkTheme } = useTheme() || { isDarkTheme: false };
 
   return (
     <ContentLayout>
@@ -20,7 +21,7 @@ export const Favorites = () => {
         <Breadcrumbs />
       </BreadcrumbsWrapper>
 
-      <Title>Favorites</Title>
+      <Title isDarkTheme={isDarkTheme}>Favorites</Title>
       <ItemsCount>
         {favoriteProducts.length > 0 ? (
           <>

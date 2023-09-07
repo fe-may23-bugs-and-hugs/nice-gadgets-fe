@@ -1,12 +1,16 @@
 import styled from 'styled-components';
+import { DarkTheme } from '../../types/DarkTheme';
 
 export const BreadcrumbsWrapper = styled.div`
   margin-top: 24px;
   margin-bottom: 40px;
 `;
 
-export const CatalogTitle = styled.h1`
-  color: ${({ theme }) => theme.colors.grayPrimary};
+export const CatalogTitle = styled.h1<DarkTheme>`
+  color: ${({ isDarkTheme }) =>
+    isDarkTheme
+      ? ({ theme }) => theme.darkThemeColors.white
+      : ({ theme }) => theme.colors.grayPrimary};
   /* Mobile/H1 */
   font-size: ${({ theme }) => theme.fonts.sizeXxl};
   font-style: normal;
