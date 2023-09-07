@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../../../shared/Mixins';
 
-interface DarkTheme {
-  isDarkTheme: boolean;
-}
-
 export const SlideWrapper = styled.div`
   position: relative;
   margin-bottom: 57px;
@@ -32,16 +28,13 @@ export const UpperWrapper = styled.div`
   `)}
 `;
 
-export const Subtitle = styled.h2<DarkTheme>`
+export const Subtitle = styled.h2`
   font-size: ${({ theme }) => theme.fonts.sizeXxl};
   font-weight: ${({ theme }) => theme.fonts.weightBold};
   line-height: ${({ theme }) => theme.fonts.lineHeightXxl};
   letter-spacing: ${({ theme }) => theme.fonts.spacingS};
   margin-right: 14px;
-  color: ${({ isDarkTheme }) =>
-    isDarkTheme
-      ? ({ theme }) => theme.darkThemeColors.white
-      : ({ theme }) => theme.colors.grayPrimary};
+  color: ${({ theme }) => theme.colors.grayPrimary};
 `;
 
 export const ButtonsWrapper = styled.div`

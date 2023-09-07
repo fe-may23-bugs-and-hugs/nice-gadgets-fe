@@ -1,10 +1,6 @@
 import styled from 'styled-components';
 import { onDesktop, onTablet } from '../../../shared/Mixins';
 
-interface DarkTheme {
-  isDarkTheme: boolean;
-}
-
 export const Wrapper = styled.div`
   display: block;
   margin-bottom: 88px;
@@ -128,28 +124,4 @@ export const BulletsContainner = styled.div`
   display: flex;
   justify-content: center;
   margin-top: 20px;
-`;
-
-export const SwiperPaginationBullet = styled.div<DarkTheme>`
-  width: 16px;
-  height: 16px;
-  background-color: ${({ isDarkTheme, theme }) =>
-    isDarkTheme ? theme.darkThemeColors.black : theme.colors.white};
-  opacity: 0.5;
-  margin: 10px !important;
-  border: 1px solid #0f0f11;
-  cursor: pointer;
-
-  transition: opacity 0.2s cubic-bezier(0.4, 0, 0.2, 1),
-              background-color 0.2s cubic-bezier(0.4, 0, 0.2, 1);
-
-  &:hover {
-    opacity: 0.7;
-    background-color: black !important;
-  }
-`;
-
-export const SwiperPaginationBulletActive = styled(SwiperPaginationBullet)`
-  background-color: #fff !important;
-  opacity: 1;
 `;
