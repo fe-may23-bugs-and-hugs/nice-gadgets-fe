@@ -13,8 +13,10 @@ interface IAuthContext {
   token: string;
   updateAuthStatus: () => void;
   onRegisterUser: (userRegister: RegisterData) => void;
-  error: string;
+  loginError: boolean;
   onResetErrors: () => void;
+  onLogoutUser: () => void;
+  registrError: boolean;
 }
 
 export const AuthContext = createContext<IAuthContext>({
@@ -25,7 +27,9 @@ export const AuthContext = createContext<IAuthContext>({
   updateAuthStatus: () => {},
   onRegisterUser: () => {},
   onResetErrors: () => {},
-  error: '',
+  loginError: false,
+  onLogoutUser: () => {},
+  registrError: false,
 });
 
 type Props = {
@@ -35,12 +39,11 @@ type Props = {
 export const AuthProvider: React.FC<Props> = ({ children }) => {
   const [userData, setUserData] = useState<UserLogin | null>(null);
   const [isAuth, setIsAuth] = useState(false);
-  const [userLoading, setUserLoading] = useState(false);
   const [token, setToken] = useLocalStorage('token', '');
-  const [error, setError] = useState('');
+  const [loginError, setLoginError] = useState(false);
+  const [registrError, setRegisterError] = useState(false);
 
   const onSendLogin = (userValues: LoginTypes) => {
-    setUserLoading(true);
     fetchLogin(userValues)
       .then((answ) => {
         setToken(answ.token);
@@ -48,9 +51,8 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
         setIsAuth(true);
       })
       .catch(() => {
-        setError('Invalid login or password');
-      })
-      .finally(() => setUserLoading(false));
+        setLoginError(true);
+      });
   };
 
   const onLogoutUser = () => {
@@ -60,18 +62,20 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   };
 
   const onResetErrors = () => {
-    setError('');
+    setLoginError(false);
+    setRegisterError(false);
   };
 
   const onRegisterUser = (userRegister: RegisterData) => {
-    setUserLoading(true);
     fetchRegister(userRegister)
       .then((answ) => {
         setToken(answ.token);
         setUserData(answ);
         setIsAuth(true);
       })
-      .finally(() => setUserLoading(false));
+      .catch(() => {
+        setRegisterError(true);
+      });
   };
 
   const updateAuthStatus = () => {
@@ -85,8 +89,10 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     token,
     updateAuthStatus,
     onRegisterUser,
-    error,
+    loginError,
     onResetErrors,
+    onLogoutUser,
+    registrError,
   };
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
