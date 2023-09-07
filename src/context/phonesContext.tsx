@@ -8,7 +8,7 @@ import { useSearchParams } from 'react-router-dom';
 
 interface IContext {
   phones: Phone[];
-  loadPhones: (pathname: string) => void;
+  loadPhones: (pathname: string) => Promise<void>;
   loadNewData: () => void;
   loadDiscountData: () => void;
   newLoader: boolean;
@@ -22,18 +22,19 @@ interface IContext {
   totalModels: number;
   sortField: SORTING;
   order: ORDER;
+  limit: number;
 }
 
 export const PhonesContext = createContext<IContext>({
   phones: [],
-  loadPhones: () => {},
+  loadPhones: () => Promise.resolve(),
   loadNewData: () => {},
   loadDiscountData: () => {},
   newLoader: false,
   discountLoader: false,
   newData: [],
   discountData: [],
-
+  limit: 16,
   phonesLoading: false,
   currentPage: 1,
   currentLimit: 16,
@@ -64,25 +65,28 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
   const [newLoader, setNewLoader] = useState(false);
   const [discountLoader, setDiscountLoader] = useState(false);
 
-  const loadPhones = (pathname: string) => {
+  const loadPhones = async (pathname: string): Promise<void> => {
     setPhonesLoading(true);
 
-    getPhones(
-      {
-        page,
-        limit,
-        sort,
-        order,
-      },
-      pathname,
-    )
-      .then((phonesFromServer) => {
-        setPhones(phonesFromServer.data);
-        setTotalPages(phonesFromServer.totalPages);
-        setTotalModels(phonesFromServer.totalItems);
-      })
-      .catch(() => setErrors(true))
-      .finally(() => setPhonesLoading(false));
+    try {
+      const phonesFromServer = await getPhones(
+        {
+          page,
+          limit,
+          sort,
+          order,
+        },
+        pathname,
+      );
+
+      setPhones(phonesFromServer.data);
+      setTotalPages(phonesFromServer.totalPages);
+      setTotalModels(phonesFromServer.totalItems);
+    } catch (error) {
+      setErrors(true);
+    } finally {
+      setPhonesLoading(false);
+    }
   };
 
   const loadNewData = () => {
@@ -119,6 +123,7 @@ export const PhonesProvider: React.FC<Props> = ({ children }) => {
     totalModels,
     sortField: sort,
     order,
+    limit,
   };
 
   return (
