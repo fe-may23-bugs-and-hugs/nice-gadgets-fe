@@ -46,6 +46,7 @@ export const InputWrapper = styled.div`
   display: flex;
   flex-direction: column;
   gap: 4px;
+  position: relative;
 `;
 
 export const SubmitButton = styled.button`
@@ -108,4 +109,30 @@ export const FormLink = styled(Link)`
   &:hover {
     color: ${(props) => props.theme.colors.graySecondary};
   }
+`;
+
+export const ToggleButton = styled.button`
+  background-color: ${(props) => props.theme.colors.white};
+  position: absolute;
+  right: 14px;
+  bottom: 10px;
+
+  border: none;
+  cursor: pointer;
+
+  ${onTablet(`
+    right: 14px;
+    bottom: 15px;
+  `)}
+
+  &:hover svg use {
+    fill: ${(props) => props.theme.colors.graySecondary};
+  }
+`;
+
+export const IconWrapper = styled.div`
+  display: flex;
+  justify-content: center;
+  height: 16px;
+  width: 16px;
 `;
