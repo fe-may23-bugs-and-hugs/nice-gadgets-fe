@@ -61,13 +61,18 @@ export const RegistrationForm: React.FC = () => {
 
   useEffect(() => {
     if (isAuth) {
+      Notiflix.Notify.init({
+        position: 'right-bottom',
+      });
       Notiflix.Notify.success('Successfully register', { timeout: 1000 });
     }
   }, [isAuth]);
 
   useEffect(() => {
     if (registrError) {
-      Notiflix.Notify.init({ cssAnimationDuration: 200 });
+      Notiflix.Notify.init({
+        position: 'right-bottom',
+      });
       Notiflix.Notify.failure('There is a problem with registration', {
         timeout: 1000,
       });
