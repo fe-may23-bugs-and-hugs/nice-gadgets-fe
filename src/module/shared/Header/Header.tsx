@@ -165,7 +165,10 @@ export const Header = () => {
           </IconElement>
         ) : (
           <IconElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
-            <LinkWrapper to="/auth/logIn" onClick={isMenuOpen ? closeMenu : undefined}>
+            <LinkWrapper
+              to="/auth/logIn"
+              onClick={isMenuOpen ? closeMenu : undefined}
+            >
               <IconSprite />
               <Icon spriteName="account" size="18px" />
             </LinkWrapper>

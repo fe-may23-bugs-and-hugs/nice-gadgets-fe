@@ -183,7 +183,9 @@ export const IconsSection = styled.div<HeaderElementProps>`
   align-items: center;
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
   height: ${({ isMenuOpen }) => (isMenuOpen ? '48px' : 'auto')};
-  border-top: 1px solid ${({ isMenuOpen, theme }) => (isMenuOpen ? theme.colors.grayElements : 'none')};
+  border-top: 1px solid
+    ${({ isMenuOpen, theme }) =>
+      isMenuOpen ? theme.colors.grayElements : 'none'};
 `;
 
 export const IconElement = styled.div<HeaderElementProps>`
@@ -253,12 +255,22 @@ export const IconElement = styled.div<HeaderElementProps>`
 
   @media (max-width: 639px) {
     &.swipetheme {
-    position: fixed;
-      margin-right: 48px;
-      width: 48px;
-      height: 48px;
-      top: 15px;
-      right: 0;
+      ${({ isMenuOpen }) => {
+      return isMenuOpen
+        ? css`
+          position: fixed;
+          margin-right: 48px;
+          width: 48px;
+          height: 48px;
+          top: 15px;
+          right: 0;
+
+            svg {
+              margin-top: 1px;
+            }
+          `
+        : 'position: relative;';
+      }};
     }
   }
 
@@ -331,9 +343,7 @@ export const LinkWrapper = styled(NavLink)``;
 export const BuregerWrapper = styled.div<HeaderElementProps>`
   border-left: 1px solid
     ${({ isDarkTheme, theme }) =>
-      isDarkTheme
-        ? theme.darkThemeColors.surface2
-        : theme.colors.grayElements};
+      isDarkTheme ? theme.darkThemeColors.surface2 : theme.colors.grayElements};
 
   ${({ isMenuOpen }) => {
     return isMenuOpen
