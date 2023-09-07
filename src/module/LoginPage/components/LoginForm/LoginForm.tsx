@@ -34,7 +34,7 @@ export const LoginForm: React.FC = () => {
 
   useEffect(() => {
     onResetErrors();
-  }, []);
+  }, [loginError]);
 
   useEffect(() => {
     if (isAuth) {
