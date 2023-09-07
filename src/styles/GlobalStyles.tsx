@@ -1,7 +1,8 @@
 import { createGlobalStyle } from 'styled-components';
-import { onDesktop } from '../module/shared/Mixins';
 import 'modern-normalize';
 import './index.css';
+import { onDesktop } from '../module/shared/Mixins';
+import { theme } from './theme';
 
 export const GlobalStyle = createGlobalStyle`
   html,
@@ -21,8 +22,28 @@ export const GlobalStyle = createGlobalStyle`
 
     ${onDesktop(`
       overflow: scroll;
+      overflow-x: hidden;
     `)}
   }
+
+  ${onDesktop(`
+    ::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background-color: ${theme.colors.graySecondary};
+      border-radius: 2px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: ${theme.colors.grayElements};
+    }
+
+    ::-webkit-scrollbar-track {
+      background: ${theme.colors.grayBackground};
+    }
+  `)}
 
   h1, h2, h3, h4, h5, p, ul {
     padding: 0;

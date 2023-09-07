@@ -27,7 +27,11 @@ export const HeaderElement = styled.header<mobileProps>`
 export const BarElement = styled.div<mobileProps>`
   display: flex;
   align-items: center;
-  gap: 32px;
+  gap: 0px;
+
+  @media (min-width: 768px) {
+    gap: 24px;
+  }
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
   width: ${({ isMenuOpen }) => (isMenuOpen ? '100%' : 'auto')};
@@ -78,10 +82,14 @@ export const ImgElement = styled.img`
 
 export const UlElement = styled.ul<mobileProps>`
   display: flex;
-  gap: 32px;
+  gap: 16px;
   align-items: center;
 
   flex-direction: ${({ isMenuOpen }) => (isMenuOpen ? 'column' : 'row')};
+
+  @media (min-width: 768px) {
+    gap: 32px;
+  }
 
   @media (min-width: 1200px) {
     gap: 64px;
@@ -189,7 +197,18 @@ export const IconElement = styled.div<IconElementProps>`
     width: 64px;
   }
 
-  &:not(:last-child) {
+  &:nth-child(-n + 2) {
+    ${({ isMenuOpen }) => {
+      return (
+        isMenuOpen &&
+        css`
+          display: none;
+        `
+      );
+    }};
+  }
+
+  &:not(:nth-child(-n + 2)) {
     ${({ isMenuOpen }) => {
       const theme = useContext(ThemeContext);
 
@@ -199,21 +218,10 @@ export const IconElement = styled.div<IconElementProps>`
 
       return isMenuOpen
         ? css`
-            &:first-child {
+            &:not(:nth-child(-n + 2)) {
               display: block;
               width: 100%;
               position: relative;
-
-              svg {
-                margin-left: auto;
-                margin-right: auto;
-              }
-            }
-            &:nth-child(2) {
-              display: block;
-              width: 100%;
-              position: relative;
-              border-left: 1px solid ${theme.colors.grayElements};
 
               svg {
                 margin-left: auto;
@@ -225,7 +233,11 @@ export const IconElement = styled.div<IconElementProps>`
     }};
   }
 
-  &:hover {
+  &:not(:first-child) {
+    border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
+  }
+
+  &:not(:first-child):hover {
     background-color: ${({ theme }) => theme.colors.grayBackground};
     transition: background-color ${({ theme }) => theme.transition.slower};
   }
@@ -241,7 +253,6 @@ export const IconElement = styled.div<IconElementProps>`
       height: ${({ theme }) => theme.fonts.lineHeightDesktop};
     }
   }
-  border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
 
   @media (min-width: 640px) {
     &:not(:last-child) {
@@ -256,6 +267,7 @@ export const IconElement = styled.div<IconElementProps>`
 export const LinkWrapper = styled(NavLink)``;
 
 export const BuregerWrapper = styled.div<mobileProps>`
+  border-left: 1px solid ${({ theme }) => theme.colors.grayElements};
   ${({ isMenuOpen }) => {
     const theme = useContext(ThemeContext);
 

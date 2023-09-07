@@ -17,6 +17,7 @@ import {
   LinkWrapper,
 } from './Header.styled';
 import { FavoriteContext, CartContext } from '../../../context';
+import { ThemeToggler } from '../ThemeToggler';
 
 export const Header = () => {
   const { totalItems } = useContext(CartContext);
@@ -103,6 +104,20 @@ export const Header = () => {
         </NavElement>
       </BarElement>
       <IconsSection isMenuOpen={isMenuOpen}>
+        <IconElement isMenuOpen={isMenuOpen}>
+          <ThemeToggler />
+        </IconElement>
+        <IconElement isMenuOpen={isMenuOpen}>
+          <IconSprite />
+          <Icon spriteName="search" size="18px" />
+        </IconElement>
+        <IconElement isMenuOpen={isMenuOpen}>
+          <LinkWrapper to="/account">
+            <IconSprite />
+            <Icon spriteName="account" size="18px" />
+          </LinkWrapper>
+        </IconElement>
+
         <IconElement
           hasPinkCircle={!!totalFavorite}
           circleText={totalFavorite}
@@ -116,6 +131,7 @@ export const Header = () => {
             <Icon spriteName="heart" size="18px" />
           </LinkWrapper>
         </IconElement>
+
         <IconElement
           hasPinkCircle={!!totalItems}
           circleText={totalItems}
@@ -126,6 +142,7 @@ export const Header = () => {
             <Icon spriteName="shopping-bag" size="18px" />
           </LinkWrapper>
         </IconElement>
+
         <BuregerWrapper onClick={toggleMenu} isMenuOpen={isMenuOpen}>
           <IconElement className={isMenuOpen ? 'close' : 'burger'}>
             <IconSprite />
