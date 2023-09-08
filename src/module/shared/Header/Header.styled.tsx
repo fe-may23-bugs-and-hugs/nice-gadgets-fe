@@ -237,6 +237,7 @@ export const IconElement = styled.div<HeaderElementProps>`
   }
 
   &:first-child {
+    margin-right: 10px;
     ${({ isMenuOpen }) => {
     return (
       isMenuOpen

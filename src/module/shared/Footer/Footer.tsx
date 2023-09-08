@@ -27,9 +27,9 @@ export const Footer = () => {
       <FooterWrapper>
         <Link href="/" isDarkTheme={isDarkTheme}>
           {isDarkTheme ? (
-            <LogoFooterDark src={logoFooterWhite} />
+            <LogoFooterDark src={logoFooterWhite} alt="Nice gadgets" />
           ) : (
-            <LogoFooter src={logoFooter} />
+            <LogoFooter src={logoFooter} alt="Nice gadgets" />
           )}
         </Link>
 

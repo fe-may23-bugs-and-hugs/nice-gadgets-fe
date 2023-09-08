@@ -106,9 +106,9 @@ export const Header = () => {
           onClick={isMenuOpen ? closeMenu : undefined}
         >
           {isDarkTheme ? (
-            <ImgElement src={logoWhite} />
+            <ImgElement src={logoWhite} alt="Nice gadgets" />
           ) : (
-            <ImgElement src={logo} />
+            <ImgElement src={logo} alt="Nice gadgets" />
           )}
         </ImgArea>
         <NavElement isMenuOpen={isMenuOpen} isDarkTheme={isDarkTheme}>
@@ -178,6 +178,7 @@ export const Header = () => {
             <LinkWrapper
               to="/auth/logIn"
               onClick={isMenuOpen ? closeMenu : undefined}
+              aria-label="Login page"
             >
               <IconSprite />
               {isDarkTheme ? (
@@ -198,6 +199,7 @@ export const Header = () => {
           <LinkWrapper
             to="/favorites"
             onClick={isMenuOpen ? closeMenu : undefined}
+            aria-label="Favorites page"
           >
             <IconSprite />
             {isDarkTheme ? (
@@ -214,7 +216,11 @@ export const Header = () => {
           isMenuOpen={isMenuOpen}
           isDarkTheme={isDarkTheme}
         >
-          <LinkWrapper to="/cart" onClick={isMenuOpen ? closeMenu : undefined}>
+          <LinkWrapper
+            to="/cart"
+            onClick={isMenuOpen ? closeMenu : undefined}
+            aria-label="Cart page"
+          >
             <IconSprite />
             {isDarkTheme ? (
               <Icon spriteName="shopping-bag-white" size="18px" />

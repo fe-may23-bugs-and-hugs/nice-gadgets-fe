@@ -27,7 +27,7 @@ export const CategoryContent = styled.div`
   gap: 4px;
 `;
 
-export const CategoryTitle = styled.h4<DarkTheme>`
+export const CategoryTitle = styled.h3<DarkTheme>`
   color: ${({ isDarkTheme }) =>
     isDarkTheme
       ? ({ theme }) => theme.darkThemeColors.white
