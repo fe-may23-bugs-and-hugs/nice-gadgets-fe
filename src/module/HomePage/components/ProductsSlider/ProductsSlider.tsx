@@ -1,4 +1,6 @@
-import React, { useContext } from 'react';
+/* eslint-disable operator-linebreak */
+/* eslint-disable no-console */
+import React, { useContext, useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper';
 import 'swiper/css';
@@ -30,11 +32,50 @@ export const ProductsSlider: React.FC<Props> = ({
 }) => {
   const prevBtnId = `prev-btn-${uniqueKey}`;
   const nextBtnId = `next-btn-${uniqueKey}`;
+  const [itemsCount, setItemsCount] = useState(1);
 
-  const { discountLoader, newLoader, recommendedLoader }
-    = useContext(PhonesContext);
+  const { discountLoader, newLoader, recommendedLoader } =
+    useContext(PhonesContext);
 
   const { isDarkTheme } = useTheme() || { isDarkTheme: false };
+
+  useEffect(() => {
+    if (window.innerWidth >= 640) {
+      setItemsCount(2);
+    }
+
+    if (window.innerWidth >= 900) {
+      setItemsCount(3);
+    }
+
+    if (window.innerWidth >= 1200) {
+      setItemsCount(4);
+    }
+
+    const handleResize = () => {
+      if (window.innerWidth < 640) {
+        setItemsCount(1);
+      }
+
+      if (window.innerWidth >= 640) {
+        setItemsCount(2);
+      }
+
+      if (window.innerWidth >= 900) {
+        setItemsCount(3);
+      }
+
+      if (window.innerWidth >= 1200) {
+        setItemsCount(4);
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, []);
 
   return (
     <SlideWrapper>
@@ -55,8 +96,14 @@ export const ProductsSlider: React.FC<Props> = ({
 
       {discountLoader || newLoader || recommendedLoader ? (
         <>
-          <div style={{ display: 'flex', gap: '16px' }}>
-            <Skeleton itemsCount={4} />
+          <div
+            style={{
+              display: 'flex',
+              gap: '16px',
+              justifyContent: 'space-around',
+            }}
+          >
+            <Skeleton itemsCount={itemsCount} />
           </div>
         </>
       ) : (
