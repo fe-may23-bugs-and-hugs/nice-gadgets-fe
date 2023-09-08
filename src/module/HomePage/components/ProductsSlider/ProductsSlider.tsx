@@ -70,6 +70,10 @@ export const ProductsSlider: React.FC<Props> = ({
               prevEl: `#${prevBtnId}`,
               nextEl: `#${nextBtnId}`,
             }}
+            a11y={{
+              prevSlideMessage: 'Previous slide',
+              nextSlideMessage: 'Next slide',
+            }}
             breakpoints={{
               640: {
                 slidesPerView: 2,

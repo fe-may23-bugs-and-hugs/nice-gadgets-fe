@@ -1,3 +1,5 @@
+/* eslint-disable indent */
+/* eslint-disable operator-linebreak */
 import { styled } from 'styled-components';
 
 export const Wrapper = styled.div``;
@@ -7,8 +9,8 @@ export const Label = styled.label<{ isDarkTheme: boolean }>`
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
-  width: 34px;
-  height: 18px;
+  width: 62px;
+  height: 30px;
   background: ${({ isDarkTheme }) =>
     isDarkTheme
       ? ({ theme }) => theme.darkThemeColors.graySecondary
@@ -30,11 +32,11 @@ export const Span = styled.span<{ isDarkTheme: boolean }>`
   &::after {
     content: '';
     position: absolute;
-    top: 1px;
-    left: 2px;
-    width: 16px;
-    height: 16px;
-    border-radius: 16px;
+    top: 4px;
+    left: 4px;
+    width: 22px;
+    height: 22px;
+    border-radius: 50%;
     transition: 0.2s;
 
     box-shadow: 0 0 2px rgba(0, 0, 0, 0.2);
@@ -42,9 +44,9 @@ export const Span = styled.span<{ isDarkTheme: boolean }>`
     background: linear-gradient(180deg, #f447af, #fcdbc1);
 
     ${({ isDarkTheme }) =>
-    isDarkTheme
-      && `
-        left: calc(100% - 2px);
+      isDarkTheme &&
+      `
+        left: calc(100% - 4px);
         transform: translateX(-100%);
         background: linear-gradient(180deg, #905BFF, #0F0F11);
     `}
@@ -55,8 +57,8 @@ export const IconWrapper = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  height: 16px;
-  width: 16px;
+  height: 22px;
+  width: 22px;
 
   :first-child {
     margin: 0;

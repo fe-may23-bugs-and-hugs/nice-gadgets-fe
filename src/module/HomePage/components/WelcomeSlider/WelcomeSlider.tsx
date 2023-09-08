@@ -43,22 +43,22 @@ export const WelcomeSlider = () => {
       >
         <SwiperSlide>
           <SliderWrapper>
-            <StyledImageMobile src={sliderOneImg} />
-            <StyledImageTablet src={sliderTabImg} />
+            <StyledImageMobile src={sliderOneImg} alt="Slide iPhone 14 Pro" />
+            <StyledImageTablet src={sliderTabImg} alt="Slide iPhone 14 Pro" />
           </SliderWrapper>
         </SwiperSlide>
 
         <SwiperSlide>
           <SliderWrapper>
-            <StyledImageMobile src={sliderPhones} />
-            <StyledImageTablet src={bannerTwo} />
+            <StyledImageMobile src={sliderPhones} alt="Slide LG Q6" />
+            <StyledImageTablet src={bannerTwo} alt="Slide LG Q6" />
           </SliderWrapper>
         </SwiperSlide>
 
         <SwiperSlide>
           <SliderWrapper>
-            <StyledImageMobile src={sliderTabs} />
-            <StyledImageTablet src={bannerThree} />
+            <StyledImageMobile src={sliderTabs} alt="Slide AirPodsPro" />
+            <StyledImageTablet src={bannerThree} alt="Slide AirPodsPro" />
           </SliderWrapper>
         </SwiperSlide>
       </Swiper>
