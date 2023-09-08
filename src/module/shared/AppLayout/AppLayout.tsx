@@ -1,11 +1,17 @@
 import { styled } from 'styled-components';
-import { pageGridMixin } from '../Mixins';
+import { onDesktop, pageGridMixin } from '../Mixins';
 import { DarkTheme } from '../../../types/DarkTheme';
 import React, { PropsWithChildren } from 'react';
 import { useTheme } from '../../../context';
 
 export const AppWrapper = styled.div`
   ${pageGridMixin}
+
+  margin-top: 50px;
+
+  ${onDesktop(`
+    margin-top: 65px;
+  `)}
 `;
 
 export const ContentBackground = styled.div<DarkTheme>`

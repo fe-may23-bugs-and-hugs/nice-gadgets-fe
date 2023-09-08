@@ -23,6 +23,11 @@ export const HeaderElement = styled.header<HeaderElementProps>`
   display: flex;
   justify-content: space-between;
   align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 999;
   border-bottom: 1px solid ${({ theme }) => theme.colors.grayElements};
   background-color: ${({ isDarkTheme }) =>
     isDarkTheme
