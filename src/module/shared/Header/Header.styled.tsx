@@ -265,10 +265,6 @@ export const IconElement = styled.div<HeaderElementProps>`
               height: 48px;
               top: 10px;
               right: 1px;
-
-              svg {
-                margin-top: 1px;
-              }
             `
           : 'position: relative;';
       }};
