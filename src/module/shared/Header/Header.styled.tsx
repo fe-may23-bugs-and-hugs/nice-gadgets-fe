@@ -239,7 +239,6 @@ export const IconElement = styled.div<HeaderElementProps>`
   }
 
   &:first-child {
-    margin-right: 20px;
     ${({ isMenuOpen }) => {
       return (
         isMenuOpen &&
@@ -251,6 +250,10 @@ export const IconElement = styled.div<HeaderElementProps>`
     }};
   }
 
+  & div label {
+    margin-left: -25px;
+  }
+
   @media (max-width: 639px) {
     &.swipetheme {
       ${({ isMenuOpen }) => {
@@ -260,8 +263,8 @@ export const IconElement = styled.div<HeaderElementProps>`
               margin-right: 48px;
               width: 48px;
               height: 48px;
-              top: 15px;
-              right: 0;
+              top: 10px;
+              right: 1px;
 
               svg {
                 margin-top: 1px;
