@@ -101,6 +101,20 @@ export const ProductCard = () => {
 
   const path = pathname.split('/')[pathname.split('/').length - 1];
   const navigate = useNavigate();
+  const [scrollPosition, setScrollPosition] = React.useState(0);
+
+  const scrollToTop = () => {
+    const scrollStep = -window.scrollY / 30; // Кількість пікселів на кожному кадрі
+
+    function animateScroll() {
+      if (window.scrollY > 0) {
+        window.scrollBy(0, scrollStep);
+        requestAnimationFrame(animateScroll); // Рекурсивно викликаємо анімацію
+      }
+    }
+
+    animateScroll();
+  };
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +157,10 @@ export const ProductCard = () => {
       } catch (error) {
       } finally {
         setLoading(false);
+
+        if (scrollPosition === 0) {
+          scrollToTop();
+        }
       }
     };
 
@@ -210,11 +228,7 @@ export const ProductCard = () => {
                   }}
                   className={selectedImage === img ? 'active' : ''}
                 >
-                  <SmallCardImage
-                    key={img}
-                    src={img}
-                    alt="Small phone image"
-                  />
+                  <SmallCardImage key={img} src={img} alt="Small phone image" />
                 </ImagesSizeBox>
               ))}
             </ImagesWrapper>
@@ -254,20 +268,14 @@ export const ProductCard = () => {
                 </ChoiseWrapper>
               )}
 
-              <PriceWrapper
-                className="card-price"
-                isDarkTheme={isDarkTheme}
-              >
+              <PriceWrapper className="card-price" isDarkTheme={isDarkTheme}>
                 <CurrentPrice
                   className="card-current-price"
                   isDarkTheme={isDarkTheme}
                 >
                   {`$${device.priceDiscount}`}
                 </CurrentPrice>
-                <OldPrice
-                  className="card-old-price"
-                  isDarkTheme={isDarkTheme}
-                >
+                <OldPrice className="card-old-price" isDarkTheme={isDarkTheme}>
                   {`$${device.priceRegular}`}
                 </OldPrice>
               </PriceWrapper>
@@ -319,9 +327,7 @@ export const ProductCard = () => {
               <DescrWrapper>
                 <DescrBox>
                   {device.screen && (
-                    <DescrTitle isDarkTheme={isDarkTheme}>
-                      Screen
-                    </DescrTitle>
+                    <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>
                   )}
                   {device.resolution && (
                     <DescrTitle isDarkTheme={isDarkTheme}>
@@ -329,9 +335,7 @@ export const ProductCard = () => {
                     </DescrTitle>
                   )}
                   {device.processor && (
-                    <DescrTitle isDarkTheme={isDarkTheme}>
-                      Processor
-                    </DescrTitle>
+                    <DescrTitle isDarkTheme={isDarkTheme}>Processor</DescrTitle>
                   )}
                   {device.ram && (
                     <DescrTitle isDarkTheme={isDarkTheme}>Ram</DescrTitle>
@@ -391,15 +395,17 @@ export const ProductCard = () => {
           </SpecsBlock>
         </ItemCard>
       </MainElement>
-      {!loading && (
-        <RecommendedBlock>
-          <ProductsSlider
-            data={recommendedData}
-            uniqueKey="recommended"
-            subtitle="You may also like"
-          />
-        </RecommendedBlock>
-      )}
+      <RecommendedBlock
+      onClick={() => {
+        setScrollPosition(0);
+      }}
+      >
+        <ProductsSlider
+          data={recommendedData}
+          uniqueKey="recommended"
+          subtitle="You may also like"
+        />
+      </RecommendedBlock>
     </ContentLayout>
   );
 };
