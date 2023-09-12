@@ -210,11 +210,7 @@ export const ProductCard = () => {
                   }}
                   className={selectedImage === img ? 'active' : ''}
                 >
-                  <SmallCardImage
-                    key={img}
-                    src={img}
-                    alt="Small phone image"
-                  />
+                  <SmallCardImage key={img} src={img} alt="Small phone image" />
                 </ImagesSizeBox>
               ))}
             </ImagesWrapper>
@@ -254,20 +250,14 @@ export const ProductCard = () => {
                 </ChoiseWrapper>
               )}
 
-              <PriceWrapper
-                className="card-price"
-                isDarkTheme={isDarkTheme}
-              >
+              <PriceWrapper className="card-price" isDarkTheme={isDarkTheme}>
                 <CurrentPrice
                   className="card-current-price"
                   isDarkTheme={isDarkTheme}
                 >
                   {`$${device.priceDiscount}`}
                 </CurrentPrice>
-                <OldPrice
-                  className="card-old-price"
-                  isDarkTheme={isDarkTheme}
-                >
+                <OldPrice className="card-old-price" isDarkTheme={isDarkTheme}>
                   {`$${device.priceRegular}`}
                 </OldPrice>
               </PriceWrapper>
@@ -319,9 +309,7 @@ export const ProductCard = () => {
               <DescrWrapper>
                 <DescrBox>
                   {device.screen && (
-                    <DescrTitle isDarkTheme={isDarkTheme}>
-                      Screen
-                    </DescrTitle>
+                    <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>
                   )}
                   {device.resolution && (
                     <DescrTitle isDarkTheme={isDarkTheme}>
@@ -329,9 +317,7 @@ export const ProductCard = () => {
                     </DescrTitle>
                   )}
                   {device.processor && (
-                    <DescrTitle isDarkTheme={isDarkTheme}>
-                      Processor
-                    </DescrTitle>
+                    <DescrTitle isDarkTheme={isDarkTheme}>Processor</DescrTitle>
                   )}
                   {device.ram && (
                     <DescrTitle isDarkTheme={isDarkTheme}>Ram</DescrTitle>
