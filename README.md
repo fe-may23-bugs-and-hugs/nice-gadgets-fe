@@ -6,8 +6,7 @@
 
 ## Front-end:
 
-## [vercel page](https://nice-gadgets-fe.vercel.app/)
-## [repository](https://github.com/fe-may23-bugs-and-hugs/nice-gadgets-fe)
+## [vercel page](https://nice-gadgets-fe.vercel.app/) | [repository](https://github.com/fe-may23-bugs-and-hugs/nice-gadgets-fe)
 
 - ### Technologies used:
 - #### React - https://react.dev/
@@ -23,8 +22,7 @@
 
 ## Back-end:
 
-## [render server](https://nice-gadgets-be.onrender.com)
-## [repository](https://github.com/fe-may23-bugs-and-hugs/nice-gadgets-be)
+## [render server](https://nice-gadgets-be.onrender.com) | [repository](https://github.com/fe-may23-bugs-and-hugs/nice-gadgets-be)
 
 - ### Technologies used:
 - #### NodeJS - https://nodejs.org/en/docs
