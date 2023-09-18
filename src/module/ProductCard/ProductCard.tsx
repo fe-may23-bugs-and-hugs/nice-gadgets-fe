@@ -101,6 +101,20 @@ export const ProductCard = () => {
 
   const path = pathname.split('/')[pathname.split('/').length - 1];
   const navigate = useNavigate();
+  const [scrollPosition, setScrollPosition] = React.useState(0);
+
+  const scrollToTop = () => {
+    const scrollStep = -window.scrollY / 30; // Кількість пікселів на кожному кадрі
+
+    function animateScroll() {
+      if (window.scrollY > 0) {
+        window.scrollBy(0, scrollStep);
+        requestAnimationFrame(animateScroll); // Рекурсивно викликаємо анімацію
+      }
+    }
+
+    animateScroll();
+  };
 
   React.useEffect(() => {
     const fetchData = async () => {
@@ -143,6 +157,10 @@ export const ProductCard = () => {
       } catch (error) {
       } finally {
         setLoading(false);
+
+        if (scrollPosition === 0) {
+          scrollToTop();
+        }
       }
     };
 
@@ -377,15 +395,17 @@ export const ProductCard = () => {
           </SpecsBlock>
         </ItemCard>
       </MainElement>
-      {!loading && (
-        <RecommendedBlock>
-          <ProductsSlider
-            data={recommendedData}
-            uniqueKey="recommended"
-            subtitle="You may also like"
-          />
-        </RecommendedBlock>
-      )}
+      <RecommendedBlock
+      onClick={() => {
+        setScrollPosition(0);
+      }}
+      >
+        <ProductsSlider
+          data={recommendedData}
+          uniqueKey="recommended"
+          subtitle="You may also like"
+        />
+      </RecommendedBlock>
     </ContentLayout>
   );
 };
