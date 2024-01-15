@@ -52,7 +52,7 @@ import {
   ButtonAdd,
   ButtonLike,
 } from './../shared/PhoneCard/PhoneCard.styled';
-import { Icon, IconSprite } from '../shared';
+import { Icon, IconSprite, Loader } from '../shared';
 import { colorMappings } from './colorMappings';
 import { getOnePhone } from '../../api/phonesAPI';
 import { Phone } from '../../types/Phone';
@@ -65,7 +65,6 @@ import {
 } from '../../context';
 import { ProductsSlider } from '../HomePage/components/ProductsSlider/ProductsSlider';
 import { Breadcrumbs } from '../shared/Breadcrumbs';
-import { Loader } from '../shared/Loader';
 
 function extractData(obj: Record<string, any>) {
   const result: Record<string, any> = {};
@@ -196,207 +195,187 @@ export const ProductCard = () => {
           <Breadcrumbs />
           <BackButton />
         </PathAndBack>
-        {loading ? (
-          <Loader visible={loading} />
-        ) : (
-          <>
-            <Title isDarkTheme={isDarkTheme}>{device.name}</Title>
-            <ItemCard>
-              <ImagesBox>
-                <ImageSizeBox>
-                  <CardImage src={currentImage} alt="Phone image" />
-                </ImageSizeBox>
-                <ImagesWrapper>
-                  {device.images.map((img) => (
-                    <ImagesSizeBox
-                      onClick={() => {
-                        setCurrentImage(img);
-                        setSelectedImage(img);
-                      }}
-                      className={selectedImage === img ? 'active' : ''}
-                    >
-                      <SmallCardImage
-                        key={img}
-                        src={img}
-                        alt="Small phone image"
-                      />
-                    </ImagesSizeBox>
-                  ))}
-                </ImagesWrapper>
-              </ImagesBox>
-              <CardInfo>
-                <CardWrapper>
-                  {device.colorsAvailable && (
-                    <ChoiseWrapper>
-                      <TitleChoise>Available colors</TitleChoise>
-                      <ChoiseButtons>
-                        {device.colorsAvailable.map((color) => (
-                          <ColorButton
-                            className={selectedColor === color ? 'active' : ''}
-                            onClick={() => handleColorClick(color)}
-                            style={{ backgroundColor: colorMappings[color] }}
-                          ></ColorButton>
-                        ))}
-                      </ChoiseButtons>
-                    </ChoiseWrapper>
+        <Title isDarkTheme={isDarkTheme}>{device.name}</Title>
+        <ItemCard>
+          <ImagesBox>
+            <ImageSizeBox>
+              <CardImage src={currentImage} alt="Phone image" />
+            </ImageSizeBox>
+            <ImagesWrapper>
+              {device.images.map((img) => (
+                <ImagesSizeBox
+                  onClick={() => {
+                    setCurrentImage(img);
+                    setSelectedImage(img);
+                  }}
+                  className={selectedImage === img ? 'active' : ''}
+                >
+                  <SmallCardImage key={img} src={img} alt="Small phone image" />
+                </ImagesSizeBox>
+              ))}
+            </ImagesWrapper>
+          </ImagesBox>
+          <CardInfo>
+            <CardWrapper>
+              {device.colorsAvailable && (
+                <ChoiseWrapper>
+                  <TitleChoise>Available colors</TitleChoise>
+                  <ChoiseButtons>
+                    {device.colorsAvailable.map((color) => (
+                      <ColorButton
+                        className={selectedColor === color ? 'active' : ''}
+                        onClick={() => handleColorClick(color)}
+                        style={{ backgroundColor: colorMappings[color] }}
+                      ></ColorButton>
+                    ))}
+                  </ChoiseButtons>
+                </ChoiseWrapper>
+              )}
+
+              {device.capacityAvailable && (
+                <ChoiseWrapper>
+                  <TitleChoise>Select capacity</TitleChoise>
+                  <ChoiseButtons>
+                    {device.capacityAvailable.map((capacity) => (
+                      <MemoryButton
+                        className={
+                          selectedCapacity === capacity ? 'active' : ''
+                        }
+                        onClick={() => handleButtonClick(capacity)}
+                      >
+                        {capacity}
+                      </MemoryButton>
+                    ))}
+                  </ChoiseButtons>
+                </ChoiseWrapper>
+              )}
+
+              <PriceWrapper className="card-price" isDarkTheme={isDarkTheme}>
+                <CurrentPrice
+                  className="card-current-price"
+                  isDarkTheme={isDarkTheme}
+                >
+                  {`$${device.priceDiscount}`}
+                </CurrentPrice>
+                <OldPrice className="card-old-price" isDarkTheme={isDarkTheme}>
+                  {`$${device.priceRegular}`}
+                </OldPrice>
+              </PriceWrapper>
+
+              <ButtonsWrapper className="card-button">
+                <ButtonAdd
+                  isDarkTheme={isDarkTheme}
+                  onClick={() => {
+                    toggleClick(device);
+                  }}
+                  type="button"
+                  isClicked={isSelected}
+                  className="card-button-add"
+                >
+                  {isSelected ? 'Added' : 'Add to cart'}
+                </ButtonAdd>
+                <ButtonLike
+                  isDarkTheme={isDarkTheme}
+                  isClicked={!!isFavorite}
+                  type="button"
+                  onClick={() => {
+                    toggleFavorite(device);
+                  }}
+                  className="card-button-like"
+                >
+                  <IconSprite />
+                  {isFavorite && (
+                    <Icon
+                      spriteName="heart-field"
+                      fill={theme.colors.accentSecondary}
+                    />
                   )}
 
-                  {device.capacityAvailable && (
-                    <ChoiseWrapper>
-                      <TitleChoise>Select capacity</TitleChoise>
-                      <ChoiseButtons>
-                        {device.capacityAvailable.map((capacity) => (
-                          <MemoryButton
-                            className={
-                              selectedCapacity === capacity ? 'active' : ''
-                            }
-                            onClick={() => handleButtonClick(capacity)}
-                          >
-                            {capacity}
-                          </MemoryButton>
-                        ))}
-                      </ChoiseButtons>
-                    </ChoiseWrapper>
+                  {!isFavorite && <Icon spriteName="heart" />}
+
+                  {isDarkTheme && isFavorite && (
+                    <Icon
+                      spriteName="heart-field"
+                      fill={theme.colors.accentSecondary}
+                    />
                   )}
 
-                  <PriceWrapper
-                    className="card-price"
-                    isDarkTheme={isDarkTheme}
-                  >
-                    <CurrentPrice
-                      className="card-current-price"
-                      isDarkTheme={isDarkTheme}
-                    >
-                      {`$${device.priceDiscount}`}
-                    </CurrentPrice>
-                    <OldPrice
-                      className="card-old-price"
-                      isDarkTheme={isDarkTheme}
-                    >
-                      {`$${device.priceRegular}`}
-                    </OldPrice>
-                  </PriceWrapper>
-
-                  <ButtonsWrapper className="card-button">
-                    <ButtonAdd
-                      isDarkTheme={isDarkTheme}
-                      onClick={() => {
-                        toggleClick(device);
-                      }}
-                      type="button"
-                      isClicked={isSelected}
-                      className="card-button-add"
-                    >
-                      {isSelected ? 'Added' : 'Add to cart'}
-                    </ButtonAdd>
-                    <ButtonLike
-                      isDarkTheme={isDarkTheme}
-                      isClicked={!!isFavorite}
-                      type="button"
-                      onClick={() => {
-                        toggleFavorite(device);
-                      }}
-                      className="card-button-like"
-                    >
-                      <IconSprite />
-                      {isFavorite && (
-                        <Icon
-                          spriteName="heart-field"
-                          fill={theme.colors.accentSecondary}
-                        />
-                      )}
-
-                      {!isFavorite && <Icon spriteName="heart" />}
-
-                      {isDarkTheme && isFavorite && (
-                        <Icon
-                          spriteName="heart-field"
-                          fill={theme.colors.accentSecondary}
-                        />
-                      )}
-
-                      {isDarkTheme && !isFavorite && (
-                        <Icon spriteName="heart-white" />
-                      )}
-                    </ButtonLike>
-                  </ButtonsWrapper>
-
-                  <DescrWrapper>
-                    <DescrBox>
-                      {device.screen && (
-                        <DescrTitle isDarkTheme={isDarkTheme}>
-                          Screen
-                        </DescrTitle>
-                      )}
-                      {device.resolution && (
-                        <DescrTitle isDarkTheme={isDarkTheme}>
-                          Resolution
-                        </DescrTitle>
-                      )}
-                      {device.processor && (
-                        <DescrTitle isDarkTheme={isDarkTheme}>
-                          Processor
-                        </DescrTitle>
-                      )}
-                      {device.ram && (
-                        <DescrTitle isDarkTheme={isDarkTheme}>Ram</DescrTitle>
-                      )}
-                    </DescrBox>
-
-                    <DescrBox>
-                      <DescrValue isDarkTheme={isDarkTheme}>
-                        {device.screen}
-                      </DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>
-                        {device.resolution}
-                      </DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>
-                        {device.processor}
-                      </DescrValue>
-                      <DescrValue isDarkTheme={isDarkTheme}>
-                        {device.ram}
-                      </DescrValue>
-                    </DescrBox>
-                  </DescrWrapper>
-                </CardWrapper>
-                <DeviceId>ID: {device._id}</DeviceId>
-              </CardInfo>
-              <AboutBlock>
-                <H2 isDarkTheme={isDarkTheme}>About</H2>
-                {device.description &&
-                  device.description.map((info) => (
-                    <DescriptionWrapper key={info.title}>
-                      <H3 isDarkTheme={isDarkTheme}>{info.title}</H3>
-                      {Array.isArray(info.text) &&
-                        info.text.map((text: string) => <P>{text}</P>)}
-                    </DescriptionWrapper>
-                  ))}
-              </AboutBlock>
-              <SpecsBlock>
-                <THead>
-                  <TRow>
-                    <Theader isDarkTheme={isDarkTheme}>Tech Spec</Theader>
-                  </TRow>
-                </THead>
-                <TechScecsInfo>
-                  {Object.entries(deviceData).map(
-                    ([key, value]) =>
-                      value && (
-                        <TableRow key={key}>
-                          <TableHeader>
-                            {key.charAt(0).toUpperCase() + key.slice(1)}
-                          </TableHeader>
-                          <TableData isDarkTheme={isDarkTheme}>
-                            {Array.isArray(value) ? value.join(' ') : value}
-                          </TableData>
-                        </TableRow>
-                      ),
+                  {isDarkTheme && !isFavorite && (
+                    <Icon spriteName="heart-white" />
                   )}
-                </TechScecsInfo>
-              </SpecsBlock>
-            </ItemCard>
-          </>
-        )}
+                </ButtonLike>
+              </ButtonsWrapper>
+
+              <DescrWrapper>
+                <DescrBox>
+                  {device.screen && (
+                    <DescrTitle isDarkTheme={isDarkTheme}>Screen</DescrTitle>
+                  )}
+                  {device.resolution && (
+                    <DescrTitle isDarkTheme={isDarkTheme}>
+                      Resolution
+                    </DescrTitle>
+                  )}
+                  {device.processor && (
+                    <DescrTitle isDarkTheme={isDarkTheme}>Processor</DescrTitle>
+                  )}
+                  {device.ram && (
+                    <DescrTitle isDarkTheme={isDarkTheme}>Ram</DescrTitle>
+                  )}
+                </DescrBox>
+
+                <DescrBox>
+                  <DescrValue isDarkTheme={isDarkTheme}>
+                    {device.screen}
+                  </DescrValue>
+                  <DescrValue isDarkTheme={isDarkTheme}>
+                    {device.resolution}
+                  </DescrValue>
+                  <DescrValue isDarkTheme={isDarkTheme}>
+                    {device.processor}
+                  </DescrValue>
+                  <DescrValue isDarkTheme={isDarkTheme}>
+                    {device.ram}
+                  </DescrValue>
+                </DescrBox>
+              </DescrWrapper>
+            </CardWrapper>
+            <DeviceId>ID: {device._id}</DeviceId>
+          </CardInfo>
+          <AboutBlock>
+            <H2 isDarkTheme={isDarkTheme}>About</H2>
+            {device.description &&
+              device.description.map((info) => (
+                <DescriptionWrapper key={info.title}>
+                  <H3 isDarkTheme={isDarkTheme}>{info.title}</H3>
+                  {Array.isArray(info.text) &&
+                    info.text.map((text: string) => <P>{text}</P>)}
+                </DescriptionWrapper>
+              ))}
+          </AboutBlock>
+          <SpecsBlock>
+            <THead>
+              <TRow>
+                <Theader isDarkTheme={isDarkTheme}>Tech Spec</Theader>
+              </TRow>
+            </THead>
+            <TechScecsInfo>
+              {Object.entries(deviceData).map(
+                ([key, value]) =>
+                  value && (
+                    <TableRow key={key}>
+                      <TableHeader>
+                        {key.charAt(0).toUpperCase() + key.slice(1)}
+                      </TableHeader>
+                      <TableData isDarkTheme={isDarkTheme}>
+                        {Array.isArray(value) ? value.join(' ') : value}
+                      </TableData>
+                    </TableRow>
+                  ),
+              )}
+            </TechScecsInfo>
+          </SpecsBlock>
+        </ItemCard>
       </MainElement>
       {!loading && (
         <RecommendedBlock>
