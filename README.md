@@ -1,1 +1,1 @@
-[DEMO](https://nice-gadgets-fe.vercel.app/)
+[DEMO link](https://nice-gadgets-fe.vercel.app/)
